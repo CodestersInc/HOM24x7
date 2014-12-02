@@ -13,9 +13,7 @@ namespace BusinessLogic
         public String ContactPerson;
         public String Email;
         public long Phone;              //to be modified later if needed
-        public String Address;          
-
-
+        public String Address;          //the try and error comments
         public String Website;
         public Boolean Features;        //public List<Boolean> Features;
 
