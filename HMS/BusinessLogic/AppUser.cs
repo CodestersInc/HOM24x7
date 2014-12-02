@@ -13,6 +13,11 @@ namespace BusinessLogic
         public String Email;
         public String Phone;           //To be changed as and when needed
         public int AccountID;
+
+
+
+
+
         public String Username;
         public String Password;
 

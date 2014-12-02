@@ -24,7 +24,9 @@ namespace BusinessLogic
 
         public ServiceRequest()
         {
-
+            /*
+             * try avoiding the telescopic constructors!!
+             */
         }
 
         public ServiceRequest(int ServiceRequestID, int ServiceID, int BookingID, DateTime CreatedDate, DateTime RequestedDate, String Status, String CustomerRemarks, String StaffRemarks, int AssignedID, int Unit)
