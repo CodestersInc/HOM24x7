@@ -242,88 +242,133 @@
                     <!-- END RESPONSIVE QUICK SEARCH FORM -->
                     <!-- BEGIN SIDEBAR MENU -->
                     <ul class="sidebar-menu">
-                        <li class="has-sub active">
-                            <a href="hahome.aspx" class="">
-                                <span class="icon-box"><i class="icon-dashboard"></i></span>Home
-                            </a>
-                        </li>
-                        <li class="has-sub">
-                            <a href="javascript:;" class="">
-                                <span class="icon-box"><i class="icon-bell-alt"></i></span>Department
+                        <!-- START Sidebar Element-Home -->
+                        <asp:PlaceHolder ID="homePlaceHolder" runat="server" Visible="false">
+                            <li class="has-sub active">
+                                <a href="hahome.aspx" class="">
+                                    <span class="icon-box"><i class="icon-dashboard"></i></span>Home
+                                </a>
+                            </li>
+                        </asp:PlaceHolder>
+                        <!-- END-Sidebar Element-Home -->
+
+                        <!-- START Sidebar Element-Department -->
+                        <asp:PlaceHolder ID="departmentPlaceHolder" runat="server" Visible="false">
+                            <li class="has-sub">
+                                <a href="javascript:;" class="">
+                                    <span class="icon-box"><i class="icon-bell-alt"></i></span>Department
 					            <span class="arrow"></span>
-                            </a>
-                            <ul class="sub">
-                                <li><a class="" href="createdepartment.aspx">Create</a></li>
-                                <li><a class="" href="searchdepartment.aspx">Search</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a href="javascript:;" class="">
-                                <span class="icon-box"><i class="icon-book"></i></span>Staff
+                                </a>
+                                <ul class="sub">
+                                    <li><a class="" href="createdepartment.aspx">Create</a></li>
+                                    <li><a class="" href="searchdepartment.aspx">Search</a></li>
+                                </ul>
+                            </li>
+                        </asp:PlaceHolder>
+                        <!-- END-Sidebar Element-Department -->
+
+                        <!-- START Sidebar Element-Service -->
+                        <asp:PlaceHolder ID="servicePlaceHolder" runat="server" Visible="false">
+                            <li class="has-sub">
+                                <a href="javascript:;" class="">
+                                    <span class="icon-box"><i class="icon-map-marker"></i></span>Service
 					            <span class="arrow"></span>
-                            </a>
-                            <ul class="sub">
-                                <li><a class="" href="registerstaff.aspx">Register</a></li>
-                                <li><a class="" href="searchstaff.aspx">Search</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a href="javascript:;" class="">
-                                <span class="icon-box"><i class="icon-barcode"></i></span>Attendance
-                                <span class="arrow"></span>
-                            </a>
-                            <ul class="sub">
-                                <li><a class="" href="markattendance.aspx">Mark</a></li>
-                                <li><a class="" href="viewattendance.aspx">View</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a href="javascript:;" class="">
-                                <span class="icon-box"><i class="icon-cogs"></i></span>Payroll
-					            <span class="arrow"></span>
-                            </a>
-                            <ul class="sub">
-                                <li><a class="" href="generatepayslip.aspx">Generate Payslip</a></li>
-                                <li><a class="" href="viewpayslip.aspx">View Payslip</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a href="javascript:;" class="">
-                                <span class="icon-box"><i class="icon-tasks"></i></span>Room
-                                <span class="arrow"></span>
-                            </a>
-                            <ul class="sub">
-                                <li><a class="" href="createroom.aspx">Create a Room</a></li>
-                                <li><a class="" href="searchroom.aspx">Search a Room</a></li>
-                                <li><a class="" href="createroomtype.aspx">Create a Room Type</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a href="javascript:;" class="">
-                                <span class="icon-box"><i class="icon-fire"></i></span>Season
+                                </a>
+                                <ul class="sub">
+                                    <li><a class="" href="createservice.aspx">Create</a></li>
+                                    <li><a class="" href="searchservice.aspx">Search</a></li>
+                                </ul>
+                            </li>
+                        </asp:PlaceHolder>
+                        <!-- END-Sidebar Element-Service -->
+
+                        <!-- START Sidebar Element-Season -->
+                        <asp:PlaceHolder ID="seasonPlaceHolder" runat="server" Visible="false">
+                            <li class="has-sub">
+                                <a href="javascript:;" class="">
+                                    <span class="icon-box"><i class="icon-fire"></i></span>Season
 	                            <span class="arrow"></span>
-                            </a>
-                            <ul class="sub">
-                                <li><a class="" href="createseason.aspx">Create</a></li>
-                                <li><a class="" href="searchseason.aspx">Search</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a href="javascript:;" class="">
-                                <span class="icon-box"><i class="icon-map-marker"></i></span>Service
+                                </a>
+                                <ul class="sub">
+                                    <li><a class="" href="createseason.aspx">Create</a></li>
+                                    <li><a class="" href="searchseason.aspx">Search</a></li>
+                                </ul>
+                            </li>
+                        </asp:PlaceHolder>
+                        <!-- END Sidebar Element-Season -->
+
+                        <!-- START Sidebar Element-Room -->
+                        <asp:PlaceHolder ID="roomPlaceHolder" runat="server" Visible="false">
+                            <li class="has-sub">
+                                <a href="javascript:;" class="">
+                                    <span class="icon-box"><i class="icon-tasks"></i></span>Room
+                                <span class="arrow"></span>
+                                </a>
+                                <ul class="sub">
+                                    <li><a class="" href="createroom.aspx">Create a Room</a></li>
+                                    <li><a class="" href="searchroom.aspx">Search a Room</a></li>
+                                    <li><a class="" href="createroomtype.aspx">Create a Room Type</a></li>
+                                </ul>
+                            </li>
+                        </asp:PlaceHolder>
+                        <!-- END Sidebar Element-Room -->
+
+                        <!-- START Sidebar Element-Payroll -->
+                        <asp:PlaceHolder ID="payrollPlaceHolder" runat="server" Visible="false">
+                            <li class="has-sub">
+                                <a href="javascript:;" class="">
+                                    <span class="icon-box"><i class="icon-cogs"></i></span>Payroll
 					            <span class="arrow"></span>
-                            </a>
-                            <ul class="sub">
-                                <li><a class="" href="createservice.aspx">Create</a></li>
-                                <li><a class="" href="searchservice.aspx">Search</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a href="javascript:;" class="">
-                                <span class="icon-box"><i class="icon-file-alt"></i></span>Service Request
-					<span class="arrow"></span>
-                            </a>
-                        </li>
+                                </a>
+                                <ul class="sub">
+                                    <li><a class="" href="generatepayslip.aspx">Generate Payslip</a></li>
+                                    <li><a class="" href="viewpayslip.aspx">View Payslip</a></li>
+                                </ul>
+                            </li>
+                        </asp:PlaceHolder>
+                        <!-- END Sidebar Element-Payroll -->
+
+                        <!-- START Sidebar Element-Accounts -->
+                        <asp:PlaceHolder ID="attendancePlaceHolder" runat="server" Visible="false">
+                            <li class="has-sub">
+                                <a href="javascript:;" class="">
+                                    <span class="icon-box"><i class="icon-barcode"></i></span>Attendance
+                                <span class="arrow"></span>
+                                </a>
+                                <ul class="sub">
+                                    <li><a class="" href="markattendance.aspx">Mark</a></li>
+                                    <li><a class="" href="viewattendance.aspx">View</a></li>
+                                </ul>
+                            </li>
+                        </asp:PlaceHolder>
+                        <!-- END Sidebar Element-Attendance -->
+
+                        <!-- START Sidebar Element-Staff -->
+                        <asp:PlaceHolder ID="staffPlaceHolder" runat="server" Visible="false">
+                            <li class="has-sub">
+                                <a href="javascript:;" class="">
+                                    <span class="icon-box"><i class="icon-book"></i></span>Staff
+					            <span class="arrow"></span>
+                                </a>
+                                <ul class="sub">
+                                    <li><a class="" href="registerstaff.aspx">Register</a></li>
+                                    <li><a class="" href="searchstaff.aspx">Search</a></li>
+                                </ul>
+                            </li>
+                        </asp:PlaceHolder>
+                        <!-- END Sidebar Element-Staff -->
+
+                        <!-- START Sidebar Element-Service Request -->
+                        <asp:PlaceHolder ID="serviceRequestPlaceHolder" runat="server" Visible="false">
+                            <li class="has-sub">
+                                <a href="javascript:;" class="">
+                                    <span class="icon-box"><i class="icon-file-alt"></i></span>Service Request
+					                <span class="arrow"></span>
+                                </a>
+                            </li>
+                        </asp:PlaceHolder>
+                        <!-- END Sidebar Element-Service Request -->
+
                     </ul>
                     <!-- END SIDEBAR MENU -->
                 </div>

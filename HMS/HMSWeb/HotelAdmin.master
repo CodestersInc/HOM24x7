@@ -325,7 +325,7 @@
                         <li class="has-sub">
                             <a href="javascript:;" class="">
                                 <span class="icon-box"><i class="icon-file-alt"></i></span>Service Request
-					<span class="arrow"></span>
+					            <span class="arrow"></span>
                             </a>
                         </li>
                     </ul>

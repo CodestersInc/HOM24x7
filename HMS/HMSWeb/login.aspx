@@ -25,7 +25,12 @@
             </div>
             <!-- END LOGO -->
         </div>
+        <asp:PlaceHolder ID="plcErrorMessage" runat="server">
+        <script type="text/javascript">
 
+            alert("Invalid username of password");
+        </script>
+            </asp:PlaceHolder>
         <!-- BEGIN LOGIN -->
         <div id="login">
             <!-- BEGIN LOGIN FORM -->
