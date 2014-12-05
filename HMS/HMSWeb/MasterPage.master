@@ -61,7 +61,7 @@
                             <span class="arrow"></span>
                         </a>
                         <!-- END RESPONSIVE MENU TOGGLER -->
-                        <div id="top_menu" class="nav notify-row">
+<%--                        <div id="top_menu" class="nav notify-row">
                             <!-- BEGIN NOTIFICATION -->
                             <ul class="nav top-menu">
                                 <!-- BEGIN SETTINGS -->
@@ -189,11 +189,12 @@
                                 <!-- END NOTIFICATION DROPDOWN -->
 
                             </ul>
-                        </div>
-                        <!-- END  NOTIFICATION -->
+                            <!-- END  NOTIFICATION -->
+                        </div>--%>
+                        
                         <div class="top-nav ">
                             <ul class="nav pull-right top-menu">
-                                <!-- BEGIN SUPPORT -->
+                                <%--<!-- BEGIN SUPPORT -->
                                 <li class="dropdown mtop5">
 
                                     <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="#" data-original-title="Chat">
@@ -205,7 +206,7 @@
                                         <i class="icon-headphones"></i>
                                     </a>
                                 </li>
-                                <!-- END SUPPORT -->
+                                <!-- END SUPPORT -->--%>
                                 <!-- BEGIN USER LOGIN DROPDOWN -->
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -214,12 +215,13 @@
                                         <b class="caret"></b>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#"><i class="icon-user"></i>My Profile</a></li>
-                                        <li><a href="#"><i class="icon-tasks"></i>My Tasks</a></li>
-                                        <li><a href="#"><i class="icon-calendar"></i>Calendar</a></li>
+                                        <li><a href="#"><i class="icon-user"></i> My Profile</a></li>
+                                        <li><a href="#"><i class="icon-tasks"></i> My Tasks</a></li>
+                                        <li><a href="#"><i class="icon-calendar"></i> Calendar</a></li>
                                         <li class="divider"></li>
                                         <li>
-                                            <%--<asp:LinkButton ID="btnLogout" OnClick="btnLogout_Click" runat="server"><i class="icon-key"></i> Log Out</asp:LinkButton></li>--%>
+                                            <asp:LinkButton ID="btnLogout" runat="server"><i class="icon-key"></i> Log Out</asp:LinkButton>
+                                        </li>
                                     </ul>
                                 </li>
                                 <!-- END USER LOGIN DROPDOWN -->
