@@ -78,6 +78,8 @@
     <Compile Include="ServiceRequest.cs" />
     <Compile Include="StaffLogic.cs" />
     <Compile Include="Staff.cs" />
+    <Compile Include="SystemAdmin.cs" />
+    <Compile Include="SystemAdminLogic.cs" />
     <Compile Include="Utility.cs" />
   </ItemGroup>
   <ItemGroup>

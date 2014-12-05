@@ -10,7 +10,7 @@ public partial class login : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-            plcErrorMessage.Visible = false;
+            errorMessagePlaceHolder.Visible = false;
         
     }
 
@@ -88,7 +88,7 @@ public partial class login : System.Web.UI.Page
         }
         else
         {
-            plcErrorMessage.Visible = true;
+            errorMessagePlaceHolder.Visible = true;
         }
         
 

@@ -25,10 +25,9 @@
             </div>
             <!-- END LOGO -->
         </div>
-        <asp:PlaceHolder ID="plcErrorMessage" runat="server">
+        <asp:PlaceHolder ID="errorMessagePlaceHolder" runat="server">
         <script type="text/javascript">
-
-            alert("Invalid username of password");
+            alert("Invalid username or password...!!");
         </script>
             </asp:PlaceHolder>
         <!-- BEGIN LOGIN -->
