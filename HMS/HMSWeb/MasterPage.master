@@ -220,7 +220,7 @@
                                         <li><a href="#"><i class="icon-calendar"></i> Calendar</a></li>
                                         <li class="divider"></li>
                                         <li>
-                                            <asp:LinkButton ID="btnLogout" runat="server"><i class="icon-key"></i> Log Out</asp:LinkButton>
+                                            <asp:LinkButton ID="btnLogout" OnClick="btnLogout_Click" runat="server"><i class="icon-key"></i> Log Out</asp:LinkButton>
                                         </li>
                                     </ul>
                                 </li>
