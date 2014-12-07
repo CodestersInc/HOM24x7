@@ -9,21 +9,31 @@ namespace BusinessLogic
     public class Customer : IModel
     {
         public int CustomerID;
-        public int AppUserID;
         public DateTime CreateDate;
+        public String Name;
+        public String Email;
+        public String Phone;
+        public String Username;
+        public String Password;
         public Boolean IsActive;
+        public int AccountID;
 
         public Customer()
         {
 
         }
 
-        public Customer(int CustomerID, int AppUserID, DateTime CreateDate, Boolean IsActive)
+        public Customer(int CustomerID, DateTime CreateDate, String Name, String Email, String Phone, String Username, String Password, Boolean IsActive, int AccountID)
         {
             this.CustomerID = CustomerID;
-            this.AppUserID = AppUserID;
             this.CreateDate = CreateDate;
+            this.Name = Name;
+            this.Email = Email;
+            this.Phone = Phone;
+            this.Username = Username;
+            this.Password = Password;
             this.IsActive = IsActive;
+            this.AccountID = AccountID;
         }
     }
 }
