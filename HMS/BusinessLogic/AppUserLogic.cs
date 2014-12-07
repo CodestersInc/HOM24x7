@@ -11,7 +11,7 @@ using DataAccess;
 
 namespace BusinessLogic
 {
-    public class AppUserLogic : ILogic<AppUser>
+    public class AppUserLogic //: ILogic<AppUser>
     {
         public int create(AppUser obj)
         {

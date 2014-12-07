@@ -72,12 +72,19 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@id", id));
             DataTable dt = DBUtility.Select(query, lstParams);
 
-            return new SystemAdmin(Convert.ToInt32(dt.Rows[0]["SystemAdminID"]),
-                dt.Rows[0]["Name"].ToString(),
-                dt.Rows[0]["Username"].ToString(),
-                dt.Rows[0]["Password"].ToString(),
-                dt.Rows[0]["Email"].ToString(),
-                dt.Rows[0]["Phone"].ToString());
+            if (dt.Rows.Count == 1)
+            {
+                return new SystemAdmin(Convert.ToInt32(dt.Rows[0]["SystemAdminID"]),
+                    dt.Rows[0]["Name"].ToString(),
+                    dt.Rows[0]["Username"].ToString(),
+                    dt.Rows[0]["Password"].ToString(),
+                    dt.Rows[0]["Email"].ToString(),
+                    dt.Rows[0]["Phone"].ToString());
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public DataTable selectAll()

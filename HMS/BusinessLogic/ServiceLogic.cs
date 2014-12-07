@@ -23,7 +23,7 @@ namespace BusinessLogic
             return DBUtility.Select(query, lstParams);
         }
 
-        public int create(Service obj)
+        public Service create(Service obj)
         {
             String query = "insert into Service values(@Name, @DepartmentID, @Rate); select * from Service Name=@Name and DepartmentID=@DepartmentID and Rate=@Rate";
             List<SqlParameter> lstParams = new List<SqlParameter>();
@@ -31,8 +31,20 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@Name", obj.Name));
             lstParams.Add(new SqlParameter("@DepartmentID", obj.DepartmentID));
             lstParams.Add(new SqlParameter("@Rate", obj.Rate));
+
+            DataTable dt = DBUtility.Select(query, lstParams);
+            if (dt.Rows.Count == 1)
+            {
+                return new Service(Convert.ToInt32(dt.Rows[0]["ServiceID"]),
+                dt.Rows[0]["Name"].ToString(),
+                Convert.ToInt32(dt.Rows[0]["DepartmentID"]),
+                Convert.ToDouble(dt.Rows[0]["Rate"]));
+            }
+            else
+            {
+                return null;
+            }
             
-            return DBUtility.Modify(query, lstParams); 
         }
 
         public int update(Service obj)
@@ -64,11 +76,17 @@ namespace BusinessLogic
 
             lstParams.Add(new SqlParameter("@id", id));
             DataTable dt = DBUtility.Select(query, lstParams);
-
-            return new Service(Convert.ToInt32(dt.Rows[0]["ServiceID"]),
+            if (dt.Rows.Count == 1)
+            {
+                return new Service(Convert.ToInt32(dt.Rows[0]["ServiceID"]),
                 dt.Rows[0]["Name"].ToString(),
                 Convert.ToInt32(dt.Rows[0]["DepartmentID"]),
                 Convert.ToDouble(dt.Rows[0]["Rate"]));
+            }
+            else
+            {
+                return null;
+            }
             
         }
 
