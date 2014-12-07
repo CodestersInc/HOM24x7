@@ -23,7 +23,7 @@ namespace BusinessLogic
             return DBUtility.Select(query, lstParams);
         }
 
-        public int create(Department obj)
+        public Department create(Department obj)
         {
             String query = "insert into Department values(@Name, @AccountID, @ManagerID)";
             List<SqlParameter> lstParams = new List<SqlParameter>();
@@ -31,8 +31,20 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@Name", obj.Name));
             lstParams.Add(new SqlParameter("@AccountID", obj.AccountID));
             lstParams.Add(new SqlParameter("@ManagerID", obj.ManagerID));
-            
-            return DBUtility.Modify(query, lstParams); 
+
+            DataTable dt = DBUtility.InsertAndFetch(query, lstParams);
+
+            if (dt.Rows.Count == 1)
+            {
+                return new Department(Convert.ToInt32(dt.Rows[0]["DepartmentID"]),
+                dt.Rows[0]["Name"].ToString(),
+                Convert.ToInt32(dt.Rows[0]["AccountID"]),
+                Convert.ToInt32(dt.Rows[0]["ManagerID"]));
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public int update(Department obj)
@@ -65,11 +77,17 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@id", id));
             DataTable dt = DBUtility.Select(query, lstParams);
 
-            return new Department(Convert.ToInt32(dt.Rows[0]["DepartmentID"]),
+            if (dt.Rows.Count == 1)
+            {
+                return new Department(Convert.ToInt32(dt.Rows[0]["DepartmentID"]),
                 dt.Rows[0]["Name"].ToString(),
                 Convert.ToInt32(dt.Rows[0]["AccountID"]),
                 Convert.ToInt32(dt.Rows[0]["ManagerID"]));
-                
+            }
+            else
+            {
+                return null;
+            }    
         }
 
         public DataTable selectAll()

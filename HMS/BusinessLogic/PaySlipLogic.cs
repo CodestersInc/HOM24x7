@@ -13,7 +13,7 @@ namespace BusinessLogic
 {
     public class PaySlipLogic : ILogic<PaySlip>
     {
-        public int create(PaySlip obj)
+        public PaySlip create(PaySlip obj)
         {
             String query = "insert into PaySlip values(@SaffID, @BasicSalary, @Allowance, @Deduction, @FromDate, @ToDate, @GenerateDate, @ApproverID)";
             List<SqlParameter> lstParams = new List<SqlParameter>();
@@ -27,7 +27,25 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@GenerateDate", obj.GenerateDate));
             lstParams.Add(new SqlParameter("@ApproverID", obj.ApproverID));
 
-            return DBUtility.Modify(query, lstParams); 
+            DataTable dt = DBUtility.InsertAndFetch(query, lstParams);
+
+            if (dt.Rows.Count == 1)
+            {
+                return new PaySlip(Convert.ToInt32(dt.Rows[0]["PaySlipID"]),
+                Convert.ToInt32(dt.Rows[0]["StaffID"]),
+                Convert.ToDouble(dt.Rows[0]["BasicSalary"]),
+                Convert.ToDouble(dt.Rows[0]["Allowance"]),
+                Convert.ToDouble(dt.Rows[0]["Deduction"]),
+                Convert.ToDateTime(dt.Rows[0]["FromDate"]),
+                Convert.ToDateTime(dt.Rows[0]["ToDate"]),
+                Convert.ToDateTime(dt.Rows[0]["GeneratedDate"]),
+                Convert.ToInt32(dt.Rows[0]["ApproverID"]));
+
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public int update(PaySlip obj)
@@ -65,7 +83,9 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@id", id));
             DataTable dt = DBUtility.Select(query, lstParams);
 
-            return new PaySlip(Convert.ToInt32(dt.Rows[0]["PaySlipID"]),
+            if (dt.Rows.Count == 1)
+            {
+                return new PaySlip(Convert.ToInt32(dt.Rows[0]["PaySlipID"]),
                 Convert.ToInt32(dt.Rows[0]["StaffID"]),
                 Convert.ToDouble(dt.Rows[0]["BasicSalary"]),
                 Convert.ToDouble(dt.Rows[0]["Allowance"]),
@@ -74,6 +94,12 @@ namespace BusinessLogic
                 Convert.ToDateTime(dt.Rows[0]["ToDate"]),
                 Convert.ToDateTime(dt.Rows[0]["GeneratedDate"]),
                 Convert.ToInt32(dt.Rows[0]["ApproverID"]));
+
+            }
+            else
+            {
+                return null;
+            }
             
         }
 

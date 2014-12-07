@@ -13,7 +13,7 @@ namespace BusinessLogic
 {
     public class BookingLogic : ILogic<Booking>
     {
-        public int create(Booking obj)
+        public Booking create(Booking obj)
         {
             String query = "insert into Booking values(@RoomID, @NumberOfPersons, @CheckInDate, @PlannedCheckOutDate, @Status, @PaidAmount, @CustomerID, @ApproverID, @ReceiverID, @StaffRemarks, @CustomerRemarks, @RoomRate, @PaymentMode, @ChequeNo, @BankName, @OnlineBookingID)";
             List<SqlParameter> lstParams = new List<SqlParameter>();
@@ -37,7 +37,33 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@OnlineBookingID", obj.OnlineBookingID));
 
 
-            return DBUtility.Modify(query, lstParams);
+            DataTable dt = DBUtility.InsertAndFetch(query, lstParams);
+
+            if (dt.Rows.Count == 1)
+            {
+                return new Booking(Convert.ToInt32(dt.Rows[0]["BookingID"]),
+                Convert.ToInt32(dt.Rows[0]["RoomID"]),
+                Convert.ToInt32(dt.Rows[0]["NumberOfPersons"]),
+                Convert.ToDateTime(dt.Rows[0]["CheckInDate"]),
+                Convert.ToDateTime(dt.Rows[0]["PlannedCheckoutDate"]),
+                Convert.ToDateTime(dt.Rows[0]["CheckOutDate"]),
+                dt.Rows[0]["Status"].ToString(),
+                Convert.ToDouble(dt.Rows[0]["PaidAmount"]),
+                Convert.ToInt32(dt.Rows[0]["CustomerID"]),
+                Convert.ToInt32(dt.Rows[0]["ApproverID"]),
+                Convert.ToInt32(dt.Rows[0]["ReceiverID"]),
+                dt.Rows[0]["StaffRemarks"].ToString(),
+                dt.Rows[0]["CustomerRemarks"].ToString(),
+                Convert.ToDouble(dt.Rows[0]["RoomRate"]),
+                dt.Rows[0]["PaymentMode"].ToString(),
+                Convert.ToInt32(dt.Rows[0]["ChequeNo"]),
+                dt.Rows[0]["BankName"].ToString(),
+                Convert.ToInt32(dt.Rows[0]["OnlineBookingID"]));
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public int update(Booking obj)
@@ -85,7 +111,9 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@id", id));
             DataTable dt = DBUtility.Select(query, lstParams);
 
-            return new Booking(Convert.ToInt32(dt.Rows[0]["BookingID"]),
+            if (dt.Rows.Count == 1)
+            {
+                return new Booking(Convert.ToInt32(dt.Rows[0]["BookingID"]),
                 Convert.ToInt32(dt.Rows[0]["RoomID"]),
                 Convert.ToInt32(dt.Rows[0]["NumberOfPersons"]),
                 Convert.ToDateTime(dt.Rows[0]["CheckInDate"]),
@@ -103,6 +131,12 @@ namespace BusinessLogic
                 Convert.ToInt32(dt.Rows[0]["ChequeNo"]),
                 dt.Rows[0]["BankName"].ToString(),
                 Convert.ToInt32(dt.Rows[0]["OnlineBookingID"]));
+            }
+            else
+            {
+                return null;
+            }
+            
         }
 
         public DataTable selectAll()

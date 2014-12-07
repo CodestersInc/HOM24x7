@@ -13,7 +13,7 @@ namespace BusinessLogic
 {
     public class OnlineBookingLogic : ILogic<OnlineBooking>
     {
-        public int create(OnlineBooking obj)
+        public OnlineBooking create(OnlineBooking obj)
         {
             String query = "insert into Booking values(@RoomTypeID, @NumberOfPersons, @CheckInDate, @PlannedCheckOutDate, @Status, @CustomerID, @ConverterID, @StaffRemarks, @CustomerRemarks, @WebsiteRate)";
             List<SqlParameter> lstParams = new List<SqlParameter>();
@@ -29,8 +29,26 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@CustomerRemarks", obj.CustomerRemarks));
             lstParams.Add(new SqlParameter("@WebsiteRate", obj.WebsiteRate));
 
+            DataTable dt = DBUtility.InsertAndFetch(query, lstParams);
 
-            return DBUtility.Modify(query, lstParams);
+            if (dt.Rows.Count == 1)
+            {
+                return new OnlineBooking(Convert.ToInt32(dt.Rows[0]["OnlineBookingID"]),
+                Convert.ToInt32(dt.Rows[0]["RoomTypeID"]),
+                Convert.ToInt32(dt.Rows[0]["NumberOfPersons"]),
+                Convert.ToDateTime(dt.Rows[0]["CheckInDate"]),
+                Convert.ToDateTime(dt.Rows[0]["PlannedCheckoutDate"]),
+                dt.Rows[0]["Status"].ToString(),
+                Convert.ToInt32(dt.Rows[0]["CustomerID"]),
+                Convert.ToInt32(dt.Rows[0]["ConverterID"]),
+                dt.Rows[0]["StaffRemarks"].ToString(),
+                dt.Rows[0]["CustomerRemarks"].ToString(),
+                Convert.ToDouble(dt.Rows[0]["WebsiteRate"]));
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public int update(OnlineBooking obj)
@@ -71,7 +89,9 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@id", id));
             DataTable dt = DBUtility.Select(query, lstParams);
 
-            return new OnlineBooking(Convert.ToInt32(dt.Rows[0]["OnlineBookingID"]),
+            if (dt.Rows.Count == 1)
+            {
+                return new OnlineBooking(Convert.ToInt32(dt.Rows[0]["OnlineBookingID"]),
                 Convert.ToInt32(dt.Rows[0]["RoomTypeID"]),
                 Convert.ToInt32(dt.Rows[0]["NumberOfPersons"]),
                 Convert.ToDateTime(dt.Rows[0]["CheckInDate"]),
@@ -82,6 +102,12 @@ namespace BusinessLogic
                 dt.Rows[0]["StaffRemarks"].ToString(),
                 dt.Rows[0]["CustomerRemarks"].ToString(),
                 Convert.ToDouble(dt.Rows[0]["WebsiteRate"]));
+            }
+            else
+            {
+                return null;
+            }
+            
         }
 
         public DataTable selectAll()
