@@ -30,7 +30,15 @@ namespace BusinessLogic
 
             if (dt.Rows.Count == 1)
             {
-                return new Customer();
+                return new Customer(Convert.ToInt32(dt.Rows[0]["CustomerID"]),
+                    Convert.ToDateTime(dt.Rows[0]["CreateDate"]),
+                    dt.Rows[0]["Name"].ToString(),
+                    dt.Rows[0]["Email"].ToString(),
+                    dt.Rows[0]["Phone"].ToString(),
+                    dt.Rows[0]["Username"].ToString(),
+                    dt.Rows[0]["Password"].ToString(),
+                    Convert.ToBoolean(dt.Rows[0]["IsActive"]),
+                    Convert.ToInt32(dt.Rows[0]["AccountID"]));
             }
             else
             {
@@ -40,14 +48,19 @@ namespace BusinessLogic
 
         public int update(Customer obj)
         {
-            String query = "update Customer set AppUserID=@AppUserID, CreateDate=@CreateDate, IsActive=@IsActive, Phone=@Phone, Address=@Address, Website=@Website, Features=@Features where CustomerID=@CustomerID";
+            String query = "update Customer set CreateDate=@CreateDate, Name=@Name, Email=@Email, Phone=@Phone, Username=@Username, Password=@Password, IsActive=@IsActive, AccountID=@AccountID where CustomerID=@CustomerID";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
-            lstParams.Add(new SqlParameter("@CustomerID", obj.CustomerID));
-            lstParams.Add(new SqlParameter("@AppUserID", obj.AppUserID));
             lstParams.Add(new SqlParameter("@CreateDate", obj.CreateDate));
+            lstParams.Add(new SqlParameter("@Name", obj.Name));
+            lstParams.Add(new SqlParameter("@Email", obj.Email));
+            lstParams.Add(new SqlParameter("@Phone", obj.Phone));
+            lstParams.Add(new SqlParameter("@Username", obj.Username));
+            lstParams.Add(new SqlParameter("@Password", obj.Password));
             lstParams.Add(new SqlParameter("@IsActive", obj.IsActive));
-
+            lstParams.Add(new SqlParameter("@AccountID", obj.AccountID));
+            lstParams.Add(new SqlParameter("@CustomerID", obj.CustomerID));
+            
             return DBUtility.Modify(query, lstParams); 
         }
 
@@ -66,26 +79,25 @@ namespace BusinessLogic
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@id", id));
+
             DataTable dt = DBUtility.Select(query, lstParams);
 
-            return new Customer(Convert.ToInt32(dt.Rows[0]["CustomerID"]),
-                Convert.ToInt32(dt.Rows[0]["AppUserID"]),
-                Convert.ToDateTime(dt.Rows[0]["CreateDate"]),
-                Convert.ToBoolean(dt.Rows[0]["IsActive"]));
-        }
-
-        public Customer selectByAppuserID(int id)
-        {
-            String query = "select * from Customer where AppUserID=@id";
-            List<SqlParameter> lstParams = new List<SqlParameter>();
-
-            lstParams.Add(new SqlParameter("@id", id));
-            DataTable dt = DBUtility.Select(query, lstParams);
-
-            return new Customer(Convert.ToInt32(dt.Rows[0]["CustomerID"]),
-                Convert.ToInt32(dt.Rows[0]["AppUserID"]),
-                Convert.ToDateTime(dt.Rows[0]["CreateDate"]),
-                Convert.ToBoolean(dt.Rows[0]["IsActive"]));
+            if (dt.Rows.Count == 1)
+            {
+                return new Customer(Convert.ToInt32(dt.Rows[0]["CustomerID"]),
+                    Convert.ToDateTime(dt.Rows[0]["CreateDate"]),
+                    dt.Rows[0]["Name"].ToString(),
+                    dt.Rows[0]["Email"].ToString(),
+                    dt.Rows[0]["Phone"].ToString(),
+                    dt.Rows[0]["Username"].ToString(),
+                    dt.Rows[0]["Password"].ToString(),
+                    Convert.ToBoolean(dt.Rows[0]["IsActive"]),
+                    Convert.ToInt32(dt.Rows[0]["AccountID"]));
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public DataTable selectAll()
