@@ -48,5 +48,9 @@ namespace DataAccess
                 con.Close();//close con
             }
         }
+        public static DataTable InsertAndFetch(String query, List<SqlParameter> lstParams)
+        {
+            return Select(query,lstParams);
+        }
     }
 }

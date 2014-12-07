@@ -15,7 +15,7 @@ namespace BusinessLogic
     {
         public DataTable search(String searchstring, int ID)
         {
-            String query = "select AppUser.*, Staff.StaffID, Department.Name as 'DepartmentName' from AppUser,Department,Staff where AppUser.Name like '%'+@Name+'%' and AppUser.AccountID=@ID and AppUser.AppUserID=Staff.AppUserID and Department.DepartmentID=Staff.DepartmentID";
+            String query = "select Department.Name, Staff.* as 'DepartmentName' from Department,Staff where Staff.Name like '%'+@Name+'%' and Staff.AccountID=@ID and Department.DepartmentID=Staff.DepartmentID";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
             lstParams.Add(new SqlParameter("@Name", searchstring));
@@ -24,22 +24,28 @@ namespace BusinessLogic
             return DBUtility.Select(query, lstParams);
         }
 
-        public int create(Staff obj)
+        public Staff create(Staff obj)
         {
-            String query = "insert into Staff values(@AppUserID, @Designation, @DOB, @DOJ, @Salary, @SalaryFrequency, @IsActive, @DepartmentID)";
+            String query = "insert into Staff(Name,Email,Phone,Username,Password,UserType,Designation,DOB,DOJ,Salary,IsActive,DepartmentID,AccountID) values(@Name, @Email, @Phone, @Username, @Password, @Designation, @DOB, @DOJ, @Salary, @Salary, @IsActive, @DepartmentID, @AccountID)";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
-            lstParams.Add(new SqlParameter("@AppUserID", obj.AppUserID));
+            lstParams.Add(new SqlParameter("@Name", obj.Name));
+            lstParams.Add(new SqlParameter("@Email",obj.Email));
+            lstParams.Add(new SqlParameter("@Phone", obj.Phone));
+            lstParams.Add(new SqlParameter("@Username", obj.Username));
+            lstParams.Add(new SqlParameter("@Password", obj.Password));
+            lstParams.Add(new SqlParameter("@UserType", obj.UserType));
             lstParams.Add(new SqlParameter("@Designation", obj.Designation));
             lstParams.Add(new SqlParameter("@DOB", obj.DOB));
             lstParams.Add(new SqlParameter("@DOJ", obj.DOJ));
             lstParams.Add(new SqlParameter("@Salary", obj.Salary));
-            lstParams.Add(new SqlParameter("@SalaryFrequency", obj.SalaryFrequency));
+            lstParams.Add(new SqlParameter("@SalaryFrequency", obj.Salary));
             lstParams.Add(new SqlParameter("@IsActive", obj.IsActive));
             lstParams.Add(new SqlParameter("@DepartmentID", obj.DepartmentID));
+            lstParams.Add(new SqlParameter("@AccountID", obj.AccountID));
 
 
-            return DBUtility.Modify(query, lstParams);
+            DataTable dt = DBUtility.Modify(query, lstParams);
         }
 
         public int update(Staff obj)
