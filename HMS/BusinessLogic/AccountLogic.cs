@@ -30,9 +30,9 @@ namespace BusinessLogic
             return DBUtility.Select(query, lstParams);
         }
 
-        public int create(Account obj)
+        public Account create(Account obj)
         {
-            String insertQuery = "insert into Account values(@Company, @ContactPerson, @Email, @Phone, @Address, @Website, @Features) ; select max(AccountID) as LastID from Account";
+            String insertQuery = "insert into Account values(@Company, @ContactPerson, @Email, @Phone, @Address, @Website, @Features) ; select max(AccountID) as LastID from Account; select * from Account where Company=@Company and ContactPerson=@ContactPerson and Email=@Email and Phone=@Phone and Address=@Address and Website=@Website and Features=@Features";
         //    String selectQuery = "select AccountID from Account where Company=@Company and ContactPerson=@ContactPerson and Email=@Email and Phone=@Phone and Address=@Address and Website=@Website and Features=@Features";
 
                      
@@ -47,7 +47,22 @@ namespace BusinessLogic
                 lstInsertParams.Add(new SqlParameter("@Features", obj.Features));
 
                 DataTable dt = DBUtility.Select(insertQuery, lstInsertParams);
-                return Convert.ToInt32(dt.Rows[0][0]); 
+
+                if(dt.Rows.Count==1)
+                {
+                    return new Account(Convert.ToInt32(dt.Rows[0]["AccountID"]),
+                        dt.Rows[0]["Company"].ToString(),
+                        dt.Rows[0]["ContactPerson"].ToString(),
+                        dt.Rows[0]["Email"].ToString(),
+                        Convert.ToInt64(dt.Rows[0]["Phone"]),
+                        dt.Rows[0]["Address"].ToString(),
+                        dt.Rows[0]["WebSite"].ToString(),
+                        Convert.ToBoolean(dt.Rows[0]["Features"]));
+                }
+                else
+                {
+                    return null;
+                }
 
         }
 
@@ -57,11 +72,11 @@ namespace BusinessLogic
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             int dataVal;
-            if(obj.Features==true)
+            if (obj.Features == true)
             {
                 dataVal = 1;
             }
-            else dataVal=0;
+            else dataVal = 0;
 
             lstParams.Add(new SqlParameter("@AccountID", obj.AccountID));
             lstParams.Add(new SqlParameter("@Company", obj.Company));
@@ -92,15 +107,21 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@id", id));
             DataTable dt = DBUtility.Select(query, lstParams);
 
-            return new Account(Convert.ToInt32(dt.Rows[0]["AccountID"]),
-                dt.Rows[0]["Company"].ToString(),
-                dt.Rows[0]["ContactPerson"].ToString(),
-                dt.Rows[0]["Email"].ToString(),
-                Convert.ToInt64(dt.Rows[0]["Phone"]),
-                dt.Rows[0]["Address"].ToString(),
-                dt.Rows[0]["WebSite"].ToString(),
-                Convert.ToBoolean(dt.Rows[0]["Features"]));
-
+            if (dt.Rows.Count == 1)
+            {
+                return new Account(Convert.ToInt32(dt.Rows[0]["AccountID"]),
+                    dt.Rows[0]["Company"].ToString(),
+                    dt.Rows[0]["ContactPerson"].ToString(),
+                    dt.Rows[0]["Email"].ToString(),
+                    Convert.ToInt64(dt.Rows[0]["Phone"]),
+                    dt.Rows[0]["Address"].ToString(),
+                    dt.Rows[0]["WebSite"].ToString(),
+                    Convert.ToBoolean(dt.Rows[0]["Features"]));
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public DataTable selectAll()
@@ -123,14 +144,21 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@Features", obj.Features));
 
             DataTable dt = DBUtility.Select(selectQuery, lstParams);
-            return new Account(Convert.ToInt32(dt.Rows[0]["AccountID"]),
-                dt.Rows[0]["Company"].ToString(),
-                dt.Rows[0]["ContactPerson"].ToString(),
-                dt.Rows[0]["Email"].ToString(),
-                Convert.ToInt64(dt.Rows[0]["Phone"]),
-                dt.Rows[0]["Address"].ToString(),
-                dt.Rows[0]["WebSite"].ToString(),
-                Convert.ToBoolean(dt.Rows[0]["Features"]));
+            if (dt.Rows.Count == 1)
+            {
+                return new Account(Convert.ToInt32(dt.Rows[0]["AccountID"]),
+                    dt.Rows[0]["Company"].ToString(),
+                    dt.Rows[0]["ContactPerson"].ToString(),
+                    dt.Rows[0]["Email"].ToString(),
+                    Convert.ToInt64(dt.Rows[0]["Phone"]),
+                    dt.Rows[0]["Address"].ToString(),
+                    dt.Rows[0]["WebSite"].ToString(),
+                    Convert.ToBoolean(dt.Rows[0]["Features"]));
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

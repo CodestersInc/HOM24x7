@@ -26,7 +26,7 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@IsActive", obj.IsActive));
             lstParams.Add(new SqlParameter("@AccountID", obj.AccountID));
             
-            DataTable dt = DBUtility.Select(query, lstParams);
+            DataTable dt = DBUtility.InsertAndFetch(query, lstParams);
 
             if (dt.Rows.Count == 1)
             {
@@ -48,7 +48,7 @@ namespace BusinessLogic
 
         public int update(Customer obj)
         {
-            String query = "update Customer set CreateDate=@CreateDate, Name=@Name, Email=@Email, Phone=@Phone, Username=@Username, Password=@Password, IsActive=@IsActive, AccountID=@AccountID where CustomerID=@CustomerID";
+            String query = "update Customer set CreateDate=@CreateDate, Name=@Name, Email=@Email, Phone=@Phone, Password=@Password, IsActive=@IsActive, AccountID=@AccountID where CustomerID=@CustomerID";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@CreateDate", obj.CreateDate));
