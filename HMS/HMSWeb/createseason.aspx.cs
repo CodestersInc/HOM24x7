@@ -10,15 +10,23 @@ public partial class createseason : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        AppUser LoggedAppUser = (AppUser)Session["AppUser"];
-        if (LoggedAppUser == null)
+        try
         {
-            Response.Redirect("login.aspx");
+            AppUser LoggedAppUser = (AppUser)Session["AppUser"];
+            if (LoggedAppUser == null)
+            {
+                Response.Redirect("login.aspx");
+            }
+            else if (LoggedAppUser.UserType != "HotelAdmin")
+            {
+                Response.Redirect("login.aspx");
+            }
         }
-        else if (LoggedAppUser.UserType != "HotelAdmin")
+        catch (Exception ex)
         {
-            Response.Redirect("login.aspx");
+            Response.Redirect("ErrorPage500");
         }
+        
 
     }
 }

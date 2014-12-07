@@ -10,7 +10,15 @@ public partial class login : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        try
+        {
             errorMessagePlaceHolder.Visible = false;
+    }
+        catch (Exception ex)
+        {
+            Response.Redirect("ErrorPage500");
+        }
+
     }
 
     /*

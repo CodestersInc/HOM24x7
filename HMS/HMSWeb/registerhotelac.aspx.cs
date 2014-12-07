@@ -21,7 +21,8 @@ public partial class hacregister : System.Web.UI.Page
     }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
-
+        try
+        {
         Account accountobj = new Account(0,
             txtCompany.Text,
             txtContact.Text,
@@ -70,7 +71,13 @@ public partial class hacregister : System.Web.UI.Page
             {
                 appuserlogic.delete(fetchedAppUser.AppUserID);
             }
+            }
         }
+        catch (Exception ex)
+        {
+            Response.Redirect("ErrorPage500.html");
+        }
+        
     }
     protected void btnCancel_Click(object sender, EventArgs e)
     {
