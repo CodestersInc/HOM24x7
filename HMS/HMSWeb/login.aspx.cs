@@ -70,7 +70,8 @@ public partial class login : System.Web.UI.Page
             SystemAdmin systemAdminLogger = systemAdminLogic.login(txtUsername.Text, txtPassword.Text);
             if(systemAdminLogger!=null)
             {
-                Session.Add("SystemAdmin", systemAdminLogger);
+                Session.Add("LoggedUser", systemAdminLogger);
+                //Session.Add("SystemAdmin", systemAdminLogger);
                 Session.Add("UserType", "SystemAdmin");
                 return;
             }
@@ -80,7 +81,8 @@ public partial class login : System.Web.UI.Page
                 Staff staffLogger = staffLogic.login(txtUsername.Text, txtPassword.Text);
                 if (staffLogger != null)
                 {
-                    Session.Add("Staff", staffLogger);
+                    Session.Add("LoggedUser", staffLogger);
+                    //Session.Add("Staff", staffLogger);
                     Session.Add("UserType", "Staff");
                     return;
                 }
@@ -90,7 +92,8 @@ public partial class login : System.Web.UI.Page
                     Customer customerLogger = customerLogic.login(txtUsername.Text, txtPassword.Text);
                     if (customerLogger != null)
                     {
-                        Session.Add("Customer", customerLogger);
+                        Session.Add("LoggedUser", customerLogger);
+                        //Session.Add("Customer", customerLogger);
                         Session.Add("UserType", "Customer");
                         return;
                     }

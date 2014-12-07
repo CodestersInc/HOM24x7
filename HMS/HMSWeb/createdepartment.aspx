@@ -40,7 +40,7 @@
                                     <div class="control-group">
                                         <label class="control-label">Departmnet Name</label>
                                         <div class="controls">
-                                            <asp:TextBox ID="txtName" runat="server" CssClass="span6 popovers" data-trigger="hover" data-content="Enter the full name of staff member." data-original-title="Popover header"></asp:TextBox>
+                                            <asp:TextBox ID="txtName" runat="server" CssClass="span6 popovers" data-trigger="hover" data-content="Enter the department name." data-original-title="Popover header"></asp:TextBox>
                                         </div>
                                     </div>
 
