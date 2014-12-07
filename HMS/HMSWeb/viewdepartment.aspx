@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/HotelAdmin.master" AutoEventWireup="true" CodeFile="viewdepartment.aspx.cs" Inherits="viewdepartment" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="viewdepartment.aspx.cs" Inherits="viewdepartment" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
