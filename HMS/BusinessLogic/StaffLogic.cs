@@ -166,5 +166,38 @@ namespace BusinessLogic
             }
             return dt;
         }
+
+        public SystemAdmin login(String username, String password)
+        {
+            String query = "select * from SystemAdmin where Username=@Username and Password=@Password";
+
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+            lstParams.Add(new SqlParameter("@Username", username));
+            lstParams.Add(new SqlParameter("@Password", password));
+
+            DataTable dt = DBUtility.Select(query, lstParams);
+
+            if (dt.Rows.Count == 1)
+            {
+                return new Staff(Convert.ToInt32(dt.Rows[0]["StaffID"]),
+                dt.Rows[0]["Name"].ToString(),
+                dt.Rows[0]["Email"].ToString(),
+                dt.Rows[0]["Phone"].ToString(),
+                dt.Rows[0]["Username"].ToString(),
+                dt.Rows[0]["Password"].ToString(),
+                dt.Rows[0]["UserType"].ToString(),
+                dt.Rows[0]["Designation"].ToString(),
+                Convert.ToDateTime(dt.Rows[0]["DOB"]),
+                Convert.ToDateTime(dt.Rows[0]["DOJ"]),
+                Convert.ToDouble(dt.Rows[0]["Salary"]),
+                Convert.ToBoolean(dt.Rows[0]["IsActive"]),
+                Convert.ToInt32(dt.Rows[0]["DepartmentID"]),
+                Convert.ToInt32(dt.Rows[0]["AcoountID"]));
+            }
+            else
+            {
+                return null;
+            }
+
     }
 }

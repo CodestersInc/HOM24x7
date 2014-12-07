@@ -16,6 +16,7 @@ namespace BusinessLogic
         public DateTime FromDate;
         public DateTime ToDate;
         public DateTime GenerateDate;
+        public DateTime PayDate
         public int ApproverID;
 
         public PaySlip()
@@ -23,7 +24,7 @@ namespace BusinessLogic
 
         }
 
-        public PaySlip(int PaySlipID, int SaffID, double BasicSalary, double Allowance, double Deduction, DateTime FromDate, DateTime ToDate, DateTime GenerateDate, int ApproverID)
+        public PaySlip(int PaySlipID, int SaffID, double BasicSalary, double Allowance, double Deduction, DateTime FromDate, DateTime ToDate, DateTime GenerateDate, DateTime PayDate, int ApproverID)
         {
             this.PaySlipID = PaySlipID;
             this.SaffID = SaffID;
@@ -33,6 +34,7 @@ namespace BusinessLogic
             this.FromDate = FromDate;
             this.ToDate = ToDate;
             this.GenerateDate = GenerateDate;
+            this.PayDate = PayDate;
             this.ApproverID = ApproverID;
             
         }

@@ -10,7 +10,7 @@ using DataAccess;
 
 namespace BusinessLogic
 {
-    class SystemAdminLogic : ILogic<SystemAdmin>
+    public class SystemAdminLogic : ILogic<SystemAdmin>
     {
 
         public SystemAdmin create(SystemAdmin obj)

@@ -15,7 +15,7 @@ namespace BusinessLogic
     {
         public PaySlip create(PaySlip obj)
         {
-            String query = "insert into PaySlip values(@SaffID, @BasicSalary, @Allowance, @Deduction, @FromDate, @ToDate, @GenerateDate, @ApproverID)";
+            String query = "insert into PaySlip values(@SaffID, @BasicSalary, @Allowance, @Deduction, @FromDate, @ToDate, @GenerateDate, @ApproverID); select * from PaySlip where BasicSalary=@BasicSalary and Allowance=@Allowance and Deduction=@Deduction and FromDate=@FromDate and ToDate=@ToDate and GenerateDate=@GenerateDate PayDate=@PayDate and ApproverID=@ApproverID);";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@SaffID", obj.SaffID));
@@ -25,6 +25,7 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@FromDate", obj.FromDate));
             lstParams.Add(new SqlParameter("@ToDate", obj.ToDate));
             lstParams.Add(new SqlParameter("@GenerateDate", obj.GenerateDate));
+            lstParams.Add(new SqlParameter("@PayDate", obj.PayDate));
             lstParams.Add(new SqlParameter("@ApproverID", obj.ApproverID));
 
             DataTable dt = DBUtility.InsertAndFetch(query, lstParams);

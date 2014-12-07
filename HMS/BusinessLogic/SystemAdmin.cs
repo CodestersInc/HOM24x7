@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-    class SystemAdmin : IModel
+    public class SystemAdmin : IModel
     {
         public int SystemAdminID;
         public string Name;
