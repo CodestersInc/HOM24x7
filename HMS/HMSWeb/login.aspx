@@ -77,7 +77,7 @@
                     <div class="controls">
                         <div class="input-prepend">
                             <span class="add-on"><i class="icon-envelope"></i></span>
-                            <asp:TextBox ID="txtEmail" CssClass="input-email" runat="server" placeholder="Email"></asp:TextBox>
+                            <asp:TextBox ID="txtEmail" CssClass="input-email" runat="server" placeHolder="Email"></asp:TextBox>
                         </div>
                     </div>
                     <div class="space20"></div>

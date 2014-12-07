@@ -12,7 +12,7 @@ namespace BusinessLogic
 {
     public class ServiceRequestLogic : ILogic<ServiceRequest>
     {
-        public int create(ServiceRequest obj)
+        public ServiceRequest create(ServiceRequest obj)
         {
             String query = "insert into ServiceRequest values(@ServiceID, @BookingID, @CreatedDate, @RequestedDate, @Status, @CustomerRemarks, @StaffRemarks, @AssignedID, @Unit) select * from ServiceRequest where ServiceID=@ServiceID BookingID=@BookingID CreatedDate=@CreatedDate and RequestedDate=@RequestedDate and Status=@Status and CustomerRemarks=@CustomerRemarks and StaffRemarks=@StaffRemarks and AssignedID=@AssignedID and Unit=@Unit";
             List<SqlParameter> lstParams = new List<SqlParameter>();
@@ -27,7 +27,25 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@AssignedID", obj.AssignedID));
             lstParams.Add(new SqlParameter("@Unit", obj.Unit));
 
-            return DBUtility.Modify(query, lstParams); 
+            DataTable dt = DBUtility.InsertAndFetch(query, lstParams);
+
+            if (dt.Rows.Count == 1)
+            {
+                return new ServiceRequest(Convert.ToInt32(dt.Rows[0]["ServiceRequestID"]),
+                Convert.ToInt32(dt.Rows[0]["ServiceID"]),
+                Convert.ToInt32(dt.Rows[0]["BookingID"]),
+                Convert.ToDateTime(dt.Rows[0]["CreatedDate"]),
+                Convert.ToDateTime(dt.Rows[0]["RequestedDate"]),
+                dt.Rows[0]["Status"].ToString(),
+                dt.Rows[0]["CustomerRemarks"].ToString(),
+                dt.Rows[0]["StaffRemarks"].ToString(),
+                Convert.ToInt32(dt.Rows[0]["AssignedID"]),
+                Convert.ToInt32(dt.Rows[0]["Unit"]));
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public int update(ServiceRequest obj)
@@ -66,7 +84,9 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@id", id));
             DataTable dt = DBUtility.Select(query, lstParams);
 
-            return new ServiceRequest(Convert.ToInt32(dt.Rows[0]["ServiceRequestID"]),
+            if(dt.Rows.Count==1)
+            {
+                return new ServiceRequest(Convert.ToInt32(dt.Rows[0]["ServiceRequestID"]),
                 Convert.ToInt32(dt.Rows[0]["ServiceID"]),
                 Convert.ToInt32(dt.Rows[0]["BookingID"]),
                 Convert.ToDateTime(dt.Rows[0]["CreatedDate"]),
@@ -76,7 +96,11 @@ namespace BusinessLogic
                 dt.Rows[0]["StaffRemarks"].ToString(),
                 Convert.ToInt32(dt.Rows[0]["AssignedID"]),
                 Convert.ToInt32(dt.Rows[0]["Unit"]));
-            
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public DataTable selectAll()

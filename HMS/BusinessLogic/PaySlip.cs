@@ -16,7 +16,7 @@ namespace BusinessLogic
         public DateTime FromDate;
         public DateTime ToDate;
         public DateTime GenerateDate;
-        public DateTime PayDate
+        public DateTime PayDate;
         public int ApproverID;
 
         public PaySlip()

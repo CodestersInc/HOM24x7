@@ -34,13 +34,11 @@ namespace BusinessLogic
                     dt.Rows[0]["Password"].ToString(),
                     dt.Rows[0]["Email"].ToString(),
                     dt.Rows[0]["Phone"].ToString());
-
             }
             else
             {
                 return null;
-            }
-            
+            }  
         }
 
         public int update(SystemAdmin obj)

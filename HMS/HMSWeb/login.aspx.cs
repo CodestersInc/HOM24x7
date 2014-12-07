@@ -11,8 +11,9 @@ public partial class login : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
             errorMessagePlaceHolder.Visible = false;
-        
     }
+
+    /*
 
     protected void staffLogger(AppUser logger)
     {
@@ -59,39 +60,47 @@ public partial class login : System.Web.UI.Page
     {
         staffLogger(logger);
     }
+    */
 
     protected void btnLogin_Click(object sender, EventArgs e)
-    {
-        AppUserLogic appUserLogic = new AppUserLogic();        
-        AppUser logger = appUserLogic.login(txtUsername.Text, txtPassword.Text);
-        
-        if ( logger!= null)
+    {     
+        if (txtUsername.Text!=null && txtPassword!=null)
         {
-            Session.Add("AppUser", logger);
-            switch(logger.UserType)
+            SystemAdminLogic systemAdminLogic = new SystemAdminLogic();
+            SystemAdmin systemAdminLogger = systemAdminLogic.login(txtUsername.Text, txtPassword.Text);
+            if(systemAdminLogger!=null)
             {
-                case "Customer":
-                    customerLogger(logger);
-                    break;
-                case "Staff":
-                    staffLogger(logger);
-                    break;
-                case "SystemAdmin":
-                    systemAdminLogger(logger);
-                    break;
-                case "AccountAdmin":
-                    accounAdminLogger(logger);
-                    break;
-                default: Response.Redirect("ErrorPage500.html");
-                    break;
+                Session.Add("SystemAdmin", systemAdminLogger);
+                Session.Add("UserType", "SystemAdmin");
+                return;
+            }
+            else
+            {
+                StaffLogic staffLogic = new StaffLogic();
+                Staff staffLogger = staffLogic.login(txtUsername.Text, txtPassword.Text);
+                if (staffLogger != null)
+                {
+                    Session.Add("Staff", staffLogger);
+                    Session.Add("UserType", "Staff");
+                    return;
+                }
+                else
+                {
+                    CustomerLogic customerLogic = new CustomerLogic();
+                    Customer customerLogger = customerLogic.login(txtUsername.Text, txtPassword.Text);
+                    if (customerLogger != null)
+                    {
+                        Session.Add("Customer", customerLogger);
+                        Session.Add("UserType", "Customer");
+                        return;
+                    }
+                }
             }
         }
         else
         {
             errorMessagePlaceHolder.Visible = true;
         }
-        
-
     }
 
     protected void forgotPassword(object sender, EventArgs e)

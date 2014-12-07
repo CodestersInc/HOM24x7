@@ -11,7 +11,7 @@ namespace BusinessLogic
 {
     public interface ILogic<T> : Logic where T : IModel
     {
-        int create(T obj);
+        T create(T obj);
         int update(T obj);
         int delete(int id);
         T selectById(int id);
