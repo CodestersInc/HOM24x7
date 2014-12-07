@@ -48,7 +48,7 @@ namespace BusinessLogic
 
         public int update(Customer obj)
         {
-            String query = "update Customer set CreateDate=@CreateDate, Name=@Name, Email=@Email, Phone=@Phone, Password=@Password, IsActive=@IsActive, AccountID=@AccountID where CustomerID=@CustomerID";
+            String query = "update Customer set CreateDate=@CreateDate, Name=@Name, Email=@Email, Phone=@Phone, Password=@Password, IsActive=@IsActive, AccountID=@AccountID where CustomerID=@CustomerID;";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@CreateDate", obj.CreateDate));

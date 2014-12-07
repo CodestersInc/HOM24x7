@@ -12,9 +12,9 @@ namespace BusinessLogic
 {
     public class SeasonRoomLogic : ILogic<SeasonRoom>
     {
-        public int create(SeasonRoom obj)
+        public SeasonRoom create(SeasonRoom obj)
         {
-            String query = "insert into SeasonRoom values(@SeasonID, @RoomTypeID, @Rate, @AgentDiscount, @MaxDiscount, @WebsiteRate)";
+            String query = "insert into SeasonRoom values(@SeasonID, @RoomTypeID, @Rate, @AgentDiscount, @MaxDiscount, @WebsiteRate); select * from SeasonRoom where SeasonID=@SeasonID and RoomTypeID=@RoomTypeID and Rate=@Rate and AgentDiscount=@AgentDiscount and MaxDiscount=@MaxDiscount and WebsiteRate=@WebsiteRate";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@SeasonID", obj.SeasonID));
@@ -24,7 +24,22 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@MaxDiscount", obj.MaxDiscount));
             lstParams.Add(new SqlParameter("@WebsiteRate", obj.WebsiteRate));
 
-            return DBUtility.Modify(query, lstParams); 
+            DataTable dt = DBUtility.InsertAndFetch(query, lstParams);
+
+            if (dt.Rows.Count == 1)
+            {
+                return new SeasonRoom(Convert.ToInt32(dt.Rows[0]["SeasonRoomID"]),
+                Convert.ToInt32(dt.Rows[0]["SeasonID"]),
+                Convert.ToInt32(dt.Rows[0]["RoomTypeID"]),
+                Convert.ToDouble(dt.Rows[0]["Rate"]),
+                Convert.ToDouble(dt.Rows[0]["AgentDiscount"]),
+                Convert.ToDouble(dt.Rows[0]["MaxDiscount"]),
+                Convert.ToDouble(dt.Rows[0]["WebsiteRate"]));
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public int update(SeasonRoom obj)
@@ -60,13 +75,20 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@id", id));
             DataTable dt = DBUtility.Select(query, lstParams);
 
-            return new SeasonRoom(Convert.ToInt32(dt.Rows[0]["SeasonRoomID"]),
+            if (dt.Rows.Count == 1)
+            {
+                return new SeasonRoom(Convert.ToInt32(dt.Rows[0]["SeasonRoomID"]),
                 Convert.ToInt32(dt.Rows[0]["SeasonID"]),
                 Convert.ToInt32(dt.Rows[0]["RoomTypeID"]),
                 Convert.ToDouble(dt.Rows[0]["Rate"]),
                 Convert.ToDouble(dt.Rows[0]["AgentDiscount"]),
                 Convert.ToDouble(dt.Rows[0]["MaxDiscount"]),
                 Convert.ToDouble(dt.Rows[0]["WebsiteRate"]));
+            }
+            else
+            {
+                return null;
+            }
             
         }
 

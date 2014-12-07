@@ -40,6 +40,7 @@ namespace BusinessLogic
                 Convert.ToDateTime(dt.Rows[0]["FromDate"]),
                 Convert.ToDateTime(dt.Rows[0]["ToDate"]),
                 Convert.ToDateTime(dt.Rows[0]["GeneratedDate"]),
+                Convert.ToDateTime(dt.Rows[0]["PayDate"]),
                 Convert.ToInt32(dt.Rows[0]["ApproverID"]));
 
             }
@@ -94,6 +95,7 @@ namespace BusinessLogic
                 Convert.ToDateTime(dt.Rows[0]["FromDate"]),
                 Convert.ToDateTime(dt.Rows[0]["ToDate"]),
                 Convert.ToDateTime(dt.Rows[0]["GeneratedDate"]),
+                Convert.ToDateTime(dt.Rows[0]["PayDate"]),
                 Convert.ToInt32(dt.Rows[0]["ApproverID"]));
 
             }

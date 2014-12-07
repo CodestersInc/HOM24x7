@@ -32,7 +32,7 @@ namespace BusinessLogic
 
         public Account create(Account obj)
         {
-            String insertQuery = "insert into Account values(@Company, @ContactPerson, @Email, @Phone, @Address, @Website, @Features) ; select max(AccountID) as LastID from Account; select * from Account where Company=@Company and ContactPerson=@ContactPerson and Email=@Email and Phone=@Phone and Address=@Address and Website=@Website and Features=@Features";
+            String insertQuery = "insert into Account values(@Company, @ContactPerson, @Email, @Phone, @Address, @Website, @Features); select * from Account where Company=@Company and ContactPerson=@ContactPerson and Email=@Email and Phone=@Phone and Address=@Address and Website=@Website and Features=@Features";
         //    String selectQuery = "select AccountID from Account where Company=@Company and ContactPerson=@ContactPerson and Email=@Email and Phone=@Phone and Address=@Address and Website=@Website and Features=@Features";
 
                      

@@ -13,9 +13,9 @@ namespace BusinessLogic
 {
     public class RoomTypeLogic : ILogic<RoomType>
     {
-        public int create(RoomType obj)
+        public RoomType create(RoomType obj)
         {
-            String query = "insert into RoomType values(@Name, @Description, @Photo, @AccountID)";
+            String query = "insert into RoomType values(@Name, @Description, @Photo, @AccountID); select * from RoomTypeLogic where Name=@Name and Description=@Description and Photo=@Photo and AccountID=@AccountID";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@Name", obj.Name));
@@ -23,7 +23,20 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@Photo", obj.Photo));
             lstParams.Add(new SqlParameter("@AccountID", obj.AccountID));
 
-            return DBUtility.Modify(query, lstParams); 
+            DataTable dt = DBUtility.InsertAndFetch(query, lstParams);
+
+            if (dt.Rows.Count == 1)
+            {
+                return new RoomType(Convert.ToInt32(dt.Rows[0]["RoomTypeID"]),
+                dt.Rows[0]["Name"].ToString(),
+                dt.Rows[0]["Description"].ToString(),
+                dt.Rows[0]["Photo"].ToString(),
+                Convert.ToInt32(dt.Rows[0]["AccountID"]));
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public int update(RoomType obj)
@@ -57,11 +70,18 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@id", id));
             DataTable dt = DBUtility.Select(query, lstParams);
 
-            return new RoomType(Convert.ToInt32(dt.Rows[0]["RoomTypeID"]),
+            if (dt.Rows.Count == 1)
+            {
+                return new RoomType(Convert.ToInt32(dt.Rows[0]["RoomTypeID"]),
                 dt.Rows[0]["Name"].ToString(),
                 dt.Rows[0]["Description"].ToString(),
                 dt.Rows[0]["Photo"].ToString(),
                 Convert.ToInt32(dt.Rows[0]["AccountID"]));
+            }
+            else
+            {
+                return null;
+            }
             
         }
 

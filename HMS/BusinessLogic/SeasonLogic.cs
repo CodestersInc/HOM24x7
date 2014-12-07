@@ -24,9 +24,9 @@ namespace BusinessLogic
             return DBUtility.Select(query, lstParams);
         }
 
-        public int create(Season obj)
+        public Season create(Season obj)
         {
-            String query = "insert into Season values(@Name, @FromDate, @ToDate, @AccountID)";
+            String query = "insert into Season values(@Name, @FromDate, @ToDate, @AccountID); select * from Season where Name=@Name FromDate=@FromDate and ToDate=@ToDate and AccountID=@AccountID";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@Name", obj.Name));
@@ -34,7 +34,21 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@ToDate", obj.ToDate));
             lstParams.Add(new SqlParameter("@AccountID", obj.AccountID));
 
-            return DBUtility.Modify(query, lstParams); 
+            DataTable dt = DBUtility.InsertAndFetch(query, lstParams);
+
+            if (dt.Rows.Count == 1)
+            {
+                return new Season(Convert.ToInt32(dt.Rows[0]["SeasonID"]),
+                dt.Rows[0]["Name"].ToString(),
+                (Convert.ToDateTime(dt.Rows[0]["FromDate"])),
+                (Convert.ToDateTime(dt.Rows[0]["ToDate"])),
+                (Convert.ToInt32(dt.Rows[0]["AccountID"])));
+            }
+            else
+            {
+                return null;
+            }
+            
         }
 
         public int update(Season obj)
@@ -68,11 +82,19 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@id", id));
             DataTable dt = DBUtility.Select(query, lstParams);
 
-            return new Season(Convert.ToInt32(dt.Rows[0]["SeasonID"]),
+            if (dt.Rows.Count == 1)
+            {
+                return new Season(Convert.ToInt32(dt.Rows[0]["SeasonID"]),
                 dt.Rows[0]["Name"].ToString(),
                 (Convert.ToDateTime(dt.Rows[0]["FromDate"])),
                 (Convert.ToDateTime(dt.Rows[0]["ToDate"])),
                 (Convert.ToInt32(dt.Rows[0]["AccountID"])));
+            }
+            else
+            {
+                return null;
+            }
+            
         }
 
         public DataTable selectAll()

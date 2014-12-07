@@ -14,7 +14,7 @@ namespace BusinessLogic
     {
         public int create(ServiceRequest obj)
         {
-            String query = "insert into ServiceRequest values(@ServiceID, @BookingID, @CreatedDate, @RequestedDate, @Status, @CustomerRemarks, @StaffRemarks, @AssignedID, @Unit)";
+            String query = "insert into ServiceRequest values(@ServiceID, @BookingID, @CreatedDate, @RequestedDate, @Status, @CustomerRemarks, @StaffRemarks, @AssignedID, @Unit) select * from ServiceRequest where ServiceID=@ServiceID BookingID=@BookingID CreatedDate=@CreatedDate and RequestedDate=@RequestedDate and Status=@Status and CustomerRemarks=@CustomerRemarks and StaffRemarks=@StaffRemarks and AssignedID=@AssignedID and Unit=@Unit";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@ServiceID", obj.ServiceID));

@@ -15,7 +15,7 @@ namespace BusinessLogic
     {
         public OnlineBooking create(OnlineBooking obj)
         {
-            String query = "insert into Booking values(@RoomTypeID, @NumberOfPersons, @CheckInDate, @PlannedCheckOutDate, @Status, @CustomerID, @ConverterID, @StaffRemarks, @CustomerRemarks, @WebsiteRate)";
+            String query = "insert into Booking values(@RoomTypeID, @NumberOfPersons, @CheckInDate, @PlannedCheckOutDate, @Status, @CustomerID, @ConverterID, @StaffRemarks, @CustomerRemarks, @WebsiteRate); select * from OnlineBooking RoomTypeID=@RoomTypeID and NumberOfPersons=@NumberOfPersons and CheckInDate=@CheckInDate and @PlannedCheckOutDate and @Status and CustomerID=@CustomerID and ConverterID=@ConverterID and StaffRemarks=@StaffRemarks and CustomerRemarks=@CustomerRemarks and WebsiteRate=@WebsiteRate";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@RoomTypeID", obj.RoomTypeID));

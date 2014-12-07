@@ -25,7 +25,7 @@ namespace BusinessLogic
 
         public int create(Service obj)
         {
-            String query = "insert into Account values(@Name, @DepartmentID, @Rate)";
+            String query = "insert into Service values(@Name, @DepartmentID, @Rate); select * from Service Name=@Name and DepartmentID=@DepartmentID and Rate=@Rate";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@Name", obj.Name));

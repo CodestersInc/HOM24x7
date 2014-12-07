@@ -15,7 +15,7 @@ namespace BusinessLogic
     {
         public Attendance create(Attendance obj)
         {
-            String query = "insert into Attendance values(@StaffID, @AttendanceDate, @InTime, @OutTime)";
+            String query = "insert into Attendance values(@StaffID, @AttendanceDate, @InTime, @OutTime; select * from Attendance where StaffID=@StaffID and AttendanceDate=@AttendanceDate and InTime=@InTime and OunTime=@OutTime)";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@StaffID", obj.StaffID));

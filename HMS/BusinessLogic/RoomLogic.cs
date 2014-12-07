@@ -13,9 +13,9 @@ namespace BusinessLogic
 {
     public class RoomLogic : ILogic<Room>
     {
-        public int create(Room obj)
+        public Room create(Room obj)
         {
-            String query = "insert into Room values(@RoomTypeID, @Number, @Floor, @Building, @Status)";
+            String query = "insert into Room values(@RoomTypeID, @Number, @Floor, @Building, @Status); select * from Room where RoomTypeID=@RoomTypeID, Number=@Number, Floor=@Floor, Building=@Building, Status=@Status";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@RoomTypeID", obj.RoomTypeID));
@@ -24,7 +24,22 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@Building", obj.Building));
             lstParams.Add(new SqlParameter("@Status", obj.Status));
 
-            return DBUtility.Modify(query, lstParams); 
+            DataTable dt = DBUtility.Select(query, lstParams);
+
+            if (dt.Rows.Count == 1)
+            {
+                return new Room(Convert.ToInt32(dt.Rows[0]["RoomID"]),
+                Convert.ToInt32(dt.Rows[0]["RoomTypeID"]),
+                dt.Rows[0]["Number"].ToString(),
+                dt.Rows[0]["Floor"].ToString(),
+                dt.Rows[0]["Building"].ToString(),
+                dt.Rows[0]["Status"].ToString());
+
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public int update(Room obj)
@@ -53,7 +68,26 @@ namespace BusinessLogic
 
         public Room selectById(int id)
         {
-            throw new NotImplementedException();
+            String query = "select * from Room where PaySlipID=@id";
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+
+            lstParams.Add(new SqlParameter("@id", id));
+            DataTable dt = DBUtility.Select(query, lstParams);
+
+            if (dt.Rows.Count == 1)
+            {
+                return new Room(Convert.ToInt32(dt.Rows[0]["RoomID"]),
+                Convert.ToInt32(dt.Rows[0]["RoomTypeID"]),
+                dt.Rows[0]["Number"].ToString(),
+                dt.Rows[0]["Floor"].ToString(),
+                dt.Rows[0]["Building"].ToString(),
+                dt.Rows[0]["Status"].ToString());
+
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public DataTable selectAll()
