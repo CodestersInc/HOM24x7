@@ -13,7 +13,7 @@ namespace BusinessLogic
 {
     public class AttendanceLogic : ILogic<Attendance>
     {
-        public int create(Attendance obj)
+        public Attendance create(Attendance obj)
         {
             String query = "insert into Attendance values(@StaffID, @AttendanceDate, @InTime, @OutTime)";
             List<SqlParameter> lstParams = new List<SqlParameter>();
@@ -23,7 +23,20 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@InTime", obj.InTime));
             lstParams.Add(new SqlParameter("@OutTime", obj.OutTime));
 
-            return DBUtility.Modify(query, lstParams);
+            DataTable dt = DBUtility.InsertAndFetch(query, lstParams);
+
+            if (dt.Rows.Count == 1)
+            {
+                return new Attendance(Convert.ToInt32(dt.Rows[0]["AttenddanceID"]),
+                Convert.ToInt32(dt.Rows[0]["StaffID"]),
+                Convert.ToDateTime(dt.Rows[0]["AttendanceDate"]),
+                Convert.ToDateTime(dt.Rows[0]["InTime"]),
+                Convert.ToDateTime(dt.Rows[0]["OutTime"]));
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public int update(Attendance obj)
@@ -56,11 +69,19 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@id", id));
             DataTable dt = DBUtility.Select(query, lstParams);
 
-            return new Attendance(Convert.ToInt32(dt.Rows[0]["AttenddanceID"]),
+            if (dt.Rows.Count == 1)
+            {
+                return new Attendance(Convert.ToInt32(dt.Rows[0]["AttenddanceID"]),
                 Convert.ToInt32(dt.Rows[0]["StaffID"]),
                 Convert.ToDateTime(dt.Rows[0]["AttendanceDate"]),
                 Convert.ToDateTime(dt.Rows[0]["InTime"]),
                 Convert.ToDateTime(dt.Rows[0]["OutTime"]));
+            }
+            else
+            {
+                return null;
+            }
+            
         }
 
         public DataTable selectAll()
