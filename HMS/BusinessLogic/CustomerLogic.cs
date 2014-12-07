@@ -12,16 +12,30 @@ namespace BusinessLogic
 {
     public class CustomerLogic : ILogic<Customer>
     {
-        public int create(Customer obj)
+        public Customer create(Customer obj)
         {
-            String query = "insert into Customer values(@AppUserID, @CreateDate, @IsActive, @Phone, @Address, @Website, @Features)";
+            String query = "insert into Customer values(@CreateDate, @Name, @Email, @Phone, @Username, @Password, @IsActive, @AccountID); select * from Customer where Username=@Username and Password=@Password;";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
-            lstParams.Add(new SqlParameter("@AppUserID", obj.AppUserID));
             lstParams.Add(new SqlParameter("@CreateDate", obj.CreateDate));
+            lstParams.Add(new SqlParameter("@Name", obj.Name));
+            lstParams.Add(new SqlParameter("@Email", obj.Email));
+            lstParams.Add(new SqlParameter("@Phone", obj.Phone));
+            lstParams.Add(new SqlParameter("@Username", obj.Username));
+            lstParams.Add(new SqlParameter("@Password", obj.Password));
             lstParams.Add(new SqlParameter("@IsActive", obj.IsActive));
+            lstParams.Add(new SqlParameter("@AccountID", obj.AccountID));
             
-            return DBUtility.Modify(query, lstParams); 
+            DataTable dt = DBUtility.Select(query, lstParams);
+
+            if (dt.Rows.Count == 1)
+            {
+                return new Customer();
+            }
+            else
+            {
+                return null; 
+            }
         }
 
         public int update(Customer obj)
