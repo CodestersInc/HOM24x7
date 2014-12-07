@@ -167,7 +167,7 @@ namespace BusinessLogic
             return dt;
         }
 
-        public SystemAdmin login(String username, String password)
+        public Staff login(String username, String password)
         {
             String query = "select * from SystemAdmin where Username=@Username and Password=@Password";
 
@@ -198,6 +198,6 @@ namespace BusinessLogic
             {
                 return null;
             }
-
+        }
     }
 }

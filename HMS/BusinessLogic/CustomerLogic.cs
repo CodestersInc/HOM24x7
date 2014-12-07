@@ -106,5 +106,33 @@ namespace BusinessLogic
 
             return DBUtility.Select(query, new List<SqlParameter>());
         }
+
+        public Customer login(String username, String password)
+        {
+            String query = "select * from SystemAdmin where Username=@Username and Password=@Password";
+
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+            lstParams.Add(new SqlParameter("@Username", username));
+            lstParams.Add(new SqlParameter("@Password", password));
+
+            DataTable dt = DBUtility.Select(query, lstParams);
+
+            if (dt.Rows.Count == 1)
+            {
+                return new Customer(Convert.ToInt32(dt.Rows[0]["CustomerID"]),
+                    Convert.ToDateTime(dt.Rows[0]["CreateDate"]),
+                    dt.Rows[0]["Name"].ToString(),
+                    dt.Rows[0]["Email"].ToString(),
+                    dt.Rows[0]["Phone"].ToString(),
+                    dt.Rows[0]["Username"].ToString(),
+                    dt.Rows[0]["Password"].ToString(),
+                    Convert.ToBoolean(dt.Rows[0]["IsActive"]),
+                    Convert.ToInt32(dt.Rows[0]["AccountID"]));
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

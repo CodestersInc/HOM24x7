@@ -25,7 +25,7 @@ namespace BusinessLogic
 
         public Department create(Department obj)
         {
-            String query = "insert into Department values(@Name, @AccountID, @ManagerID)";
+            String query = "insert into Department values(@Name, @AccountID, @ManagerID); select * from Department where Name=@Name and AccountID=@AccountID and ";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@Name", obj.Name));
