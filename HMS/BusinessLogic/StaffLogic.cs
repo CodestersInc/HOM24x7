@@ -26,11 +26,11 @@ namespace BusinessLogic
 
         public Staff create(Staff obj)
         {
-            String query = "insert into Staff(Name,Email,Phone,Username,Password,UserType,Designation,DOB,DOJ,Salary,IsActive,DepartmentID,AccountID) values(@Name, @Email, @Phone, @Username, @Password, @Designation, @DOB, @DOJ, @Salary, @Salary, @IsActive, @DepartmentID, @AccountID)";
+            String query = "insert into Staff(Name,Email,Phone,Username,Password,UserType,Designation,DOB,DOJ,Salary,IsActive,DepartmentID,AccountID) values(@Name, @Email, @Phone, @Username, @Password, @Designation, @DOB, @DOJ, @Salary, @Salary, @IsActive, @DepartmentID, @AccountID); select * from Staff where username=@Username, password=@Password";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@Name", obj.Name));
-            lstParams.Add(new SqlParameter("@Email",obj.Email));
+            lstParams.Add(new SqlParameter("@Email", obj.Email));
             lstParams.Add(new SqlParameter("@Phone", obj.Phone));
             lstParams.Add(new SqlParameter("@Username", obj.Username));
             lstParams.Add(new SqlParameter("@Password", obj.Password));
@@ -44,25 +44,49 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@DepartmentID", obj.DepartmentID));
             lstParams.Add(new SqlParameter("@AccountID", obj.AccountID));
 
+            DataTable dt = DBUtility.InsertAndFetch(query, lstParams);
 
-            DataTable dt = DBUtility.Modify(query, lstParams);
+            if (dt.Rows.Count == 1)
+            {
+                return new Staff(Convert.ToInt32(dt.Rows[0]["StaffID"]),
+                    dt.Rows[0]["Name"].ToString(),
+                    dt.Rows[0]["Email"].ToString(),
+                    dt.Rows[0]["Phone"].ToString(),
+                    dt.Rows[0]["Username"].ToString(),
+                    dt.Rows[0]["Password"].ToString(),
+                    dt.Rows[0]["UserType"].ToString(),
+                    dt.Rows[0]["Designation"].ToString(),
+                    Convert.ToDateTime(dt.Rows[0]["DOB"]),
+                    Convert.ToDateTime(dt.Rows[0]["DOJ"]),
+                    Convert.ToDouble(dt.Rows[0]["Salary"]),
+                    Convert.ToBoolean(dt.Rows[0]["IsActive"]),
+                    Convert.ToInt32(dt.Rows[0]["DepartmentID"]),
+                    Convert.ToInt32(dt.Rows[0]["AcoountID"]));
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public int update(Staff obj)
         {
-            String query = "update Staff set AppUserID=@AppUserID, Designation=@Designation, DOB=@DOB, DOJ=@DOJ, Salary=@Salary, SalaryFrequency=@SalaryFrequency, IsActive=@IsActive, DepartmentID=@DepartmentID where StaffID=@StaffID";
+            String query = "update Staff set Name=@Name, Email=@Email, Phone=@Phone, Password=@Password, UserType=@UserType, Designation=@Designation, DOB=@DOB, DOJ=@DOJ, Salary=@Salary, IsActive=@IsActive, DepartmentID=@DepartmentID where StaffID=@StaffID";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@StaffID", obj.StaffID));
-            lstParams.Add(new SqlParameter("@AppUserID", obj.AppUserID));
+            lstParams.Add(new SqlParameter("@Name", obj.Name));
+            lstParams.Add(new SqlParameter("@Email", obj.Email));
+            lstParams.Add(new SqlParameter("@Phone", obj.Phone));
+            lstParams.Add(new SqlParameter("@Username", obj.Username));
+            lstParams.Add(new SqlParameter("@Password", obj.Password));
+            lstParams.Add(new SqlParameter("@UserType", obj.UserType));
             lstParams.Add(new SqlParameter("@Designation", obj.Designation));
             lstParams.Add(new SqlParameter("@DOB", obj.DOB));
             lstParams.Add(new SqlParameter("@DOJ", obj.DOJ));
             lstParams.Add(new SqlParameter("@Salary", obj.Salary));
-            lstParams.Add(new SqlParameter("@SalaryFrequency", obj.SalaryFrequency));
             lstParams.Add(new SqlParameter("@IsActive", obj.IsActive));
             lstParams.Add(new SqlParameter("@DepartmentID", obj.DepartmentID));
-
 
             return DBUtility.Modify(query, lstParams);
         }
@@ -87,40 +111,19 @@ namespace BusinessLogic
             if (dt.Rows.Count == 1)
             {
                 return new Staff(Convert.ToInt32(dt.Rows[0]["StaffID"]),
-                Convert.ToInt32(dt.Rows[0]["AppUserID"]),
+                dt.Rows[0]["Name"].ToString(),
+                dt.Rows[0]["Email"].ToString(),
+                dt.Rows[0]["Phone"].ToString(),
+                dt.Rows[0]["Username"].ToString(),
+                dt.Rows[0]["Password"].ToString(),
+                dt.Rows[0]["UserType"].ToString(),
                 dt.Rows[0]["Designation"].ToString(),
                 Convert.ToDateTime(dt.Rows[0]["DOB"]),
                 Convert.ToDateTime(dt.Rows[0]["DOJ"]),
                 Convert.ToDouble(dt.Rows[0]["Salary"]),
-                dt.Rows[0]["SalaryFrequency"].ToString(),
                 Convert.ToBoolean(dt.Rows[0]["IsActive"]),
-                Convert.ToInt32(dt.Rows[0]["DepartmentID"]));
-            }
-            else
-            {
-                return null;
-            }
-
-        }
-
-        public Staff selectByAppUserId(int id)
-        {
-            String query = "select * from Staff where AppUserID=@id";
-            List<SqlParameter> lstParams = new List<SqlParameter>();
-
-            lstParams.Add(new SqlParameter("@id", id));
-            DataTable dt = DBUtility.Select(query, lstParams);
-            if (dt.Rows.Count == 1)
-            {
-                return new Staff(Convert.ToInt32(dt.Rows[0]["StaffID"]),
-                Convert.ToInt32(dt.Rows[0]["AppUserID"]),
-                dt.Rows[0]["Designation"].ToString(),
-                Convert.ToDateTime(dt.Rows[0]["DOB"]),
-                Convert.ToDateTime(dt.Rows[0]["DOJ"]),
-                Convert.ToDouble(dt.Rows[0]["Salary"]),
-                dt.Rows[0]["SalaryFrequency"].ToString(),
-                Convert.ToBoolean(dt.Rows[0]["IsActive"]),
-                Convert.ToInt32(dt.Rows[0]["DepartmentID"]));
+                Convert.ToInt32(dt.Rows[0]["DepartmentID"]),
+                Convert.ToInt32(dt.Rows[0]["AcoountID"]));
             }
             else
             {
@@ -138,7 +141,7 @@ namespace BusinessLogic
 
         public DataTable getStaffNames(int AccountID)
         {
-            String query = "select AppUser.Name as 'AppUserName', Department.Name as 'DepartmentName', Staff.StaffID as 'StaffID' from AppUser,Department,Staff where AppUser.AppUserID=Staff.AppUserID and AppUser.AccountID=Department.AccountID  and AppUser.AccountID=@AccountID";
+            String query = "select Department.Name as 'DepartmentName', Staff.* from Department,Staff where Staff.DepartmentID=Department.DepartmentID and AccountID=@AccountID";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
             lstParams.Add(new SqlParameter("@AccountID", AccountID));
@@ -158,7 +161,7 @@ namespace BusinessLogic
             int i = 0;
             for (i = 0; i < dt.Columns.Count; i++)
             {
-                dt.Rows[i]["Designation"]=dt.Rows[i]["Designation"].ToString();
+                dt.Rows[i]["Designation"] = dt.Rows[i]["Designation"].ToString();
                 dt.AcceptChanges();
             }
             return dt;
