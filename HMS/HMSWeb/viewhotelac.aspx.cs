@@ -62,7 +62,7 @@ public partial class viewhotelac : System.Web.UI.Page
             }
             else
             {
-                Response.Redirect("500.html");
+                Response.Redirect("ErrorPage500.html");
             }
         }
         catch (Exception ex)

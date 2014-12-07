@@ -39,7 +39,7 @@ public partial class adddepartment : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-
+            Response.Redirect("ErrorPage500..html");
         }
         
     }
@@ -63,7 +63,7 @@ public partial class adddepartment : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-
+            Response.Redirect("ErrorPage500..html");
         }
         
     }

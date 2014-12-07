@@ -13,11 +13,19 @@ public partial class hacregister : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        Staff loggedUser = (Staff)Session["LoggedUser"];
-        if (loggedUser !=null || Session["UserType"] != "HotelAdmin")
+        try
         {
-            Response.Redirect("login.aspx");
+            Staff loggedUser = (Staff)Session["LoggedUser"];
+            if (loggedUser != null || Session["UserType"] != "HotelAdmin")
+            {
+                Response.Redirect("login.aspx");
+            }
         }
+        catch (Exception ex)
+        {
+            Response.Redirect("ErrorPage500.html");
+        }
+        
     }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {

@@ -72,7 +72,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
         }
         catch (Exception ex)
         {
-            Response.Redirect("ErrorPage500");
+            Response.Redirect("ErrorPage500.html");
         }
         
     }
@@ -86,7 +86,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
         }
         catch (Exception ex)
         {
-            Response.Redirect("ErrorPage500");
+            Response.Redirect("ErrorPage500.html");
         }
         
     }
