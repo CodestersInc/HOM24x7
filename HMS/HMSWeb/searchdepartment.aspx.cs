@@ -23,4 +23,15 @@ public partial class searchdepartment : System.Web.UI.Page
         GridView1.DataSource = new DepartmentLogic().search(txtName.Text, loggedUser.AccountID);
         GridView1.DataBind();
     }
+
+    protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "Remove")
+        {
+            new DepartmentLogic().delete(Convert.ToInt32(e.CommandArgument));
+            Staff loggedUser = (Staff)Session["LoggedUser"];
+            GridView1.DataSource = new DepartmentLogic().search(txtName.Text, loggedUser.AccountID);
+            GridView1.DataBind();
+        }
+    }
 }

@@ -14,7 +14,7 @@ namespace BusinessLogic
     {
         public DataTable search(String searchstring, int ID)
         {
-            String query = "select Department.Name as 'Department', Department.DepartmentID, Staff.Name as 'Manager' from Department,Staff where Department.ManagerID=Staff.StaffID and Department.Name like '%'+@Name+'%' and Department.AccountID=@AccountID";
+            String query = "select Department.Name as 'Department', Department.DepartmentID, Staff.Name as 'Manager' from Department,Staff where Department.ManagerID=Staff.StaffID and Department.Name like @Name+'%' and Department.AccountID=@AccountID";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
             lstParams.Add(new SqlParameter("@Name", searchstring));

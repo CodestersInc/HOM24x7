@@ -18,12 +18,12 @@ namespace BusinessLogic
             List<SqlParameter> lstParams = new List<SqlParameter>();
             if (ID == 0)
             {
-                query = "select * from Account where Company like '%'+@Company+'%'";
+                query = "select * from Account where Company like @Company+'%'";
             }
             else
             {
                 lstParams.Add(new SqlParameter("@ID", ID));
-                query = "select * from Account where Company like '%'+@Company+'%' and AccountID=@ID";
+                query = "select * from Account where Company like @Company+'%' and AccountID=@ID";
             }
 
             lstParams.Add(new SqlParameter("@Company", searchstring));

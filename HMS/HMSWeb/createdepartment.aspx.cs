@@ -43,6 +43,7 @@ public partial class adddepartment : System.Web.UI.Page
             Response.Redirect("home.aspx");
         }
     }
+
     protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
     {
         if (e.CommandName == "Select")

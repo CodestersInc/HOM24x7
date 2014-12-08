@@ -47,7 +47,7 @@
                         </span>
                     </div>
                     <div class="widget-body">
-                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" class="table table-striped table-bordered">
+                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" class="table table-striped table-bordered" OnRowCommand="GridView1_RowCommand">
                             <Columns>
                                 <asp:TemplateField HeaderText="Name">
                                     <ItemTemplate>
@@ -71,8 +71,8 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="">
                                     <ItemTemplate>
-                                        <a href='<%# "viewstaff.aspx?ID=" + Eval("StaffID") %>' class="btn mini purple"><i class="icon-edit"></i> Edit</a>
-                                        <a onclick="" class="btn mini black"><i class="icon-trash"></i> Remove</a>
+                                        <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewstaff.aspx?ID=" + Eval("StaffID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
+                                        <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("StaffID") %>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>

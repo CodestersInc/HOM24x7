@@ -76,7 +76,7 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="">
                                     <ItemTemplate>
-                                        <a href='<%# "viewhotelac.aspx?ID=" + Eval("AccountID") %>'>View Details</a>
+                                        <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewhotelac.aspx?ID=" + Eval("AccountID") %>' runat="server"><i class="icon-edit"></i> View/Edit Details</asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>

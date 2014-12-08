@@ -47,7 +47,7 @@
                         </span>
                     </div>
                     <div class="widget-body">
-                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" class="table table-striped table-bordered">
+                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" class="table table-striped table-bordered" OnRowCommand="GridView1_RowCommand">
                             <Columns>
                                 <asp:TemplateField HeaderText="Department">
                                     <ItemTemplate>
@@ -61,10 +61,8 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="">
                                     <ItemTemplate>
-                                        <%--<asp:LinkButton ID="LinkButton1" runat="server" >LinkButton</asp:LinkButton>--%>
-                                        <a href='<%# "viewdepartment.aspx?ID=" + Eval("DepartmentID") %>' class="btn mini purple"><i class="icon-edit"></i> Edit</a>
-                                        <%--<asp:LinkButton ID="LinkButton2" runat="server">LinkButton</asp:LinkButton>--%>
-                                        <a onclick="" runat="server" class="btn mini black"><i class="icon-trash"></i> Remove</a>
+                                        <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewdepartment.aspx?ID=" + Eval("DepartmentID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
+                                        <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("DepartmentID") %>' CssClass="btn"><i class="icon-trash"></i> Remove</asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
@@ -80,5 +78,5 @@
     <!-- END PAGE CONTAINER -->
 </asp:Content>
 
-<asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" Runat="Server">
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
 </asp:Content>
