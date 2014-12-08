@@ -55,7 +55,7 @@
                                         <Columns>
                                             <asp:TemplateField HeaderText="Name">
                                                 <ItemTemplate>
-                                                    <%# Eval("AppUserName") %>
+                                                    <%# Eval("Name") %>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Department Name">

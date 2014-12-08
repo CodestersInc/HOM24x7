@@ -10,10 +10,10 @@ public partial class adddepartment : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        try
-        {
+        //try
+        //{
             Staff loggedUser = (Staff)Session["LoggedUser"];
-            if (Session["UserType"] != "HotelAdmin")
+            if (Session["StaffUserType"].ToString() != "HotelAdmin")
             {
                 Response.Redirect("login.aspx");
             }
@@ -26,21 +26,17 @@ public partial class adddepartment : System.Web.UI.Page
             }
             else
             {
-                /*
                 txtName.Text = (String)Request.QueryString["Name"];
                 StaffLogic stafflogicobj = new StaffLogic();
                 Staff staffobj = stafflogicobj.selectById(Convert.ToInt32((String)Request.QueryString["ID"]));
-                AppUserLogic appuserlogicobj = new AppUserLogic();
-                AppUser appuserobj = appuserlogicobj.selectById(staffobj.AppUserID);
-                txtManagerName.Text = appuserobj.Name;
+                txtManagerName.Text = staffobj.Name;
                 Session.Add("DepartmentManager", staffobj);
-                */
             }
-        }
-        catch (Exception ex)
-        {
-            Response.Redirect("ErrorPage500..html");
-        }
+        //}
+        //catch (Exception ex)
+        //{
+        //    Response.Redirect("ErrorPage500.html");
+        //}
         
     }
     protected void btnSubmit_Click(object sender, EventArgs e)
@@ -63,7 +59,7 @@ public partial class adddepartment : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            Response.Redirect("ErrorPage500..html");
+            Response.Redirect("ErrorPage500.html");
         }
         
     }

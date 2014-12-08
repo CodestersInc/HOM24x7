@@ -84,7 +84,7 @@ public partial class login : System.Web.UI.Page
                     //Session.Add("SystemAdmin", systemAdminLogger);
                     Session.Add("UserType", "SystemAdmin");
                     Response.Redirect("home.aspx");
-                }/*
+                }
                 else
                 {
                     StaffLogic staffLogic = new StaffLogic();
@@ -108,7 +108,7 @@ public partial class login : System.Web.UI.Page
                             Response.Redirect("home.aspx");
                         }
                     }
-                }*/
+                }
             }
             else
             {

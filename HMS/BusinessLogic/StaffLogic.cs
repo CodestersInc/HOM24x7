@@ -134,7 +134,7 @@ namespace BusinessLogic
                 Convert.ToDouble(dt.Rows[0]["Salary"]),
                 Convert.ToBoolean(dt.Rows[0]["IsActive"]),
                 Convert.ToInt32(dt.Rows[0]["DepartmentID"]),
-                Convert.ToInt32(dt.Rows[0]["AcoountID"]));
+                Convert.ToInt32(dt.Rows[0]["AccountID"]));
             }
             else
             {
@@ -180,7 +180,7 @@ namespace BusinessLogic
 
         public Staff login(String username, String password)
         {
-            String query = "select * from SystemAdmin where Username=@Username and Password=@Password";
+            String query = "select * from Staff where Username=@Username and Password=@Password";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
             lstParams.Add(new SqlParameter("@Username", username));
@@ -203,7 +203,7 @@ namespace BusinessLogic
                 Convert.ToDouble(dt.Rows[0]["Salary"]),
                 Convert.ToBoolean(dt.Rows[0]["IsActive"]),
                 Convert.ToInt32(dt.Rows[0]["DepartmentID"]),
-                Convert.ToInt32(dt.Rows[0]["AcoountID"]));
+                Convert.ToInt32(dt.Rows[0]["AccountID"]));
             }
             else
             {
