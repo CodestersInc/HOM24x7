@@ -13,12 +13,12 @@ public partial class login : System.Web.UI.Page
         try
         {
             errorMessagePlaceHolder.Visible = false;
-    }
+        }
         catch (Exception ex)
         {
-            Response.Redirect("ErrorPage500");
+            Console.Write(ex.StackTrace);
+            Response.Redirect("ErrorPage500.html");
         }
-
     }
 
     /*
@@ -31,10 +31,10 @@ public partial class login : System.Web.UI.Page
         switch (loggerStaff.Designation)
         {
             case "Maintainance Staff":
-                Response.Redirect("hahome.aspx");
+                Response.Redirect("home.aspx");
                 break;
             case "Department Manager":
-                Response.Redirect("hahome.aspx");
+                Response.Redirect("home.aspx");
                 break;
             case "House keeping":
                 Response.Redirect("hkhome.aspx");
@@ -43,7 +43,7 @@ public partial class login : System.Web.UI.Page
                 Response.Redirect("rehome.aspx");
                 break;
             case "AccountAdmin":
-                Response.Redirect("hahome.aspx");
+                Response.Redirect("home.aspx");
                 break;
             default:
                 Response.Redirect("ErrorPage500.html");
@@ -61,7 +61,7 @@ public partial class login : System.Web.UI.Page
 
     protected void systemAdminLogger(AppUser logger)
     {
-        Response.Redirect("sahome.aspx");
+        Response.Redirect("home.aspx");
     }
 
     protected void accounAdminLogger(AppUser logger)
@@ -72,8 +72,8 @@ public partial class login : System.Web.UI.Page
 
     protected void btnLogin_Click(object sender, EventArgs e)
     {
-        try
-        {
+        //try
+        //{
             if (txtUsername.Text != null && txtPassword != null)
             {
                 SystemAdminLogic systemAdminLogic = new SystemAdminLogic();
@@ -83,8 +83,8 @@ public partial class login : System.Web.UI.Page
                     Session.Add("LoggedUser", systemAdminLogger);
                     //Session.Add("SystemAdmin", systemAdminLogger);
                     Session.Add("UserType", "SystemAdmin");
-                    return;
-                }
+                    Response.Redirect("home.aspx");
+                }/*
                 else
                 {
                     StaffLogic staffLogic = new StaffLogic();
@@ -94,7 +94,7 @@ public partial class login : System.Web.UI.Page
                         Session.Add("LoggedUser", staffLogger);
                         //Session.Add("Staff", staffLogger);
                         Session.Add("UserType", "Staff");
-                        return;
+                        Response.Redirect("home.aspx");
                     }
                     else
                     {
@@ -105,21 +105,21 @@ public partial class login : System.Web.UI.Page
                             Session.Add("LoggedUser", customerLogger);
                             //Session.Add("Customer", customerLogger);
                             Session.Add("UserType", "Customer");
-                            return;
+                            Response.Redirect("home.aspx");
                         }
                     }
-                }
+                }*/
             }
             else
             {
                 errorMessagePlaceHolder.Visible = true;
             }
-        }
-        catch (Exception) 
-        { 
-            Response.Redirect("ErrorPage500..html"); 
-        }
-        
+        //}
+        //catch (Exception ex)
+        //{
+        //    Console.Write(ex.StackTrace);
+        //    Response.Redirect("ErrorPage500.html");
+        //}
     }
 
     protected void forgotPassword(object sender, EventArgs e)

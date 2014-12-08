@@ -39,7 +39,7 @@ public partial class searchdepartment : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            Response.Redirect("ErrorPage500.htm;")
+            Response.Redirect("ErrorPage500.html");
         }
         
     }

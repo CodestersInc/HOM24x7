@@ -11,7 +11,7 @@
                 <h3 class="page-title">Create a New Department</h3>
                 <ul class="breadcrumb">
                     <li>
-                        <a href="hahome.aspx"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                        <a href="home.aspx"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                     </li>
                     <li>
                         <a href="#">Department</a> <span class="divider">&nbsp;</span>

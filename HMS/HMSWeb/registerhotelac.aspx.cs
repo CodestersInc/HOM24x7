@@ -13,25 +13,15 @@ public partial class hacregister : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        try
+        SystemAdmin loggedUser = (SystemAdmin)Session["LoggedUser"];
+        if (loggedUser == null || Session["UserType"] != "SystemAdmin")
         {
-            Staff loggedUser = (Staff)Session["LoggedUser"];
-            if (loggedUser != null || Session["UserType"] != "HotelAdmin")
-            {
-                Response.Redirect("login.aspx");
-            }
+            Response.Redirect("login.aspx");
         }
-        catch (Exception ex)
-        {
-            Response.Redirect("ErrorPage500.html");
-        }
-        
     }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
-        try
-        {
-        Account accountobj = new Account(0,
+        Account newaccount = new Account(0,
             txtCompany.Text,
             txtContact.Text,
             txtAccountEmail.Text,
@@ -41,54 +31,40 @@ public partial class hacregister : System.Web.UI.Page
             cbxFeatures.Checked);
 
         AccountLogic accountlogic = new AccountLogic();
-        int createAccountSuccess = accountlogic.create(accountobj);
+        Account accountobject = accountlogic.create(newaccount);
 
-        if (createAccountSuccess == 1)
+        if (accountobject != null)
         {
-            Account fetchedNewAccount = accountlogic.fetchFromModel(accountobj);
+            Staff staffobj = new Staff(0,
+                txtName.Text,
+                txtEmail.Text,
+                Convert.ToString(accountobject.Phone),
+                txtUsername.Text,                           //to be modified in future to email id
+                txtPassword.Text,
+                "HotelAdmin",
+                "Admin",
+                Convert.ToDateTime(txtDOB.Text),
+                System.DateTime.Now,
+                Convert.ToInt32(txtSalary.Text),
+                true,
+                0,
+                accountobject.AccountID);
 
-            AppUser appuserobj = new AppUser(0, txtName.Text,
-               txtEmail.Text,
-               txtPhone.Text,
-               fetchedNewAccount.AccountID,
-               txtUsername.Text,
-               txtPassword.Text,
-               "AccountAdmin");
+            StaffLogic stafflogic = new StaffLogic();
+            Staff staffobject = stafflogic.create(staffobj);
 
-            AppUserLogic appuserlogic = new AppUserLogic();
-            int createAppUserSuccess = appuserlogic.create(appuserobj);
-            AppUser fetchedAppUser = appuserlogic.getUserFromUsername(txtUsername.Text);
-            if (createAppUserSuccess == 1)
+            if(staffobject!=null)
             {
-
-                Staff staffobj = new Staff(0,
-                    fetchedAppUser.AppUserID,
-                    "AccountAdmin",
-                    Convert.ToDateTime(txtDOB.Text),
-                    System.DateTime.Now,
-                    Convert.ToInt32(txtSalary.Text),
-                    ddlSalaryFrequency.SelectedValue.ToString(),
-                    true,
-                    0);
-
-                StaffLogic stafflogic = new StaffLogic();
-                stafflogic.create(staffobj);
-                Response.Redirect("hahome.aspx");
+                Response.Redirect("home.aspx");
             }
             else
             {
-                appuserlogic.delete(fetchedAppUser.AppUserID);
-            }
+                accountlogic.delete(accountobject.AccountID);
             }
         }
-        catch (Exception ex)
-        {
-            Response.Redirect("ErrorPage500.html");
-        }
-        
     }
     protected void btnCancel_Click(object sender, EventArgs e)
     {
-        Response.Redirect("sahome.aspx");
+        Response.Redirect("home.aspx");
     }
 }

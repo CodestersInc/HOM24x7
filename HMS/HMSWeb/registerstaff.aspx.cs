@@ -71,7 +71,7 @@ public partial class registrestaff : System.Web.UI.Page
                         Convert.ToInt32(ddlDepartment.DataValueField)));
                 if (successfullAdditionOfStaff == 1)
                 {
-                    Response.Redirect("hahome.aspx");
+                    Response.Redirect("home.aspx");
                 }
             }
         }
@@ -84,6 +84,6 @@ public partial class registrestaff : System.Web.UI.Page
 
     protected void btnCancel_Click(object sender, EventArgs e)
     {
-        Response.Redirect("hahome.aspx");
+        Response.Redirect("home.aspx");
     }
 }

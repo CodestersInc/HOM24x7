@@ -32,23 +32,36 @@ namespace BusinessLogic
 
         public Account create(Account obj)
         {
-            String insertQuery = "insert into Account values(@Company, @ContactPerson, @Email, @Phone, @Address, @Website, @Features); select * from Account where Company=@Company and ContactPerson=@ContactPerson and Email=@Email and Phone=@Phone and Address=@Address and Website=@Website and Features=@Features";
-        //    String selectQuery = "select AccountID from Account where Company=@Company and ContactPerson=@ContactPerson and Email=@Email and Phone=@Phone and Address=@Address and Website=@Website and Features=@Features";
+            String insertQuery = "insert into Account values(@Company, @ContactPerson, @Email, @Phone, @Address, @Website, @Features)";
+            String selectQuery = "select * from Account where Company=@Company and ContactPerson=@ContactPerson and Email=@Email and Phone=@Phone and Address=@Address and Website=@Website and Features=@Features";
 
-                     
-                List<SqlParameter> lstInsertParams = new List<SqlParameter>();
 
-                lstInsertParams.Add(new SqlParameter("@Company", obj.Company));
-                lstInsertParams.Add(new SqlParameter("@ContactPerson", obj.ContactPerson));
-                lstInsertParams.Add(new SqlParameter("@Email", obj.Email));
-                lstInsertParams.Add(new SqlParameter("@Phone", obj.Phone));
-                lstInsertParams.Add(new SqlParameter("@Address", obj.Address));
-                lstInsertParams.Add(new SqlParameter("@Website", obj.Website));
-                lstInsertParams.Add(new SqlParameter("@Features", obj.Features));
+            List<SqlParameter> lstParams = new List<SqlParameter>();
 
-                DataTable dt = DBUtility.Select(insertQuery, lstInsertParams);
+            lstParams.Add(new SqlParameter("@Company", obj.Company));
+            lstParams.Add(new SqlParameter("@ContactPerson", obj.ContactPerson));
+            lstParams.Add(new SqlParameter("@Email", obj.Email));
+            lstParams.Add(new SqlParameter("@Phone", obj.Phone));
+            lstParams.Add(new SqlParameter("@Address", obj.Address));
+            lstParams.Add(new SqlParameter("@Website", obj.Website));
+            lstParams.Add(new SqlParameter("@Features", obj.Features));
 
-                if(dt.Rows.Count==1)
+            int res = DBUtility.Modify(insertQuery, lstParams);
+
+            if (res == 1)
+            {
+                List<SqlParameter> lstParams1 = new List<SqlParameter>();
+                lstParams1.Add(new SqlParameter("@Company", obj.Company));
+                lstParams1.Add(new SqlParameter("@ContactPerson", obj.ContactPerson));
+                lstParams1.Add(new SqlParameter("@Email", obj.Email));
+                lstParams1.Add(new SqlParameter("@Phone", obj.Phone));
+                lstParams1.Add(new SqlParameter("@Address", obj.Address));
+                lstParams1.Add(new SqlParameter("@Website", obj.Website));
+                lstParams1.Add(new SqlParameter("@Features", obj.Features));
+
+                DataTable dt = DBUtility.Select(selectQuery, lstParams1);
+
+                if (dt.Rows.Count == 1)
                 {
                     return new Account(Convert.ToInt32(dt.Rows[0]["AccountID"]),
                         dt.Rows[0]["Company"].ToString(),
@@ -63,7 +76,8 @@ namespace BusinessLogic
                 {
                     return null;
                 }
-
+            }
+            return null;
         }
 
         public int update(Account obj)

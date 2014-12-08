@@ -12,7 +12,7 @@
                 <h3 class="page-title">View Staff Details</h3>
                 <ul class="breadcrumb">
                     <li>
-                        <a href="hahome.aspx"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                        <a href="home.aspx"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                     </li>
                     <li>
                         <a href="#">Staff</a> <span class="divider">&nbsp;</span>

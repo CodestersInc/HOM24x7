@@ -12,12 +12,12 @@
                 <h3 class="page-title">Hotel Account Registration</h3>
                 <ul class="breadcrumb">
                     <li>
-                        <a href="sahome.aspx"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                        <a href="home.aspx"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                     </li>
                     <li>
                         <a href="#">Accounts</a> <span class="divider">&nbsp;</span>
                     </li>
-                    <li><a href="hacregister.aspx">Register</a><span class="divider-last">&nbsp;</span></li>
+                    <li><a href="registerhotelac.aspx">Register</a><span class="divider-last">&nbsp;</span></li>
                 </ul>
             </div>
         </div>
@@ -79,32 +79,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <%--<div class="control-group">
-                            <label class="control-label">Features</label>
-                            <div class="controls">
-                                    <label class="checker">
-                                        <asp:CheckBox ID="cbxFeatures" runat="server" />Available
-                                    </label>
-                                
-                            </div>
-                        </div>--%>
-
                             <div class="control-group">
                                 <label class="control-label">Features</label>
                                 <div class="danger-toggle-button">
-                                    <asp:CheckBox ID="cbxFeatures" runat="server"/> 
-                                    <span style="position: relative; top: 4px">Available</span>
+                                    <asp:CheckBox ID="cbxFeatures" runat="server" />
                                 </div>
                             </div>
 
-                            <div class="control-group">
-                                <label class="control-label">Styled Toggle Button</label>
-                                <div class="controls">
-                                    <div class="danger-toggle-button">
-                                        <asp:CheckBox ID="chkTest" runat="server" />
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -199,7 +180,7 @@
                                     </div>
                                 </div>
 
-                                <div class="control-group">
+                                <%--                                <div class="control-group">
                                     <label class="control-label">Salary Frequency</label>
                                     <div class="controls">
                                         <asp:DropDownList ID="ddlSalaryFrequency" runat="server" CssClass="span6" data-placeholder="Choose a Category" TabIndex="1">
@@ -209,7 +190,7 @@
                                             <asp:ListItem Value="Hourly">Hourly</asp:ListItem>
                                         </asp:DropDownList>
                                     </div>
-                                </div>
+                                </div>--%>
 
                                 <div class="form-actions">
                                     <asp:Button ID="btnSubmit" CssClass="btn btn-success" runat="server" Text="Submit" OnClick="btnSubmit_Click" />

@@ -26,7 +26,7 @@ namespace BusinessLogic
 
         public Staff create(Staff obj)
         {
-            String query = "insert into Staff(Name,Email,Phone,Username,Password,UserType,Designation,DOB,DOJ,Salary,IsActive,DepartmentID,AccountID) values(@Name, @Email, @Phone, @Username, @Password, @Designation, @DOB, @DOJ, @Salary, @Salary, @IsActive, @DepartmentID, @AccountID); select * from Staff where username=@Username, password=@Password";
+            String query = "insert into Staff(Name,Email,Phone,Username,Password,UserType,Designation,DOB,DOJ,Salary,IsActive,DepartmentID,AccountID) values(@Name, @Email, @Phone, @Username, @Password, @UserType, @Designation, @DOB, @DOJ, @Salary, @IsActive, @DepartmentID, @AccountID)";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@Name", obj.Name));
@@ -39,34 +39,45 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@DOB", obj.DOB));
             lstParams.Add(new SqlParameter("@DOJ", obj.DOJ));
             lstParams.Add(new SqlParameter("@Salary", obj.Salary));
-            lstParams.Add(new SqlParameter("@SalaryFrequency", obj.Salary));
             lstParams.Add(new SqlParameter("@IsActive", obj.IsActive));
             lstParams.Add(new SqlParameter("@DepartmentID", obj.DepartmentID));
             lstParams.Add(new SqlParameter("@AccountID", obj.AccountID));
 
-            DataTable dt = DBUtility.InsertAndFetch(query, lstParams);
+            int res = DBUtility.Modify(query, lstParams);
 
-            if (dt.Rows.Count == 1)
+            if (res == 1)
             {
-                return new Staff(Convert.ToInt32(dt.Rows[0]["StaffID"]),
-                    dt.Rows[0]["Name"].ToString(),
-                    dt.Rows[0]["Email"].ToString(),
-                    dt.Rows[0]["Phone"].ToString(),
-                    dt.Rows[0]["Username"].ToString(),
-                    dt.Rows[0]["Password"].ToString(),
-                    dt.Rows[0]["UserType"].ToString(),
-                    dt.Rows[0]["Designation"].ToString(),
-                    Convert.ToDateTime(dt.Rows[0]["DOB"]),
-                    Convert.ToDateTime(dt.Rows[0]["DOJ"]),
-                    Convert.ToDouble(dt.Rows[0]["Salary"]),
-                    Convert.ToBoolean(dt.Rows[0]["IsActive"]),
-                    Convert.ToInt32(dt.Rows[0]["DepartmentID"]),
-                    Convert.ToInt32(dt.Rows[0]["AcoountID"]));
+                String selectquery = "select * from staff where username=@username and password=@password";
+                
+                List<SqlParameter> lstParams1 = new List<SqlParameter>();
+                lstParams1.Add(new SqlParameter("@Username", obj.Username));
+                lstParams1.Add(new SqlParameter("@Password", obj.Password));
+
+                DataTable dt = DBUtility.Select(selectquery, lstParams1);
+
+                if (dt.Rows.Count == 1)
+                {
+                    return new Staff(Convert.ToInt32(dt.Rows[0]["StaffID"]),
+                        dt.Rows[0]["Name"].ToString(),
+                        dt.Rows[0]["Email"].ToString(),
+                        dt.Rows[0]["Phone"].ToString(),
+                        dt.Rows[0]["Username"].ToString(),
+                        dt.Rows[0]["Password"].ToString(),
+                        dt.Rows[0]["UserType"].ToString(),
+                        dt.Rows[0]["Designation"].ToString(),
+                        Convert.ToDateTime(dt.Rows[0]["DOB"]),
+                        Convert.ToDateTime(dt.Rows[0]["DOJ"]),
+                        Convert.ToDouble(dt.Rows[0]["Salary"]),
+                        Convert.ToBoolean(dt.Rows[0]["IsActive"]),
+                        Convert.ToInt32(dt.Rows[0]["DepartmentID"]),
+                        Convert.ToInt32(dt.Rows[0]["AccountID"]));
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 
         public int update(Staff obj)

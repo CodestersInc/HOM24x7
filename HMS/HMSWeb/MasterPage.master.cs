@@ -12,9 +12,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
     {
         try
         {
-            AppUser LoggedAppUser = (AppUser)Session["AppUser"];
-
-            if (LoggedAppUser == null)
+            if (Session["LoggedUser"] == null)
             {
                 Response.Redirect("login.aspx");
             }
@@ -24,40 +22,41 @@ public partial class MasterPage : System.Web.UI.MasterPage
                 {
                     homePlaceHolder.Visible = true;
                     accountsPlaceHolder.Visible = true;
+                    SystemAdmin systemAdminObj = (SystemAdmin)Session["LoggedUser"];
+                    lblUsername.Text = systemAdminObj.Name;
                 }
                 else
                 {
                     if (Session["UserType"].ToString() == "Staff")
                     {
                         homePlaceHolder.Visible = true;
-                        if (Session["Staff"] != null)
+                        Staff staffObj = (Staff)Session["LoggedUser"];
+                        String userType = staffObj.UserType;
+
+                        if (userType == "HotelAdmin")
                         {
-                            Staff staffObj = (Staff)Session["Staff"];
-                            String userType = staffObj.UserType;
+                            Session["StaffUserType"] = "HotelAdmin";
+                            attendancePlaceHolder.Visible = true;
+                            departmentPlaceHolder.Visible = true;
+                            payrollPlaceHolder.Visible = true;
+                            roomPlaceHolder.Visible = true;
+                            staffPlaceHolder.Visible = true;
+                            seasonPlaceHolder.Visible = true;
+                            servicePlaceHolder.Visible = true;
+                            serviceRequestPlaceHolder.Visible = true;
+                            lblUsername.Text = staffObj.Name;
+                        }
+                        if (userType == "Reception")
+                        {
 
-                            if (userType == "HotelAdmin")
-                            {
-                                attendancePlaceHolder.Visible = true;
-                                departmentPlaceHolder.Visible = true;
-                                payrollPlaceHolder.Visible = true;
-                                roomPlaceHolder.Visible = true;
-                                staffPlaceHolder.Visible = true;
-                                seasonPlaceHolder.Visible = true;
-                                servicePlaceHolder.Visible = true;
-                                serviceRequestPlaceHolder.Visible = true;
-                            }
-                            if (userType == "Reception")
-                            {
+                        }
+                        if (userType == "Service")
+                        {
 
-                            }
-                            if (userType == "Service")
-                            {
+                        }
+                        if (userType == "DepartmentManager")
+                        {
 
-                            }
-                            if (userType == "DepartmentManager")
-                            {
-
-                            }
                         }
                     }
                     else
@@ -74,20 +73,22 @@ public partial class MasterPage : System.Web.UI.MasterPage
         {
             Response.Redirect("ErrorPage500.html");
         }
-        
+
     }
     protected void btnLogout_Click(object sender, EventArgs e)
     {
         try
         {
-            AppUser LoggedAppUser = (AppUser)Session["AppUser"];
-            Session["AppUser"] = null;
+            Session["LoggedUser"] = null;
+            Session["UserType"] = null;
+            Session["StaffUserType"] = null;
             Response.Redirect("login.aspx");
         }
         catch (Exception ex)
         {
+            Console.Out.Write(ex.StackTrace);
             Response.Redirect("ErrorPage500.html");
         }
-        
+
     }
 }
