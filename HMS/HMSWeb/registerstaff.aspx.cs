@@ -29,9 +29,6 @@ public partial class registrestaff : System.Web.UI.Page
 
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
-        DepartmentLogic DL = new DepartmentLogic();
-        StaffLogic SL = new StaffLogic();
-
         Staff loggedInStaff = (Staff)Session["LoggedUser"];
 
         Staff staffobject = new Staff(0,
@@ -49,11 +46,15 @@ public partial class registrestaff : System.Web.UI.Page
             Convert.ToInt32(ddlDepartment.SelectedValue),
             loggedInStaff.AccountID);
 
-        Staff createdstaff = SL.create(staffobject);
+        Staff createdstaff = new StaffLogic().create(staffobject);
 
         if (createdstaff != null)
         {
             Response.Redirect("home.aspx");
+        }
+        else
+        {
+            Response.Redirect("ErrorPage500.html");
         }
     }
 
