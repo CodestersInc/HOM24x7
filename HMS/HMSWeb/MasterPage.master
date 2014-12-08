@@ -8,6 +8,7 @@
     <title></title>
 
     <asp:ContentPlaceHolder ID="headContentPlaceHolder" runat="server">
+
     </asp:ContentPlaceHolder>
 
     <meta charset="utf-8" />
@@ -250,7 +251,8 @@
                 <!-- BEGIN PAGE -->
                 <div id="main-content">
                     <!-- BEGIN PAGE CONTAINER-->
-                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    <asp:ContentPlaceHolder ID="bodyContentPlaceHolder" runat="server">
+
                     </asp:ContentPlaceHolder>
                     <!-- END PAGE CONTAINER-->
                 </div>
@@ -268,29 +270,29 @@
             <!-- END FOOTER -->
 
             <!-- BEGIN JAVASCRIPTS -->
-            <!-- Load javascripts at bottom, this will reduce page load time -->
-            <script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
-            <script src="assets/jquery-slimscroll/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
-            <script src="assets/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-            <script src="assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-            <script src="js/jquery.blockui.js" type="text/javascript"></script>
-            <script src="js/jquery.cookie.js" type="text/javascript"></script>
-            <script src="assets/jquery-knob/js/jquery.knob.js" type="text/javascript"></script>
-            <script src="assets/flot/jquery.flot.js" type="text/javascript"></script>
-            <script src="assets/flot/jquery.flot.resize.js" type="text/javascript"></script>
-            <script src="assets/flot/jquery.flot.pie.js" type="text/javascript"></script>
-            <script src="assets/flot/jquery.flot.stack.js" type="text/javascript"></script>
-            <script src="assets/flot/jquery.flot.crosshair.js" type="text/javascript"></script>
-            <script src="js/scripts.js" type="text/javascript"></script>
-            <script>
-                jQuery(document).ready(function () {
-                    // initiate layout and plugins
-                    App.init();
-                });
-            </script>
+            <asp:ContentPlaceHolder ID="scriptsContentPlaceHolder" runat="server">
+                <!-- Load javascripts at bottom, this will reduce page load time -->
+                <script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
+                <script src="assets/jquery-slimscroll/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
+                <script src="assets/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+                <script src="assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+                <script src="js/jquery.blockui.js" type="text/javascript"></script>
+                <script src="js/jquery.cookie.js" type="text/javascript"></script>
+                <script src="assets/jquery-knob/js/jquery.knob.js" type="text/javascript"></script>
+                <script src="assets/flot/jquery.flot.js" type="text/javascript"></script>
+                <script src="assets/flot/jquery.flot.resize.js" type="text/javascript"></script>
+                <script src="assets/flot/jquery.flot.pie.js" type="text/javascript"></script>
+                <script src="assets/flot/jquery.flot.stack.js" type="text/javascript"></script>
+                <script src="assets/flot/jquery.flot.crosshair.js" type="text/javascript"></script>
+                <script src="js/scripts.js" type="text/javascript"></script>
+                <script>
+                    jQuery(document).ready(function () {
+                        // initiate layout and plugins
+                        App.init();
+                    });
+                </script>
+            </asp:ContentPlaceHolder>
             <!-- END JAVASCRIPTS -->
-            <asp:ContentPlaceHolder ID="scriptsContentPlaceHolder" runat="server"></asp:ContentPlaceHolder>
-
         </div>
     </form>
     <!-- END FORM -->

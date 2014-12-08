@@ -3,7 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" runat="Server">
     <link rel="stylesheet" href="assets/bootstrap-toggle-buttons/static/stylesheets/bootstrap-toggle-buttons.css" />
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+
+<asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="Server">
     <!-- BEGIN PAGE CONTAINER-->
     <div class="container-fluid">
         <!-- BEGIN PAGE HEADER-->
@@ -160,7 +161,7 @@
     <!-- END PAGE CONTAINER-->
 </asp:Content>
 
-<asp:Content ID="sdfsfs" ContentPlaceHolderID="PlcScripts" runat="server">
+<asp:Content ID="sdfsfs" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="server">
     <script type="text/javascript" src="assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="assets/bootstrap-daterangepicker/date.js"></script>
     <script type="text/javascript" src="assets/bootstrap-daterangepicker/daterangepicker.js"></script>
@@ -226,6 +227,5 @@
             });
 
         }
-
     </script>
 </asp:Content>

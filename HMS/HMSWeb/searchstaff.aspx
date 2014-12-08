@@ -2,7 +2,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+
+<asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="Server">
     <!-- BEGIN PAGE CONTAINER-->
     <div class="container-fluid">
         <!-- BEGIN PAGE HEADER-->
@@ -46,33 +47,6 @@
                         </span>
                     </div>
                     <div class="widget-body">
-                        <%--                        <table class="table table-striped table-bordered" id="sample_1">
-                            <thead>
-                                <tr>
-                                    <th>Username</th>
-                                    <th class="hidden-phone">Email</th>
-                                    <th class="hidden-phone">Points</th>
-                                    <th class="hidden-phone">Joined</th>
-                                    <th class="hidden-phone"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="odd gradeX">
-                                    <td>shuxer</td>
-                                    <td class="hidden-phone"><a href="mailto:shuxer@gmail.com">shuxer@gmail.com</a></td>
-                                    <td class="hidden-phone">120</td>
-                                    <td class="center hidden-phone">12 Jan 2012</td>
-                                    <td class="hidden-phone"><span class="label label-success">Approved</span></td>
-                                </tr>
-                                <tr class="odd gradeX">
-                                    <td>looper</td>
-                                    <td class="hidden-phone"><a href="mailto:looper90@gmail.com">looper90@gmail.com</a></td>
-                                    <td class="hidden-phone">120</td>
-                                    <td class="center hidden-phone">12.12.2011</td>
-                                    <td class="hidden-phone"><span class="label label-warning">Suspended</span></td>
-                                </tr>
-                            </tbody>
-                        </table>--%>
                         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" class="table table-striped table-bordered">
                             <Columns>
                                 <asp:TemplateField HeaderText="Name">

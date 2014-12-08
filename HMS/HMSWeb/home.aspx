@@ -2,9 +2,10 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" Runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <b>Home Page</b>
-</asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="PlcScripts" Runat="Server">
+
+<asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" Runat="Server">
+    <center><h1><b>Home Page</b></h1></center>
 </asp:Content>
 
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" Runat="Server">
+</asp:Content>
