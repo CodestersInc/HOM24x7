@@ -32,7 +32,6 @@ public partial class viewhotelac : System.Web.UI.Page
     protected void btnUpdate_Click(object sender, EventArgs e)
     {
         Account accountobj = new Account();
-        AccountLogic accountlogicobj = new AccountLogic();
 
         accountobj.AccountID = Convert.ToInt32(Request.QueryString["ID"]);
         accountobj.Company = txtCompany.Text;
@@ -43,7 +42,7 @@ public partial class viewhotelac : System.Web.UI.Page
         accountobj.Website = txtWebsite.Text;
         accountobj.Features = cbxFeatures.Checked;
 
-        if (accountlogicobj.update(accountobj) == 1)
+        if (new AccountLogic().update(accountobj) == 1)
         {
             Response.Redirect("searchhotelac.aspx");
         }

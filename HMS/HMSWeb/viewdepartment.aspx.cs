@@ -17,8 +17,7 @@ public partial class viewdepartment : System.Web.UI.Page
             Response.Redirect("login.aspx");
         }
 
-        StaffLogic stafflogicobj = new StaffLogic();
-        GridView1.DataSource = stafflogicobj.getStaffNames(loggedUser.AccountID);
+        GridView1.DataSource = new StaffLogic().getStaffNames(loggedUser.AccountID);
         GridView1.DataBind();
 
         if (!IsPostBack)
@@ -39,11 +38,9 @@ public partial class viewdepartment : System.Web.UI.Page
         departmentobj.AccountID = loggedUser.AccountID;
         departmentobj.ManagerID = Convert.ToInt32(ViewState["staffid"]);
 
-        int res = new DepartmentLogic().update(departmentobj);
-
-        if (res == 1)
+        if (new DepartmentLogic().update(departmentobj) == 1)
         {
-            Response.Redirect("home.aspx");
+            Response.Redirect("searchdepartment.aspx");
         }
         else
         {

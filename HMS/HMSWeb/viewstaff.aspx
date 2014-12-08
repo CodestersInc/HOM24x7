@@ -65,11 +65,24 @@
                                 </div>
 
                                 <div class="control-group">
+                                    <label class="control-label">User Type</label>
+                                    <div class="controls">
+                                        <asp:DropDownList ID="ddlUserType" runat="server" CssClass="span6" data-placeholder="Choose a Category" TabIndex="1">
+                                            <asp:ListItem>Select...</asp:ListItem>
+                                            <asp:ListItem Value="HotelAdmin">Hotel Admin</asp:ListItem>
+                                            <asp:ListItem Value="Service">Service</asp:ListItem>
+                                            <asp:ListItem Value="Reception">Reception</asp:ListItem>
+                                            <asp:ListItem Value="DepartmentManager">Manager</asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
                                     <label class="control-label">Designation</label>
                                     <div class="controls">
                                         <asp:DropDownList ID="ddlDesignation" runat="server" CssClass="span6" data-placeholder="Choose a Category" TabIndex="1">
                                             <asp:ListItem>Select...</asp:ListItem>
-                                            <asp:ListItem Value="MaintainanceStaff">Maintainance Staff</asp:ListItem>
+                                            <asp:ListItem Value="MaintainanceStaff">Maintenance Staff</asp:ListItem>
                                             <asp:ListItem Value="DepartmentManager">Department Manager</asp:ListItem>
                                             <asp:ListItem Value="Housekeeping">House keeping</asp:ListItem>
                                             <asp:ListItem Value="AdminStaff">Administration Staff</asp:ListItem>
@@ -80,9 +93,8 @@
                                 <div class="control-group">
                                     <label class="control-label">Date of Birth</label>
                                     <div class="controls">
-                                        <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-                                            <asp:TextBox ID="txtDOB" runat="server" CssClass=" m-ctrl-medium date-picker" size="16" Text="12-02-2012"></asp:TextBox>
-                                            <%--<input class=" m-ctrl-medium date-picker" size="16" type="text" value="12-02-2012" />--%>
+                                        <div class="input-append date date-picker" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+                                            <asp:TextBox ID="txtDOB" runat="server" CssClass=" m-ctrl-medium date-picker" size="16"></asp:TextBox>
                                             <span class="add-on"><i class="icon-calendar"></i></span>
                                         </div>
                                     </div>
@@ -91,11 +103,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Date of Join</label>
                                     <div class="controls">
-                                        <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-                                            <asp:TextBox ID="txtDOJ" Enabled="false" runat="server" CssClass=" m-ctrl-medium date-picker" size="16" Text="12-02-2012"></asp:TextBox>
-                                            <%--<input class=" m-ctrl-medium date-picker" size="16" type="text" value="12-02-2012" />--%>
-                                            <span class="add-on"><i class="icon-calendar"></i></span>
-                                        </div>
+                                        <asp:TextBox ID="txtDOJ" Enabled="false" runat="server"></asp:TextBox>
                                     </div>
                                 </div>
 
@@ -109,7 +117,7 @@
                                     </div>
                                 </div>
 
-                                <div class="control-group">
+                                <%--                                <div class="control-group">
                                     <label class="control-label">Salary Frequency</label>
                                     <div class="controls">
                                         <asp:DropDownList ID="ddlSalaryFrequency" runat="server" CssClass="span6" data-placeholder="Choose a Category" TabIndex="1">
@@ -119,7 +127,7 @@
                                             <asp:ListItem Value="Hourly">Hourly</asp:ListItem>
                                         </asp:DropDownList>
                                     </div>
-                                </div>
+                                </div>--%>
 
                                 <div class="control-group">
                                     <label class="control-label">Is Active</label>
@@ -144,9 +152,8 @@
 
                                 <div class="form-actions">
                                     <asp:LinkButton ID="btnUpdate" CssClass="btn btn-inverse" runat="server" OnClick="btnUpdate_Click"><i class="icon-refresh icon-white"></i>Update</asp:LinkButton>
-                                    <%--<button class="btn btn-inverse"><i class="icon-refresh icon-white"></i> Update</button>--%>
-                                    <asp:Button ID="btnReset" CssClass="btn" runat="server" Text="Reset" />
-                                    <asp:Button ID="btnCancel" CssClass="btn" runat="server" Text="Cancel" />
+                                    <%--<asp:Button ID="btnReset" CssClass="btn" runat="server" Text="Reset" />--%>
+                                    <asp:Button ID="btnCancel" CssClass="btn" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
                                 </div>
 
                             </div>

@@ -15,7 +15,7 @@ namespace BusinessLogic
     {
         public DataTable search(String searchstring, int ID)
         {
-            String query = "select Department.Name, Staff.* as 'DepartmentName' from Department,Staff where Staff.Name like '%'+@Name+'%' and Staff.AccountID=@ID and Department.DepartmentID=Staff.DepartmentID";
+            String query = "select Department.Name as 'DepartmentName', Staff.* from Department,Staff where Staff.Name like '%'+@Name+'%' and Staff.AccountID=@ID and Department.DepartmentID=Staff.DepartmentID";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
             lstParams.Add(new SqlParameter("@Name", searchstring));
@@ -82,15 +82,13 @@ namespace BusinessLogic
 
         public int update(Staff obj)
         {
-            String query = "update Staff set Name=@Name, Email=@Email, Phone=@Phone, Password=@Password, UserType=@UserType, Designation=@Designation, DOB=@DOB, DOJ=@DOJ, Salary=@Salary, IsActive=@IsActive, DepartmentID=@DepartmentID where StaffID=@StaffID";
+            String query = "update Staff set Name=@Name, Email=@Email, Phone=@Phone, UserType=@UserType, Designation=@Designation, DOB=@DOB, DOJ=@DOJ, Salary=@Salary, IsActive=@IsActive, DepartmentID=@DepartmentID, AccountID=@AccountID where StaffID=@StaffID";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@StaffID", obj.StaffID));
             lstParams.Add(new SqlParameter("@Name", obj.Name));
             lstParams.Add(new SqlParameter("@Email", obj.Email));
             lstParams.Add(new SqlParameter("@Phone", obj.Phone));
-            lstParams.Add(new SqlParameter("@Username", obj.Username));
-            lstParams.Add(new SqlParameter("@Password", obj.Password));
             lstParams.Add(new SqlParameter("@UserType", obj.UserType));
             lstParams.Add(new SqlParameter("@Designation", obj.Designation));
             lstParams.Add(new SqlParameter("@DOB", obj.DOB));
@@ -98,6 +96,7 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@Salary", obj.Salary));
             lstParams.Add(new SqlParameter("@IsActive", obj.IsActive));
             lstParams.Add(new SqlParameter("@DepartmentID", obj.DepartmentID));
+            lstParams.Add(new SqlParameter("@AccountID", obj.AccountID));
 
             return DBUtility.Modify(query, lstParams);
         }
@@ -162,20 +161,12 @@ namespace BusinessLogic
 
         public DataTable selectDistinctDesignation(int AccountID)
         {
-            String query = "select DISTINCT Designation as 'DesignationChoice', Staff.StaffID from Department, Staff where AccountID=@AccountID";
+            String query = "select DISTINCT Designation as 'DesignationChoices' from Staff where Staff.AccountID=@AccountID";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
             lstParams.Add(new SqlParameter("@AccountID", AccountID));
 
-            DataTable dt = DBUtility.Select(query, lstParams);
-
-            int i = 0;
-            for (i = 0; i < dt.Columns.Count; i++)
-            {
-                dt.Rows[i]["Designation"] = dt.Rows[i]["Designation"].ToString();
-                dt.AcceptChanges();
-            }
-            return dt;
+            return DBUtility.Select(query, lstParams);
         }
 
         public Staff login(String username, String password)

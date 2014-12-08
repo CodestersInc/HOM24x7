@@ -4,7 +4,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" Runat="Server">
-    <center><h1><b>Home Page</b></h1></center>
+    <center><h2><b>Home Page</b></h2></center>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" Runat="Server">

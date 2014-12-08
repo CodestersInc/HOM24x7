@@ -213,7 +213,6 @@
     <script type="text/javascript" src="assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="assets/bootstrap-daterangepicker/date.js"></script>
     <script type="text/javascript" src="assets/bootstrap-daterangepicker/daterangepicker.js"></script>
-
     <script type="text/javascript" src="assets/bootstrap-toggle-buttons/static/js/jquery.toggle.buttons.js"></script>
 
     <script>

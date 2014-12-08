@@ -21,9 +21,9 @@ public partial class registrestaff : System.Web.UI.Page
         }
 
         DepartmentLogic departmentLogic = new DepartmentLogic();
-        ddlDepartment.DataSource = departmentLogic.selectDistinctDept(loggedUser.AccountID);
+        ddlDepartment.DataSource = departmentLogic.selectDistinctDepartment(loggedUser.AccountID);
         ddlDepartment.DataValueField = "DepartmentID";
-        ddlDepartment.DataTextField = "DepartmentName";
+        ddlDepartment.DataTextField = "DepartmentChoices";
         ddlDepartment.DataBind();
     }
 

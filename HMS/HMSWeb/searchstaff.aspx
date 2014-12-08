@@ -54,6 +54,11 @@
                                         <%# Eval("Name") %>
                                     </ItemTemplate>
                                 </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Department">
+                                    <ItemTemplate>
+                                        <%# Eval("DepartmentName") %>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Email">
                                     <ItemTemplate>
                                         <%# Eval("Email") %>
@@ -64,15 +69,10 @@
                                         <%# Eval("Phone") %>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Department">
-                                    <ItemTemplate>
-                                        <%# Eval("DepartmentName") %>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
                                 <asp:TemplateField HeaderText="">
                                     <ItemTemplate>
-                                        <a href='<%# "viewstaff.aspx?ID=" + Eval("StaffID") %>' class="btn mini purple"><i class="icon-edit"></i>Edit</a>
-                                        <a onclick="" class="btn mini black"><i class="icon-trash"></i>Remove</a>
+                                        <a href='<%# "viewstaff.aspx?ID=" + Eval("StaffID") %>' class="btn mini purple"><i class="icon-edit"></i> Edit</a>
+                                        <a onclick="" class="btn mini black"><i class="icon-trash"></i> Remove</a>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>

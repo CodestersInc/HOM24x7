@@ -6,6 +6,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" Runat="Server">
 </asp:Content>
 
-<asp:Content ID="Content3" ContentPlaceHolderID="PlcScripts" Runat="Server">
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" Runat="Server">
 </asp:Content>
 
