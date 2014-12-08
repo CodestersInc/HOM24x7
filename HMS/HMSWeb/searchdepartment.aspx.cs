@@ -20,8 +20,7 @@ public partial class searchdepartment : System.Web.UI.Page
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["LoggedUser"];
-        DepartmentLogic departmentLogicObj = new DepartmentLogic();
-        GridView1.DataSource = departmentLogicObj.search(txtName.Text, loggedUser.AccountID);
+        GridView1.DataSource = new DepartmentLogic().search(txtName.Text, loggedUser.AccountID);
         GridView1.DataBind();
     }
 }

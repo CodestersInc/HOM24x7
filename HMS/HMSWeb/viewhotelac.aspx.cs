@@ -18,8 +18,7 @@ public partial class viewhotelac : System.Web.UI.Page
 
         if (!IsPostBack)
         {
-            AccountLogic accountlogicobj = new AccountLogic();
-            Account accountobj = accountlogicobj.selectById(Convert.ToInt32(Request.QueryString["ID"]));
+            Account accountobj = new AccountLogic().selectById(Convert.ToInt32(Request.QueryString["ID"]));
             txtCompany.Text = accountobj.Company;
             txtContact.Text = accountobj.ContactPerson;
             txtEmail.Text = accountobj.Email;

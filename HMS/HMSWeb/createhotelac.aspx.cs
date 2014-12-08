@@ -30,8 +30,7 @@ public partial class hacregister : System.Web.UI.Page
             txtWebsite.Text,
             cbxFeatures.Checked);
 
-        AccountLogic accountlogic = new AccountLogic();
-        Account accountobject = accountlogic.create(newaccount);
+        Account accountobject = new AccountLogic().create(newaccount);
 
         if (accountobject != null)
         {
@@ -50,8 +49,7 @@ public partial class hacregister : System.Web.UI.Page
                 0,
                 accountobject.AccountID);
 
-            StaffLogic stafflogic = new StaffLogic();
-            Staff staffobject = stafflogic.create(staffobj);
+            Staff staffobject = new StaffLogic().create(staffobj);
 
             if(staffobject!=null)
             {
@@ -59,7 +57,7 @@ public partial class hacregister : System.Web.UI.Page
             }
             else
             {
-                accountlogic.delete(accountobject.AccountID);
+                new AccountLogic().delete(accountobject.AccountID);
             }
         }
     }

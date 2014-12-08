@@ -15,10 +15,10 @@ public partial class adddepartment : System.Web.UI.Page
         {
             Response.Redirect("login.aspx");
         }
+
         if (Request.QueryString["ID"] == null && Request.QueryString["Name"] == null)
         {
-            StaffLogic stafflogicobj = new StaffLogic();
-            GridView1.DataSource = stafflogicobj.getStaffNames(loggedUser.AccountID);
+            GridView1.DataSource = new StaffLogic().getStaffNames(loggedUser.AccountID);
             GridView1.DataBind();
         }
 
@@ -29,28 +29,19 @@ public partial class adddepartment : System.Web.UI.Page
     }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
-        //try
-        //{
-            Staff loggedUser = (Staff)Session["LoggedUser"];
-            Department departmentobj = new Department();
-            DepartmentLogic departmentlogicobj = new DepartmentLogic();
+        Staff loggedUser = (Staff)Session["LoggedUser"];
 
-            departmentobj.AccountID = loggedUser.AccountID;
-            departmentobj.Name = txtName.Text;
-            departmentobj.ManagerID = Convert.ToInt32(ViewState["staffid"]);
-            
-            Department department = departmentlogicobj.create(departmentobj);
+        Department departmentobj = new Department();
+        departmentobj.AccountID = loggedUser.AccountID;
+        departmentobj.Name = txtName.Text;
+        departmentobj.ManagerID = Convert.ToInt32(ViewState["staffid"]);
 
-            if(department!=null)
-            {
-                Response.Redirect("home.aspx");
-            }
-        //}
-        //catch (Exception ex)
-        //{
-        //    Response.Redirect("ErrorPage500.html");
-        //}
+        Department department = new DepartmentLogic().create(departmentobj);
 
+        if (department != null)
+        {
+            Response.Redirect("home.aspx");
+        }
     }
     protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
     {

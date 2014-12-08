@@ -25,8 +25,7 @@ public partial class viewstaff : System.Web.UI.Page
             //ddlDesignation.DataBind();
 
             //Fill ddlDepartment
-            DepartmentLogic departmentLogic = new DepartmentLogic();
-            ddlDepartment.DataSource = departmentLogic.selectDistinctDepartment(loggedUser.AccountID);
+            ddlDepartment.DataSource = new DepartmentLogic().selectDistinctDepartment(loggedUser.AccountID);
             ddlDepartment.DataValueField = "DepartmentID";
             ddlDepartment.DataTextField = "DepartmentChoices";
             ddlDepartment.DataBind();
