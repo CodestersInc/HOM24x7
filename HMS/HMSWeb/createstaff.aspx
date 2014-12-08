@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="registerstaff.aspx.cs" Inherits="registrestaff" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="createstaff.aspx.cs" Inherits="registrestaff" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" runat="Server">
 </asp:Content>
@@ -16,7 +16,7 @@
                     <li>
                         <a href="#">Staff</a> <span class="divider">&nbsp;</span>
                     </li>
-                    <li><a href="registerstaff.aspx">Register</a><span class="divider-last">&nbsp;</span></li>
+                    <li><a href="createstaff.aspx">Register</a><span class="divider-last">&nbsp;</span></li>
                 </ul>
             </div>
         </div>

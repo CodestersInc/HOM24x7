@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="registerhotelac.aspx.cs" Inherits="hacregister" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="createhotelac.aspx.cs" Inherits="hacregister" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" runat="Server">
     <link rel="stylesheet" href="assets/bootstrap-toggle-buttons/static/stylesheets/bootstrap-toggle-buttons.css" />
@@ -17,7 +17,7 @@
                     <li>
                         <a href="#">Accounts</a> <span class="divider">&nbsp;</span>
                     </li>
-                    <li><a href="registerhotelac.aspx">Register</a><span class="divider-last">&nbsp;</span></li>
+                    <li><a href="createhotelac.aspx">Register</a><span class="divider-last">&nbsp;</span></li>
                 </ul>
             </div>
         </div>

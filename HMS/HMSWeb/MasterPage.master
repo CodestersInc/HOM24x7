@@ -120,7 +120,7 @@
                                 </a>
                                 <ul class="sub">
                                     <li><a class="" href="searchhotelac.aspx">Search</a></li>
-                                    <li><a class="" href="registerhotelac.aspx">Register</a></li>
+                                    <li><a class="" href="createhotelac.aspx">Register</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
@@ -225,7 +225,7 @@
 					            <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a class="" href="registerstaff.aspx">Register</a></li>
+                                    <li><a class="" href="createstaff.aspx">Register</a></li>
                                     <li><a class="" href="searchstaff.aspx">Search</a></li>
                                 </ul>
                             </li>
