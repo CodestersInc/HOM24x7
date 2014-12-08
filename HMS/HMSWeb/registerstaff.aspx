@@ -94,6 +94,18 @@
                         <div>
                             <div class="form-horizontal">
                                 <div class="control-group">
+                                    <label class="control-label">User Type</label>
+                                    <div class="controls">
+                                        <asp:DropDownList ID="ddlUserType" runat="server" CssClass="span6" data-placeholder="Choose a Category" TabIndex="1">
+                                            <asp:ListItem>Select...</asp:ListItem>
+                                            <asp:ListItem Value="HotelAdmin">Hotel Admin</asp:ListItem>
+                                            <asp:ListItem Value="Service">Service</asp:ListItem>
+                                            <asp:ListItem Value="Reception">Reception</asp:ListItem>
+                                            <asp:ListItem Value="DepartmentManager">Manager</asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>
+                                </div>
+                                <div class="control-group">
                                     <label class="control-label">Designation</label>
                                     <div class="controls">
                                         <asp:DropDownList ID="ddlDesignation" runat="server" CssClass="span6" data-placeholder="Choose a Category" TabIndex="1">
@@ -126,7 +138,7 @@
                                     </div>
                                 </div>
 
-                                <div class="control-group">
+<%--                                <div class="control-group">
                                     <label class="control-label">Salary Frequency</label>
                                     <div class="controls">
                                         <asp:DropDownList ID="ddlSalaryFrequency" runat="server" CssClass="span6" data-placeholder="Choose a Category" TabIndex="1">
@@ -136,7 +148,7 @@
                                             <asp:ListItem Value="Hourly">Hourly</asp:ListItem>
                                         </asp:DropDownList>
                                     </div>
-                                </div>
+                                </div>--%>
 
                                 <div class="control-group">
                                     <label class="control-label">Is Active</label>
@@ -157,6 +169,7 @@
                                     <div class="controls">
                                         <asp:DropDownList ID="ddlDepartment" runat="server" CssClass="span6" data-placeholder="Choose a Category" TabIndex="1">
                                             <asp:ListItem>Select...</asp:ListItem>
+                                            <asp:ListItem Value="0">***No Department***</asp:ListItem>
                                         </asp:DropDownList>
                                     </div>
                                 </div>

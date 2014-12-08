@@ -10,57 +10,58 @@ public partial class adddepartment : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        Staff loggedUser = (Staff)Session["LoggedUser"];
+        if (Session["StaffUserType"].ToString() != "HotelAdmin")
+        {
+            Response.Redirect("login.aspx");
+        }
+        if (Request.QueryString["ID"] == null && Request.QueryString["Name"] == null)
+        {
+            StaffLogic stafflogicobj = new StaffLogic();
+            GridView1.DataSource = stafflogicobj.getStaffNames(loggedUser.AccountID);
+            GridView1.DataBind();
+        }
+
+        if (!IsPostBack)
+        {
+            btnSubmit.Enabled = false;
+        }
+    }
+    protected void btnSubmit_Click(object sender, EventArgs e)
+    {
         //try
         //{
             Staff loggedUser = (Staff)Session["LoggedUser"];
-            if (Session["StaffUserType"].ToString() != "HotelAdmin")
-            {
-                Response.Redirect("login.aspx");
-            }
+            Department departmentobj = new Department();
+            DepartmentLogic departmentlogicobj = new DepartmentLogic();
 
-            if (Request.QueryString["ID"] == null && Request.QueryString["Name"] == null)
+            departmentobj.AccountID = loggedUser.AccountID;
+            departmentobj.Name = txtName.Text;
+            departmentobj.ManagerID = Convert.ToInt32(ViewState["staffid"]);
+            
+            Department department = departmentlogicobj.create(departmentobj);
+
+            if(department!=null)
             {
-                StaffLogic stafflogicobj = new StaffLogic();
-                GridView1.DataSource = stafflogicobj.getStaffNames(loggedUser.AccountID);
-                GridView1.DataBind();
-            }
-            else
-            {
-                txtName.Text = (String)Request.QueryString["Name"];
-                StaffLogic stafflogicobj = new StaffLogic();
-                Staff staffobj = stafflogicobj.selectById(Convert.ToInt32((String)Request.QueryString["ID"]));
-                txtManagerName.Text = staffobj.Name;
-                Session.Add("DepartmentManager", staffobj);
+                Response.Redirect("home.aspx");
             }
         //}
         //catch (Exception ex)
         //{
         //    Response.Redirect("ErrorPage500.html");
         //}
-        
-    }
-    protected void btnSubmit_Click(object sender, EventArgs e)
-    {
-        try
-        {
-            Staff loggedUser = (Staff)Session["LoggedUser"];
-            Department departmentobj = new Department();
-            DepartmentLogic departmentlogicobj = new DepartmentLogic();
-            //AppUser LoggedAppUser = (AppUser)Session["AppUser"];
-            Staff DepartmentManager = (Staff)Session["DepartmentManager"];
 
-            departmentobj.AccountID = loggedUser.AccountID;
-            departmentobj.Name = txtName.Text;
-            if (txtManagerName.Text != "")
-            {
-                departmentobj.ManagerID = DepartmentManager.StaffID;
-            }
-            departmentlogicobj.create(departmentobj);
-        }
-        catch (Exception ex)
+    }
+    protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "Select")
         {
-            Response.Redirect("ErrorPage500.html");
+            int staffid = Convert.ToInt32(e.CommandArgument);
+            txtManagerName.Text = new StaffLogic().selectById(staffid).Name;
+            GridView1.Visible = false;
+
+            ViewState["staffid"] = staffid;
+            btnSubmit.Enabled = true;
         }
-        
     }
 }

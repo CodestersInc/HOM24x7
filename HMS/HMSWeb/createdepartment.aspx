@@ -38,7 +38,7 @@
                             <div>
                                 <div class="form-horizontal">
                                     <div class="control-group">
-                                        <label class="control-label">Departmnet Name</label>
+                                        <label class="control-label">Department Name</label>
                                         <div class="controls">
                                             <asp:TextBox ID="txtName" runat="server" CssClass="span6 popovers" data-trigger="hover" data-content="Enter the department name." data-original-title="Popover header"></asp:TextBox>
                                         </div>
@@ -50,22 +50,27 @@
                                             <asp:TextBox ID="txtManagerName" runat="server" CssClass="span6 " placeholder="Disabled input here..." disabled=""></asp:TextBox>
                                         </div>
                                     </div>
-
-                                    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" class="table table-striped table-bordered">
+                                    
+                                    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" class="table table-striped table-bordered" OnRowCommand="GridView1_RowCommand">
                                         <Columns>
                                             <asp:TemplateField HeaderText="Name">
                                                 <ItemTemplate>
                                                     <%# Eval("Name") %>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Name">
+                                                <ItemTemplate>
+                                                    <%# Eval("Email") %>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Department Name">
                                                 <ItemTemplate>
-                                                    <%# Eval("DepartmentName") %>
+                                                    <%# Eval("Phone") %>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Department">
                                                 <ItemTemplate>
-                                                    <a href='<%# "createdepartment.aspx?ID=" + Eval("StaffID") + "?Name="+txtName.Text%>' class="btn mini purple"><i class="icon-bookmark"></i>Select as Manger</a>
+                                                    <asp:LinkButton ID="LinkButton1" runat="server"  class="btn mini purple" CommandName="Select" CommandArgument='<%#  Eval("StaffID") %>'> Select as Manager </asp:LinkButton>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                         </Columns>

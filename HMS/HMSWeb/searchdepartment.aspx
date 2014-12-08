@@ -78,18 +78,20 @@
                             <Columns>
                                 <asp:TemplateField HeaderText="Department">
                                     <ItemTemplate>
-                                        <%# Eval("DepartmentName") %>
+                                        <%# Eval("Department") %>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Manager">
                                     <ItemTemplate>
-                                        <%# Eval("AppUserName") %>
+                                        <%# Eval("Manager") %>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="">
                                     <ItemTemplate>
-                                        <a href='<%# "viewdepartment.aspx?ID=" + Eval("Department.DepartmentID") %>' class="btn mini purple"><i class="icon-edit"></i>Edit</a>
-                                        <a onclick="" class="btn mini black"><i class="icon-trash"></i>Remove</a>
+                                        <%--<asp:LinkButton ID="LinkButton1" runat="server" >LinkButton</asp:LinkButton>--%>
+                                        <a href='<%# "viewdepartment.aspx?ID=" + Eval("DepartmentID") %>' class="btn mini purple"><i class="icon-edit"></i>Edit</a>
+                                        <%--<asp:LinkButton ID="LinkButton2" runat="server">LinkButton</asp:LinkButton>--%>
+                                        <a ID="removeDepartment" onclick="" runat="server" class="btn mini black"><i class="icon-trash"></i>Remove</a>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>

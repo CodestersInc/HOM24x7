@@ -13,7 +13,7 @@ public partial class login : System.Web.UI.Page
         try
         {
             errorMessagePlaceHolder.Visible = false;
-        }
+    }
         catch (Exception ex)
         {
             Console.Write(ex.StackTrace);
@@ -114,13 +114,13 @@ public partial class login : System.Web.UI.Page
             {
                 errorMessagePlaceHolder.Visible = true;
             }
-        //}
-        //catch (Exception ex)
-        //{
-        //    Console.Write(ex.StackTrace);
-        //    Response.Redirect("ErrorPage500.html");
-        //}
-    }
+        }
+    //    catch (Exception) 
+    //    { 
+    //        Response.Redirect("ErrorPage500.html"); 
+    //    }
+        
+    //}
 
     protected void forgotPassword(object sender, EventArgs e)
     {

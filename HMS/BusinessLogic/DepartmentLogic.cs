@@ -14,37 +14,48 @@ namespace BusinessLogic
     {
         public DataTable search(String searchstring, int ID)
         {
-            String query = "select Department.Name as 'Department', AppUser.Name as 'AppUserName' from AppUser,Department,Staff where Department.ManagerID=Staff.StaffID and Staff.AppUserID=AppUser.AppUserID and Department.Name like '%'+@Name+'%' and Department.AccountID=@AccountID";
+            String query = "select Department.Name as 'Department', Department.DepartmentID, Staff.Name as 'Manager' from Department,Staff where Department.ManagerID=Staff.StaffID and Department.Name like '%'+@Name+'%' and Department.AccountID=@AccountID";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
             lstParams.Add(new SqlParameter("@Name", searchstring));
-            lstParams.Add(new SqlParameter("@ID", ID));
+            lstParams.Add(new SqlParameter("@AccountID", ID));
 
             return DBUtility.Select(query, lstParams);
         }
 
         public Department create(Department obj)
         {
-            String query = "insert into Department values(@Name, @AccountID, @ManagerID); select * from Department where Name=@Name and AccountID=@AccountID and ManagerID=@ManagerID;";
+            String query = "insert into Department values(@Name, @AccountID, @ManagerID)";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@Name", obj.Name));
             lstParams.Add(new SqlParameter("@AccountID", obj.AccountID));
             lstParams.Add(new SqlParameter("@ManagerID", obj.ManagerID));
 
-            DataTable dt = DBUtility.InsertAndFetch(query, lstParams);
+            int res = DBUtility.Modify(query, lstParams);
 
-            if (dt.Rows.Count == 1)
+            if(res==1)
             {
-                return new Department(Convert.ToInt32(dt.Rows[0]["DepartmentID"]),
-                dt.Rows[0]["Name"].ToString(),
-                Convert.ToInt32(dt.Rows[0]["AccountID"]),
-                Convert.ToInt32(dt.Rows[0]["ManagerID"]));
+                String fetchquery = "select * from Department where Name=@Name and AccountID=@AccountID and ManagerID=@ManagerID;";
+                List<SqlParameter> lstParams1 = new List<SqlParameter>();
+
+                lstParams1.Add(new SqlParameter("@Name", obj.Name));
+                lstParams1.Add(new SqlParameter("@AccountID", obj.AccountID));
+                lstParams1.Add(new SqlParameter("@ManagerID", obj.ManagerID));
+                DataTable dt = DBUtility.Select(fetchquery, lstParams1);
+                if (dt.Rows.Count == 1)
+                {
+                    return new Department(Convert.ToInt32(dt.Rows[0]["DepartmentID"]),
+                    dt.Rows[0]["Name"].ToString(),
+                    Convert.ToInt32(dt.Rows[0]["AccountID"]),
+                    Convert.ToInt32(dt.Rows[0]["ManagerID"]));
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 
         public int update(Department obj)
@@ -99,7 +110,7 @@ namespace BusinessLogic
 
         public DataTable selectDistinctDept(int AccountID)
         {
-            String query = "select DISTINCT Name as 'DepartmentChoices', DepartmentID from Department where AccountID=@AccountID";
+            String query = "select DISTINCT Name as 'DepartmentName', DepartmentID from Department where AccountID=@AccountID";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
             lstParams.Add(new SqlParameter("@AccountID", AccountID));

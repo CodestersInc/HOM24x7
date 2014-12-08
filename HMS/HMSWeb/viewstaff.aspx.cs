@@ -10,28 +10,25 @@ public partial class viewstaff : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        try
-        {
-            AppUser LoggedAppUser = (AppUser)Session["AppUser"];
-            if (LoggedAppUser == null)
+        //try
+        //{
+            Staff loggedUser = (Staff)Session["loggedUser"];
+            if (loggedUser == null || loggedUser.UserType != "HotelAdmin")
             {
                 Response.Redirect("login.aspx");
             }
-            else if (LoggedAppUser.UserType != "HotelAdmin")
-            {
-                Response.Redirect("login.aspx");
-            }
+
             //Fill ddlDesignation
             StaffLogic staffLogic = new StaffLogic();
-            // ddlDesignation.DataSource = staffLogic.selectDistinctDesignation(LoggedAppUser.AccountID);
-            //ddlDesignation.DataValueField = "DepartmentID";
-            //ddlDesignation.DataTextField = "DesignationChoices";
-            // ddlDesignation.DataBind();
+            ddlDesignation.DataSource = staffLogic.selectDistinctDesignation(loggedUser.AccountID);
+            ddlDesignation.DataValueField = "DepartmentID";
+            ddlDesignation.DataTextField = "DesignationChoices";
+            ddlDesignation.DataBind();
 
 
             //Fill ddlDepartment
             DepartmentLogic departmentLogic = new DepartmentLogic();
-            ddlDepartment.DataSource = departmentLogic.selectDistinctDept(LoggedAppUser.AccountID);
+            ddlDepartment.DataSource = departmentLogic.selectDistinctDept(loggedUser.AccountID);
             ddlDepartment.DataValueField = "DepartmentID";
             ddlDepartment.DataTextField = "DepartmentChoices";
             ddlDepartment.DataBind();
@@ -50,7 +47,6 @@ public partial class viewstaff : System.Web.UI.Page
             txtDOB.Text = (staffobj.DOB).Date.ToString();
             txtDOJ.Text = (staffobj.DOJ).Date.ToString();
             txtSalary.Text = staffobj.Salary.ToString();
-            ddlSalaryFrequency.SelectedValue = staffobj.SalaryFrequency;
             if (staffobj.IsActive == true)
             {
                 radioYes.Checked = true;
@@ -61,12 +57,11 @@ public partial class viewstaff : System.Web.UI.Page
 
             DepartmentLogic departmentlogicobj = new DepartmentLogic();
             ddlDepartment.SelectedValue = departmentlogicobj.selectById(staffobj.DepartmentID).Name.ToString();
-        }
-        catch (Exception ex)
-        {
-            Response.Redirect("ErrorPage500");
-        }
-        
+        //}
+        //catch (Exception ex)
+        //{
+        //    Response.Redirect("ErrorPage500");
+        //}
     }
     protected void btnUpdate_Click(object sender, EventArgs e)
     {

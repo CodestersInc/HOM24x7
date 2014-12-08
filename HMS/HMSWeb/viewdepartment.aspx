@@ -35,25 +35,49 @@
                     </div>
                     <div class="widget-body form">
                         <div class="widget-body form">
-                            <!-- BEGIN FORM-->
                             <div>
                                 <div class="form-horizontal">
                                     <div class="control-group">
                                         <label class="control-label">Department Name</label>
                                         <div class="controls">
-                                            <asp:TextBox ID="txtName" runat="server" CssClass="span6 popovers" data-trigger="hover" data-content="Enter the full name of staff member." data-original-title="Popover header"></asp:TextBox>
+                                            <asp:TextBox ID="txtName" runat="server" CssClass="span6 popovers" data-trigger="hover" data-content="Enter the department name." data-original-title="Popover header"></asp:TextBox>
                                         </div>
                                     </div>
 
                                     <div class="control-group">
-                                        <label class="control-label">Department Manager</label>
+                                        <label class="control-label">Manager Name</label>
                                         <div class="controls">
-                                            <asp:TextBox ID="txtManager" runat="server" CssClass="span6 popovers" data-trigger="hover" data-content="Enter the full name of staff member." data-original-title="Popover header"></asp:TextBox>
+                                            <asp:TextBox ID="txtManagerName" runat="server" CssClass="span6 " placeholder="Disabled input here..." disabled=""></asp:TextBox>
                                         </div>
                                     </div>
 
+                                    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" class="table table-striped table-bordered" OnRowCommand="GridView1_RowCommand">
+                                        <Columns>
+                                            <asp:TemplateField HeaderText="Name">
+                                                <ItemTemplate>
+                                                    <%# Eval("Name") %>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Name">
+                                                <ItemTemplate>
+                                                    <%# Eval("Email") %>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Department Name">
+                                                <ItemTemplate>
+                                                    <%# Eval("Phone") %>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Department">
+                                                <ItemTemplate>
+                                                    <asp:LinkButton ID="LinkButton1" runat="server" class="btn mini purple" CommandName="Select" CommandArgument='<%#  Eval("StaffID") %>'> Select as Manager </asp:LinkButton>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                        </Columns>
+                                    </asp:GridView>
+
                                     <div class="form-actions">
-                                        <asp:Button ID="btnSubmit" CssClass="btn btn-success" runat="server" Text="Submit" />
+                                        <asp:LinkButton ID="btnUpdate" CssClass="btn btn-inverse" runat="server" OnClick="btnUpdate_Click"><i class="icon-refresh icon-white"></i>Update</asp:LinkButton>
                                         <asp:Button ID="btnCancel" CssClass="btn" runat="server" Text="Cancel" />
                                     </div>
                                 </div>
