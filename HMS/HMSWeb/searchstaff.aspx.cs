@@ -26,12 +26,12 @@ public partial class searchstaff : System.Web.UI.Page
 
     protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
     {
-        if (e.commandname == "remove")
+        if (e.CommandName == "Remove")
         {
-            new stafflogic().delete(convert.toint32(e.commandargument));
-            staff loggeduser = (staff)session["loggeduser"];
-            gridview1.datasource = new stafflogic().search(txtname.text, loggeduser.accountid);
-            gridview1.databind();
+            new StaffLogic().delete(Convert.ToInt32(e.CommandArgument));
+            Staff loggeduser = (Staff)Session["loggeduser"];
+            GridView1.DataSource = new StaffLogic().search(txtName.Text, loggeduser.AccountID);
+            GridView1.DataBind();
         }
     }
 }

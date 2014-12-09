@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
 using BusinessLogic;
 
 public partial class viewstaff : System.Web.UI.Page
@@ -25,7 +26,9 @@ public partial class viewstaff : System.Web.UI.Page
             //ddlDesignation.DataBind();
 
             //Fill ddlDepartment
-            ddlDepartment.DataSource = new DepartmentLogic().selectDistinctDepartment(loggedUser.AccountID);
+            DataTable dt = new DepartmentLogic().selectDistinctDepartment(loggedUser.AccountID);
+            dt.Rows.Add(new object[] { "No Department", 0 });
+            ddlDepartment.DataSource = dt;
             ddlDepartment.DataValueField = "DepartmentID";
             ddlDepartment.DataTextField = "DepartmentChoices";
             ddlDepartment.DataBind();

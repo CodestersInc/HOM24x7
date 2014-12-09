@@ -8,7 +8,6 @@
     <title></title>
 
     <asp:ContentPlaceHolder ID="headContentPlaceHolder" runat="server">
-
     </asp:ContentPlaceHolder>
 
     <meta charset="utf-8" />
@@ -135,8 +134,8 @@
                                 <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a class="" href="markattendance.aspx">Mark</a></li>
-                                    <li><a class="" href="viewattendance.aspx">View</a></li>
+                                    <li><a class="" href="#">Mark</a></li>
+                                    <li><a class="" href="#">View</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
@@ -165,8 +164,8 @@
 					            <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a class="" href="generatepayslip.aspx">Generate Payslip</a></li>
-                                    <li><a class="" href="viewpayslip.aspx">View Payslip</a></li>
+                                    <li><a class="" href="#">Generate Payslip</a></li>
+                                    <li><a class="" href="#">View Payslip</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
@@ -180,9 +179,9 @@
                                 <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a class="" href="createroom.aspx">Create a Room</a></li>
-                                    <li><a class="" href="searchroom.aspx">Search a Room</a></li>
-                                    <li><a class="" href="createroomtype.aspx">Create a Room Type</a></li>
+                                    <li><a class="" href="#">Create a Room</a></li>
+                                    <li><a class="" href="#">Search a Room</a></li>
+                                    <li><a class="" href="#">Create a Room Type</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
@@ -196,8 +195,8 @@
 	                            <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a class="" href="createseason.aspx">Create</a></li>
-                                    <li><a class="" href="searchseason.aspx">Search</a></li>
+                                    <li><a class="" href="#">Create</a></li>
+                                    <li><a class="" href="#">Search</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
@@ -211,12 +210,23 @@
 					            <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a class="" href="createservice.aspx">Create</a></li>
-                                    <li><a class="" href="searchservice.aspx">Search</a></li>
+                                    <li><a class="" href="#">Create</a></li>
+                                    <li><a class="" href="#">Search</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
                         <!-- END-Sidebar Element-Service -->
+
+                        <!-- START Sidebar Element-Service Request -->
+                        <asp:PlaceHolder ID="serviceRequestPlaceHolder" runat="server" Visible="false">
+                            <li class="has-sub">
+                                <a href="javascript:;" class="">
+                                    <span class="icon-box"><i class="icon-file-alt"></i></span>Service Request
+					                <span class="arrow"></span>
+                                </a>
+                            </li>
+                        </asp:PlaceHolder>
+                        <!-- END Sidebar Element-Service Request -->
 
                         <!-- START Sidebar Element-Staff -->
                         <asp:PlaceHolder ID="staffPlaceHolder" runat="server" Visible="false">
@@ -232,18 +242,6 @@
                             </li>
                         </asp:PlaceHolder>
                         <!-- END Sidebar Element-Staff -->
-
-                        <!-- START Sidebar Element-Service Request -->
-                        <asp:PlaceHolder ID="serviceRequestPlaceHolder" runat="server" Visible="false">
-                            <li class="has-sub">
-                                <a href="javascript:;" class="">
-                                    <span class="icon-box"><i class="icon-file-alt"></i></span>Service Request
-					                <span class="arrow"></span>
-                                </a>
-                            </li>
-                        </asp:PlaceHolder>
-                        <!-- END Sidebar Element-Service Request -->
-
                     </ul>
                     <!-- END SIDEBAR MENU -->
                 </div>
@@ -252,7 +250,6 @@
                 <div id="main-content">
                     <!-- BEGIN PAGE CONTAINER-->
                     <asp:ContentPlaceHolder ID="bodyContentPlaceHolder" runat="server">
-
                     </asp:ContentPlaceHolder>
                     <!-- END PAGE CONTAINER-->
                 </div>
@@ -270,28 +267,27 @@
             <!-- END FOOTER -->
 
             <!-- BEGIN JAVASCRIPTS -->
-                <!-- Load javascripts at bottom, this will reduce page load time -->
-                <script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
-                <script src="assets/jquery-slimscroll/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
-                <script src="assets/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-                <script src="assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-                <script src="js/jquery.blockui.js" type="text/javascript"></script>
-                <script src="js/jquery.cookie.js" type="text/javascript"></script>
-                <script src="assets/jquery-knob/js/jquery.knob.js" type="text/javascript"></script>
-                <script src="assets/flot/jquery.flot.js" type="text/javascript"></script>
-                <script src="assets/flot/jquery.flot.resize.js" type="text/javascript"></script>
-                <script src="assets/flot/jquery.flot.pie.js" type="text/javascript"></script>
-                <script src="assets/flot/jquery.flot.stack.js" type="text/javascript"></script>
-                <script src="assets/flot/jquery.flot.crosshair.js" type="text/javascript"></script>
-                <script src="js/scripts.js" type="text/javascript"></script>
-                <script>
-                    jQuery(document).ready(function () {
-                        // initiate layout and plugins
-                        App.init();
-                    });
-                </script>
+            <!-- Load javascripts at bottom, this will reduce page load time -->
+            <script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
+            <script src="assets/jquery-slimscroll/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
+            <script src="assets/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+            <script src="assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+            <script src="js/jquery.blockui.js" type="text/javascript"></script>
+            <script src="js/jquery.cookie.js" type="text/javascript"></script>
+            <script src="assets/jquery-knob/js/jquery.knob.js" type="text/javascript"></script>
+            <script src="assets/flot/jquery.flot.js" type="text/javascript"></script>
+            <script src="assets/flot/jquery.flot.resize.js" type="text/javascript"></script>
+            <script src="assets/flot/jquery.flot.pie.js" type="text/javascript"></script>
+            <script src="assets/flot/jquery.flot.stack.js" type="text/javascript"></script>
+            <script src="assets/flot/jquery.flot.crosshair.js" type="text/javascript"></script>
+            <script src="js/scripts.js" type="text/javascript"></script>
+            <script>
+                jQuery(document).ready(function () {
+                    // initiate layout and plugins
+                    App.init();
+                });
+            </script>
             <asp:ContentPlaceHolder ID="scriptsContentPlaceHolder" runat="server">
-
             </asp:ContentPlaceHolder>
             <!-- END JAVASCRIPTS -->
         </div>

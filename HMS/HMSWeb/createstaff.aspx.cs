@@ -19,8 +19,9 @@ public partial class registrestaff : System.Web.UI.Page
         {
             Response.Redirect("login.aspx");
         }
-
-        ddlDepartment.DataSource = new DepartmentLogic().selectDistinctDepartment(loggedUser.AccountID);
+        DataTable dt = new DepartmentLogic().selectDistinctDepartment(loggedUser.AccountID);
+        dt.Rows.Add(new object[]{"No Department",0});
+        ddlDepartment.DataSource = dt;
         ddlDepartment.DataValueField = "DepartmentID";
         ddlDepartment.DataTextField = "DepartmentChoices";
         ddlDepartment.DataBind();
