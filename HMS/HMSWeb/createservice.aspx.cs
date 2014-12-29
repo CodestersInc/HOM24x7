@@ -24,7 +24,7 @@ public partial class createservice : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            Response.Redirect("ErrorPage500");
+            Server.TransferRequest("ErrorPage500");
         }
         
 
