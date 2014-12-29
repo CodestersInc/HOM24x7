@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using BusinessLogic;
+using WebUtility;
 
 public partial class registrestaff : System.Web.UI.Page
 {
@@ -35,8 +36,8 @@ public partial class registrestaff : System.Web.UI.Page
             txtName.Text,
             txtEmail.Text,
             txtPhone.Text,
-            txtUsername.Text,
-            txtPassword.Text,
+            Utility.GetSHA512Hash(txtUsername.Text),
+            Utility.GetSHA512Hash(txtPassword.Text),
             ddlUserType.SelectedValue,
             ddlDesignation.SelectedValue,
             Convert.ToDateTime(txtDOB.Text),

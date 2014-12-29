@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using BusinessLogic;
+using WebUtility;
 
 public partial class hacregister : System.Web.UI.Page
 {
@@ -38,8 +39,8 @@ public partial class hacregister : System.Web.UI.Page
                 txtName.Text,
                 txtEmail.Text,
                 Convert.ToString(accountobject.Phone),
-                txtUsername.Text,                           //to be modified in future to email id
-                txtPassword.Text,
+                Utility.GetSHA512Hash(txtUsername.Text),                           //to be modified in future to email id
+                Utility.GetSHA512Hash(txtPassword.Text),
                 "HotelAdmin",
                 "Admin",
                 Convert.ToDateTime(txtDOB.Text),

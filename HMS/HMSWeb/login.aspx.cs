@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
+using WebUtility;
 
 public partial class login : System.Web.UI.Page
 {
@@ -17,7 +18,10 @@ public partial class login : System.Web.UI.Page
     {
         if (txtUsername.Text != null && txtPassword != null)
         {
-            SystemAdmin systemAdminLogger = new SystemAdminLogic().login(txtUsername.Text, txtPassword.Text);
+            String HashedUsername = Utility.GetSHA512Hash(txtUsername.Text);
+            String HashedPassword = Utility.GetSHA512Hash(txtPassword.Text);
+
+            SystemAdmin systemAdminLogger = new SystemAdminLogic().login(HashedUsername, HashedPassword);
             if (systemAdminLogger != null)
             {
                 Session.Add("LoggedUser", systemAdminLogger);
@@ -27,7 +31,7 @@ public partial class login : System.Web.UI.Page
             else
             {
                 StaffLogic staffLogic = new StaffLogic();
-                Staff staffLogger = staffLogic.login(txtUsername.Text, txtPassword.Text);
+                Staff staffLogger = staffLogic.login(HashedUsername, HashedPassword);
                 if (staffLogger != null)
                 {
                     Session.Add("LoggedUser", staffLogger);
@@ -36,7 +40,7 @@ public partial class login : System.Web.UI.Page
                 }
                 else
                 {
-                    Customer customerLogger = new CustomerLogic().login(txtUsername.Text, txtPassword.Text);
+                    Customer customerLogger = new CustomerLogic().login(HashedUsername, HashedPassword);
                     if (customerLogger != null)
                     {
                         Session.Add("LoggedUser", customerLogger);

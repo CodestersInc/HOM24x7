@@ -15,8 +15,6 @@ namespace WebUtility
 
     public class Utility
     {
-        private static SHA512 sha512Hash = SHA512.Create();
-
         public Utility()
         {
             //
@@ -26,7 +24,7 @@ namespace WebUtility
 
         public static String GetSHA512Hash(String source)
         {
-            using (sha512Hash)
+            using (SHA512 sha512Hash = SHA512.Create())
             {
                 // Convert the input string to a byte array and compute the hash. 
                 byte[] data = sha512Hash.ComputeHash(Encoding.UTF8.GetBytes(source));
