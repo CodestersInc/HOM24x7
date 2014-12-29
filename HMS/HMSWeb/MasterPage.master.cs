@@ -69,6 +69,12 @@ public partial class MasterPage : System.Web.UI.MasterPage
             }
         }
     }
+
+    protected void btnMyProfile_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("userprofile.aspx");
+    }
+
     protected void btnLogout_Click(object sender, EventArgs e)
     {
         Session["LoggedUser"] = null;

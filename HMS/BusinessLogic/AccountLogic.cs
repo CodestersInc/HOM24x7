@@ -18,7 +18,7 @@ namespace BusinessLogic
             List<SqlParameter> lstParams = new List<SqlParameter>();
             if (ID == 0)
             {
-                query = "select * from Account where Company like @Company+'%'";
+                query = "select * from Account where Company like @Company+'%' order by Company";
             }
             else
             {

@@ -17,7 +17,9 @@
                     <li>
                         <a href="#">Department</a> <span class="divider">&nbsp;</span>
                     </li>
-                    <li><a href="createdepartment.aspx">Create</a><span class="divider-last">&nbsp;</span></li>
+                    <li>
+                        <a href="createdepartment.aspx">Create</a><span class="divider-last">&nbsp;</span>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -29,7 +29,7 @@
                     <label class="control-label">Service Name</label>
                     <div class="controls">
                         <asp:TextBox ID="txtName" runat="server" CssClass="span6  tooltips" data-trigger="hover" data-original-title="Enter the service name."></asp:TextBox>
-                        <asp:Button ID="btnSubmit" CssClass="btn btn-success" runat="server" Text="Search" />
+                        <asp:Button ID="btnSearch" OnClick="btnSearch_Click" CssClass="btn btn-success" runat="server" Text="Search" />
                     </div>
                 </div>
             </div>
@@ -47,32 +47,22 @@
                         </span>
                     </div>
                     <div class="widget-body">
-                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" class="table table-striped table-bordered">
+                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" class="table table-striped table-bordered" OnRowCommand="GridView1_RowCommand">
                             <Columns>
                                 <asp:TemplateField HeaderText="Name">
                                     <ItemTemplate>
-                                        <%# Eval("Service.Name") %>
+                                        <%# Eval("Name") %>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Department">
                                     <ItemTemplate>
-                                        <%# Eval("Department.Name") %>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Rate">
-                                    <ItemTemplate>
-                                        <%# Eval("Phone") %>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Department">
-                                    <ItemTemplate>
-                                        <%# Eval("Department") %>
+                                        <%# Eval("DepartmentName") %>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="">
                                     <ItemTemplate>
-                                        <a href='<%# "viewstaff.aspx?ID=" + Eval("StaffID") %>' class="btn mini purple"><i class="icon-edit"></i>Edit</a>
-                                        <a onclick="" class="btn mini black"><i class="icon-trash"></i>Remove</a>
+                                        <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewservice.aspx?ID=" + Eval("ServiceID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
+                                        <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("ServiceID") %>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
@@ -88,5 +78,5 @@
     <!-- END PAGE CONTAINER -->
 </asp:Content>
 
-<asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" Runat="Server">
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
 </asp:Content>

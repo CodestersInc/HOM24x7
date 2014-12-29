@@ -14,7 +14,7 @@ namespace BusinessLogic
     {
         public DataTable search(String searchstring, int ID)
         {
-            String query = "select * from Service where Name like=@Name and AccountID=@ID";
+            String query = "select Department.Name as 'DepartmentName', Service.* from Department,Service where Service.Name like @Name+'%' and Service.AccountID=@ID and Department.DepartmentID=Service.DepartmentID order by Service.Name";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
             lstParams.Add(new SqlParameter("@Name", searchstring));
@@ -25,39 +25,55 @@ namespace BusinessLogic
 
         public Service create(Service obj)
         {
-            String query = "insert into Service values(@Name, @DepartmentID, @Rate); select * from Service Name=@Name and DepartmentID=@DepartmentID and Rate=@Rate";
+            String query = "insert into Service values(@Name, @DepartmentID, @Rate, @AccountID)";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@Name", obj.Name));
             lstParams.Add(new SqlParameter("@DepartmentID", obj.DepartmentID));
             lstParams.Add(new SqlParameter("@Rate", obj.Rate));
+            lstParams.Add(new SqlParameter("@AccountID", obj.AccountID));
 
-            DataTable dt = DBUtility.Select(query, lstParams);
-            if (dt.Rows.Count == 1)
+            int res = DBUtility.Modify(query, lstParams);
+
+            if (res == 1)
             {
-                return new Service(Convert.ToInt32(dt.Rows[0]["ServiceID"]),
-                dt.Rows[0]["Name"].ToString(),
-                Convert.ToInt32(dt.Rows[0]["DepartmentID"]),
-                Convert.ToDouble(dt.Rows[0]["Rate"]));
+                String selectquery = "select * from Service where Name=@ServiceName and DepartmentID=@DepartmentID and AccountID=@AccountID";
+                List<SqlParameter> lstParams1 = new List<SqlParameter>();
+
+                lstParams1.Add(new SqlParameter("@ServiceName", obj.Name));
+                lstParams1.Add(new SqlParameter("@DepartmentID", obj.DepartmentID));
+                lstParams1.Add(new SqlParameter("@AccountID", obj.AccountID));
+
+                DataTable dt = DBUtility.Select(selectquery, lstParams1);
+
+                if (dt.Rows.Count == 1)
+                {
+                    return new Service(Convert.ToInt32(dt.Rows[0]["ServiceID"]),
+                    dt.Rows[0]["Name"].ToString(),
+                    Convert.ToInt32(dt.Rows[0]["DepartmentID"]),
+                    Convert.ToDouble(dt.Rows[0]["Rate"]),
+                    Convert.ToInt32(dt.Rows[0]["AccountID"]));
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
-            {
-                return null;
-            }
-            
+            return null;
         }
 
         public int update(Service obj)
         {
-            String query = "insert into Account values(Name=@Name, DepartmentID=@DepartmentID, Rate=@Rate where ServiceID=@ServiceID)";
+            String query = "update Service set Name=@Name, DepartmentID=@DepartmentID, Rate=@Rate where ServiceID=@ServiceID and AccountID=@AccountID";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@ServiceID", obj.ServiceID));
             lstParams.Add(new SqlParameter("@Name", obj.Name));
             lstParams.Add(new SqlParameter("@DepartmentID", obj.DepartmentID));
             lstParams.Add(new SqlParameter("@Rate", obj.Rate));
+            lstParams.Add(new SqlParameter("@AccountID", obj.AccountID));
 
-            return DBUtility.Modify(query, lstParams); 
+            return DBUtility.Modify(query, lstParams);
         }
 
         public int delete(int id)
@@ -66,7 +82,7 @@ namespace BusinessLogic
             List<SqlParameter> lstParams = new List<SqlParameter>();
             lstParams.Add(new SqlParameter("@ID", id));
 
-            return DBUtility.Modify(query, lstParams);  
+            return DBUtility.Modify(query, lstParams);
         }
 
         public Service selectById(int id)
@@ -81,13 +97,13 @@ namespace BusinessLogic
                 return new Service(Convert.ToInt32(dt.Rows[0]["ServiceID"]),
                 dt.Rows[0]["Name"].ToString(),
                 Convert.ToInt32(dt.Rows[0]["DepartmentID"]),
-                Convert.ToDouble(dt.Rows[0]["Rate"]));
+                Convert.ToDouble(dt.Rows[0]["Rate"]),
+                Convert.ToInt32(dt.Rows[0]["AccountID"]));
             }
             else
             {
                 return null;
             }
-            
         }
 
         public DataTable selectAll()

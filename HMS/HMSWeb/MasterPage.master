@@ -49,7 +49,7 @@
                 <div class="navbar-inner">
                     <div class="container-fluid">
                         <!-- BEGIN LOGO -->
-                        <a class="brand" href="home.html">
+                        <a class="brand" href="home.aspx">
                             <img src="img/logo.png" alt="Admin Lab" />
                         </a>
                         <!-- END LOGO -->
@@ -72,7 +72,9 @@
                                         <b class="caret"></b>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#"><i class="icon-user"></i> My Profile</a></li>
+                                        <li>
+                                            <asp:LinkButton ID="LinkButton1" OnClick="btnMyProfile_Click" runat="server"><i class="icon-user"></i> My Profile</asp:LinkButton>
+                                        </li>
                                         <li><a href="#"><i class="icon-tasks"></i> My Tasks</a></li>
                                         <li><a href="#"><i class="icon-calendar"></i> Calendar</a></li>
                                         <li class="divider"></li>
@@ -210,8 +212,8 @@
 					            <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a class="" href="#">Create</a></li>
-                                    <li><a class="" href="#">Search</a></li>
+                                    <li><a class="" href="createservice.aspx">Create</a></li>
+                                    <li><a class="" href="searchservice.aspx">Search</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>

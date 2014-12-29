@@ -170,7 +170,6 @@
                                     <div class="controls">
                                         <asp:DropDownList ID="ddlDepartment" runat="server" CssClass="span6" data-placeholder="Choose a Category" TabIndex="1">
                                             <asp:ListItem>Select...</asp:ListItem>
-                                            <asp:ListItem Value="0">***No Department***</asp:ListItem>
                                         </asp:DropDownList>
                                     </div>
                                 </div>

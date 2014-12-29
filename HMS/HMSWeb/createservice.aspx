@@ -49,7 +49,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Department</label>
                                     <div class="controls">
-                                        <asp:DropDownList ID="ddlSalaryFrequency" runat="server" CssClass="span6" data-placeholder="Choose a Category" TabIndex="1">
+                                        <asp:DropDownList ID="ddlDepartment" runat="server" CssClass="span6" data-placeholder="Choose a Category" TabIndex="1">
                                             <asp:ListItem>Select...</asp:ListItem>
                                         </asp:DropDownList>
                                     </div>
@@ -65,7 +65,7 @@
                                 </div>
 
                                 <div class="form-actions">
-                                    <asp:Button ID="btnSubmit" CssClass="btn btn-success" runat="server" Text="Submit" />
+                                    <asp:Button ID="btnSubmit" CssClass="btn btn-success" OnClick="btnSubmit_Click" runat="server" Text="Submit" />
                                     <asp:Button ID="btnCancel" CssClass="btn" runat="server" Text="Cancel" />
                                 </div>
                             </div>

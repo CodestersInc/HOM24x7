@@ -15,7 +15,7 @@ namespace BusinessLogic
     {
         public DataTable search(String searchstring, int ID)
         {
-            String query = "select * from Season where Name like=@Name and AccountID=@ID";
+            String query = "select * from Season where Name like=@Name and AccountID=@ID order by Season.Name";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
             lstParams.Add(new SqlParameter("@Name", searchstring));

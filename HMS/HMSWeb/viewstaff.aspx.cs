@@ -18,13 +18,6 @@ public partial class viewstaff : System.Web.UI.Page
         }
         if (!IsPostBack)
         {
-            ////Fill ddlDesignation
-            //StaffLogic staffLogic = new StaffLogic();
-            //ddlDesignation.DataSource = staffLogic.selectDistinctDesignation(loggedUser.AccountID);
-            //ddlDesignation.DataValueField = "DesignationChoices";
-            //ddlDesignation.DataTextField = "DesignationChoices";
-            //ddlDesignation.DataBind();
-
             //Fill ddlDepartment
             DataTable dt = new DepartmentLogic().selectDistinctDepartment(loggedUser.AccountID);
             dt.Rows.Add(new object[] { "No Department", 0 });
@@ -49,7 +42,8 @@ public partial class viewstaff : System.Web.UI.Page
             }
             else
                 radioNo.Checked = true;
-            ddlDepartment.SelectedValue = new DepartmentLogic().selectById(staffobj.DepartmentID).Name.ToString();
+
+            ddlDepartment.SelectedValue = new DepartmentLogic().selectById(staffobj.DepartmentID).Name;
         }
     }
     protected void btnUpdate_Click(object sender, EventArgs e)
