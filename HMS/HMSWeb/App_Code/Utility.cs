@@ -7,12 +7,10 @@ using System.Text;
 
 /// <summary>
 /// Summary description for Utility
-/// </summary>
-/// 
+/// </summary> 
 
 namespace WebUtility
 {
-
     public class Utility
     {
         public Utility()

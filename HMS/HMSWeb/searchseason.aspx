@@ -28,8 +28,8 @@
                 <div class="control-group">
                     <label class="control-label">Search Season</label>
                     <div class="controls">
-                        <asp:TextBox ID="txtCompany" runat="server" CssClass="span6 popovers" data-trigger="hover" data-content="Please enter the name of thee registering organization." data-original-title="Suggestions"></asp:TextBox>
-                        <asp:Button ID="btnSubmit" CssClass="btn btn-success" runat="server" Text="Search" />
+                        <asp:TextBox ID="txtSeasonName" runat="server" CssClass="span4 tooltips" data-trigger="hover" data-original-title="Enter season name to search for"></asp:TextBox>
+                        <asp:Button ID="btnSubmit" CssClass="btn btn-info" OnClick="btnSubmit_Click" runat="server" Text="Search" />
                     </div>
                 </div>
             </div>
@@ -40,14 +40,14 @@
                 <!-- BEGIN EXAMPLE TABLE widget-->
                 <div class="widget">
                     <div class="widget-title">
-                        <h4><i class="icon-reorder"></i>Account Record</h4>
+                        <h4><i class="icon-reorder"></i>Seasons Record</h4>
                         <span class="tools">
                             <a href="javascript:;" class="icon-chevron-down"></a>
                             <a href="javascript:;" class="icon-remove"></a>
                         </span>
                     </div>
                     <div class="widget-body">
-                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" class="table table-striped table-bordered">
+                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" class="table table-striped table-bordered" OnRowCommand="GridView1_RowCommand">
                             <Columns>
                                 <asp:TemplateField HeaderText="Name">
                                     <ItemTemplate>
@@ -64,10 +64,11 @@
                                         <%# Eval("ToDate") %>
                                     </ItemTemplate>
                                 </asp:TemplateField>
+
                                 <asp:TemplateField HeaderText="">
                                     <ItemTemplate>
-                                        <a href='<%# "viewseason.aspx?ID=" + Eval("StaffID") %>' class="btn mini purple"><i class="icon-edit"></i>Edit</a>
-                                        <a onclick="" class="btn mini black"><i class="icon-trash"></i>Remove</a>
+                                        <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewseason.aspx?ID=" + Eval("SeasonID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
+                                        <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("SeasonID") %>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
@@ -82,5 +83,5 @@
     <!-- END PAGE CONTAINER -->
 </asp:Content>
 
-<asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" Runat="Server">
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
 </asp:Content>

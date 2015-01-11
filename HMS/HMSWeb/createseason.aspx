@@ -41,7 +41,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Season Name</label>
                                     <div class="controls">
-                                        <asp:TextBox ID="txtName" runat="server" CssClass="span6 popovers" data-trigger="hover" data-content="Enter the full name of staff member." data-original-title="Popover header"></asp:TextBox>
+                                        <asp:TextBox ID="txtSeasonName" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter the name of season" data-original-title="Popover header"></asp:TextBox>
                                     </div>
                                 </div>
 
@@ -49,8 +49,7 @@
                                     <label class="control-label">From Date</label>
                                     <div class="controls">
                                         <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-                                            <asp:TextBox ID="txtFromDate" runat="server" CssClass=" m-ctrl-medium date-picker" size="16" Text="12-02-2012"></asp:TextBox>
-                                            <%--<input class=" m-ctrl-medium date-picker" size="16" type="text" value="12-02-2012" />--%>
+                                            <asp:TextBox ID="txtFromDate" runat="server" CssClass=" m-ctrl-medium date-picker" size="16" Text="DD-MM-YYYY"></asp:TextBox>
                                             <span class="add-on"><i class="icon-calendar"></i></span>
                                         </div>
                                     </div>
@@ -60,16 +59,15 @@
                                     <label class="control-label">To Date</label>
                                     <div class="controls">
                                         <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-                                            <asp:TextBox ID="txtToDate" runat="server" CssClass=" m-ctrl-medium date-picker" size="16" Text="12-02-2012"></asp:TextBox>
-                                            <%--<input class=" m-ctrl-medium date-picker" size="16" type="text" value="12-02-2012" />--%>
+                                            <asp:TextBox ID="txtToDate" runat="server" CssClass=" m-ctrl-medium date-picker" size="16" Text="DD-MM-YYYY"></asp:TextBox>
                                             <span class="add-on"><i class="icon-calendar"></i></span>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="form-actions">
-                                    <asp:Button ID="btnSubmit" CssClass="btn btn-success" runat="server" Text="Submit" />
-                                    <asp:Button ID="btnCancel" CssClass="btn" runat="server" Text="Cancel" />
+                                    <asp:Button ID="btnSubmit" CssClass="btn btn-success" OnClick="btnSubmit_Click" runat="server" Text="Submit" />
+                                    <asp:Button ID="btnCancel" CssClass="btn btn-warning" OnClick="btnCancel_Click" runat="server" Text="Cancel" />
                                 </div>
                             </div>
                         </div>
@@ -83,5 +81,12 @@
     <!-- END PAGE CONTAINER-->
 </asp:Content>
 
-<asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" Runat="Server">
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
+    <script type="text/javascript" src="assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="assets/bootstrap-daterangepicker/date.js"></script>
+    <script type="text/javascript" src="assets/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+    <script>
+        $(".date-picker").datepicker();
+    </script>
 </asp:Content>

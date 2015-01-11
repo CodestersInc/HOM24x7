@@ -106,7 +106,7 @@
                         <!-- START Sidebar Element-Home -->
                         <asp:PlaceHolder ID="homePlaceHolder" runat="server" Visible="false">
                             <li class="has-sub active">
-                                <a href="home.aspx" class="">
+                                <a href="home.aspx" >
                                     <span class="icon-box"><i class="icon-dashboard"></i></span>Home
                                 </a>
                             </li>
@@ -116,13 +116,13 @@
                         <!-- START Sidebar Element-Accounts -->
                         <asp:PlaceHolder ID="accountsPlaceHolder" runat="server" Visible="false">
                             <li class="has-sub">
-                                <a href="javascript:;" class="">
+                                <a href="javascript:;" >
                                     <span class="icon-box"><i class="icon-book"></i></span>Accounts
 					            <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a class="" href="searchhotelac.aspx">Search</a></li>
-                                    <li><a class="" href="createhotelac.aspx">Register</a></li>
+                                    <li><a  href="searchhotelac.aspx">Search</a></li>
+                                    <li><a  href="createhotelac.aspx">Register</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
@@ -131,13 +131,13 @@
                         <!-- START Sidebar Element-Attendance -->
                         <asp:PlaceHolder ID="attendancePlaceHolder" runat="server" Visible="false">
                             <li class="has-sub">
-                                <a href="javascript:;" class="">
+                                <a href="javascript:;" >
                                     <span class="icon-box"><i class="icon-barcode"></i></span>Attendance
                                 <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a class="" href="#">Mark</a></li>
-                                    <li><a class="" href="#">View</a></li>
+                                    <li><a  href="#">Mark</a></li>
+                                    <li><a  href="#">View</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
@@ -146,13 +146,13 @@
                         <!-- START Sidebar Element-Department -->
                         <asp:PlaceHolder ID="departmentPlaceHolder" runat="server" Visible="false">
                             <li class="has-sub">
-                                <a href="javascript:;" class="">
+                                <a href="javascript:;" >
                                     <span class="icon-box"><i class="icon-bell-alt"></i></span>Department
 					            <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a class="" href="createdepartment.aspx">Create</a></li>
-                                    <li><a class="" href="searchdepartment.aspx">Search</a></li>
+                                    <li><a  href="createdepartment.aspx">Create</a></li>
+                                    <li><a  href="searchdepartment.aspx">Search</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
@@ -161,13 +161,13 @@
                         <!-- START Sidebar Element-Payroll -->
                         <asp:PlaceHolder ID="payrollPlaceHolder" runat="server" Visible="false">
                             <li class="has-sub">
-                                <a href="javascript:;" class="">
+                                <a href="javascript:;" >
                                     <span class="icon-box"><i class="icon-cogs"></i></span>Payroll
 					            <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a class="" href="#">Generate Payslip</a></li>
-                                    <li><a class="" href="#">View Payslip</a></li>
+                                    <li><a  href="#">Generate Payslip</a></li>
+                                    <li><a  href="#">View Payslip</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
@@ -176,14 +176,14 @@
                         <!-- START Sidebar Element-Room -->
                         <asp:PlaceHolder ID="roomPlaceHolder" runat="server" Visible="false">
                             <li class="has-sub">
-                                <a href="javascript:;" class="">
+                                <a href="javascript:;" >
                                     <span class="icon-box"><i class="icon-tasks"></i></span>Room
                                 <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a class="" href="#">Create a Room</a></li>
-                                    <li><a class="" href="#">Search a Room</a></li>
-                                    <li><a class="" href="#">Create a Room Type</a></li>
+                                    <li><a  href="createroom.aspx">Create a Room</a></li>
+                                    <li><a  href="searchroom.aspx">Search a Room</a></li>
+                                    <li><a  href="createroomtype.aspx">Create a Room Type</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
@@ -192,13 +192,13 @@
                         <!-- START Sidebar Element-Season -->
                         <asp:PlaceHolder ID="seasonPlaceHolder" runat="server" Visible="false">
                             <li class="has-sub">
-                                <a href="javascript:;" class="">
+                                <a href="javascript:;" >
                                     <span class="icon-box"><i class="icon-fire"></i></span>Season
 	                            <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a class="" href="#">Create</a></li>
-                                    <li><a class="" href="#">Search</a></li>
+                                    <li><a  href="createseason.aspx">Create</a></li>
+                                    <li><a  href="searchseason.aspx">Search</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
@@ -207,13 +207,13 @@
                         <!-- START Sidebar Element-Service -->
                         <asp:PlaceHolder ID="servicePlaceHolder" runat="server" Visible="false">
                             <li class="has-sub">
-                                <a href="javascript:;" class="">
+                                <a href="javascript:;" >
                                     <span class="icon-box"><i class="icon-map-marker"></i></span>Service
 					            <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a class="" href="createservice.aspx">Create</a></li>
-                                    <li><a class="" href="searchservice.aspx">Search</a></li>
+                                    <li><a  href="createservice.aspx">Create</a></li>
+                                    <li><a  href="searchservice.aspx">Search</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
@@ -222,7 +222,7 @@
                         <!-- START Sidebar Element-Service Request -->
                         <asp:PlaceHolder ID="serviceRequestPlaceHolder" runat="server" Visible="false">
                             <li class="has-sub">
-                                <a href="javascript:;" class="">
+                                <a href="javascript:;" >
                                     <span class="icon-box"><i class="icon-file-alt"></i></span>Service Request
 					                <span class="arrow"></span>
                                 </a>
@@ -233,13 +233,13 @@
                         <!-- START Sidebar Element-Staff -->
                         <asp:PlaceHolder ID="staffPlaceHolder" runat="server" Visible="false">
                             <li class="has-sub">
-                                <a href="javascript:;" class="">
+                                <a href="javascript:;" >
                                     <span class="icon-box"><i class="icon-book"></i></span>Staff
 					            <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a class="" href="createstaff.aspx">Register</a></li>
-                                    <li><a class="" href="searchstaff.aspx">Search</a></li>
+                                    <li><a  href="createstaff.aspx">Register</a></li>
+                                    <li><a  href="searchstaff.aspx">Search</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>

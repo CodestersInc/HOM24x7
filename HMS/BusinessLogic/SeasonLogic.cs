@@ -15,7 +15,7 @@ namespace BusinessLogic
     {
         public DataTable search(String searchstring, int ID)
         {
-            String query = "select * from Season where Name like=@Name and AccountID=@ID order by Season.Name";
+            String query = "select * from Season where Name like @Name+'%' and AccountID=@ID order by Season.Name";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
             lstParams.Add(new SqlParameter("@Name", searchstring));
@@ -26,7 +26,7 @@ namespace BusinessLogic
 
         public Season create(Season obj)
         {
-            String query = "insert into Season values(@Name, @FromDate, @ToDate, @AccountID); select * from Season where Name=@Name FromDate=@FromDate and ToDate=@ToDate and AccountID=@AccountID";
+            String query = "insert into Season(Name,FromDate,ToDate,AccountID) values(@Name, @FromDate, @ToDate, @AccountID);";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@Name", obj.Name));
@@ -34,21 +34,32 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@ToDate", obj.ToDate));
             lstParams.Add(new SqlParameter("@AccountID", obj.AccountID));
 
-            DataTable dt = DBUtility.InsertAndFetch(query, lstParams);
+            int res = DBUtility.Modify(query, lstParams);
 
-            if (dt.Rows.Count == 1)
+            if (res == 1)
             {
-                return new Season(Convert.ToInt32(dt.Rows[0]["SeasonID"]),
-                dt.Rows[0]["Name"].ToString(),
-                (Convert.ToDateTime(dt.Rows[0]["FromDate"])),
-                (Convert.ToDateTime(dt.Rows[0]["ToDate"])),
-                (Convert.ToInt32(dt.Rows[0]["AccountID"])));
+                String selectquery = "select * from Season where Name=@Name and AccountID=@AccountID";
+                List<SqlParameter> lstParams1 = new List<SqlParameter>();
+                
+                lstParams1.Add(new SqlParameter("@Name", obj.Name));
+                lstParams1.Add(new SqlParameter("@AccountID", obj.AccountID));
+
+                DataTable dt = DBUtility.Select(selectquery, lstParams1);
+
+                if (dt.Rows.Count == 1)
+                {
+                    return new Season(Convert.ToInt32(dt.Rows[0]["SeasonID"]),
+                    dt.Rows[0]["Name"].ToString(),
+                    (Convert.ToDateTime(dt.Rows[0]["FromDate"])),
+                    (Convert.ToDateTime(dt.Rows[0]["ToDate"])),
+                    (Convert.ToInt32(dt.Rows[0]["AccountID"])));
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
-            {
-                return null;
-            }
-            
+            return null;
         }
 
         public int update(Season obj)
@@ -62,7 +73,7 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@ToDate", obj.ToDate));
             lstParams.Add(new SqlParameter("@AccountID", obj.AccountID));
 
-            return DBUtility.Modify(query, lstParams); 
+            return DBUtility.Modify(query, lstParams);
         }
 
         public int delete(int id)
@@ -71,7 +82,7 @@ namespace BusinessLogic
             List<SqlParameter> lstParams = new List<SqlParameter>();
             lstParams.Add(new SqlParameter("@ID", id));
 
-            return DBUtility.Modify(query, lstParams);  
+            return DBUtility.Modify(query, lstParams);
         }
 
         public Season selectById(int id)
@@ -94,7 +105,7 @@ namespace BusinessLogic
             {
                 return null;
             }
-            
+
         }
 
         public DataTable selectAll()

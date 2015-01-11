@@ -10,33 +10,40 @@ public partial class viewseason : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        try
+        Staff loggedUser = (Staff)Session["loggedUser"];
+        if (loggedUser == null || loggedUser.UserType != "HotelAdmin")
         {
-            AppUser LoggedAppUser = (AppUser)Session["AppUser"];
-            if (LoggedAppUser == null)
-            {
-                Response.Redirect("login.aspx");
-            }
-            else if (LoggedAppUser.UserType != "HotelAdmin")
-            {
-                Response.Redirect("login.aspx");
-            }
+            Response.Redirect("login.aspx");
         }
-        catch (Exception ex)
+        if (!IsPostBack)
         {
-            Response.Redirect("ErrorPage500");
+            Season seasonobject = new SeasonLogic().selectById(Convert.ToInt32(Request.QueryString["ID"]));
+            txtSeasonName.Text = seasonobject.Name;
+            txtFromDate.Text = (seasonobject.FromDate).Date.ToString();
+            txtToDate.Text = (seasonobject.ToDate).Date.ToString();
         }
-        
     }
-    protected void lbtnSave_Click(object sender, EventArgs e)
+    protected void btnUpdate_Click(object sender, EventArgs e)
     {
-        try
-        {
+        Staff loggedUser = (Staff)Session["loggedUser"];
 
+        Season seasonobject = new Season(Convert.ToInt32(Request.QueryString["ID"]),
+            txtSeasonName.Text,
+            Convert.ToDateTime(txtFromDate.Text),
+            Convert.ToDateTime(txtToDate.Text),
+            loggedUser.AccountID);
+
+        if (new SeasonLogic().update(seasonobject) == 1)
+        {
+            Response.Redirect("searchseason.aspx");
         }
-        catch (Exception ex)
+        else
         {
             Response.Redirect("ErrorPage500.html");
         }
+    }
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("home.aspx");
     }
 }
