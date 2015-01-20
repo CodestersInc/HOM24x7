@@ -54,12 +54,12 @@
                                         <%# Eval("Name") %>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Email">
+                                <asp:TemplateField HeaderText="From Date">
                                     <ItemTemplate>
                                         <%# Eval("FromDate") %>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Phone">
+                                <asp:TemplateField HeaderText="To Date">
                                     <ItemTemplate>
                                         <%# Eval("ToDate") %>
                                     </ItemTemplate>

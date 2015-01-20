@@ -29,7 +29,7 @@
                     <label class="control-label">Account Name</label>
                     <div class="controls">
                         <asp:TextBox ID="txtName" runat="server" CssClass="span6  tooltips" data-trigger="hover" data-original-title="Enter account to search for."></asp:TextBox>
-                        <asp:Button ID="btnSubmit" CssClass="btn btn-success" runat="server" Text="Search" OnClick="btnSubmit_Click" />
+                        <asp:Button ID="btnSubmit" CssClass="btn btn-info" runat="server" Text="Search" OnClick="btnSubmit_Click" />
                     </div>
                 </div>
             </div>

@@ -43,12 +43,14 @@
                                     <asp:TextBox ID="txtCompany" runat="server" CssClass="span6 popovers" data-trigger="hover" data-content="Please enter the name of the registering organization." data-original-title="Suggestions"></asp:TextBox>
                                 </div>
                             </div>
+
                             <div class="control-group">
                                 <label class="control-label">Contact Person</label>
                                 <div class="controls">
                                     <asp:TextBox ID="txtContact" runat="server" CssClass="span6 popovers" data-trigger="hover" data-content="Enter the full name of the contact person representing the organization." data-original-title="Suggestions"></asp:TextBox>
                                 </div>
                             </div>
+
                             <div class="control-group">
                                 <label class="control-label">Email Address</label>
                                 <div class="controls">
@@ -58,6 +60,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="control-group">
                                 <label class="control-label">Phone</label>
                                 <div class="controls">
@@ -65,12 +68,14 @@
                                     <span class="help-inline">10 Digit Number</span>
                                 </div>
                             </div>
+
                             <div class="control-group">
                                 <label class="control-label">Address</label>
                                 <div class="controls">
                                     <asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine" CssClass="span6" Rows="3"></asp:TextBox>
                                 </div>
                             </div>
+
                             <div class="control-group">
                                 <label class="control-label">Website URL</label>
                                 <div class="controls">
@@ -80,6 +85,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="control-group">
                                 <label class="control-label">Features</label>
                                 <div class="danger-toggle-button">
@@ -195,7 +201,7 @@
 
                                 <div class="form-actions">
                                     <asp:Button ID="btnSubmit" CssClass="btn btn-success" runat="server" Text="Submit" OnClick="btnSubmit_Click" />
-                                    <asp:Button ID="btnCancel" CssClass="btn" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
+                                    <asp:Button ID="btnCancel" CssClass="btn btn-warning" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
                                 </div>
                             </div>
                         </div>

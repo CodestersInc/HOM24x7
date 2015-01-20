@@ -184,6 +184,7 @@
                                     <li><a  href="createroom.aspx">Create a Room</a></li>
                                     <li><a  href="searchroom.aspx">Search a Room</a></li>
                                     <li><a  href="createroomtype.aspx">Create a Room Type</a></li>
+                                    <li><a  href="searchroomtype.aspx">Search a Room Type</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>

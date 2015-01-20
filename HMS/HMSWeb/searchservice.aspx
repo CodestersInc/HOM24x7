@@ -29,7 +29,7 @@
                     <label class="control-label">Service Name</label>
                     <div class="controls">
                         <asp:TextBox ID="txtName" runat="server" CssClass="span6  tooltips" data-trigger="hover" data-original-title="Enter the service name."></asp:TextBox>
-                        <asp:Button ID="btnSearch" OnClick="btnSearch_Click" CssClass="btn btn-success" runat="server" Text="Search" />
+                        <asp:Button ID="btnSearch" OnClick="btnSearch_Click" CssClass="btn btn-info" runat="server" Text="Search" />
                     </div>
                 </div>
             </div>
