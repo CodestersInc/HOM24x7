@@ -13,9 +13,20 @@ namespace BusinessLogic
 {
     public class RoomTypeLogic : ILogic<RoomType>
     {
+        public DataTable search(String searchstring, int ID)
+        {
+            String query = "select * from RoomType where RoomType.Name like @Name+'%' and AccountID=@ID order by RoomType.Name";
+
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+            lstParams.Add(new SqlParameter("@Name", searchstring));
+            lstParams.Add(new SqlParameter("@ID", ID));
+
+            return DBUtility.Select(query, lstParams);
+        }
+
         public RoomType create(RoomType obj)
         {
-            String query = "insert into RoomType values(@Name, @Description, @Photo, @AccountID); select * from RoomTypeLogic where Name=@Name and Description=@Description and Photo=@Photo and AccountID=@AccountID";
+            String query = "insert into RoomType values(@Name, @Description, @Photo, @AccountID)";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@Name", obj.Name));
@@ -23,20 +34,35 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@Photo", obj.Photo));
             lstParams.Add(new SqlParameter("@AccountID", obj.AccountID));
 
-            DataTable dt = DBUtility.InsertAndFetch(query, lstParams);
+            int res = DBUtility.Modify(query, lstParams);
 
-            if (dt.Rows.Count == 1)
+            if(res==1)
             {
-                return new RoomType(Convert.ToInt32(dt.Rows[0]["RoomTypeID"]),
-                dt.Rows[0]["Name"].ToString(),
-                dt.Rows[0]["Description"].ToString(),
-                dt.Rows[0]["Photo"].ToString(),
-                Convert.ToInt32(dt.Rows[0]["AccountID"]));
+                String fetchquery = "select * from RoomType where Name=@Name and Description=@Description and Photo=@Photo and AccountID=@AccountID";
+                List<SqlParameter> lstParams1 = new List<SqlParameter>();
+
+                lstParams1.Add(new SqlParameter("@Name", obj.Name));
+                lstParams1.Add(new SqlParameter("@Description", obj.Description));
+                lstParams1.Add(new SqlParameter("@Photo", obj.Photo));
+                lstParams1.Add(new SqlParameter("@AccountID", obj.AccountID));
+                
+                
+                DataTable dt = DBUtility.Select(fetchquery, lstParams1);
+                
+                if (dt.Rows.Count == 1)
+                {
+                    return new RoomType(Convert.ToInt32(dt.Rows[0]["RoomTypeID"]),
+                    dt.Rows[0]["Name"].ToString(),
+                    dt.Rows[0]["Description"].ToString(),
+                    dt.Rows[0]["Photo"].ToString(),
+                    Convert.ToInt32(dt.Rows[0]["AccountID"]));
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 
         public int update(RoomType obj)

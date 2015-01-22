@@ -75,8 +75,8 @@
                                     </div>
                                 </div>
 
-                                <table>
-                                    <asp:Repeater ID="Repeater1" runat="server" class="table table-striped table-bordered">
+                                <table class="table table-striped table-bordered">
+                                    <asp:Repeater ID="Repeater1" runat="server">
                                         <ItemTemplate>
                                             <tr>
                                                 <td><%#Eval("")%></td>

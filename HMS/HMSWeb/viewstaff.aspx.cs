@@ -43,9 +43,10 @@ public partial class viewstaff : System.Web.UI.Page
             else
                 radioNo.Checked = true;
 
-            ddlDepartment.SelectedValue = staffobj.DepartmentID.ToString();//new DepartmentLogic().selectById(staffobj.DepartmentID).Name;
+            ddlDepartment.SelectedValue = staffobj.DepartmentID.ToString();
         }
     }
+
     protected void btnUpdate_Click(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["loggedUser"];
@@ -73,6 +74,7 @@ public partial class viewstaff : System.Web.UI.Page
             Response.Redirect("ErrorPage500.html");
         }
     }
+
     protected void btnCancel_Click(object sender, EventArgs e)
     {
         Response.Redirect("home.aspx");

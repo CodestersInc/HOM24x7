@@ -33,6 +33,21 @@
                 </div>
             </div>
         </div>
+
+        <table class="table table-striped table-bordered">
+            <th>Room Type</th>
+            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
+                <ItemTemplate>
+                    <tr>
+                        <td><%#Eval("Name")%></td>
+                        <td>
+                            <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewroomtype.aspx?ID=" + Eval("RoomTypeID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
+                            <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("RoomTypeID") %>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>
+                        </td>
+                    </tr>
+                </ItemTemplate>
+            </asp:Repeater>
+        </table>
     </div>
     <!-- END PAGE CONTAINER -->
 </asp:Content>
