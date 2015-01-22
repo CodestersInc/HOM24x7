@@ -84,30 +84,11 @@
                     </div>
                 </div>
                 <!-- END Create Room FORM-->
+                
 
-                <asp:Repeater ID="Repeater1" runat="server">
-                    <HeaderTemplate>
-                        <table>
-                            <tr>
-                                <th>Season</th>
-                                <th>Rate</th>
-                                <th>Agent Discount</th>
-                                <th>Maximum Discount</th>
-                                <th>Website Rate</th>
-                            </tr>
-                        </table>
-                    </HeaderTemplate>
 
-                    <ItemTemplate>
-                        <tr>
-                            <td>Winter</td>
-                            <td>
-                                <asp:TextBox runat="server"></asp:TextBox>
-                            </td>
-                        </tr>
-                    </ItemTemplate>
-                </asp:Repeater>
             </div>
+
         </div>
         <!-- END PAGE CONTENT-->
     </div>
