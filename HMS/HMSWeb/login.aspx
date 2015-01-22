@@ -13,6 +13,76 @@
     <link href="css/style.css" rel="stylesheet" />
     <link href="css/style_responsive.css" rel="stylesheet" />
     <link href="css/style_default.css" rel="stylesheet" id="style_color" />
+
+    <style type="text/css">
+        #dialogoverlay {
+            display: none;
+            opacity: .8;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            background: #FFF;
+            width: 100%;
+            z-index: 10;
+        }
+
+        #dialogbox {
+            display: none;
+            position: fixed;
+            background: #000;
+            border-radius: 7px;
+            width: 300px;
+            z-index: 10;
+        }
+
+            #dialogbox > div {
+                background: #FFF;
+                margin: 8px;
+            }
+
+                #dialogbox > div > #dialogboxhead {
+                    background: #666;
+                    font-size: 19px;
+                    padding: 10px;
+                    color: #CCC;
+                }
+
+                #dialogbox > div > #dialogboxbody {
+                    background: #333;
+                    padding: 20px;
+                    color: #FFF;
+                }
+
+                #dialogbox > div > #dialogboxfoot {
+                    background: #666;
+                    padding: 10px;
+                    text-align: center;
+                }
+    </style>
+
+    <script>
+        function CustomAlert() {
+            this.render = function (dialog, dialogdata) {
+                var winW = window.innerWidth;
+                var winH = window.innerHeight;
+                var dialogoverlay = document.getElementById('dialogoverlay');
+                var dialogbox = document.getElementById('dialogbox');
+                dialogoverlay.style.display = "block";
+                dialogoverlay.style.height = winH + "px";
+                dialogbox.style.left = "530px";
+                dialogbox.style.top = "250px";
+                dialogbox.style.display = "block";
+                document.getElementById('dialogboxhead').innerHTML = dialog;
+                document.getElementById('dialogboxbody').innerHTML = dialogdata;
+                document.getElementById('dialogboxfoot').innerHTML = '<center><button onclick="Alert.ok()">OK</button></center>';
+            }
+            this.ok = function () {
+                document.getElementById('dialogbox').style.display = "none";
+                document.getElementById('dialogoverlay').style.display = "none";
+            }
+        }
+        var Alert = new CustomAlert();
+    </script>
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -26,10 +96,20 @@
             <!-- END LOGO -->
         </div>
         <asp:PlaceHolder ID="errorMessagePlaceHolder" runat="server">
-        <script type="text/javascript">
-            alert("Invalid username or password...!!");
-        </script>
-            </asp:PlaceHolder>
+            <div id="dialogoverlay"></div>
+            <div id="dialogbox">
+                <div>
+                    <div id="dialogboxhead"></div>
+                    <div id="dialogboxbody"></div>
+                    <div id="dialogboxfoot"></div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                //alert("Invalid username or password...!!");
+                Alert.ok();
+                Alert.render('Login Error', 'Invalid username or password...!!');
+            </script>
+        </asp:PlaceHolder>
         <!-- BEGIN LOGIN -->
         <div id="login">
             <!-- BEGIN LOGIN FORM -->
@@ -82,7 +162,7 @@
                     </div>
                     <div class="space20"></div>
                 </div>
-                <asp:Button ID="btnSubmitEmail" CssClass="btn btn-block login-btn" runat="server" Text="Submit" OnClick="forgotPassword"/>
+                <asp:Button ID="btnSubmitEmail" CssClass="btn btn-block login-btn" runat="server" Text="Submit" OnClick="forgotPassword" />
             </div>
             <!-- END FORGOT PASSWORD FORM -->
         </div>

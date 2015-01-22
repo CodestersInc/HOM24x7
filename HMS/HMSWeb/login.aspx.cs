@@ -47,6 +47,10 @@ public partial class login : System.Web.UI.Page
                         Session.Add("UserType", "Customer");
                         Response.Redirect("home.aspx");
                     }
+                    else
+                    {
+                        errorMessagePlaceHolder.Visible = true;
+                    }
                 }
             }
         }
