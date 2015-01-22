@@ -75,6 +75,17 @@
                                     </div>
                                 </div>
 
+                                <table>
+                                    <asp:Repeater ID="Repeater1" runat="server" class="table table-striped table-bordered">
+                                        <ItemTemplate>
+                                            <tr>
+                                                <td><%#Eval("")%></td>
+                                                <td></td>
+                                            </tr>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </table>
+
                                 <div class="form-actions">
                                     <asp:Button ID="btnSubmit" CssClass="btn btn-success" runat="server" Text="Submit" />
                                     <asp:Button ID="btnCancel" CssClass="btn btn-warning" runat="server" Text="Cancel" />
@@ -84,9 +95,6 @@
                     </div>
                 </div>
                 <!-- END Create Room FORM-->
-                
-
-
             </div>
 
         </div>

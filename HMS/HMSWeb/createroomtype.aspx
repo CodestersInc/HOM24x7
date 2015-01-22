@@ -49,27 +49,30 @@
                                 <div class="control-group">
                                     <label class="control-label">Description</label>
                                     <div class="controls">
-                                        <asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine" CssClass="span5" Rows="4"></asp:TextBox>
+                                        <asp:TextBox ID="txtDescription" runat="server" TextMode="MultiLine" CssClass="span5" Rows="4"></asp:TextBox>
                                     </div>
                                 </div>
 
                                 <div class="control-group">
                                     <label class="control-label">Photo</label>
                                     <div class="controls">
-                                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                                        <%--                                        <div class="fileupload fileupload-new" data-provides="fileupload">
                                             <input type="hidden">
                                             <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
                                                 <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" />
                                             </div>
                                             <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
-                                            <div>
-                                                <%--<asp:FileUpload CssClass="fileupload-new" ID="FileUpload2" runat="server"/>--%>
+                                            <div>                                                
                                                 <span class="btn btn-file"><span class="fileupload-new">select image</span>
                                                     <span class="fileupload-exists">Change</span>
                                                     <input class="default" type="file"></span>
                                                 <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
                                             </div>
-                                        </div>
+                                        </div>--%>
+                                        <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                                            <asp:Image ID="Image1" runat="server" />
+                                        </div><br /><br />
+                                        <asp:FileUpload CssClass="fileupload-new" ID="FileUpload1" runat="server" /><br /><br />
                                         <span class="label label-important">NOTE!</span>
                                         <span>Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only
                                         </span>
