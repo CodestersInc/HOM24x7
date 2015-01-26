@@ -27,7 +27,7 @@
                 <div class="control-group">
                     <label class="control-label">Room Type Name</label>
                     <div class="controls">
-                        <asp:TextBox ID="txtRoomTypeName" runat="server" CssClass="span6  tooltips" data-trigger="hover" data-original-title="Enter staff name to search for."></asp:TextBox>
+                        <asp:TextBox ID="txtRoomTypeName" runat="server" CssClass="span6  tooltips" data-trigger="hover" data-original-title="Enter Room Type name to search for."></asp:TextBox>
                         <asp:Button ID="btnSubmit" CssClass="btn btn-info" runat="server" Text="Search" OnClick="btnSubmit_Click" />
                     </div>
                 </div>

@@ -47,32 +47,46 @@
                         </span>
                     </div>
                     <div class="widget-body">
-                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" class="table table-striped table-bordered" OnRowCommand="GridView1_RowCommand">
-                            <Columns>
-                                <asp:TemplateField HeaderText="Name">
-                                    <ItemTemplate>
-                                        <%# Eval("Name") %>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="From Date">
-                                    <ItemTemplate>
-                                        <%# Eval("FromDate") %>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="To Date">
-                                    <ItemTemplate>
-                                        <%# Eval("ToDate") %>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
 
-                                <asp:TemplateField HeaderText="">
-                                    <ItemTemplate>
-                                        <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewseason.aspx?ID=" + Eval("SeasonID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
-                                        <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("SeasonID") %>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                            </Columns>
-                        </asp:GridView>
+                        <!--START Repeater-->
+                        <!--
+                            *
+                            *
+                            * There is a bug that the Header of the table will show up on the page load
+                            *
+                            *-->
+                        <table class="table table-striped table-bordered table-advance table-hover">
+                            <tr>
+                                <th>Name
+                                </th>
+                                <th>From Date
+                                </th>
+                                <th>To Date
+                                </th>
+                                
+                                <th></th>
+                            </tr>
+                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
+                                <ItemTemplate>
+                                    <tr>
+                                        <td>
+                                            <%# Eval("Name") %>
+                                        </td>
+                                        <td>
+                                            <%# Eval("FromDate") %>
+                                        </td>
+                                        <td>
+                                            <%# Eval("ToDate") %>
+                                        </td>
+                                        <td>
+                                            <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewseason.aspx?ID=" + Eval("SeasonID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
+                                            <asp:LinkButton ID="btnRemove1" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("SeasonID") %>' CssClass="btn"><i class="icon-trash"></i> Remove</asp:LinkButton>
+                                        </td>
+                                    </tr>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </table>
+                        <!--END Repeater-->
                     </div>
                 </div>
                 <!-- END EXAMPLE TABLE widget-->

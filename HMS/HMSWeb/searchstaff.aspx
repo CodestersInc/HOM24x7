@@ -47,6 +47,7 @@
                         </span>
                     </div>
                     <div class="widget-body">
+<%--                        <!--START GridView-->
                         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" CssClass="table table-striped table-bordered" OnRowCommand="GridView1_RowCommand">
                             <Columns>
                                 <asp:TemplateField HeaderText="Name">
@@ -77,6 +78,51 @@
                                 </asp:TemplateField>
                             </Columns>
                         </asp:GridView>
+                        <!--END GridView-->--%>
+
+
+                        <!--START Repeater-->
+                        <!--
+                            *
+                            *
+                            * There is a bug that the Header of the table will show up on the page load
+                            *
+                            *-->
+                        <table class="table table-striped table-bordered table-advance table-hover">
+                            <tr>
+                                <th>Name
+                                </th>
+                                <th>Department Name
+                                </th>
+                                <th>Email
+                                </th>
+                                <th>Phone
+                                </th>
+                            </tr>
+                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
+                                <ItemTemplate>
+                                    <tr>
+                                        <td>
+                                            <%# Eval("Name") %>
+                                        </td>
+                                        <td>
+                                            <%# Eval("DepartmentName") %>
+                                        </td>
+                                        <td>
+                                            <%# Eval("Email") %>
+                                        </td>
+                                        <td>
+                                            <%# Eval("Phone") %>
+                                        </td>
+                                        <td>
+                                            <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewstaff.aspx?ID=" + Eval("StaffID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
+                                            <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("StaffID") %>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>
+                                        </td>
+                                    </tr>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </table>
+                        <!--END Repeater-->
                     </div>
                 </div>
                 <!-- END EXAMPLE TABLE widget-->

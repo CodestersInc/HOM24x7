@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
+using System.Data;
 
 public partial class searchdepartment : System.Web.UI.Page
 {
@@ -19,19 +20,21 @@ public partial class searchdepartment : System.Web.UI.Page
 
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
+        //resultTable.Visible = true;
         Staff loggedUser = (Staff)Session["LoggedUser"];
-        GridView1.DataSource = new DepartmentLogic().search(txtName.Text, loggedUser.AccountID);
-        GridView1.DataBind();
+        Repeater1.DataSource = new DepartmentLogic().search(txtName.Text, loggedUser.AccountID);
+        Repeater1.DataBind();
     }
 
-    protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+    
+    protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
     {
         if (e.CommandName == "Remove")
         {
             new DepartmentLogic().delete(Convert.ToInt32(e.CommandArgument));
             Staff loggedUser = (Staff)Session["LoggedUser"];
-            GridView1.DataSource = new DepartmentLogic().search(txtName.Text, loggedUser.AccountID);
-            GridView1.DataBind();
+            Repeater1.DataSource = new DepartmentLogic().search(txtName.Text, loggedUser.AccountID);
+            Repeater1.DataBind();
         }
     }
 }

@@ -15,7 +15,7 @@ public partial class hacregister : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         SystemAdmin loggedUser = (SystemAdmin)Session["LoggedUser"];
-        if (loggedUser == null || Session["UserType"] != "SystemAdmin")
+        if (loggedUser == null || Session["UserType"].ToString() != "SystemAdmin")
         {
             Response.Redirect("login.aspx");
         }

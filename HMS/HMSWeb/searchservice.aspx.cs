@@ -21,18 +21,18 @@ public partial class searchservice : System.Web.UI.Page
     protected void btnSearch_Click(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["loggedUser"];
-        GridView1.DataSource = new ServiceLogic().search(txtName.Text, loggedUser.AccountID);
-        GridView1.DataBind();
+        Repeater1.DataSource = new ServiceLogic().search(txtName.Text, loggedUser.AccountID);
+        Repeater1.DataBind();
     }
 
-    protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+    protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
     {
         if (e.CommandName == "Remove")
         {
-            new ServiceLogic().delete(Convert.ToInt32(e.CommandArgument));
+            new SeasonLogic().delete(Convert.ToInt32(e.CommandArgument));
             Staff loggeduser = (Staff)Session["loggeduser"];
-            GridView1.DataSource = new ServiceLogic().search(txtName.Text, loggeduser.AccountID);
-            GridView1.DataBind();
+            Repeater1.DataSource = new ServiceLogic().search(txtName.Text, loggeduser.AccountID);
+            Repeater1.DataBind();
         }
     }
 }
