@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
+    <style>
+        .draggableA {
+            width: 30px;
+            height: 30px;
+            padding: 0.5cm;
+            border-style: solid;
+            border-width: 1px;
+            background-color: blue;
+        }
+
+        .draggableB {
+            width: 30px;
+            height: 30px;
+            padding: 0.5cm;
+            border-style: solid;
+            border-width: 1px;
+            background-color: chocolate;
+        }
+
+        #canvas {
+            height: 500px;
+            width: 700px;
+            padding: 0.5cm;
+            border-style: solid;
+        }
+    </style>
+
+	<script src="jquery-1.11.2.js"></script>
+	<script src="jquery-ui.js"></script>
+    <script src="jquery.ui.rotatable.min.js"></script>
+    <link rel="stylesheet" href="jquery.ui.rotatable.css">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#canvas').resizable();
+            //$('#canvas').draggable();
+            var posA = $('.draggableA').click(function () {
+                $(this).clone().appendTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" });
+
+
+                $("#canvas .draggableA:last").click(function () {
+                    posA = $(this).position();
+                    alert("left:" + posA.left + "\nright:" + posA.right + "\ntop:" + posA.top + "\nbottom:" + posA.bottom);
+
+                });
+
+                //alert("left:" + posA.left + "\nright:" + posA.right + "\ntop:" + posA.top + "\nbottom:" + posA.bottom);
+            });
+
+            $('.draggableB').click(function () {
+                $(this).clone().appendTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" });
+            });
+        });
+
+
+        function getRotationDegrees(matrix) {
+            alert("called");
+            if (matrix !== 'none') {
+                var values = matrix.split('(')[1].split(')')[0].split(',');
+                var a = values[0];
+                var b = values[1];
+                var angle = Math.round(Math.atan2(b, a) * (180 / Math.PI));
+            } else { var angle = 0; }
+            return (angle < 0) ? angle += 360 : angle;
+        }
+
+
+        function save(){
+            $("#canvas>.ui-draggable").each(function () {
+                topv = $(this).css('top');
+                lv = $(this).css('left');
+                wv = $(this).css('width');
+                hv = $(this).css('height');
+                tv = $(this).css('transform');
+                alert(getRotationDegrees(tv));
+
+
+            })
+        }
+    </script>
+</head>
+<body>
+    <div id="pallete">
+        <div class="draggableA" style="float:left;"></div>
+        <div class="draggableB" style="float:left;"></div>
+    </div>
+    <br /><br /><br /><br />
+    <div id="canvas" >
+    </div>
+    <input type="button" value="Save" onclick="save()" />
+</body>
+</html>
