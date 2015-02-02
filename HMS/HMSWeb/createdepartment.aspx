@@ -50,38 +50,48 @@
                                     <div class="control-group">
                                         <label class="control-label">Manager Name</label>
                                         <div class="controls">
-                                            <asp:TextBox ID="txtManagerName" runat="server" CssClass="span6 " placeholder="Disabled input here..." disabled=""></asp:TextBox>
+                                            <asp:TextBox ID="txtManagerName" runat="server" CssClass="span6 " Enabled="false"></asp:TextBox>
                                         </div>
                                     </div>
                                     
-                                    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" class="table table-striped table-bordered" OnRowCommand="GridView1_RowCommand">
-                                        <Columns>
-                                            <asp:TemplateField HeaderText="Name">
+                                    <asp:PlaceHolder ID="searchResultTable" runat="server" Visible="false">
+                                        <table class="table table-striped table-bordered table-advance table-hover">
+                                            <tr>
+                                                <th>Name
+                                                </th>
+                                                <th>From Date
+                                                </th>
+                                                <th>To Date
+                                                </th>
+
+                                                <th></th>
+                                            </tr>
+                                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
                                                 <ItemTemplate>
-                                                    <%# Eval("Name") %>
+                                                    <tr>
+                                                        <td>
+                                                            <%# Eval("Name") %>
+                                                        </td>
+                                                        <td>
+                                                            <%# Eval("Email") %>
+                                                        </td>
+                                                        <td>
+                                                            <%# Eval("DepartmentName") %>
+                                                        </td>
+                                                        <td>
+                                                            <asp:LinkButton ID="btnAddAsManager" runat="server" CommandName="Select" CommandArgument='<%#  Eval("StaffID") %>' CssClass="btn">Select as Manager</asp:LinkButton>
+                                                        </td>
+                                                    </tr>
                                                 </ItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Name">
-                                                <ItemTemplate>
-                                                    <%# Eval("Email") %>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Department Name">
-                                                <ItemTemplate>
-                                                    <%# Eval("Phone") %>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Department">
-                                                <ItemTemplate>
-                                                    <asp:LinkButton ID="LinkButton1" runat="server"  class="btn mini purple" CommandName="Select" CommandArgument='<%#  Eval("StaffID") %>'> Select as Manager </asp:LinkButton>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                        </Columns>
-                                    </asp:GridView>
+                                            </asp:Repeater>
+                                        </table>
+                                        <!--END Repeater-->
+
+                                    </asp:PlaceHolder>
 
                                     <div class="form-actions">
                                         <asp:Button ID="btnSubmit" CssClass="btn btn-success" runat="server" Text="Submit" OnClick="btnSubmit_Click" />
-                                        <asp:Button ID="btnCancel" CssClass="btn btn-warning" runat="server" Text="Cancel" />
+                                        <asp:Button ID="btnCancel" CssClass="btn btn-warning" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
                                     </div>
                                 </div>
                             </div>
@@ -96,5 +106,5 @@
     <!-- END PAGE CONTAINER-->
 </asp:Content>
 
-<asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" Runat="Server">
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
 </asp:Content>

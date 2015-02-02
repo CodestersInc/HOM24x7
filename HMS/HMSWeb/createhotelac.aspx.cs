@@ -22,6 +22,10 @@ public partial class hacregister : System.Web.UI.Page
     }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
+        AccountLogic accountLogin = new AccountLogic();
+        StaffLogic staffLogic = new StaffLogic();
+        SeasonLogic seasonLogic = new SeasonLogic();
+
         Account newaccount = new Account(0,
             txtCompany.Text,
             txtContact.Text,
@@ -31,7 +35,7 @@ public partial class hacregister : System.Web.UI.Page
             txtWebsite.Text,
             cbxFeatures.Checked);
 
-        Account accountobject = new AccountLogic().create(newaccount);
+        Account accountobject = accountLogin.create(newaccount);
 
         if (accountobject != null)
         {
@@ -44,21 +48,37 @@ public partial class hacregister : System.Web.UI.Page
                 "HotelAdmin",
                 "Admin",
                 Convert.ToDateTime(txtDOB.Text),
-                System.DateTime.Now,
+                DateTime.Now,
                 Convert.ToInt32(txtSalary.Text),
                 true,
                 0,
                 accountobject.AccountID);
 
-            Staff staffobject = new StaffLogic().create(staffobj);
 
+            Staff staffobject = staffLogic.create(staffobj);
+            //START Add a regular season so the hotel can be managed using it on the regular basis
+            Season RegularSeason = seasonLogic.create(new Season(0,
+                "Regular Season",
+                DateTime.Now,
+                DateTime.MaxValue,
+                accountobject.AccountID));
+            //END Add a regular season so the hotel can be managed using it on the regular basis
             if(staffobject!=null)
             {
-                Response.Redirect("home.aspx");
+                if(RegularSeason!=null)
+                {
+                    Response.Redirect("home.aspx");
+                }
+                else
+                {
+                    staffLogic.delete(staffobject.StaffID);
+                    accountLogin.delete(accountobject.AccountID);
+                }
+
             }
             else
             {
-                new AccountLogic().delete(accountobject.AccountID);
+                accountLogin.delete(accountobject.AccountID);
             }
         }
     }

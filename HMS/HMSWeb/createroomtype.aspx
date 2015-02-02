@@ -82,6 +82,44 @@
                                     </div>
                                 </div>
 
+                                <div>
+                                    <!-- START SEASON MAPPING -->
+                                    <!--START Repeater-->
+                                    <table class="table table-striped table-bordered table-advance table-hover">
+                                        <tr>
+                                            <th>Season</th>
+                                            <th>Rate</th>
+                                            <th>Agent Discount</th>
+                                            <th>Max Discount</th>
+                                            <th>Website Rate</th>
+                                        </tr>
+                                        <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
+                                            <ItemTemplate>
+                                                <tr>
+                                                    <td>
+                                                        <asp:HiddenField ID="HiddenFieldSeasonID" Value='<%# Eval("SeasonID") %>' runat="server" />
+                                                        <b><%# Eval("Name") %></b>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox ID="txtRate" runat="server"></asp:TextBox>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox ID="txtAgentDiscount" runat="server"></asp:TextBox>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox ID="txtMaxDiscount" runat="server"></asp:TextBox>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox ID="txtWebsiteRate" runat="server"></asp:TextBox>
+                                                    </td>
+                                                </tr>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </table>
+                                    <!--END Repeater-->
+                                    <!-- END SEASON MAPPING -->
+                                </div>
+
                                 <div class="form-actions">
                                     <asp:Button ID="btnSubmit" CssClass="btn btn-success" OnClick="btnSubmit_Click" runat="server" Text="Submit" />
                                     <asp:Button ID="btnCancel" CssClass="btn btn-warning" OnClick="btnCancel_Click" runat="server" Text="Cancel" />
@@ -89,15 +127,14 @@
 
                             </div>
                         </div>
-                        <!-- BEGIN FORM-->
+                        <!-- END FORM-->
                     </div>
+                    <!-- END Create Room FORM-->
                 </div>
-                <!-- END Create Room FORM-->
             </div>
+            <!-- END PAGE CONTENT-->
         </div>
-        <!-- END PAGE CONTENT-->
-    </div>
-    <!-- END PAGE CONTAINER-->
+        <!-- END PAGE CONTAINER-->
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
     <script type="text/javascript" src="assets/bootstrap/js/bootstrap-fileupload.js"></script>

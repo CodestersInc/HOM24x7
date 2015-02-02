@@ -12,15 +12,16 @@ public partial class adddepartment : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["LoggedUser"];
-        if (Session["StaffUserType"].ToString() != "HotelAdmin")
+        if (loggedUser == null || Session["StaffUserType"].ToString() != "HotelAdmin")
         {
             Response.Redirect("login.aspx");
         }
 
         if (Request.QueryString["ID"] == null && Request.QueryString["Name"] == null)
         {
-            GridView1.DataSource = new StaffLogic().getStaffNames(loggedUser.AccountID);
-            GridView1.DataBind();
+            searchResultTable.Visible = true;
+            Repeater1.DataSource = new StaffLogic().search("", loggedUser.AccountID);
+            Repeater1.DataBind();
         }
 
         if (!IsPostBack)
@@ -45,16 +46,45 @@ public partial class adddepartment : System.Web.UI.Page
         }
     }
 
-    protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+    //protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+    //{
+    //    if (e.CommandName == "Select")
+    //    {
+    //        int staffid = Convert.ToInt32(e.CommandArgument);
+    //        txtManagerName.Text = new StaffLogic().selectById(staffid).Name;
+    //        GridView1.Visible = false;
+
+    //        ViewState["staffid"] = staffid;
+    //        btnSubmit.Enabled = true;
+    //    }
+    //}
+
+    protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
     {
         if (e.CommandName == "Select")
         {
             int staffid = Convert.ToInt32(e.CommandArgument);
             txtManagerName.Text = new StaffLogic().selectById(staffid).Name;
-            GridView1.Visible = false;
+            Repeater1.Visible = false;
+            //Repeater1.DataSource = new StaffLogic().search("", loggedUser.AccountID);
+            //Repeater1.DataBind();
+            searchResultTable.Visible = false;
 
             ViewState["staffid"] = staffid;
             btnSubmit.Enabled = true;
         }
+    }
+
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        if (txtManagerName.Text.Length!=0)
+        {
+            Response.Redirect("createdepartment.aspx");
+        }
+        else
+        {
+            Response.Redirect("home.aspx");
+        }
+        
     }
 }

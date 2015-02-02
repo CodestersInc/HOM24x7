@@ -40,7 +40,7 @@ namespace BusinessLogic
             {
                 String selectquery = "select * from Season where Name=@Name and AccountID=@AccountID";
                 List<SqlParameter> lstParams1 = new List<SqlParameter>();
-                
+
                 lstParams1.Add(new SqlParameter("@Name", obj.Name));
                 lstParams1.Add(new SqlParameter("@AccountID", obj.AccountID));
 
@@ -113,6 +113,15 @@ namespace BusinessLogic
             String query = "select * from Season";
 
             return DBUtility.Select(query, new List<SqlParameter>());
+        }
+
+        public DataTable selectAll(int id)
+        {
+            String query = "select * from Season where AccountID=@id";
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+
+            lstParams.Add(new SqlParameter("@id", id));
+            return DBUtility.Select(query, lstParams);
         }
     }
 }

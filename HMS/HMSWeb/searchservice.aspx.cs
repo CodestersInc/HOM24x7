@@ -29,9 +29,10 @@ public partial class searchservice : System.Web.UI.Page
     {
         if (e.CommandName == "Remove")
         {
-            new SeasonLogic().delete(Convert.ToInt32(e.CommandArgument));
+            ServiceLogic serviceLogic = new ServiceLogic();
+            serviceLogic.delete(Convert.ToInt32(e.CommandArgument));
             Staff loggeduser = (Staff)Session["loggeduser"];
-            Repeater1.DataSource = new ServiceLogic().search(txtName.Text, loggeduser.AccountID);
+            Repeater1.DataSource = serviceLogic.search(txtName.Text, loggeduser.AccountID);
             Repeater1.DataBind();
         }
     }

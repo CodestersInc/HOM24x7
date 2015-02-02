@@ -47,40 +47,55 @@
                         </span>
                     </div>
                     <div class="widget-body">
-                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" class="table table-striped table-bordered">
-                            <Columns>
-                                <asp:TemplateField HeaderText="Company">
-                                    <ItemTemplate>
-                                        <%# Eval("Company") %>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Contact Person">
-                                    <ItemTemplate>
-                                        <%# Eval("ContactPerson") %>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Email">
-                                    <ItemTemplate>
-                                        <a href='<%# Eval("Email") %>'><%# Eval("Email") %></a>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Phone">
-                                    <ItemTemplate>
-                                        <%# Eval("Phone") %>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Wesite">
-                                    <ItemTemplate>
-                                        <%# Eval("Website") %>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="">
-                                    <ItemTemplate>
-                                        <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewhotelac.aspx?ID=" + Eval("AccountID") %>' runat="server"><i class="icon-edit"></i> View/Edit Details</asp:LinkButton>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                            </Columns>
-                        </asp:GridView>
+                        <!--START Repeater-->
+                        <!--
+                            *
+                            *
+                            * There is a bug that the Header of the table will show up on the page load
+                            *
+                            *-->
+                        <table class="table table-striped table-bordered table-advance table-hover">
+                            <tr>
+                                <th>Compony
+                                </th>
+                                <th>Contact person
+                                </th>
+                                <th>Email
+                                </th>
+                                <th>Phone
+                                </th>
+                                <th>Website
+                                </th>
+                                <th>
+                                </th>
+                            </tr>
+                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
+                                <ItemTemplate>
+                                    <tr>
+                                        <td>
+                                            <%# Eval("Compony") %>
+                                        </td>
+                                        <td>
+                                            <%# Eval("ContactPerson") %>
+                                        </td>
+                                        <td>
+                                            <%# Eval("Email") %>
+                                        </td>
+                                        <td>
+                                            <%# Eval("Phone") %>
+                                        </td>
+                                        <td>
+                                            <%# Eval("Website") %>
+                                        </td>
+                                        <td>
+                                            <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewservice.aspx?ID=" + Eval("ServiceID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
+                                            <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("ServiceID") %>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>
+                                        </td>
+                                    </tr>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </table>
+                        <!--END Repeater-->
                     </div>
                 </div>
                 <!-- END EXAMPLE TABLE widget-->
@@ -92,5 +107,5 @@
     <!-- END PAGE CONTAINER -->
 </asp:Content>
 
-<asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" Runat="Server">
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
 </asp:Content>

@@ -19,7 +19,19 @@ public partial class hacsearch : System.Web.UI.Page
 
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
-        GridView1.DataSource = new AccountLogic().search(txtName.Text, 0);
-        GridView1.DataBind();
+        Repeater1.DataSource = new AccountLogic().search(txtName.Text, 0);
+        Repeater1.DataBind();
+    }
+
+    protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
+    {
+        if (e.CommandName == "Remove")
+        {
+            AccountLogic accountLogic = new AccountLogic();
+            accountLogic.delete(Convert.ToInt32(e.CommandArgument));
+            Staff loggedUser = (Staff)Session["LoggedUser"];
+            Repeater1.DataSource = accountLogic.search(txtName.Text, 0);
+            Repeater1.DataBind();
+        }
     }
 }

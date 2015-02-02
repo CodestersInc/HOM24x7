@@ -13,11 +13,7 @@ public partial class generatepayslip : System.Web.UI.Page
         try
         {
             AppUser LoggedAppUser = (AppUser)Session["AppUser"];
-            if (LoggedAppUser == null)
-            {
-                Response.Redirect("login.aspx");
-            }
-            else if (LoggedAppUser.UserType != "HotelAdmin")
+            if (LoggedAppUser == null || LoggedAppUser.UserType != "HotelAdmin")
             {
                 Response.Redirect("login.aspx");
             }
@@ -26,6 +22,6 @@ public partial class generatepayslip : System.Web.UI.Page
         {
             Response.Redirect("ErrorPage500.html");
         }
-        
+
     }
 }

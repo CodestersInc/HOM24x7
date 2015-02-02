@@ -151,7 +151,7 @@ namespace BusinessLogic
 
         public DataTable getStaffNames(int AccountID)
         {
-            String query = "select * from Staff where Staff.AccountID=@AccountID";
+            String query = "select Staff.*, Department.Name as 'DepartmentName' from Staff, Department where Staff.DepartmentID = Department.DepartmentID and Staff.AccountID=@AccountID ";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
             lstParams.Add(new SqlParameter("@AccountID", AccountID));

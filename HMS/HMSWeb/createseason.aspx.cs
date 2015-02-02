@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.Sql;
+using System.Data.SqlClient;
 using BusinessLogic;
 
 public partial class createseason : System.Web.UI.Page
@@ -22,7 +25,11 @@ public partial class createseason : System.Web.UI.Page
     {
         Staff loggedUser = (Staff)Session["loggedUser"];
 
-        Season seasonobject = new SeasonLogic().create(new Season(0,
+        SeasonLogic seasonLogic = new SeasonLogic();
+        RoomTypeLogic roomTypeLogic = new RoomTypeLogic();
+        SeasonRoomLogic seasonRoomLogic = new SeasonRoomLogic();
+
+        Season seasonobject = seasonLogic.create(new Season(0,
             txtSeasonName.Text,
             Convert.ToDateTime(txtFromDate.Text),
             Convert.ToDateTime(txtToDate.Text),
@@ -30,6 +37,15 @@ public partial class createseason : System.Web.UI.Page
 
         if (seasonobject != null)
         {
+            DataTable roomTypes = roomTypeLogic.selectAll(loggedUser.AccountID);
+
+            for (int i = 0; i < roomTypes.Rows.Count; i++)
+            {
+                seasonRoomLogic.create(new SeasonRoom(0,
+                    seasonobject.SeasonID, Convert.ToInt32(roomTypes.Rows[i]["RoomTypeID"]),
+                    0, 0, 0, 0));
+            }
+
             Response.Redirect("home.aspx");
         }
         else

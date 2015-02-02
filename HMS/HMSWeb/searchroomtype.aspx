@@ -35,7 +35,11 @@
         </div>
 
         <table class="table table-striped table-bordered">
-            <th>Room Type</th>
+            <tr>
+                <th>Room Type</th>
+                <th></th>
+            </tr>
+            
             <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
                 <ItemTemplate>
                     <tr>

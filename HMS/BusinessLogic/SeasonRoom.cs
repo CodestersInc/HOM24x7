@@ -11,17 +11,17 @@ namespace BusinessLogic
         public int SeasonRoomID;
         public int SeasonID;
         public int RoomTypeID;
-        public double Rate;
-        public double AgentDiscount;
-        public double MaxDiscount;
-        public double WebsiteRate;
+        public float Rate;
+        public float AgentDiscount;
+        public float MaxDiscount;
+        public float WebsiteRate;
 
         public SeasonRoom()
         {
 
         }
 
-        public SeasonRoom(int SeasonRoomID, int SeasonID, int RoomTypeID, double Rate, double AgentDiscount, double MaxDiscount, double WebsiteRate)
+        public SeasonRoom(int SeasonRoomID, int SeasonID, int RoomTypeID, float Rate, float AgentDiscount, float MaxDiscount, float WebsiteRate)
         {
             this.SeasonRoomID = SeasonRoomID;
             this.SeasonID = SeasonID;

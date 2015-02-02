@@ -31,10 +31,10 @@ namespace BusinessLogic
                 return new SeasonRoom(Convert.ToInt32(dt.Rows[0]["SeasonRoomID"]),
                 Convert.ToInt32(dt.Rows[0]["SeasonID"]),
                 Convert.ToInt32(dt.Rows[0]["RoomTypeID"]),
-                Convert.ToDouble(dt.Rows[0]["Rate"]),
-                Convert.ToDouble(dt.Rows[0]["AgentDiscount"]),
-                Convert.ToDouble(dt.Rows[0]["MaxDiscount"]),
-                Convert.ToDouble(dt.Rows[0]["WebsiteRate"]));
+                Convert.ToSingle(dt.Rows[0]["Rate"]),
+                Convert.ToSingle(dt.Rows[0]["AgentDiscount"]),
+                Convert.ToSingle(dt.Rows[0]["MaxDiscount"]),
+                Convert.ToSingle(dt.Rows[0]["WebsiteRate"]));
             }
             else
             {
@@ -55,7 +55,7 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@MaxDiscount", obj.MaxDiscount));
             lstParams.Add(new SqlParameter("@WebsiteRate", obj.WebsiteRate));
 
-            return DBUtility.Modify(query, lstParams); 
+            return DBUtility.Modify(query, lstParams);
         }
 
         public int delete(int id)
@@ -64,7 +64,7 @@ namespace BusinessLogic
             List<SqlParameter> lstParams = new List<SqlParameter>();
             lstParams.Add(new SqlParameter("@ID", id));
 
-            return DBUtility.Modify(query, lstParams);  
+            return DBUtility.Modify(query, lstParams);
         }
 
         public SeasonRoom selectById(int id)
@@ -80,16 +80,16 @@ namespace BusinessLogic
                 return new SeasonRoom(Convert.ToInt32(dt.Rows[0]["SeasonRoomID"]),
                 Convert.ToInt32(dt.Rows[0]["SeasonID"]),
                 Convert.ToInt32(dt.Rows[0]["RoomTypeID"]),
-                Convert.ToDouble(dt.Rows[0]["Rate"]),
-                Convert.ToDouble(dt.Rows[0]["AgentDiscount"]),
-                Convert.ToDouble(dt.Rows[0]["MaxDiscount"]),
-                Convert.ToDouble(dt.Rows[0]["WebsiteRate"]));
+                Convert.ToSingle(dt.Rows[0]["Rate"]),
+                Convert.ToSingle(dt.Rows[0]["AgentDiscount"]),
+                Convert.ToSingle(dt.Rows[0]["MaxDiscount"]),
+                Convert.ToSingle(dt.Rows[0]["WebsiteRate"]));
             }
             else
             {
                 return null;
             }
-            
+
         }
 
         public DataTable selectAll()
@@ -97,6 +97,17 @@ namespace BusinessLogic
             String query = "select * from SeasonRoom";
 
             return DBUtility.Select(query, new List<SqlParameter>());
+        }
+
+        public DataTable getAllSeasons(int roomTypeID, int accountID)
+        {
+            String query = "select Season.SeasonID Season.Name, SeasonRoom.Rate, SeasonRoom.AgentDiscount, SeasonRoom.MaxDiscount, SeasonRoom.WebsiteRate from Season, SeasonRoom where SeasonRoom.SeasonID = Season.SeasonID and SeasonRoom.RoomTypeID=@RoomTypeID and Season.AccountID=@AccountID;";
+
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+            lstParams.Add(new SqlParameter("@AccountID", accountID));
+            lstParams.Add(new SqlParameter("@AccountID", roomTypeID));
+
+            return DBUtility.Select(query, lstParams);
         }
     }
 }

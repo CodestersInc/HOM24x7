@@ -28,9 +28,10 @@ public partial class searchroomtype : System.Web.UI.Page
     {
         if (e.CommandName == "Remove")
         {
-            new RoomTypeLogic().delete(Convert.ToInt32(e.CommandArgument));
+            RoomTypeLogic roomTypeLogic = new RoomTypeLogic();
+            roomTypeLogic.delete(Convert.ToInt32(e.CommandArgument));
             Staff loggedUser = (Staff)Session["loggeduser"];
-            Repeater1.DataSource = new RoomTypeLogic().search(txtRoomTypeName.Text, loggedUser.AccountID);
+            Repeater1.DataSource = roomTypeLogic.search(txtRoomTypeName.Text, loggedUser.AccountID);
             Repeater1.DataBind();
         }
     }

@@ -30,9 +30,10 @@ public partial class searchseason : System.Web.UI.Page
     {
         if (e.CommandName == "Remove")
         {
-            new SeasonLogic().delete(Convert.ToInt32(e.CommandArgument));
+            SeasonLogic seasonLogic = new SeasonLogic();
+            seasonLogic.delete(Convert.ToInt32(e.CommandArgument));
             Staff loggeduser = (Staff)Session["loggeduser"];
-            Repeater1.DataSource = new SeasonLogic().search(txtSeasonName.Text, loggeduser.AccountID);
+            Repeater1.DataSource = seasonLogic.search(txtSeasonName.Text, loggeduser.AccountID);
             Repeater1.DataBind();
         }
     }
