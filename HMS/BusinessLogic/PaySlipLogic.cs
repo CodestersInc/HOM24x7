@@ -13,6 +13,11 @@ namespace BusinessLogic
 {
     public class PaySlipLogic : ILogic<PaySlip>
     {
+        public System.Data.DataTable search(string searchstring, int ID)
+        {
+            throw new NotImplementedException();
+        }
+
         public PaySlip create(PaySlip obj)
         {
             String query = "insert into PaySlip values(@SaffID, @BasicSalary, @Allowance, @Deduction, @FromDate, @ToDate, @GenerateDate, @ApproverID); select * from PaySlip where BasicSalary=@BasicSalary and Allowance=@Allowance and Deduction=@Deduction and FromDate=@FromDate and ToDate=@ToDate and GenerateDate=@GenerateDate PayDate=@PayDate and ApproverID=@ApproverID);";

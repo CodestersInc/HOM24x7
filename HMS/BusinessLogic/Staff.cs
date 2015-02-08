@@ -9,6 +9,7 @@ namespace BusinessLogic
     public class Staff : IModel
     {
         public int StaffID;
+        public String StaffCode;
         public String Name;
         public String Email;
         public String Phone;
@@ -28,9 +29,10 @@ namespace BusinessLogic
 
         }
 
-        public Staff(int StaffID, String Name,String Email, String Phone, String Username, String Password, String UserType, String Designation, DateTime DOB, DateTime DOJ, double Salary, Boolean IsActive, int DepartmentID, int AccountID)
+        public Staff(int StaffID, String StaffCode, String Name,String Email, String Phone, String Username, String Password, String UserType, String Designation, DateTime DOB, DateTime DOJ, double Salary, Boolean IsActive, int DepartmentID, int AccountID)
         {
             this.StaffID = StaffID;
+            this.StaffCode = StaffCode;
             this.Name = Name;
             this.Email = Email;
             this.Phone = Phone;

@@ -41,6 +41,7 @@ public partial class hacregister : System.Web.UI.Page
         {
             Staff staffobj = new Staff(0,
                 txtName.Text,
+                txtStaffCode.Text,
                 txtEmail.Text,
                 Convert.ToString(accountobject.Phone),
                 Utility.GetSHA512Hash(txtUsername.Text),                           //to be modified in future to email id

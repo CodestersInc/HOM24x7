@@ -88,8 +88,8 @@
 
                             <div class="control-group">
                                 <label class="control-label">Features</label>
-                                <div class="danger-toggle-button">
-                                    <asp:CheckBox ID="cbxFeatures" runat="server" />
+                                <div class="controls">
+                                    <asp:CheckBox ID="cbxFeatures" CssClass="success-toggle-button" runat="server" />
                                 </div>
                             </div>
 
@@ -166,6 +166,13 @@
                         <!-- BEGIN FORM-->
                         <div>
                             <div class="form-horizontal">
+                                <div class="control-group">
+                                    <label class="control-label">Staff Code</label>
+                                    <div class="controls">
+                                        <asp:TextBox ID="txtStaffCode" runat="server" CssClass="span2 popovers" data-trigger="hover" data-content="Enter the staff code of staff member (to be assigned or already assigned)" data-original-title="Hint"></asp:TextBox>                                        
+                                    </div>
+                                </div>
+
 
                                 <div class="control-group">
                                     <label class="control-label">Date of Birth</label>

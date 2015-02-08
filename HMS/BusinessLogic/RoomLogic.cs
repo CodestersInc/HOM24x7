@@ -13,6 +13,11 @@ namespace BusinessLogic
 {
     public class RoomLogic : ILogic<Room>
     {
+        public System.Data.DataTable search(string searchstring, int ID)
+        {
+            throw new NotImplementedException();
+        }
+
         public Room create(Room obj)
         {
             String query = "insert into Room values(@RoomTypeID, @Number, @Floor, @Building, @Status); select * from Room where RoomTypeID=@RoomTypeID, Number=@Number, Floor=@Floor, Building=@Building, Status=@Status";

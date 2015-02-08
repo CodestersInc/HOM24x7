@@ -13,6 +13,11 @@ namespace BusinessLogic
 {
     public class OnlineBookingLogic : ILogic<OnlineBooking>
     {
+        public System.Data.DataTable search(string searchstring, int ID)
+        {
+            throw new NotImplementedException();
+        }
+
         public OnlineBooking create(OnlineBooking obj)
         {
             String query = "insert into Booking values(@RoomTypeID, @NumberOfPersons, @CheckInDate, @PlannedCheckOutDate, @Status, @CustomerID, @ConverterID, @StaffRemarks, @CustomerRemarks, @WebsiteRate); select * from OnlineBooking RoomTypeID=@RoomTypeID and NumberOfPersons=@NumberOfPersons and CheckInDate=@CheckInDate and @PlannedCheckOutDate and @Status and CustomerID=@CustomerID and ConverterID=@ConverterID and StaffRemarks=@StaffRemarks and CustomerRemarks=@CustomerRemarks and WebsiteRate=@WebsiteRate";

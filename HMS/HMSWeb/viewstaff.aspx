@@ -40,6 +40,13 @@
                         <div>
                             <div class="form-horizontal">
                                 <div class="control-group">
+                                    <label class="control-label">Staff Code</label>
+                                    <div class="controls">
+                                        <asp:TextBox ID="txtStaffCode" runat="server" CssClass="span2 popovers" data-trigger="hover" data-content="Enter the staff code of staff member." data-original-title="Popover header"></asp:TextBox>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
                                     <label class="control-label">Name</label>
                                     <div class="controls">
                                         <asp:TextBox ID="txtName" runat="server" CssClass="span6 popovers" data-trigger="hover" data-content="Enter the full name of staff member." data-original-title="Popover header"></asp:TextBox>

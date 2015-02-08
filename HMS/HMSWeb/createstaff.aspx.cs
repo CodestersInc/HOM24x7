@@ -33,6 +33,7 @@ public partial class registrestaff : System.Web.UI.Page
         Staff loggedInStaff = (Staff)Session["LoggedUser"];
 
         Staff staffobject = new Staff(0,
+            txtStaffCode.Text,
             txtName.Text,
             txtEmail.Text,
             txtPhone.Text,

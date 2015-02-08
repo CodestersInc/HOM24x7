@@ -11,6 +11,7 @@ namespace BusinessLogic
 {
     public interface ILogic<T> : Logic where T : IModel
     {
+        DataTable search(String searchstring, int ID);
         T create(T obj);
         int update(T obj);
         int delete(int id);

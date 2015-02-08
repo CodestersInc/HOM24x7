@@ -81,27 +81,21 @@
                         <!--END GridView-->--%>
 
                         <asp:PlaceHolder ID="searchResultArea" Visible="false" runat="server">
-                            <!--START Repeater-->
-                            <!--
-                            *
-                            *
-                            * There is a bug that the Header of the table will show up on the page load
-                            *
-                            *-->
                             <table class="table table-striped table-bordered table-advance table-hover">
                                 <tr>
-                                    <th>Name
-                                    </th>
-                                    <th>Department Name
-                                    </th>
-                                    <th>Email
-                                    </th>
-                                    <th>Phone
-                                    </th>
+                                    <th>Staff Code</th>
+                                    <th>Name</th>
+                                    <th>Department Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th></th>
                                 </tr>
                                 <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
                                     <ItemTemplate>
                                         <tr>
+                                            <td>
+                                                <%# Eval("StaffCode") %>
+                                            </td>
                                             <td>
                                                 <%# Eval("Name") %>
                                             </td>

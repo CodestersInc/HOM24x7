@@ -12,6 +12,11 @@ namespace BusinessLogic
 {
     public class SeasonRoomLogic : ILogic<SeasonRoom>
     {
+        public System.Data.DataTable search(string searchstring, int ID)
+        {
+            throw new NotImplementedException();
+        }
+
         public SeasonRoom create(SeasonRoom obj)
         {
             String query = "insert into SeasonRoom values(@SeasonID, @RoomTypeID, @Rate, @AgentDiscount, @MaxDiscount, @WebsiteRate); select * from SeasonRoom where SeasonID=@SeasonID and RoomTypeID=@RoomTypeID and Rate=@Rate and AgentDiscount=@AgentDiscount and MaxDiscount=@MaxDiscount and WebsiteRate=@WebsiteRate";

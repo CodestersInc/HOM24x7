@@ -15,7 +15,7 @@ namespace BusinessLogic
     {
         public DataTable search(String searchstring, int ID)
         {
-            String query = "select Department.Name as 'DepartmentName', Staff.* from Department,Staff where Staff.Name like @Name+'%' and Staff.AccountID=@ID and Department.DepartmentID=Staff.DepartmentID order by Staff.Name";
+            String query = "select Department.Name as 'DepartmentName', Staff.* from Department,Staff where Staff.Name like @Name+'%' and Staff.AccountID=@ID and Department.DepartmentID=Staff.DepartmentID order by Staff.StaffCode";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
             lstParams.Add(new SqlParameter("@Name", searchstring));
@@ -26,9 +26,10 @@ namespace BusinessLogic
 
         public Staff create(Staff obj)
         {
-            String query = "insert into Staff(Name,Email,Phone,Username,Password,UserType,Designation,DOB,DOJ,Salary,IsActive,DepartmentID,AccountID) values(@Name, @Email, @Phone, @Username, @Password, @UserType, @Designation, @DOB, @DOJ, @Salary, @IsActive, @DepartmentID, @AccountID)";
+            String query = "insert into Staff values(@StaffCode, @Name, @Email, @Phone, @Username, @Password, @UserType, @Designation, @DOB, @DOJ, @Salary, @IsActive, @DepartmentID, @AccountID)";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
+            lstParams.Add(new SqlParameter("@StaffCode", obj.StaffCode));
             lstParams.Add(new SqlParameter("@Name", obj.Name));
             lstParams.Add(new SqlParameter("@Email", obj.Email));
             lstParams.Add(new SqlParameter("@Phone", obj.Phone));
@@ -48,7 +49,7 @@ namespace BusinessLogic
             if (res == 1)
             {
                 String selectquery = "select * from staff where username=@username and password=@password";
-                
+
                 List<SqlParameter> lstParams1 = new List<SqlParameter>();
                 lstParams1.Add(new SqlParameter("@Username", obj.Username));
                 lstParams1.Add(new SqlParameter("@Password", obj.Password));
@@ -58,6 +59,7 @@ namespace BusinessLogic
                 if (dt.Rows.Count == 1)
                 {
                     return new Staff(Convert.ToInt32(dt.Rows[0]["StaffID"]),
+                        dt.Rows[0]["StaffCode"].ToString(),
                         dt.Rows[0]["Name"].ToString(),
                         dt.Rows[0]["Email"].ToString(),
                         dt.Rows[0]["Phone"].ToString(),
@@ -82,10 +84,11 @@ namespace BusinessLogic
 
         public int update(Staff obj)
         {
-            String query = "update Staff set Name=@Name, Email=@Email, Phone=@Phone, UserType=@UserType, Designation=@Designation, DOB=@DOB, DOJ=@DOJ, Salary=@Salary, IsActive=@IsActive, DepartmentID=@DepartmentID, AccountID=@AccountID where StaffID=@StaffID";
+            String query = "update Staff set StaffCode=@StaffCode, Name=@Name, Email=@Email, Phone=@Phone, UserType=@UserType, Designation=@Designation, DOB=@DOB, DOJ=@DOJ, Salary=@Salary, IsActive=@IsActive, DepartmentID=@DepartmentID, AccountID=@AccountID where StaffID=@StaffID";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@StaffID", obj.StaffID));
+            lstParams.Add(new SqlParameter("@StaffCode", obj.StaffCode));
             lstParams.Add(new SqlParameter("@Name", obj.Name));
             lstParams.Add(new SqlParameter("@Email", obj.Email));
             lstParams.Add(new SqlParameter("@Phone", obj.Phone));
@@ -121,6 +124,7 @@ namespace BusinessLogic
             if (dt.Rows.Count == 1)
             {
                 return new Staff(Convert.ToInt32(dt.Rows[0]["StaffID"]),
+                dt.Rows[0]["StaffCode"].ToString(),
                 dt.Rows[0]["Name"].ToString(),
                 dt.Rows[0]["Email"].ToString(),
                 dt.Rows[0]["Phone"].ToString(),
@@ -182,6 +186,7 @@ namespace BusinessLogic
             if (dt.Rows.Count == 1)
             {
                 return new Staff(Convert.ToInt32(dt.Rows[0]["StaffID"]),
+                dt.Rows[0]["StaffCode"].ToString(),
                 dt.Rows[0]["Name"].ToString(),
                 dt.Rows[0]["Email"].ToString(),
                 dt.Rows[0]["Phone"].ToString(),

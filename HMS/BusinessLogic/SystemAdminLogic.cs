@@ -12,6 +12,10 @@ namespace BusinessLogic
 {
     public class SystemAdminLogic : ILogic<SystemAdmin>
     {
+        public System.Data.DataTable search(string searchstring, int ID)
+        {
+            throw new NotImplementedException();
+        }
 
         public SystemAdmin create(SystemAdmin obj)
         {

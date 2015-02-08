@@ -28,6 +28,7 @@ public partial class viewstaff : System.Web.UI.Page
 
             Staff staffobj = new StaffLogic().selectById(Convert.ToInt32(Request.QueryString["ID"]));
             txtName.Text = staffobj.Name;
+            txtStaffCode.Text = staffobj.StaffCode;
             txtEmail.Text = staffobj.Email;
             txtPhone.Text = staffobj.Phone;
             ddlUserType.SelectedValue = staffobj.UserType;
@@ -53,6 +54,7 @@ public partial class viewstaff : System.Web.UI.Page
 
         Staff staffobj = new Staff();
         staffobj.StaffID = Convert.ToInt32(Request.QueryString["ID"]);
+        staffobj.StaffCode = txtStaffCode.Text;
         staffobj.Name = txtName.Text;
         staffobj.Email = txtEmail.Text;
         staffobj.Phone = txtPhone.Text;

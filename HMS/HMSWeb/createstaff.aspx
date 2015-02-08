@@ -95,6 +95,13 @@
                         <div>
                             <div class="form-horizontal">
                                 <div class="control-group">
+                                    <label class="control-label">Staff Code</label>
+                                    <div class="controls">
+                                        <asp:TextBox ID="txtStaffCode" runat="server" CssClass="span2 popovers" data-trigger="hover" data-content="Enter the staff code of staff member." data-original-title="Popover header"></asp:TextBox>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
                                     <label class="control-label">User Type</label>
                                     <div class="controls">
                                         <asp:DropDownList ID="ddlUserType" runat="server" CssClass="span6" data-placeholder="Choose a Category" TabIndex="1">
@@ -139,29 +146,13 @@
                                     </div>
                                 </div>
 
-<%--                                <div class="control-group">
-                                    <label class="control-label">Salary Frequency</label>
-                                    <div class="controls">
-                                        <asp:DropDownList ID="ddlSalaryFrequency" runat="server" CssClass="span6" data-placeholder="Choose a Category" TabIndex="1">
-                                            <asp:ListItem>Select...</asp:ListItem>
-                                            <asp:ListItem Value="Monthly">Monthly</asp:ListItem>
-                                            <asp:ListItem Value="Weekly">Weekly</asp:ListItem>
-                                            <asp:ListItem Value="Hourly">Hourly</asp:ListItem>
-                                        </asp:DropDownList>
-                                    </div>
-                                </div>--%>
-
                                 <div class="control-group">
                                     <label class="control-label">Is Active</label>
                                     <div class="controls">
-                                        <label class="radio">
-                                            <asp:RadioButton ID="radioYes" runat="server" GroupName="IsActiveRadio" Checked="true" />
-                                            Yes
-                                        </label>
-                                        <label class="radio">
-                                            <asp:RadioButton ID="radioNo" runat="server" GroupName="IsActiveRadio" />
-                                            No
-                                        </label>
+                                        <asp:RadioButton ID="radioYes" runat="server" GroupName="IsActive" />
+                                        <span style="position: relative; top: 4px">Yes</span>
+                                        <asp:RadioButton ID="radioNo" runat="server" GroupName="IsActive" />
+                                        <span style="position: relative; top: 4px">No</span>
                                     </div>
                                 </div>
 
@@ -175,8 +166,8 @@
                                 </div>
 
                                 <div class="form-actions">
-                                    <asp:Button ID="btnSubmit" CssClass="btn btn-success" runat="server" Text="Submit" OnClick="btnSubmit_Click"/>
-                                    <asp:Button ID="btnCancel" CssClass="btn btn-warning" runat="server" Text="Cancel" OnClick="btnCancel_Click"/>
+                                    <asp:Button ID="btnSubmit" CssClass="btn btn-success" runat="server" Text="Submit" OnClick="btnSubmit_Click" />
+                                    <asp:Button ID="btnCancel" CssClass="btn btn-warning" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
                                 </div>
                             </div>
                         </div>
@@ -190,7 +181,7 @@
     <!-- END PAGE CONTAINER-->
 </asp:Content>
 
-<asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" Runat="Server">
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
     <script type="text/javascript" src="assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="assets/bootstrap-daterangepicker/date.js"></script>
     <script type="text/javascript" src="assets/bootstrap-daterangepicker/daterangepicker.js"></script>

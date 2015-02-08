@@ -13,6 +13,11 @@ namespace BusinessLogic
 {
     public class AttendanceLogic : ILogic<Attendance>
     {
+        public System.Data.DataTable search(string searchstring, int ID)
+        {
+            throw new NotImplementedException();
+        }
+
         public Attendance create(Attendance obj)
         {
             String query = "insert into Attendance values(@StaffID, @AttendanceDate, @InTime, @OutTime; select * from Attendance where StaffID=@StaffID and AttendanceDate=@AttendanceDate and InTime=@InTime and OunTime=@OutTime)";

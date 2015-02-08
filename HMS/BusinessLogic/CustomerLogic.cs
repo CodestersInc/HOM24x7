@@ -12,6 +12,11 @@ namespace BusinessLogic
 {
     public class CustomerLogic : ILogic<Customer>
     {
+        public System.Data.DataTable search(string searchstring, int ID)
+        {
+            throw new NotImplementedException();
+        }
+
         public Customer create(Customer obj)
         {
             String query = "insert into Customer values(@CreateDate, @Name, @Email, @Phone, @Username, @Password, @IsActive, @AccountID); select * from Customer where Username=@Username and Password=@Password;";

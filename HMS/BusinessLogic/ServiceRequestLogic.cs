@@ -12,6 +12,11 @@ namespace BusinessLogic
 {
     public class ServiceRequestLogic : ILogic<ServiceRequest>
     {
+        public System.Data.DataTable search(string searchstring, int ID)
+        {
+            throw new NotImplementedException();
+        }
+
         public ServiceRequest create(ServiceRequest obj)
         {
             String query = "insert into ServiceRequest values(@ServiceID, @BookingID, @CreatedDate, @RequestedDate, @Status, @CustomerRemarks, @StaffRemarks, @AssignedID, @Unit) select * from ServiceRequest where ServiceID=@ServiceID BookingID=@BookingID CreatedDate=@CreatedDate and RequestedDate=@RequestedDate and Status=@Status and CustomerRemarks=@CustomerRemarks and StaffRemarks=@StaffRemarks and AssignedID=@AssignedID and Unit=@Unit";
