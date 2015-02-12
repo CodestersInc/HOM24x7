@@ -177,6 +177,16 @@
                         </asp:PlaceHolder>
                         <!-- END Sidebar Element-Payroll -->
 
+                        <!-- START Sidebar Element-Payroll -->
+                        <asp:PlaceHolder ID="planbuilderPlaceHolder" runat="server" Visible="false">
+                            <li class="has-sub">
+                                <a href="planbuilder.aspx">
+                                    <span class="icon-box"><i class="icon-building"></i></span>Plan Builder
+                                </a>
+                            </li>
+                        </asp:PlaceHolder>
+                        <!-- END Sidebar Element-Payroll -->
+
                         <!-- START Sidebar Element-Room -->
                         <asp:PlaceHolder ID="roomPlaceHolder" runat="server" Visible="false">
                             <li class="has-sub">

@@ -43,6 +43,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
                         seasonPlaceHolder.Visible = true;
                         servicePlaceHolder.Visible = true;
                         serviceRequestPlaceHolder.Visible = true;
+                        planbuilderPlaceHolder.Visible = true;
                         lblUsername.Text = staffObj.Name;
                     }
                     if (userType == "Reception")
