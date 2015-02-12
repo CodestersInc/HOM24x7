@@ -180,9 +180,15 @@
                         <!-- START Sidebar Element-Payroll -->
                         <asp:PlaceHolder ID="planbuilderPlaceHolder" runat="server" Visible="false">
                             <li class="has-sub">
-                                <a href="planbuilder.aspx">
-                                    <span class="icon-box"><i class="icon-building"></i></span>Plan Builder
+                                <a href="javascript:;">
+                                    <span class="icon-box"><i class="icon-building"></i></span>Plan Builder<span class="arrow"></span>
                                 </a>
+                                <ul class="sub">
+                                    <li><a href="createcomponent.aspx">Create a Component</a></li>
+                                    <li><a href="searchcomponent.aspx">Search a Component</a></li>
+                                    <li><a href="createplan.aspx">Create a Plan</a></li>
+                                    <li><a href="searchplan.aspx">Search a Plan</a></li>
+                                </ul>
                             </li>
                         </asp:PlaceHolder>
                         <!-- END Sidebar Element-Payroll -->

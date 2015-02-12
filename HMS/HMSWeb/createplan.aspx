@@ -83,9 +83,12 @@
             $(this).clone().appendTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" });
         });
 
-        $('.draggableB').click(function () {
+        $('.draggableA').click(function () {
             $(this).clone().appendTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" });
         });
+
+        $('.draggableB').click(function () {
+            $(this).clone().appendTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" });
         });
 
         function save() {
