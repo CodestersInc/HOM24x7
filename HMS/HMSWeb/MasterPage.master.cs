@@ -38,12 +38,12 @@ public partial class MasterPage : System.Web.UI.MasterPage
                         attendancePlaceHolder.Visible = true;
                         departmentPlaceHolder.Visible = true;
                         payrollPlaceHolder.Visible = true;
+                        planbuilderPlaceHolder.Visible = true;
                         roomPlaceHolder.Visible = true;
                         staffPlaceHolder.Visible = true;
                         seasonPlaceHolder.Visible = true;
                         servicePlaceHolder.Visible = true;
-                        serviceRequestPlaceHolder.Visible = true;
-                        planbuilderPlaceHolder.Visible = true;
+                        serviceRequestPlaceHolder.Visible = true;                        
                         lblUsername.Text = staffObj.Name;
                     }
                     if (userType == "Reception")

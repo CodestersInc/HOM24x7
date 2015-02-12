@@ -15,7 +15,7 @@
             margin: 5px;
         }
 
-        .palleteComponent{
+        .palleteComponent {
             width: 70px;
             float: left;
             min-height: 70px;
@@ -38,8 +38,8 @@
         }
 
         #canvas {
-            min-height: 500px;
-            min-width: 800px;
+            min-height: 400px;
+            min-width: 400px;
             padding: 5px;
             border-style: solid;
             border-width: 1px;
@@ -55,20 +55,70 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="Server">
-
-    <div>
-    </div>
-
-
-    <div id="planbuilder">
-        <div id="pallete">
-            <div class="draggableA palleteComponent"></div>
-            <div class="draggableB palleteComponent"></div>
+    <!-- BEGIN PAGE CONTAINER-->
+    <div class="container-fluid">
+        <!-- BEGIN PAGE HEADER-->
+        <div class="row-fluid">
+            <div class="span12">
+                <h3 class="page-title">Create New Plan</h3>
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="home.aspx"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                    </li>
+                    <li>
+                        <a href="#">Plan</a> <span class="divider">&nbsp;</span>
+                    </li>
+                    <li><a href="createplan.aspx">Create</a><span class="divider-last">&nbsp;</span></li>
+                </ul>
+            </div>
         </div>
-        <div id="canvas">
+        <!-- END PAGE HEADER-->
+        <!-- BEGIN SAMPLE FORM widget-->
+        <div class="widget">
+            <div class="widget-title">
+                <h4><i class="icon-reorder"></i>Add Room</h4>
+                <span class="tools">
+                    <a href="javascript:;" class="icon-chevron-down"></a>
+                    <a href="javascript:;" class="icon-remove"></a>
+                </span>
+            </div>
+            <div class="widget-body form">
+                <!-- BEGIN FORM-->
+                <div>
+                    <div class="form-horizontal">
+                        <div class="control-group">
+                            <label class="control-label">Floor Number</label>
+                            <div class="controls">
+                                <asp:DropDownList ID="ddlFloorNumber" runat="server" CssClass="span2" data-placeholder="Choose a floor" TabIndex="1" />
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Room Number</label>
+                            <div class="controls">
+                                <asp:DropDownList ID="DropDownList1" runat="server" CssClass="span2" data-placeholder="Choose a floor" TabIndex="1" />
+                            </div>
+                        </div>
+
+                        <!--START PLAN BUILDER-->
+                        <div id="planbuilder">
+                            <div id="pallete">
+                                <div class="draggableA palleteComponent"></div>
+                                <div class="draggableB palleteComponent"></div>
+                            </div>
+                            <div id="canvas">
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <asp:Button ID="btnSubmit" CssClass="btn btn-success" runat="server" Text="Submit" />
+                            <asp:Button ID="btnCancel" CssClass="btn btn-warning" runat="server" Text="Cancel" />
+                        </div>
+                    </div>
         </div>
+        <!-- END SAMPLE FORM widget-->
     </div>
-    <input type="button" value="Save" onclick="save()" />
+    <!-- END PAGE CONTAINER-->
 
 </asp:Content>
 

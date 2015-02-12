@@ -50,7 +50,7 @@
                     <div class="container-fluid">
                         <!-- BEGIN LOGO -->
                         <a class="brand" href="home.aspx">
-                            <img src="img/logo.png" alt="Admin Lab" />
+                            <img src="img/logo.png"/>
                         </a>
                         <!-- END LOGO -->
                         <!-- BEGIN RESPONSIVE MENU TOGGLER -->
@@ -181,7 +181,8 @@
                         <asp:PlaceHolder ID="planbuilderPlaceHolder" runat="server" Visible="false">
                             <li class="has-sub">
                                 <a href="javascript:;">
-                                    <span class="icon-box"><i class="icon-building"></i></span>Plan Builder<span class="arrow"></span>
+                                    <span class="icon-box"><i class="icon-building"></i></span>Plan Builder
+                                    <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
                                     <li><a href="createcomponent.aspx">Create a Component</a></li>
@@ -283,7 +284,7 @@
             <!-- BEGIN FOOTER -->
             <div id="footer">
                 <b>2015 &copy; Host of The Most.</b>
-		        <div class="span pull-right">
+                <div class="span pull-right">
                     <span class="go-top"><i class="icon-arrow-up"></i></span>
                 </div>
             </div>
