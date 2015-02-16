@@ -86,6 +86,14 @@
                 <!-- BEGIN FORM-->
                 <div>
                     <div class="form-horizontal">
+
+                        <div class="control-group">
+                            <label class="control-label">Room Number</label>
+                            <div class="controls">
+                                <asp:TextBox ID="txtRoomNumber" runat="server" CssClass="span6 popovers" data-trigger="hover" data-content="Enter the full name of staff member." data-original-title="Popover header"></asp:TextBox>
+                            </div>
+                        </div>
+
                         <div class="control-group">
                             <label class="control-label">Floor Number</label>
                             <div class="controls">
@@ -94,11 +102,27 @@
                         </div>
 
                         <div class="control-group">
-                            <label class="control-label">Room Number</label>
+                            <label class="control-label">Room Type</label>
                             <div class="controls">
-                                <asp:DropDownList ID="DropDownList1" runat="server" CssClass="span2" data-placeholder="Choose a floor" TabIndex="1" />
+                                <asp:DropDownList ID="ddlRoomType" runat="server" CssClass="span2" data-placeholder="Choose a floor" TabIndex="1" />
                             </div>
                         </div>
+
+                        <div class="control-group">
+                                    <label class="control-label">Status</label>
+                                    <div class="controls">
+                                        <asp:DropDownList ID="ddlStatus" runat="server" CssClass="span4" data-placeholder="Choose a Category" TabIndex="1">
+                                            <asp:ListItem>Select...</asp:ListItem>
+                                            <asp:ListItem>Empty</asp:ListItem>
+                                            <asp:ListItem>Occupied</asp:ListItem>
+                                            <asp:ListItem>Under Maintenance</asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>
+                                </div>
+
+                        <div class="form-actions">
+                                    <asp:Button ID="btnCreateRoom" CssClass="btn btn-success" runat="server" Text="Add to Plan" OnClick="btnCreateRoom_Click" />
+                                </div>
 
                         <!--START PLAN BUILDER-->
                         <div id="planbuilder">
@@ -111,15 +135,16 @@
                         </div>
 
                         <div class="form-actions">
-                            <asp:Button ID="btnSubmit" CssClass="btn btn-success" runat="server" Text="Submit" />
-                            <asp:Button ID="btnCancel" CssClass="btn btn-warning" runat="server" Text="Cancel" />
+                            <asp:Button ID="btnSubmit" CssClass="btn btn-success" runat="server" Text="Submit" OnClick="btnSubmit_Click" />
+                            <asp:Button ID="btnCancel" CssClass="btn btn-warning" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
                         </div>
                     </div>
+                </div>
+                <!-- END SAMPLE FORM widget-->
+            </div>
+            <!-- END PAGE CONTAINER-->
         </div>
-        <!-- END SAMPLE FORM widget-->
     </div>
-    <!-- END PAGE CONTAINER-->
-
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">

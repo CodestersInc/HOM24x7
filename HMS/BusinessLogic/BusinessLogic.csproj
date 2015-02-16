@@ -57,6 +57,8 @@
     <Compile Include="Customer.cs" />
     <Compile Include="DepartmentLogic.cs" />
     <Compile Include="Department.cs" />
+    <Compile Include="Floor.cs" />
+    <Compile Include="FloorLogic.cs" />
     <Compile Include="ILogic.cs" />
     <Compile Include="IModel.cs" />
     <Compile Include="Logic.cs" />

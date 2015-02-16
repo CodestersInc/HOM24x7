@@ -19,12 +19,12 @@ namespace BusinessLogic
 
         public Plan create(Plan obj)
         {
-            String query = "insert into Plan values(@PlanStyle, @FloorNumber, @AccountID)";
+            String query = "insert into Plan values(@PlanStyle, @FloorID, @Image)";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@PlanStyle", obj.PlanStyle));
-            lstParams.Add(new SqlParameter("@FloorNumber", obj.FloorNumber));
-            lstParams.Add(new SqlParameter("@AccountID", obj.AccountID));
+            lstParams.Add(new SqlParameter("@FloorNumber", obj.FloorID));
+            lstParams.Add(new SqlParameter("@AccountID", obj.Image));
 
             int res = DBUtility.Modify(query, lstParams);
 
@@ -34,15 +34,15 @@ namespace BusinessLogic
                 List<SqlParameter> lstParams1 = new List<SqlParameter>();
 
                 lstParams1.Add(new SqlParameter("@PlanStyle", obj.PlanStyle));
-                lstParams1.Add(new SqlParameter("@FloorNumber", obj.FloorNumber));
-                lstParams1.Add(new SqlParameter("@AccountID", obj.AccountID));
+                lstParams1.Add(new SqlParameter("@FloorNumber", obj.FloorID));
+                lstParams1.Add(new SqlParameter("@AccountID", obj.Image));
                 DataTable dt = DBUtility.Select(fetchquery, lstParams1);
                 if (dt.Rows.Count == 1)
                 {
                     return new Plan(Convert.ToInt32(dt.Rows[0]["PlanID"]),
                     dt.Rows[0]["PlanStyle"].ToString(),
-                    dt.Rows[0]["FloorNumber"].ToString(),
-                    Convert.ToInt32(dt.Rows[0]["AccountID"]));
+                    dt.Rows[0]["FloorID"].ToString(),
+                    dt.Rows[0]["Image"].ToString());
                 }
                 else
                 {
@@ -54,13 +54,13 @@ namespace BusinessLogic
 
         public int update(Plan obj)
         {
-            String query = "update Plan set PlanStyle=@PlanStyle, FloorNumber=@FloorNumber where PlanID=@PlanID";
+            String query = "update Plan set PlanStyle=@PlanStyle, FloorNumber=@FloorNumber, Image=@Image  where PlanID=@PlanID";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@PlanID", obj.PlanID));
             lstParams.Add(new SqlParameter("@PlanStyle", obj.PlanStyle));
-            lstParams.Add(new SqlParameter("@FloorNumber", obj.FloorNumber));
-            lstParams.Add(new SqlParameter("@PlanID", obj.PlanID));
+            lstParams.Add(new SqlParameter("@FloorNumber", obj.FloorID));
+            lstParams.Add(new SqlParameter("@Image", obj.Image));
 
             return DBUtility.Modify(query, lstParams);
         }
@@ -86,8 +86,8 @@ namespace BusinessLogic
             {
                 return new Plan(Convert.ToInt32(dt.Rows[0]["PlanID"]),
                     dt.Rows[0]["PlanStyle"].ToString(),
-                    dt.Rows[0]["FloorNumber"].ToString(),
-                    Convert.ToInt32(dt.Rows[0]["AccountID"]));
+                    dt.Rows[0]["FloorID"].ToString(),
+                    dt.Rows[0]["Image"].ToString());
             }
             else
             {
@@ -100,6 +100,15 @@ namespace BusinessLogic
             String query = "select * from Plan";
 
             return DBUtility.Select(query, new List<SqlParameter>());
+        }
+
+        public DataTable selectAll(int id)
+        {
+            String query = "select * from Plan where AccountID=@id";
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+
+            lstParams.Add(new SqlParameter("@id", id));
+            return DBUtility.Select(query, lstParams);
         }
     }
 }

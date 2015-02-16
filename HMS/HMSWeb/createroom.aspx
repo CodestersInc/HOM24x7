@@ -87,8 +87,8 @@
                                 </table>
 
                                 <div class="form-actions">
-                                    <asp:Button ID="btnSubmit" CssClass="btn btn-success" runat="server" Text="Submit" />
-                                    <asp:Button ID="btnCancel" CssClass="btn btn-warning" runat="server" Text="Cancel" />
+                                    <asp:Button ID="btnSubmit" CssClass="btn btn-success" runat="server" Text="Submit" OnClick="btnSubmit_Click" />
+                                    <asp:Button ID="btnCancel" CssClass="btn btn-warning" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
                                 </div>
                             </div>
                         </div>

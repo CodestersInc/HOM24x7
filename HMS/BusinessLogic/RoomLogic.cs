@@ -13,9 +13,15 @@ namespace BusinessLogic
 {
     public class RoomLogic : ILogic<Room>
     {
-        public System.Data.DataTable search(string searchstring, int ID)
+        public DataTable search(string searchstring, int ID)
         {
-            throw new NotImplementedException();
+            String query = "select Room.*, RoomType.Name, Floor.FloorNumber from Room, RoomType, Floor where Room.Number like @Number+'%' and Room.FloorID=Floor.FloorID and Room.RoomTypeID=RoomType.RoomTypeID and Floor.AccountID=@AccountID;";
+
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+            lstParams.Add(new SqlParameter("@Number", searchstring));
+            lstParams.Add(new SqlParameter("@ID", ID));
+
+            return DBUtility.Select(query, lstParams);
         }
 
         public Room create(Room obj)
@@ -25,7 +31,7 @@ namespace BusinessLogic
 
             lstParams.Add(new SqlParameter("@RoomTypeID", obj.RoomTypeID));
             lstParams.Add(new SqlParameter("@Number", obj.Number));
-            lstParams.Add(new SqlParameter("@Floor", obj.Floor));
+            lstParams.Add(new SqlParameter("@FloorID", obj.FloorID));
             lstParams.Add(new SqlParameter("@Building", obj.Building));
             lstParams.Add(new SqlParameter("@Status", obj.Status));
 
@@ -36,7 +42,7 @@ namespace BusinessLogic
                 return new Room(Convert.ToInt32(dt.Rows[0]["RoomID"]),
                 Convert.ToInt32(dt.Rows[0]["RoomTypeID"]),
                 dt.Rows[0]["Number"].ToString(),
-                dt.Rows[0]["Floor"].ToString(),
+                Convert.ToInt32(dt.Rows[0]["FloorID"].ToString()),
                 dt.Rows[0]["Building"].ToString(),
                 dt.Rows[0]["Status"].ToString());
 
@@ -55,7 +61,7 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@RoomID", obj.RoomID));
             lstParams.Add(new SqlParameter("@RoomTypeID", obj.RoomTypeID));
             lstParams.Add(new SqlParameter("@Number", obj.Number));
-            lstParams.Add(new SqlParameter("@Floor", obj.Floor));
+            lstParams.Add(new SqlParameter("@FloorID", obj.FloorID));
             lstParams.Add(new SqlParameter("@Building", obj.Building));
             lstParams.Add(new SqlParameter("@Status", obj.Status));
 
@@ -84,7 +90,7 @@ namespace BusinessLogic
                 return new Room(Convert.ToInt32(dt.Rows[0]["RoomID"]),
                 Convert.ToInt32(dt.Rows[0]["RoomTypeID"]),
                 dt.Rows[0]["Number"].ToString(),
-                dt.Rows[0]["Floor"].ToString(),
+                Convert.ToInt32(dt.Rows[0]["Floor"].ToString()),
                 dt.Rows[0]["Building"].ToString(),
                 dt.Rows[0]["Status"].ToString());
 

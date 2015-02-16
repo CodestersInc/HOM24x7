@@ -31,6 +31,51 @@
                         <asp:Button ID="btnSubmit" CssClass="btn btn-info" runat="server" Text="Search" OnClick="btnSubmit_Click" />
                     </div>
                 </div>
+                <asp:PlaceHolder ID="searchResultArea" Visible="false" runat="server">
+                    <!-- BEGIN ADVANCED TABLE widget-->
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <!-- BEGIN EXAMPLE TABLE widget-->
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h4><i class="icon-reorder"></i>Room Types</h4>
+                                    <span class="tools">
+                                        <a href="javascript:;" class="icon-chevron-down"></a>
+                                        <a href="javascript:;" class="icon-remove"></a>
+                                    </span>
+                                </div>
+                                <div class="widget-body">
+                                    <table class="table table-striped table-bordered">
+                                        <tr>
+                                            <th>Room Number</th>
+                                            <th>Room Type</th>
+                                            <th>Status</th>
+                                            <th>Floor</th>
+
+                                            <th></th>
+                                        </tr>
+
+                                        <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
+                                            <ItemTemplate>
+                                                <tr>
+                                                    <td><%#Eval("Number")%></td>
+                                                    <td>
+                                                        <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewroom.aspx?ID=" + Eval("RoomID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
+                                                        <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("RoomID") %>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- END EXAMPLE TABLE widget-->
+                        </div>
+                    </div>
+
+                    <!-- END ADVANCED TABLE widget-->
+                </asp:PlaceHolder>
             </div>
         </div>
     </div>

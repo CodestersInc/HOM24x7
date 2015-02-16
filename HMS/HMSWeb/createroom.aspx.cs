@@ -7,6 +7,9 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
+using System.Data;
+using System.Data.Sql;
+using System.Data.SqlClient;
 using BusinessLogic;
 
 public partial class createroom : System.Web.UI.Page
@@ -19,5 +22,22 @@ public partial class createroom : System.Web.UI.Page
         {
             Response.Redirect("login.aspx");
         }
+
+        DataTable dt = new RoomTypeLogic().selectAll(loggedUser.AccountID);
+        ddlRoomType.DataSource = dt;
+        ddlRoomType.DataValueField = "RoomTypeID";
+        ddlRoomType.DataTextField = "Name";
+        ddlRoomType.DataBind();
+
+    }
+
+    protected void btnSubmit_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("home.aspx");
     }
 }

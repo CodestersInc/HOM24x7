@@ -10,20 +10,20 @@ namespace BusinessLogic
     {
         public int PlanID;
         public String PlanStyle;
-        public String FloorNumber;
-        public int AccountID;
+        public String FloorID;
+        public String Image;
 
         public Plan()
         {
 
         }
 
-        public Plan(int PlanID, String PlanStyle, String FloorNumber, int AccountID)
+        public Plan(int PlanID, String PlanStyle, String FloorID, String Image)
         {
             this.PlanID = PlanID;
             this.PlanStyle = PlanStyle;
-            this.FloorNumber = FloorNumber;
-            this.AccountID = AccountID;
+            this.FloorID = FloorID;
+            this.Image = Image;
         }
     }
 
