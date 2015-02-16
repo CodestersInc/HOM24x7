@@ -28,7 +28,7 @@
                     <label class="control-label">Component Name</label>
                     <div class="controls">
                         <asp:TextBox ID="txtName" runat="server" CssClass="span6  tooltips" data-trigger="hover" data-original-title="Enter staff name to search for."></asp:TextBox>
-                        <asp:Button ID="btnSubmit" CssClass="btn btn-info" runat="server" Text="Search" OnClick="btnSubmit_Click" />
+                        <asp:Button ID="btnSubmit" CssClass="btn btn-info" runat="server" Text="Search" />
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                                     <th>Phone</th>
                                     <th></th>
                                 </tr>
-                                <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
+                                <asp:Repeater ID="Repeater1" runat="server">
                                     <ItemTemplate>
                                         <tr>
                                             <td>
