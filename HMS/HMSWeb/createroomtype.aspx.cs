@@ -23,6 +23,7 @@ public partial class createroomtype : System.Web.UI.Page
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         Staff loggedInStaff = (Staff)Session["LoggedUser"];
+
         String ticks = DateTime.Now.Ticks.ToString();
         RoomTypeLogic roomTypeLogic = new RoomTypeLogic();
 

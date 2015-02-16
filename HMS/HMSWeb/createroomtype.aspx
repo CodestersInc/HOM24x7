@@ -54,6 +54,17 @@
                                 </div>
 
                                 <div class="control-group">
+                                    <label class="control-label">Is Room</label>
+                                    <div class="controls">
+                                        <asp:RadioButton ID="radioYes" runat="server" GroupName="IsActive" />
+                                        <span style="position: relative; top: 4px">Room</span>
+                                        <asp:RadioButton ID="radioNo" runat="server" GroupName="IsActive" />
+                                        <span style="position: relative; top: 4px">Other</span>
+                                    </div>
+                                </div>
+
+
+                                <div class="control-group">
                                     <label class="control-label">Photo</label>
                                     <div class="controls">
                                         <%--                                        <div class="fileupload fileupload-new" data-provides="fileupload">
@@ -137,6 +148,12 @@
         <!-- END PAGE CONTAINER-->
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
-    <script type="text/javascript" src="assets/bootstrap/js/bootstrap-fileupload.js"></script>
+    <script type="text/javascript" src="assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="assets/bootstrap-daterangepicker/date.js"></script>
+    <script type="text/javascript" src="assets/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+    <script>
+        $(".date-picker").datepicker();
+    </script>
 </asp:Content>
 
