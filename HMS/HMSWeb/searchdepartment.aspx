@@ -34,60 +34,53 @@
                 </div>
             </div>
         </div>
-        <!-- BEGIN ADVANCED TABLE widget-->
-        <div class="row-fluid">
-            <div class="span12">
-                <!-- BEGIN EXAMPLE TABLE widget-->
-                <div class="widget">
-                    <div class="widget-title">
-                        <h4><i class="icon-reorder"></i>Department Record</h4>
-                        <span class="tools">
-                            <a href="javascript:;" class="icon-chevron-down"></a>
-                            <a href="javascript:;" class="icon-remove"></a>
-                        </span>
+        <asp:PlaceHolder ID="searchResultArea" Visible="false" runat="server">
+            <!-- BEGIN ADVANCED TABLE widget-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN EXAMPLE TABLE widget-->
+                    <div class="widget">
+                        <div class="widget-title">
+                            <h4><i class="icon-reorder"></i>Department Record</h4>
+                            <span class="tools">
+                                <a href="javascript:;" class="icon-chevron-down"></a>
+                                <a href="javascript:;" class="icon-remove"></a>
+                            </span>
+                        </div>
+                        <div class="widget-body">
+                            <table class="table table-striped table-bordered table-advance table-hover">
+                                <tr>
+                                    <th>Department
+                                    </th>
+                                    <th>Manager
+                                    </th>
+                                    <th></th>
+                                </tr>
+                                <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
+                                    <ItemTemplate>
+                                        <tr>
+                                            <td>
+                                                <%# Eval("Department") %>
+                                            </td>
+                                            <td>
+                                                <%# Eval("Manager") %>
+                                            </td>
+                                            <td>
+                                                <asp:LinkButton ID="btnEdit1" CssClass="btn mini purple" PostBackUrl='<%# "viewdepartment.aspx?ID=" + Eval("DepartmentID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
+                                                <asp:LinkButton ID="btnRemove1" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("DepartmentID") %>' CssClass="btn"><i class="icon-trash"></i> Remove</asp:LinkButton>
+                                            </td>
+                                        </tr>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </table>
+                        </div>
                     </div>
-                    <div class="widget-body">
-
-                        <!-- START Repeater-->
-                        <!--
-                            *
-                            *
-                            * There is a bug that the Header of the table will show up on the page load
-                            *
-                            *-->
-                        <table class="table table-striped table-bordered table-advance table-hover">
-                            <tr>
-                                <th>Department
-                                </th>
-                                <th>Manager
-                                </th>
-                                <th></th>
-                            </tr>
-                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
-                                <ItemTemplate>
-                                    <tr>
-                                        <td>
-                                            <%# Eval("Department") %>
-                                        </td>
-                                        <td>
-                                            <%# Eval("Manager") %>
-                                        </td>
-                                        <td>
-                                            <asp:LinkButton ID="btnEdit1" CssClass="btn mini purple" PostBackUrl='<%# "viewdepartment.aspx?ID=" + Eval("DepartmentID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
-                                            <asp:LinkButton ID="btnRemove1" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("DepartmentID") %>' CssClass="btn"><i class="icon-trash"></i> Remove</asp:LinkButton>
-                                        </td>
-                                    </tr>
-                                </ItemTemplate>
-                            </asp:Repeater>
-                        </table>
-                        <!-- END Repeater-->
-                    </div>
+                    <!-- END EXAMPLE TABLE widget-->
                 </div>
-                <!-- END EXAMPLE TABLE widget-->
             </div>
-        </div>
 
-        <!-- END ADVANCED TABLE widget-->
+            <!-- END ADVANCED TABLE widget-->
+        </asp:PlaceHolder>
     </div>
     <!-- END PAGE CONTAINER -->
 </asp:Content>

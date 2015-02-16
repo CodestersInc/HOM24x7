@@ -20,8 +20,8 @@ public partial class searchstaff : System.Web.UI.Page
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["loggedUser"];
+        
         searchResultArea.Visible = true;
-
         Repeater1.DataSource = new StaffLogic().search(txtName.Text, loggedUser.AccountID);
         Repeater1.DataBind();
     }
@@ -33,6 +33,8 @@ public partial class searchstaff : System.Web.UI.Page
             StaffLogic staffLogic = new StaffLogic();
             staffLogic.delete(Convert.ToInt32(e.CommandArgument));
             Staff loggeduser = (Staff)Session["loggeduser"];
+
+            searchResultArea.Visible = true;
             Repeater1.DataSource = staffLogic.search(txtName.Text, loggeduser.AccountID);
             Repeater1.DataBind();
         }

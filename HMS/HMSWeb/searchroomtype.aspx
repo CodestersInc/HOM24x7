@@ -33,25 +33,47 @@
                 </div>
             </div>
         </div>
+        <asp:PlaceHolder ID="searchResultArea" Visible="false" runat="server">
+            <!-- BEGIN ADVANCED TABLE widget-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN EXAMPLE TABLE widget-->
+                    <div class="widget">
+                        <div class="widget-title">
+                            <h4><i class="icon-reorder"></i>Room Types</h4>
+                            <span class="tools">
+                                <a href="javascript:;" class="icon-chevron-down"></a>
+                                <a href="javascript:;" class="icon-remove"></a>
+                            </span>
+                        </div>
+                        <div class="widget-body">
+                            <table class="table table-striped table-bordered">
+                                <tr>
+                                    <th>Room Type</th>
+                                    <th></th>
+                                </tr>
 
-        <table class="table table-striped table-bordered">
-            <tr>
-                <th>Room Type</th>
-                <th></th>
-            </tr>
-            
-            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
-                <ItemTemplate>
-                    <tr>
-                        <td><%#Eval("Name")%></td>
-                        <td>
-                            <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewroomtype.aspx?ID=" + Eval("RoomTypeID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
-                            <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("RoomTypeID") %>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>
-                        </td>
-                    </tr>
-                </ItemTemplate>
-            </asp:Repeater>
-        </table>
+                                <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
+                                    <ItemTemplate>
+                                        <tr>
+                                            <td><%#Eval("Name")%></td>
+                                            <td>
+                                                <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewroomtype.aspx?ID=" + Eval("RoomTypeID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
+                                                <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("RoomTypeID") %>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>
+                                            </td>
+                                        </tr>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+
+                            </table>
+                        </div>
+                    </div>
+                    <!-- END EXAMPLE TABLE widget-->
+                </div>
+            </div>
+
+            <!-- END ADVANCED TABLE widget-->
+        </asp:PlaceHolder>
     </div>
     <!-- END PAGE CONTAINER -->
 </asp:Content>

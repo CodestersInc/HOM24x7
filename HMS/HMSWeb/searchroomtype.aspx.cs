@@ -20,6 +20,8 @@ public partial class searchroomtype : System.Web.UI.Page
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["loggedUser"];
+        
+        searchResultArea.Visible = true;
         Repeater1.DataSource = new RoomTypeLogic().search(txtRoomTypeName.Text, loggedUser.AccountID);
         Repeater1.DataBind();
     }
@@ -31,6 +33,8 @@ public partial class searchroomtype : System.Web.UI.Page
             RoomTypeLogic roomTypeLogic = new RoomTypeLogic();
             roomTypeLogic.delete(Convert.ToInt32(e.CommandArgument));
             Staff loggedUser = (Staff)Session["loggeduser"];
+            
+            searchResultArea.Visible = true;
             Repeater1.DataSource = roomTypeLogic.search(txtRoomTypeName.Text, loggedUser.AccountID);
             Repeater1.DataBind();
         }

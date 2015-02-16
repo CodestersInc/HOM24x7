@@ -27,12 +27,13 @@
                 <div class="control-group">
                     <label class="control-label">Component Name</label>
                     <div class="controls">
-                        <asp:TextBox ID="txtName" runat="server" CssClass="span6  tooltips" data-trigger="hover" data-original-title="Enter staff name to search for."></asp:TextBox>
-                        <asp:Button ID="btnSubmit" CssClass="btn btn-info" runat="server" Text="Search" />
+                        <asp:TextBox ID="txtName" runat="server" CssClass="span6  tooltips" data-trigger="hover" data-original-title="Enter Component name to search for." ></asp:TextBox>
+                        <asp:Button ID="btnSubmit" CssClass="btn btn-info" runat="server" Text="Search" OnClick="btnSubmit_Click" />
                     </div>
                 </div>
             </div>
         </div>
+        <asp:PlaceHolder ID="searchResultArea" Visible="false" runat="server">
         <!-- BEGIN ADVANCED TABLE widget-->
         <div class="row-fluid">
             <div class="span12">
@@ -45,47 +46,40 @@
                             <a href="javascript:;" class="icon-remove"></a>
                         </span>
                     </div>
-                    <div class="widget-body">
-
-
-                        <asp:PlaceHolder ID="searchResultArea" Visible="false" runat="server">
+                    <div class="widget-body">                        
                             <table class="table table-striped table-bordered table-advance table-hover">
                                 <tr>
-                                    <th>Staff Code</th>
+                                    <th>Image</th>
                                     <th>Name</th>
-                                    <th>Department Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
                                     <th></th>
                                 </tr>
                                 <asp:Repeater ID="Repeater1" runat="server">
                                     <ItemTemplate>
                                         <tr>
-                                            <td>
-                                                <%# Eval("StaffCode") %>
+                                            <td style="max-height:70px; max-width: 70px">
+                                                <img src='<%# Eval("Image") %>' />
                                             </td>
                                             <td>
                                                 <%# Eval("Name") %>
                                             </td>
                                             <td>
-                                                <%# Eval("DepartmentName") %>
+                                                <%# Eval("Type") %>
                                             </td>
                                             <td>
-                                                <%# Eval("Email") %>
+                                                <%# Eval("Description") %>
                                             </td>
                                             <td>
-                                                <%# Eval("Phone") %>
-                                            </td>
-                                            <td>
-                                                <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewstaff.aspx?ID=" + Eval("StaffID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
-                                                <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#Eval("StaffID")%>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>
+                                                <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewstaff.aspx?ID=" + Eval("ComponentID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
+                                                <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#Eval("ComponentID")%>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>
                                             </td>
                                         </tr>
                                     </ItemTemplate>
                                 </asp:Repeater>
                             </table>
                             <!--END Repeater-->
-                        </asp:PlaceHolder>
+                        
 
                     </div>
                 </div>
@@ -94,6 +88,7 @@
         </div>
 
         <!-- END ADVANCED TABLE widget-->
+    </asp:PlaceHolder>
     </div>
     <!-- END PAGE CONTAINER -->
 

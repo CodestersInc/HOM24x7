@@ -22,6 +22,8 @@ public partial class searchseason : System.Web.UI.Page
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["loggedUser"];
+
+        searchResultArea.Visible = true;
         Repeater1.DataSource = new SeasonLogic().search(txtSeasonName.Text, loggedUser.AccountID);
         Repeater1.DataBind();
     }
@@ -33,6 +35,8 @@ public partial class searchseason : System.Web.UI.Page
             SeasonLogic seasonLogic = new SeasonLogic();
             seasonLogic.delete(Convert.ToInt32(e.CommandArgument));
             Staff loggeduser = (Staff)Session["loggeduser"];
+
+            searchResultArea.Visible = true;
             Repeater1.DataSource = seasonLogic.search(txtSeasonName.Text, loggeduser.AccountID);
             Repeater1.DataBind();
         }

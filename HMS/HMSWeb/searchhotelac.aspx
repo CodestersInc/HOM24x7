@@ -34,6 +34,7 @@
                 </div>
             </div>
         </div>
+        <asp:PlaceHolder ID="searchResultArea" Visible="false" runat="server">
         <!-- BEGIN ADVANCED TABLE widget-->
         <div class="row-fluid">
             <div class="span12">
@@ -47,16 +48,9 @@
                         </span>
                     </div>
                     <div class="widget-body">
-                        <!--START Repeater-->
-                        <!--
-                            *
-                            *
-                            * There is a bug that the Header of the table will show up on the page load
-                            *
-                            *-->
                         <table class="table table-striped table-bordered table-advance table-hover">
                             <tr>
-                                <th>Compony
+                                <th>Company
                                 </th>
                                 <th>Contact person
                                 </th>
@@ -73,7 +67,7 @@
                                 <ItemTemplate>
                                     <tr>
                                         <td>
-                                            <%# Eval("Compony") %>
+                                            <%# Eval("Company") %>
                                         </td>
                                         <td>
                                             <%# Eval("ContactPerson") %>
@@ -88,20 +82,19 @@
                                             <%# Eval("Website") %>
                                         </td>
                                         <td>
-                                            <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewservice.aspx?ID=" + Eval("ServiceID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
-                                            <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("ServiceID") %>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>
+                                            <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewhotelac.aspx?ID=" + Eval("AccountID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
+                                            <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("AccountID") %>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>
                                         </td>
                                     </tr>
                                 </ItemTemplate>
                             </asp:Repeater>
                         </table>
-                        <!--END Repeater-->
                     </div>
                 </div>
                 <!-- END EXAMPLE TABLE widget-->
             </div>
         </div>
-
+        </asp:PlaceHolder>
         <!-- END ADVANCED TABLE widget-->
     </div>
     <!-- END PAGE CONTAINER -->

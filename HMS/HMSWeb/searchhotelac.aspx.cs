@@ -19,6 +19,7 @@ public partial class hacsearch : System.Web.UI.Page
 
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
+        searchResultArea.Visible = true;
         Repeater1.DataSource = new AccountLogic().search(txtName.Text, 0);
         Repeater1.DataBind();
     }
@@ -30,6 +31,8 @@ public partial class hacsearch : System.Web.UI.Page
             AccountLogic accountLogic = new AccountLogic();
             accountLogic.delete(Convert.ToInt32(e.CommandArgument));
             Staff loggedUser = (Staff)Session["LoggedUser"];
+
+            searchResultArea.Visible = true;
             Repeater1.DataSource = accountLogic.search(txtName.Text, 0);
             Repeater1.DataBind();
         }

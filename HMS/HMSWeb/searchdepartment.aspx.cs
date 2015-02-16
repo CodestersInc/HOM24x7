@@ -22,6 +22,8 @@ public partial class searchdepartment : System.Web.UI.Page
     {
         //resultTable.Visible = true;
         Staff loggedUser = (Staff)Session["LoggedUser"];
+
+        searchResultArea.Visible = true;
         Repeater1.DataSource = new DepartmentLogic().search(txtName.Text, loggedUser.AccountID);
         Repeater1.DataBind();
     }
@@ -34,6 +36,8 @@ public partial class searchdepartment : System.Web.UI.Page
             DepartmentLogic departmentLogic = new DepartmentLogic();
             departmentLogic.delete(Convert.ToInt32(e.CommandArgument));
             Staff loggedUser = (Staff)Session["LoggedUser"];
+
+            searchResultArea.Visible = true;
             Repeater1.DataSource = departmentLogic.search(txtName.Text, loggedUser.AccountID);
             Repeater1.DataBind();
         }

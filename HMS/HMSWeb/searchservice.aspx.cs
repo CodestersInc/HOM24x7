@@ -21,6 +21,8 @@ public partial class searchservice : System.Web.UI.Page
     protected void btnSearch_Click(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["loggedUser"];
+
+        searchResultArea.Visible = true;
         Repeater1.DataSource = new ServiceLogic().search(txtName.Text, loggedUser.AccountID);
         Repeater1.DataBind();
     }
@@ -32,6 +34,8 @@ public partial class searchservice : System.Web.UI.Page
             ServiceLogic serviceLogic = new ServiceLogic();
             serviceLogic.delete(Convert.ToInt32(e.CommandArgument));
             Staff loggeduser = (Staff)Session["loggeduser"];
+
+            searchResultArea.Visible = true;
             Repeater1.DataSource = serviceLogic.search(txtName.Text, loggeduser.AccountID);
             Repeater1.DataBind();
         }
