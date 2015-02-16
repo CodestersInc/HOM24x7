@@ -15,7 +15,7 @@ namespace BusinessLogic
     {
         public DataTable search(string searchstring, int ID)
         {
-            String query = "select Room.*, RoomType.Name, Floor.FloorNumber from Room, RoomType, Floor where Room.RoomNumber like @Number+'%' and Room.FloorID=Floor.FloorID and Room.RoomTypeID=RoomType.RoomTypeID and RoomType.AccountID=@AccountID;";
+            String query = "select Room.*, RoomType.Name, Floor.FloorNumber from Room, RoomType, Floor where Room.RoomNumber like @Number+'%' and Room.FloorID=Floor.FloorID and Room.RoomTypeID=RoomType.RoomTypeID and RoomType.AccountID=@ID;";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
             lstParams.Add(new SqlParameter("@Number", searchstring));
@@ -26,46 +26,56 @@ namespace BusinessLogic
 
         public Room create(Room obj)
         {
-            String query = "insert into Room values(@RoomTypeID, @Number, @Floor, @Building, @Status); select * from Room where RoomTypeID=@RoomTypeID, Number=@Number, Floor=@Floor, Building=@Building, Status=@Status";
+            String insertquery = "insert into Room values(@RoomTypeID, @RoomNumber, @FloorID, @Status);";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@RoomTypeID", obj.RoomTypeID));
-            lstParams.Add(new SqlParameter("@Number", obj.Number));
+            lstParams.Add(new SqlParameter("@RoomNumber", obj.RoomNumber));
             lstParams.Add(new SqlParameter("@FloorID", obj.FloorID));
-            lstParams.Add(new SqlParameter("@Building", obj.Building));
             lstParams.Add(new SqlParameter("@Status", obj.Status));
 
-            DataTable dt = DBUtility.Select(query, lstParams);
+            int res = DBUtility.Modify(insertquery, lstParams);
 
-            if (dt.Rows.Count == 1)
+            if (res == 1)
             {
-                return new Room(Convert.ToInt32(dt.Rows[0]["RoomID"]),
-                Convert.ToInt32(dt.Rows[0]["RoomTypeID"]),
-                dt.Rows[0]["Number"].ToString(),
-                Convert.ToInt32(dt.Rows[0]["FloorID"].ToString()),
-                dt.Rows[0]["Building"].ToString(),
-                dt.Rows[0]["Status"].ToString());
+                String selectquery = "select * from Room where RoomTypeID=@RoomTypeID and RoomNumber=@RoomNumber and FloorID=@FloorID and Status=@Status;";
+                List<SqlParameter> lstParams1 = new List<SqlParameter>();
 
+                lstParams1.Add(new SqlParameter("@RoomTypeID", obj.RoomTypeID));
+                lstParams1.Add(new SqlParameter("@RoomNumber", obj.RoomNumber));
+                lstParams1.Add(new SqlParameter("@FloorID", obj.FloorID));
+                lstParams1.Add(new SqlParameter("@Status", obj.Status));
+
+                DataTable dt = DBUtility.Select(selectquery, lstParams1);
+
+                if (dt.Rows.Count == 1)
+                {
+                    return new Room(Convert.ToInt32(dt.Rows[0]["RoomID"]),
+                    Convert.ToInt32(dt.Rows[0]["RoomTypeID"]),
+                    dt.Rows[0]["RoomNumber"].ToString(),
+                    Convert.ToInt32(dt.Rows[0]["FloorID"]),
+                    dt.Rows[0]["Status"].ToString());
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 
         public int update(Room obj)
         {
-            String query = "update Room set RoomTypeID=@RoomTypeID, Number=@Number, Floor=@Floor, Building=@Building, Status=@Status where RoomID=@RoomID";
+            String query = "update Room set RoomTypeID=@RoomTypeID, Number=@Number, FloorID=@FloorID, Status=@Status where RoomID=@RoomID";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@RoomID", obj.RoomID));
             lstParams.Add(new SqlParameter("@RoomTypeID", obj.RoomTypeID));
-            lstParams.Add(new SqlParameter("@Number", obj.Number));
+            lstParams.Add(new SqlParameter("@Number", obj.RoomNumber));
             lstParams.Add(new SqlParameter("@FloorID", obj.FloorID));
-            lstParams.Add(new SqlParameter("@Building", obj.Building));
             lstParams.Add(new SqlParameter("@Status", obj.Status));
 
-            return DBUtility.Modify(query, lstParams); 
+            return DBUtility.Modify(query, lstParams);
         }
 
         public int delete(int id)
@@ -74,7 +84,7 @@ namespace BusinessLogic
             List<SqlParameter> lstParams = new List<SqlParameter>();
             lstParams.Add(new SqlParameter("@ID", id));
 
-            return DBUtility.Modify(query, lstParams);  
+            return DBUtility.Modify(query, lstParams);
         }
 
         public Room selectById(int id)
@@ -89,11 +99,9 @@ namespace BusinessLogic
             {
                 return new Room(Convert.ToInt32(dt.Rows[0]["RoomID"]),
                 Convert.ToInt32(dt.Rows[0]["RoomTypeID"]),
-                dt.Rows[0]["Number"].ToString(),
-                Convert.ToInt32(dt.Rows[0]["Floor"].ToString()),
-                dt.Rows[0]["Building"].ToString(),
+                dt.Rows[0]["RoomNumber"].ToString(),
+                Convert.ToInt32(dt.Rows[0]["FloorID"]),
                 dt.Rows[0]["Status"].ToString());
-
             }
             else
             {

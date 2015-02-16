@@ -29,6 +29,7 @@ public partial class adddepartment : System.Web.UI.Page
             btnSubmit.Enabled = false;
         }
     }
+
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["LoggedUser"];
@@ -45,19 +46,6 @@ public partial class adddepartment : System.Web.UI.Page
             Response.Redirect("home.aspx");
         }
     }
-
-    //protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
-    //{
-    //    if (e.CommandName == "Select")
-    //    {
-    //        int staffid = Convert.ToInt32(e.CommandArgument);
-    //        txtManagerName.Text = new StaffLogic().selectById(staffid).Name;
-    //        GridView1.Visible = false;
-
-    //        ViewState["staffid"] = staffid;
-    //        btnSubmit.Enabled = true;
-    //    }
-    //}
 
     protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
     {

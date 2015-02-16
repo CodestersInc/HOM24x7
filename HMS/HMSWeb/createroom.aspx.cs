@@ -23,16 +23,33 @@ public partial class createroom : System.Web.UI.Page
             Response.Redirect("login.aspx");
         }
 
-        DataTable dt = new RoomTypeLogic().selectAll(loggedUser.AccountID);
-        ddlRoomType.DataSource = dt;
+        DataTable dt1 = new RoomTypeLogic().selectAll(loggedUser.AccountID);
+        dt1.Rows.Add(new object[] {0, "Select" });
+        ddlRoomType.DataSource = dt1;
         ddlRoomType.DataValueField = "RoomTypeID";
         ddlRoomType.DataTextField = "Name";
         ddlRoomType.DataBind();
+        //ddlRoomType.SelectedValue = "Select";//TO BE RESOLVED FOR SETTING THE SELECT FIELD AS SELECTED FIELD
+
+        DataTable dt2 = new FloorLogic().selectAll(loggedUser.AccountID);
+        dt2.Rows.Add(new object[] {0, "Select" });
+        ddlFloor.DataSource = dt2;
+        ddlFloor.DataValueField = "FloorID";
+        ddlFloor.DataTextField = "FloorNumber";
+        ddlFloor.DataBind();
 
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
+        if(new RoomLogic().create(new Room(0,
+            Convert.ToInt32(ddlRoomType.SelectedValue),
+            txtRoomNumber.Text,
+            Convert.ToInt32(ddlFloor.SelectedValue),
+            ddlStatus.SelectedValue))!=null)
+        {
+            Response.Redirect("home.aspx");
+        }
 
     }
 

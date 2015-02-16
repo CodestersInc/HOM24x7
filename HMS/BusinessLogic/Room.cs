@@ -10,9 +10,8 @@ namespace BusinessLogic
     {
         public int RoomID;
         public int RoomTypeID;
-        public String Number;
+        public String RoomNumber;
         public int FloorID;
-        public String Building;
         public String Status;
 
         public Room()
@@ -20,13 +19,12 @@ namespace BusinessLogic
 
         }
 
-        public Room(int RoomID, int RoomTypeID, String Number, int FloorID, String Building, String Status)
+        public Room(int RoomID, int RoomTypeID, String RoomNumber, int FloorID, String Status)
         {
             this.RoomID = RoomID;
             this.RoomTypeID = RoomTypeID;
-            this.Number = Number;
+            this.RoomNumber = RoomNumber;
             this.FloorID = FloorID;
-            this.Building = Building;
             this.Status = Status;
         }
     }
