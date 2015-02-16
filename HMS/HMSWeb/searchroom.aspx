@@ -27,7 +27,7 @@
                 <div class="control-group">
                     <label class="control-label">Room Name</label>
                     <div class="controls">
-                        <asp:TextBox ID="txtRoomTypeName" runat="server" CssClass="span6  tooltips" data-trigger="hover" data-original-title="Enter Room number to search for."></asp:TextBox>
+                        <asp:TextBox ID="txtName" runat="server" CssClass="span6  tooltips" data-trigger="hover" data-original-title="Enter Room number to search for."></asp:TextBox>
                         <asp:Button ID="btnSubmit" CssClass="btn btn-info" runat="server" Text="Search" OnClick="btnSubmit_Click" />
                     </div>
                 </div>
@@ -58,7 +58,11 @@
                                         <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
                                             <ItemTemplate>
                                                 <tr>
-                                                    <td><%#Eval("Number")%></td>
+                                                    <td><%#Eval("RoomNumber")%></td>
+                                                    <td><%#Eval("Name")%></td>
+                                                    <td><%#Eval("Status")%></td>
+                                                    <td><%#Eval("FloorNumber")%></td>
+
                                                     <td>
                                                         <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewroom.aspx?ID=" + Eval("RoomID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
                                                         <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("RoomID") %>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>

@@ -20,7 +20,6 @@ public partial class searchdepartment : System.Web.UI.Page
 
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
-        //resultTable.Visible = true;
         Staff loggedUser = (Staff)Session["LoggedUser"];
 
         searchResultArea.Visible = true;

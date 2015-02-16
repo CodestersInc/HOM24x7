@@ -37,7 +37,7 @@ public partial class createroomtype : System.Web.UI.Page
         {
             FileUpload1.SaveAs(Server.MapPath("img/roomtype/" + ticks + FileUpload1.FileName));
             SeasonRoomLogic seasonroomlogic = new SeasonRoomLogic();
-
+            
             for (int i = 0; i < Repeater1.Items.Count; i++)
             {
                 seasonroomlogic.create(new SeasonRoom(0,
