@@ -9,7 +9,7 @@
         <div class="row-fluid">
             <div class="span12">
                 <!-- BEGIN PAGE TITLE & BREADCRUMB-->
-                <h3 class="page-title">Search Staff</h3>
+                <h3 class="page-title">Search Component</h3>
                 <ul class="breadcrumb">
                     <li>
                         <a href="home.aspx"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
@@ -71,8 +71,8 @@
                                                 <%# Eval("Description") %>
                                             </td>
                                             <td>
-                                                <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewstaff.aspx?ID=" + Eval("ComponentID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
-                                                <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#Eval("ComponentID")%>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>
+                                                <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewcomponent.aspx?ID=" + Eval("ComponentID") %>' runat="server"><i class="icon-edit"></i>Edit</asp:LinkButton>
+                                                <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#Eval("ComponentID")%>' CssClass="btn mini purple"><i class="icon-trash"></i>Remove</asp:LinkButton>
                                             </td>
                                         </tr>
                                     </ItemTemplate>

@@ -21,8 +21,8 @@ public partial class searchdepartment : System.Web.UI.Page
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["LoggedUser"];
-
         searchResultArea.Visible = true;
+
         Repeater1.DataSource = new DepartmentLogic().search(txtName.Text, loggedUser.AccountID);
         Repeater1.DataBind();
     }

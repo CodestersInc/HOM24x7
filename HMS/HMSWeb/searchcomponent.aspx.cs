@@ -33,6 +33,7 @@ public partial class searchcomponent : System.Web.UI.Page
             ComponentLogic componentLogic = new ComponentLogic();
             componentLogic.delete(Convert.ToInt32(e.CommandArgument));
             Staff loggedUser = (Staff)Session["loggeduser"];
+
             searchResultArea.Visible = true;
             Repeater1.DataSource = componentLogic.search(txtName.Text, loggedUser.AccountID);
             Repeater1.DataBind();
