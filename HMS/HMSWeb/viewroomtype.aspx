@@ -62,6 +62,41 @@
                                     </div>
                                 </div>
 
+                                <!--START Repeater-->
+                                <table class="table table-striped table-bordered table-advance table-hover">
+                                    <tr>
+                                        <th>Season</th>
+                                        <th>Rate</th>
+                                        <th>Agent Discount</th>
+                                        <th>Max Discount</th>
+                                        <th>Website Rate</th>
+                                    </tr>
+                                    <asp:Repeater ID="Repeater1" runat="server">
+                                        <ItemTemplate>
+                                            <tr>
+                                                <td>
+                                                    <asp:HiddenField ID="HiddenFieldSeasonRoomID" Value='<%# Eval("SeasonRoomID") %>' runat="server" />
+                                                    <asp:HiddenField ID="HiddenFieldSeasonID" Value='<%# Eval("SeasonID") %>' runat="server" />
+                                                    <b><%# Eval("Name") %></b>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox ID="txtRate" Text='<%# Eval("Rate") %>' runat="server"></asp:TextBox>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox ID="txtAgentDiscount" Text='<%# Eval("AgentDiscount") %>' runat="server"></asp:TextBox>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox ID="txtMaxDiscount" Text='<%# Eval("MaxDiscount") %>' runat="server"></asp:TextBox>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox ID="txtWebsiteRate" Text='<%# Eval("WebsiteRate") %>' runat="server"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </table>
+                                <!--END Repeater-->
+
                                 <div class="form-actions">
                                     <asp:LinkButton ID="btnUpdate" CssClass="btn btn-inverse" runat="server" OnClick="btnUpdate_Click"><i class="icon-refresh icon-white"></i>Update</asp:LinkButton>
                                     <asp:Button ID="btnCancel" CssClass="btn" runat="server" Text="Cancel" OnClick="btnCancel_Click" />

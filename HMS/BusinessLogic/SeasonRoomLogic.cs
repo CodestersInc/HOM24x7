@@ -43,7 +43,7 @@ namespace BusinessLogic
                 lstParams1.Add(new SqlParameter("@MaxDiscount", obj.MaxDiscount));
                 lstParams1.Add(new SqlParameter("@WebsiteRate", obj.WebsiteRate));
 
-                DataTable dt = DBUtility.Select(selectquery, lstParams);
+                DataTable dt = DBUtility.Select(selectquery, lstParams1);
 
                 if (dt.Rows.Count == 1)
                 {
@@ -68,7 +68,7 @@ namespace BusinessLogic
 
         public int update(SeasonRoom obj)
         {
-            String query = "update SeasonRoom set SeasonID=@SeasonID, RoomTypeID=@RoomTypeID, Rate=@Rate, AgentDiscount=@AgentDiscount, MaxDiscount=@MaxDiscount, WebsiteRate=@WebsiteRate where SeasonRommID=@SeasonRommID";
+            String query = "update SeasonRoom set SeasonID=@SeasonID, RoomTypeID=@RoomTypeID, Rate=@Rate, AgentDiscount=@AgentDiscount, MaxDiscount=@MaxDiscount, WebsiteRate=@WebsiteRate where SeasonRoomID=@SeasonRoomID";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@SeasonRoomID", obj.SeasonRoomID));
@@ -123,13 +123,13 @@ namespace BusinessLogic
             return DBUtility.Select(query, new List<SqlParameter>());
         }
 
-        public DataTable getAllSeasons(int roomTypeID, int accountID)
+        public DataTable getAllSeasonRooms(int roomTypeID, int accountID)
         {
-            String query = "select Season.SeasonID Season.Name, SeasonRoom.Rate, SeasonRoom.AgentDiscount, SeasonRoom.MaxDiscount, SeasonRoom.WebsiteRate from Season, SeasonRoom where SeasonRoom.SeasonID = Season.SeasonID and SeasonRoom.RoomTypeID=@RoomTypeID and Season.AccountID=@AccountID;";
+            String query = "select SeasonRoom.SeasonRoomID, Season.SeasonID, Season.Name, SeasonRoom.Rate, SeasonRoom.AgentDiscount, SeasonRoom.MaxDiscount, SeasonRoom.WebsiteRate from Season, SeasonRoom where SeasonRoom.SeasonID = Season.SeasonID and SeasonRoom.RoomTypeID=@RoomTypeID and Season.AccountID=@AccountID;";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
             lstParams.Add(new SqlParameter("@AccountID", accountID));
-            lstParams.Add(new SqlParameter("@AccountID", roomTypeID));
+            lstParams.Add(new SqlParameter("@RoomTypeID", roomTypeID));
 
             return DBUtility.Select(query, lstParams);
         }

@@ -27,7 +27,7 @@
                 <div class="control-group">
                     <label class="control-label">Room Name</label>
                     <div class="controls">
-                        <asp:TextBox ID="txtName" runat="server" CssClass="span6  tooltips" data-trigger="hover" data-original-title="Enter Room number to search for."></asp:TextBox>
+                        <asp:TextBox ID="txtName" runat="server" CssClass="span3  tooltips" data-trigger="hover" data-original-title="Enter Room number to search for."></asp:TextBox>
                         <asp:Button ID="btnSubmit" CssClass="btn btn-info" runat="server" Text="Search" OnClick="btnSubmit_Click" />
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                                     </span>
                                 </div>
                                 <div class="widget-body">
-                                    <table class="table table-striped table-bordered">
+                                    <table class="table table-striped">
                                         <tr>
                                             <th>Room Number</th>
                                             <th>Room Type</th>
@@ -55,7 +55,7 @@
                                             <th></th>
                                         </tr>
 
-                                        <asp:Repeater ID="Repeater1" runat="server">
+                                        <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
                                             <ItemTemplate>
                                                 <tr>
                                                     <td><%#Eval("RoomNumber")%></td>
@@ -77,7 +77,6 @@
                             <!-- END EXAMPLE TABLE widget-->
                         </div>
                     </div>
-
                     <!-- END ADVANCED TABLE widget-->
                 </asp:PlaceHolder>
             </div>
@@ -87,4 +86,3 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
 </asp:Content>
-

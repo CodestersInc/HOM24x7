@@ -15,10 +15,10 @@ namespace BusinessLogic
     {
         public DataTable search(string searchstring, int ID)
         {
-            String query = "select Room.*, RoomType.Name, Floor.FloorNumber from Room, RoomType, Floor where Room.RoomNumber like @Number+'%' and Room.FloorID=Floor.FloorID and Room.RoomTypeID=RoomType.RoomTypeID and RoomType.AccountID=@ID;";
+            String query = "select Room.*, RoomType.Name, Floor.FloorNumber from Room, RoomType, Floor where Room.RoomNumber like @RoomNumber+'%' and Room.FloorID=Floor.FloorID and Room.RoomTypeID=RoomType.RoomTypeID and RoomType.AccountID=@ID;";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
-            lstParams.Add(new SqlParameter("@Number", searchstring));
+            lstParams.Add(new SqlParameter("@RoomNumber", searchstring));
             lstParams.Add(new SqlParameter("@ID", ID));
 
             return DBUtility.Select(query, lstParams);
@@ -66,12 +66,12 @@ namespace BusinessLogic
 
         public int update(Room obj)
         {
-            String query = "update Room set RoomTypeID=@RoomTypeID, Number=@Number, FloorID=@FloorID, Status=@Status where RoomID=@RoomID";
+            String query = "update Room set RoomTypeID=@RoomTypeID, RoomNumber=@RoomNumber, FloorID=@FloorID, Status=@Status where RoomID=@RoomID";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@RoomID", obj.RoomID));
             lstParams.Add(new SqlParameter("@RoomTypeID", obj.RoomTypeID));
-            lstParams.Add(new SqlParameter("@Number", obj.RoomNumber));
+            lstParams.Add(new SqlParameter("@RoomNumber", obj.RoomNumber));
             lstParams.Add(new SqlParameter("@FloorID", obj.FloorID));
             lstParams.Add(new SqlParameter("@Status", obj.Status));
 
@@ -89,7 +89,7 @@ namespace BusinessLogic
 
         public Room selectById(int id)
         {
-            String query = "select * from Room where PaySlipID=@id";
+            String query = "select * from Room where RoomID=@id";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@id", id));

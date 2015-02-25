@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
+using System.Data;
 
 public partial class viewroomtype : System.Web.UI.Page
 {
@@ -22,6 +23,10 @@ public partial class viewroomtype : System.Web.UI.Page
             txtRoomTypeName.Text = roomtypeobj.Name;
             txtDescription.Text = roomtypeobj.Description;
             Image1.ImageUrl = roomtypeobj.Photo;
+
+            DataTable dt = new SeasonRoomLogic().getAllSeasonRooms(roomtypeobj.RoomTypeID, loggedUser.AccountID);
+            Repeater1.DataSource = dt;
+            Repeater1.DataBind();
         }
     }
 
@@ -44,13 +49,25 @@ public partial class viewroomtype : System.Web.UI.Page
             roomtypeobj.Photo = new RoomTypeLogic().selectById(Convert.ToInt32(Request.QueryString["ID"])).Photo;
         }
         roomtypeobj.AccountID = loggedUser.AccountID;
-            
+
         if (new RoomTypeLogic().update(roomtypeobj) == 1)
         {
             if (FileUpload1.HasFile)
             {
                 FileUpload1.SaveAs(Server.MapPath("img/roomtype/" + ticks + FileUpload1.FileName));
             }
+
+            for (int i = 0; i < Repeater1.Items.Count; i++)
+            {
+                new SeasonRoomLogic().update(new SeasonRoom(Convert.ToInt32(((HiddenField)Repeater1.Items[i].FindControl("HiddenFieldSeasonRoomID")).Value),
+                Convert.ToInt32(((HiddenField)Repeater1.Items[i].FindControl("HiddenFieldSeasonID")).Value),
+                        roomtypeobj.RoomTypeID,
+                        Convert.ToSingle(((TextBox)Repeater1.Items[i].FindControl("txtRate")).Text),
+                        Convert.ToSingle(((TextBox)Repeater1.Items[i].FindControl("txtAgentDiscount")).Text),
+                        Convert.ToSingle(((TextBox)Repeater1.Items[i].FindControl("txtMaxDiscount")).Text),
+                        Convert.ToSingle(((TextBox)Repeater1.Items[i].FindControl("txtWebsiteRate")).Text)));
+            }
+
             Response.Redirect("searchroomtype.aspx");
         }
         else

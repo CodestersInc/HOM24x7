@@ -53,9 +53,6 @@
                                     </div>
                                 </div>
 
-
-
-
                                 <div class="control-group">
                                     <label class="control-label">Description</label>
                                     <div class="controls">
@@ -64,19 +61,6 @@
                                 </div>
 
                                 <div class="controls">
-                                    <%--                                        <div class="fileupload fileupload-new" data-provides="fileupload">
-                                            <input type="hidden">
-                                            <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                                                <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" />
-                                            </div>
-                                            <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
-                                            <div>                                                
-                                                <span class="btn btn-file"><span class="fileupload-new">select image</span>
-                                                    <span class="fileupload-exists">Change</span>
-                                                    <input class="default" type="file"></span>
-                                                <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
-                                            </div>
-                                        </div>--%>
                                     <div class="fileupload-new thumbnail" style="max-width: 200px; max-height: 150px;">
                                         <asp:Image ID="Image1" runat="server" />
                                     </div>
@@ -89,9 +73,8 @@
                                     </span>
                                 </div>
 
-
                                 <div class="form-actions">
-                                    <asp:Button ID="btnSubmit" CssClass="btn btn-success" OnClick="btnSubmit_Click" runat="server" Text="Submit" />
+                                    <asp:LinkButton ID="btnUpdate" CssClass="btn btn-inverse" runat="server" OnClick="btnUpdate_Click"><i class="icon-refresh icon-white"></i>Update</asp:LinkButton>
                                     <asp:Button ID="btnCancel" CssClass="btn btn-warning" OnClick="btnCancel_Click" runat="server" Text="Cancel" />
                                 </div>
                             </div>

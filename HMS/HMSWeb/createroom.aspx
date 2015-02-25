@@ -48,43 +48,28 @@
                                 <div class="control-group">
                                     <label class="control-label">Room Type</label>
                                     <div class="controls">
-                                        <asp:DropDownList ID="ddlRoomType" runat="server" CssClass="span4" data-placeholder="Choose a Category" TabIndex="1">
-                                            <asp:ListItem>Select...</asp:ListItem>
-                                        </asp:DropDownList>
+                                        <asp:DropDownList ID="ddlRoomType" runat="server" CssClass="span4" data-placeholder="Choose a Category" TabIndex="1"/>
                                     </div>
                                 </div>
 
                                 <div class="control-group">
                                     <label class="control-label">Floor</label>
                                     <div class="controls">
-                                        <asp:DropDownList ID="ddlFloor" runat="server" CssClass="span4" data-placeholder="Choose a Category" TabIndex="1">
-                                            <asp:ListItem>Select...</asp:ListItem>
-                                        </asp:DropDownList>
+                                        <asp:DropDownList ID="ddlFloor" runat="server" CssClass="span4" data-placeholder="Choose a Category" TabIndex="1"/>
                                     </div>
                                 </div>
 
                                 <div class="control-group">
                                     <label class="control-label">Status</label>
                                     <div class="controls">
-                                        <asp:DropDownList ID="ddlStatus" runat="server" CssClass="span4" data-placeholder="Choose a Category" TabIndex="1">
-                                            <asp:ListItem>Select...</asp:ListItem>
+                                        <asp:DropDownList ID="ddlStatus" runat="server" CssClass="span4" data-placeholder="Choose a Category" TabIndex="1">                                           
+                                            <asp:ListItem>Booked</asp:ListItem>
                                             <asp:ListItem>Empty</asp:ListItem>
                                             <asp:ListItem>Occupied</asp:ListItem>
                                             <asp:ListItem>Under Maintenance</asp:ListItem>
                                         </asp:DropDownList>
                                     </div>
                                 </div>
-
-                                <table class="table table-striped table-bordered">
-                                    <asp:Repeater ID="Repeater1" runat="server">
-                                        <ItemTemplate>
-                                            <tr>
-                                                <td><%#Eval("")%></td>
-                                                <td></td>
-                                            </tr>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-                                </table>
 
                                 <div class="form-actions">
                                     <asp:Button ID="btnSubmit" CssClass="btn btn-success" runat="server" Text="Submit" OnClick="btnSubmit_Click" />

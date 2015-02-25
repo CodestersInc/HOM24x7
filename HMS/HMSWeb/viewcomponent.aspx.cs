@@ -24,12 +24,13 @@ public partial class viewcomponent : System.Web.UI.Page
             txtDescription.Text = component.Description;
             if (component.Type == "Room") radioYes.Checked = true; else radioNo.Checked = true;
         }
-        
-
-        
     }
 
-    protected void btnSubmit_Click(object sender, EventArgs e)
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("home.aspx");
+    }
+    protected void btnUpdate_Click(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["loggedUser"];
 
@@ -48,17 +49,11 @@ public partial class viewcomponent : System.Web.UI.Page
         if (res != 0)
         {
             FileUpload1.SaveAs(Server.MapPath("img/component/" + ticks + FileUpload1.FileName));
-            Response.Redirect("home.aspx");
+            Response.Redirect("searchcomponent.aspx");
         }
         else
         {
             Server.TransferRequest("ErrorPage500.html");
         }
-
-    }
-
-    protected void btnCancel_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("home.aspx");
     }
 }

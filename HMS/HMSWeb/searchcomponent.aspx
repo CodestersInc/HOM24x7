@@ -55,7 +55,7 @@
                                     <th>Description</th>
                                     <th></th>
                                 </tr>
-                                <asp:Repeater ID="Repeater1" runat="server">
+                                <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
                                     <ItemTemplate>
                                         <tr>
                                             <td style="max-height:70px; max-width: 70px">
