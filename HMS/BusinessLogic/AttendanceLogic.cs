@@ -18,15 +18,34 @@ namespace BusinessLogic
             throw new NotImplementedException();
         }
 
+        public DataTable getStaffByDepartment(int DepartmentID, int AccountID)
+        {
+            String query = "select * from Staff where AccountID=@AccountID and DepartmentID=@DepartmentID";
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+
+            lstParams.Add(new SqlParameter("@DepartmentID", DepartmentID));
+            lstParams.Add(new SqlParameter("@AccountID", AccountID));
+
+            return DBUtility.Select(query, lstParams);
+        }
+
+        public DataTable getTodaysAttendance(int AccountID)
+        {
+            throw new NotImplementedException();
+        }
+
         public Attendance create(Attendance obj)
         {
-            String query = "insert into Attendance values(@StaffID, @AttendanceDate, @InTime, @OutTime; select * from Attendance where StaffID=@StaffID and AttendanceDate=@AttendanceDate and InTime=@InTime and OunTime=@OutTime)";
+            String query = "insert into Attendance values(@StaffID, @AttendanceDate, @InTime, @OutTime, @AttendanceStatus);";
+
+
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@StaffID", obj.StaffID));
             lstParams.Add(new SqlParameter("@AttendanceDate", obj.AttendanceDate));
             lstParams.Add(new SqlParameter("@InTime", obj.InTime));
             lstParams.Add(new SqlParameter("@OutTime", obj.OutTime));
+            lstParams.Add(new SqlParameter("@AttendanceStatus", obj.AttendanceStatus));
 
             DataTable dt = DBUtility.InsertAndFetch(query, lstParams);
 
@@ -36,7 +55,8 @@ namespace BusinessLogic
                 Convert.ToInt32(dt.Rows[0]["StaffID"]),
                 Convert.ToDateTime(dt.Rows[0]["AttendanceDate"]),
                 Convert.ToDateTime(dt.Rows[0]["InTime"]),
-                Convert.ToDateTime(dt.Rows[0]["OutTime"]));
+                Convert.ToDateTime(dt.Rows[0]["OutTime"]),
+                Convert.ToBoolean(dt.Rows[0]["AttendanceStatus"]));
             }
             else
             {
@@ -46,13 +66,14 @@ namespace BusinessLogic
 
         public int update(Attendance obj)
         {
-            String query = "update Attendance set StaffID=@StaffID, AttendanceDate=@AttendanceDate, InTime=@InTime, OutTime=@OutTime where AttendanceID=@AttendanceID";
+            String query = "update Attendance set StaffID=@StaffID, AttendanceDate=@AttendanceDate, InTime=@InTime, OutTime=@OutTime AttendanceStatus=@AttendanceStatus where AttendanceID=@AttendanceID";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@StaffID", obj.StaffID));
             lstParams.Add(new SqlParameter("@AttendanceDate", obj.AttendanceDate));
             lstParams.Add(new SqlParameter("@InTime", obj.InTime));
             lstParams.Add(new SqlParameter("@OutTime", obj.OutTime));
+            lstParams.Add(new SqlParameter("@AttendanceStatus", obj.AttendanceStatus));
 
             return DBUtility.Modify(query, lstParams);
         }
@@ -80,7 +101,8 @@ namespace BusinessLogic
                 Convert.ToInt32(dt.Rows[0]["StaffID"]),
                 Convert.ToDateTime(dt.Rows[0]["AttendanceDate"]),
                 Convert.ToDateTime(dt.Rows[0]["InTime"]),
-                Convert.ToDateTime(dt.Rows[0]["OutTime"]));
+                Convert.ToDateTime(dt.Rows[0]["OutTime"]),
+                Convert.ToBoolean(dt.Rows[0]["AttendanceStatus"]));
             }
             else
             {

@@ -10,22 +10,15 @@ public partial class markattendance : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        try
+
+        Staff loggedUser = (Staff)Session["LoggedUser"];
+        if (loggedUser == null || loggedUser.UserType != "HotelAdmin")
         {
-            AppUser LoggedAppUser = (AppUser)Session["AppUser"];
-            if (LoggedAppUser == null)
-            {
-                Response.Redirect("login.aspx");
-            }
-            else if (LoggedAppUser.UserType != "HotelAdmin" || LoggedAppUser.UserType != "Staff")
-            {
-                Response.Redirect("login.aspx");
-            }
+            Response.Redirect("login.aspx");
         }
-        catch (Exception ex)
-        {
-            Response.Redirect("ErrorPage500.html");
-        }
-        
+
+        Repeater1.DataSource = new AttendanceLogic().getStaffByDepartment(loggedUser.DepartmentID, loggedUser.AccountID);
+        Repeater1.DataBind();
+
     }
 }
