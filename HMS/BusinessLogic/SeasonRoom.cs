@@ -31,6 +31,5 @@ namespace BusinessLogic
             this.MaxDiscount = MaxDiscount;
             this.WebsiteRate = WebsiteRate;
         }
-
     }
 }

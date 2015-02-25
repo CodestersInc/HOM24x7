@@ -54,37 +54,8 @@
                                 </div>
 
                                 <div class="control-group">
-                                    <label class="control-label">Is Room</label>
-                                    <div class="controls">
-                                        <asp:RadioButton ID="radioYes" runat="server" GroupName="IsActive" />
-                                        <span style="position: relative; top: 4px">Room</span>
-                                        <asp:RadioButton ID="radioNo" runat="server" GroupName="IsActive" />
-                                        <span style="position: relative; top: 4px">Other</span>
-                                    </div>
-                                </div>
-
-
-                                <div class="control-group">
                                     <label class="control-label">Photo</label>
                                     <div class="controls">
-                                        <%--                                        <div class="fileupload fileupload-new" data-provides="fileupload">
-                                            <input type="hidden">
-                                            <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                                                <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" />
-                                            </div>
-                                            <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
-                                            <div>                                                
-                                                <span class="btn btn-file"><span class="fileupload-new">select image</span>
-                                                    <span class="fileupload-exists">Change</span>
-                                                    <input class="default" type="file"></span>
-                                                <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
-                                            </div>
-                                        </div>--%>
-                                        <div class="fileupload-new thumbnail" style="max-width: 200px; max-height: 150px;">
-                                            <asp:Image ID="Image1" runat="server" />
-                                        </div>
-                                        <br />
-                                        <br />
                                         <asp:FileUpload CssClass="fileupload-new" ID="FileUpload1" runat="server" /><br />
                                         <br />
                                         <span class="label label-important">NOTE!</span>
@@ -92,56 +63,74 @@
                                         </span>
                                     </div>
                                 </div>
-
-                                <div>
-                                    <!-- START SEASON MAPPING -->
-                                    <!--START Repeater-->
-                                    <table class="table table-striped table-bordered table-advance table-hover">
-                                        <tr>
-                                            <th>Season</th>
-                                            <th>Rate</th>
-                                            <th>Agent Discount</th>
-                                            <th>Max Discount</th>
-                                            <th>Website Rate</th>
-                                        </tr>
-                                        <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
-                                            <ItemTemplate>
-                                                <tr>
-                                                    <td>
-                                                        <asp:HiddenField ID="HiddenFieldSeasonID" Value='<%# Eval("SeasonID") %>' runat="server" />
-                                                        <b><%# Eval("Name") %></b>
-                                                    </td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtRate" runat="server"></asp:TextBox>
-                                                    </td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtAgentDiscount" runat="server"></asp:TextBox>
-                                                    </td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtMaxDiscount" runat="server"></asp:TextBox>
-                                                    </td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtWebsiteRate" runat="server"></asp:TextBox>
-                                                    </td>
-                                                </tr>
-                                            </ItemTemplate>
-                                        </asp:Repeater>
-                                    </table>
-                                    <!--END Repeater-->
-                                    <!-- END SEASON MAPPING -->
-                                </div>
-
-                                <div class="form-actions">
-                                    <asp:Button ID="btnSubmit" CssClass="btn btn-success" OnClick="btnSubmit_Click" runat="server" Text="Submit" />
-                                    <asp:Button ID="btnCancel" CssClass="btn btn-warning" OnClick="btnCancel_Click" runat="server" Text="Cancel" />
-                                </div>
-
                             </div>
                         </div>
                         <!-- END FORM-->
                     </div>
                     <!-- END Create Room FORM-->
                 </div>
+                <!-- END Create Room Type FORM-->
+
+                <!-- BEGIN Create Room Type FORM-->
+                <div class="widget">
+                    <div class="widget-title">
+                        <h4><i class="icon-reorder"></i>Season rate for room type</h4>
+                        <span class="tools">
+                            <a href="javascript:;" class="icon-chevron-down"></a>
+                            <a href="javascript:;" class="icon-remove"></a>
+                        </span>
+                    </div>
+                    <div class="widget-body form">
+                        <!-- BEGIN FORM-->
+                        <div>
+                            <div>
+                                <!-- START SEASON MAPPING -->
+                                <!--START Repeater-->
+                                <table class="table table-striped table-bordered table-advance table-hover">
+                                    <tr>
+                                        <th>Season</th>
+                                        <th>Rate</th>
+                                        <th>Agent Discount</th>
+                                        <th>Max Discount</th>
+                                        <th>Website Rate</th>
+                                    </tr>
+                                    <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
+                                        <ItemTemplate>
+                                            <tr>
+                                                <td>
+                                                    <asp:HiddenField ID="HiddenFieldSeasonID" Value='<%# Eval("SeasonID") %>' runat="server" />
+                                                    <b><%# Eval("Name") %></b>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox ID="txtRate" runat="server"></asp:TextBox>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox ID="txtAgentDiscount" runat="server"></asp:TextBox>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox ID="txtMaxDiscount" runat="server"></asp:TextBox>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox ID="txtWebsiteRate" runat="server"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </table>
+                                <!--END Repeater-->
+                                <!-- END SEASON MAPPING -->
+                            </div>
+
+                            <div class="form-actions">
+                                <asp:Button ID="btnSubmit" CssClass="btn btn-success" OnClick="btnSubmit_Click" runat="server" Text="Submit" />
+                                <asp:Button ID="btnCancel" CssClass="btn btn-warning" OnClick="btnCancel_Click" runat="server" Text="Cancel" />
+                            </div>
+                        </div>
+                        <!-- END FORM-->
+                    </div>
+                    <!-- END Create Room FORM-->
+                </div>
+                <!-- END Create Room Type FORM-->
             </div>
             <!-- END PAGE CONTENT-->
         </div>

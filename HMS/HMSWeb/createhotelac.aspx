@@ -89,7 +89,7 @@
                             <div class="control-group">
                                 <label class="control-label">Features</label>
                                 <div class="controls">
-                                    <asp:CheckBox ID="cbxFeatures" CssClass="success-toggle-button" runat="server" />
+                                    <asp:CheckBox ID="cbxFeatures" CssClass="success-toggle-button toggle-button" runat="server" />
                                 </div>
                             </div>
 
@@ -178,8 +178,7 @@
                                     <label class="control-label">Date of Birth</label>
                                     <div class="controls">
                                         <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-                                            <asp:TextBox ID="txtDOB" runat="server" CssClass=" m-ctrl-medium date-picker" Text="dd-mm-yyyy"></asp:TextBox>--%>
-                                            <%--<input class=" m-ctrl-medium date-picker" size="16" type="text" value="12-02-2012" />--%>
+                                            <asp:TextBox ID="txtDOB" runat="server" CssClass=" m-ctrl-medium date-picker" Text="dd-mm-yyyy"></asp:TextBox>                                           
                                             <span class="add-on"><i class="icon-calendar"></i></span>
                                         </div>
                                     </div>
@@ -193,18 +192,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <%--                                <div class="control-group">
-                                    <label class="control-label">Salary Frequency</label>
-                                    <div class="controls">
-                                        <asp:DropDownList ID="ddlSalaryFrequency" runat="server" CssClass="span6" data-placeholder="Choose a Category" TabIndex="1">
-                                            <asp:ListItem>Select...</asp:ListItem>
-                                            <asp:ListItem Value="Monthly">Monthly</asp:ListItem>
-                                            <asp:ListItem Value="Weekly">Weekly</asp:ListItem>
-                                            <asp:ListItem Value="Hourly">Hourly</asp:ListItem>
-                                        </asp:DropDownList>
-                                    </div>
-                                </div>--%>
 
                                 <div class="form-actions">
                                     <asp:Button ID="btnSubmit" CssClass="btn btn-success" runat="server" Text="Submit" OnClick="btnSubmit_Click" />
@@ -234,58 +221,13 @@
         var handleToggleButtons = function () {
             if (!jQuery().toggleButtons) {
                 return;
-            }
-            $('.basic-toggle-button').toggleButtons();
-            $('.text-toggle-button').toggleButtons({
-                width: 200,
-                label: {
-                    enabled: "Lorem Ipsum",
-                    disabled: "Dolor Sit"
-                }
-            });
-            $('.danger-toggle-button').toggleButtons({
-                style: {
-                    // Accepted values ["primary", "danger", "info", "success", "warning"] or nothing
-                    enabled: "danger",
-                    disabled: "info"
-                }
-            });
-            $('.info-toggle-button').toggleButtons({
-                style: {
-                    enabled: "info",
-                    disabled: ""
-                }
-            });
+            }           
             $('.success-toggle-button').toggleButtons({
                 style: {
                     enabled: "success",
                     disabled: "danger"
                 }
             });
-            $('.warning-toggle-button').toggleButtons({
-                style: {
-                    enabled: "warning",
-                    disabled: "success"
-                }
-            });
-
-            $('.height-toggle-button').toggleButtons({
-                height: 100,
-                font: {
-                    'line-height': '100px',
-                    'font-size': '20px',
-                    'font-style': 'italic'
-                }
-            });
-
-            $('.not-animated-toggle-button').toggleButtons({
-                animated: false
-            });
-
-            $('.transition-value-toggle-button').toggleButtons({
-                transitionspeed: 1 // default value: 0.05
-            });
-
         }
     </script>
 </asp:Content>

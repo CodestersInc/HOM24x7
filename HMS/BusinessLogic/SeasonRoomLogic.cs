@@ -19,7 +19,7 @@ namespace BusinessLogic
 
         public SeasonRoom create(SeasonRoom obj)
         {
-            String query = "insert into SeasonRoom values(@SeasonID, @RoomTypeID, @Rate, @AgentDiscount, @MaxDiscount, @WebsiteRate); select * from SeasonRoom where SeasonID=@SeasonID and RoomTypeID=@RoomTypeID and Rate=@Rate and AgentDiscount=@AgentDiscount and MaxDiscount=@MaxDiscount and WebsiteRate=@WebsiteRate";
+            String insertquery = "insert into SeasonRoom values(@SeasonID, @RoomTypeID, @Rate, @AgentDiscount, @MaxDiscount, @WebsiteRate);";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@SeasonID", obj.SeasonID));
@@ -29,17 +29,36 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@MaxDiscount", obj.MaxDiscount));
             lstParams.Add(new SqlParameter("@WebsiteRate", obj.WebsiteRate));
 
-            DataTable dt = DBUtility.InsertAndFetch(query, lstParams);
+            int res = DBUtility.Modify(insertquery, lstParams);
 
-            if (dt.Rows.Count == 1)
+            if (res == 1)
             {
-                return new SeasonRoom(Convert.ToInt32(dt.Rows[0]["SeasonRoomID"]),
-                Convert.ToInt32(dt.Rows[0]["SeasonID"]),
-                Convert.ToInt32(dt.Rows[0]["RoomTypeID"]),
-                Convert.ToSingle(dt.Rows[0]["Rate"]),
-                Convert.ToSingle(dt.Rows[0]["AgentDiscount"]),
-                Convert.ToSingle(dt.Rows[0]["MaxDiscount"]),
-                Convert.ToSingle(dt.Rows[0]["WebsiteRate"]));
+                String selectquery = "select * from SeasonRoom where SeasonID=@SeasonID and RoomTypeID=@RoomTypeID and Rate=@Rate and AgentDiscount=@AgentDiscount and MaxDiscount=@MaxDiscount and WebsiteRate=@WebsiteRate;";
+                List<SqlParameter> lstParams1 = new List<SqlParameter>();
+
+                lstParams1.Add(new SqlParameter("@SeasonID", obj.SeasonID));
+                lstParams1.Add(new SqlParameter("@RoomTypeID", obj.RoomTypeID));
+                lstParams1.Add(new SqlParameter("@Rate", obj.Rate));
+                lstParams1.Add(new SqlParameter("@AgentDiscount", obj.AgentDiscount));
+                lstParams1.Add(new SqlParameter("@MaxDiscount", obj.MaxDiscount));
+                lstParams1.Add(new SqlParameter("@WebsiteRate", obj.WebsiteRate));
+
+                DataTable dt = DBUtility.Select(selectquery, lstParams);
+
+                if (dt.Rows.Count == 1)
+                {
+                    return new SeasonRoom(Convert.ToInt32(dt.Rows[0]["SeasonRoomID"]),
+                    Convert.ToInt32(dt.Rows[0]["SeasonID"]),
+                    Convert.ToInt32(dt.Rows[0]["RoomTypeID"]),
+                    Convert.ToSingle(dt.Rows[0]["Rate"]),
+                    Convert.ToSingle(dt.Rows[0]["AgentDiscount"]),
+                    Convert.ToSingle(dt.Rows[0]["MaxDiscount"]),
+                    Convert.ToSingle(dt.Rows[0]["WebsiteRate"]));
+                }
+                else
+                {
+                    return null;
+                }
             }
             else
             {

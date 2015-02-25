@@ -284,7 +284,7 @@
             <!-- BEGIN FOOTER -->
             <div id="footer">
                 <b>2015 &copy; Host of The Most.</b>
-                <div class="span pull-right">
+                <div class="pull-right">
                     <span class="go-top"><i class="icon-arrow-up"></i></span>
                 </div>
             </div>
