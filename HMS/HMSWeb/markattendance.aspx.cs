@@ -17,8 +17,34 @@ public partial class markattendance : System.Web.UI.Page
             Response.Redirect("login.aspx");
         }
 
-        Repeater1.DataSource = new AttendanceLogic().getStaffByDepartment(loggedUser.DepartmentID, loggedUser.AccountID);
+        AttendanceLogic attendanceLogic = new AttendanceLogic();
+
+        if (attendanceLogic.isMarked(loggedUser.DepartmentID,loggedUser.AccountID))
+        {
+            //Response.Redirect("viewattendance.aspx");
+        }
+
+
+        Repeater1.DataSource = attendanceLogic.getStaffByDepartment(loggedUser.DepartmentID, loggedUser.AccountID);
         Repeater1.DataBind();
 
+    }
+
+    protected void btnSubmit_Click(object sender, EventArgs e)
+    {
+        AttendanceLogic attendanceLogic = new AttendanceLogic();
+
+        for (int i = 0; i < Repeater1.Items.Count; i++)
+        {
+            Boolean temp = ((CheckBox)Repeater1.Items[i].FindControl("cbxPresence")).Checked; 
+            attendanceLogic.create(new Attendance(0,
+                Convert.ToInt32(((HiddenField)Repeater1.Items[i].FindControl("HiddenFieldStaffID")).Value),
+                DateTime.Now,
+                DateTime.Now,
+                DateTime.Now,
+                temp ));
+                
+        }
+        Response.Redirect("viewattendance.aspx");
     }
 }

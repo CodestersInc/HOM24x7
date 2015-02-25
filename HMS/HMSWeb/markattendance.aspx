@@ -36,13 +36,21 @@
             <asp:Repeater ID="Repeater1" runat="server">
                 <ItemTemplate>
                     <tr>
-                    <td><%# Eval("StaffCode") %></td>
-                    <td><%# Eval("Name") %></td>
-                    <td><asp:CheckBox ID="CheckBox1" CssClass="success-toggle-button toggle-button" runat="server" Checked="false" /></td>
+                        <td>
+                            <%# Eval("StaffCode") %>
+                            <asp:HiddenField ID="HiddenFieldStaffID" runat="server" Value='<%# Eval("StaffID") %>' />
+                        </td>
+                        <td><%# Eval("Name") %></td>
+                        <td>
+                            <div class="controls">
+                                <asp:CheckBox ID="cbxPresence" CssClass="success-toggle-button toggle-button" runat="server" />
+                            </div>
+                        </td>
                     </tr>
                 </ItemTemplate>
             </asp:Repeater>
         </table>
+        <asp:Button ID="btnSubmit" runat="server" Text="Submit Attendance" CssClass="btn btn-success" OnClick="btnSubmit_Click" />
     </div>
     <!-- END PAGE CONTAINER -->
 

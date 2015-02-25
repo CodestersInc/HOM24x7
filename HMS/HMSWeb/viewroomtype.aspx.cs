@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using System.Data;
+using System.Data.Sql;
+using System.Data.SqlClient;
 
 public partial class viewroomtype : System.Web.UI.Page
 {
@@ -60,7 +62,7 @@ public partial class viewroomtype : System.Web.UI.Page
             for (int i = 0; i < Repeater1.Items.Count; i++)
             {
                 new SeasonRoomLogic().update(new SeasonRoom(Convert.ToInt32(((HiddenField)Repeater1.Items[i].FindControl("HiddenFieldSeasonRoomID")).Value),
-                Convert.ToInt32(((HiddenField)Repeater1.Items[i].FindControl("HiddenFieldSeasonID")).Value),
+                        Convert.ToInt32(((HiddenField)Repeater1.Items[i].FindControl("HiddenFieldSeasonID")).Value),
                         roomtypeobj.RoomTypeID,
                         Convert.ToSingle(((TextBox)Repeater1.Items[i].FindControl("txtRate")).Text),
                         Convert.ToSingle(((TextBox)Repeater1.Items[i].FindControl("txtAgentDiscount")).Text),

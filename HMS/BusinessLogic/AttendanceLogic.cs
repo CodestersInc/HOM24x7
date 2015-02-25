@@ -47,21 +47,34 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@OutTime", obj.OutTime));
             lstParams.Add(new SqlParameter("@AttendanceStatus", obj.AttendanceStatus));
 
-            DataTable dt = DBUtility.InsertAndFetch(query, lstParams);
+            int res = DBUtility.Modify(query, lstParams);
 
-            if (dt.Rows.Count == 1)
+            if (res == 1)
             {
-                return new Attendance(Convert.ToInt32(dt.Rows[0]["AttenddanceID"]),
-                Convert.ToInt32(dt.Rows[0]["StaffID"]),
-                Convert.ToDateTime(dt.Rows[0]["AttendanceDate"]),
-                Convert.ToDateTime(dt.Rows[0]["InTime"]),
-                Convert.ToDateTime(dt.Rows[0]["OutTime"]),
-                Convert.ToBoolean(dt.Rows[0]["AttendanceStatus"]));
-            }
-            else
-            {
+                String selectQuery = "select * from Attendance where StaffID=@StaffID and AttendanceDate=@AttendanceDate and InTime=@InTime and OutTime=@OutTime and AttendanceStatus=@AttendanceStatus";
+
+                List<SqlParameter> lstParams1 = new List<SqlParameter>();
+
+                lstParams1.Add(new SqlParameter("@StaffID", obj.StaffID));
+                lstParams1.Add(new SqlParameter("@AttendanceDate", obj.AttendanceDate));
+                lstParams1.Add(new SqlParameter("@InTime", obj.InTime));
+                lstParams1.Add(new SqlParameter("@OutTime", obj.OutTime));
+                lstParams1.Add(new SqlParameter("@AttendanceStatus", obj.AttendanceStatus));
+
+                DataTable dt = DBUtility.Select(selectQuery, lstParams1);
+
+                if (dt.Rows.Count == 1)
+                {
+                    return new Attendance(Convert.ToInt32(dt.Rows[0]["AttenddanceID"]),
+                    Convert.ToInt32(dt.Rows[0]["StaffID"]),
+                    Convert.ToDateTime(dt.Rows[0]["AttendanceDate"]),
+                    Convert.ToDateTime(dt.Rows[0]["InTime"]),
+                    Convert.ToDateTime(dt.Rows[0]["OutTime"]),
+                    Convert.ToBoolean(dt.Rows[0]["AttendanceStatus"]));
+                }
                 return null;
             }
+            return null;
         }
 
         public int update(Attendance obj)
@@ -108,7 +121,7 @@ namespace BusinessLogic
             {
                 return null;
             }
-            
+
         }
 
         public DataTable selectAll()
@@ -116,6 +129,19 @@ namespace BusinessLogic
             String query = "select * from Attendance";
 
             return DBUtility.Select(query, new List<SqlParameter>());
+        }
+
+        public bool isMarked(int DepartmentID, int AccountID)
+        {
+            String query = "select AttendanceID from Attendance, Staff where DepartmentID=@DepartmentID and AccountID=@AccountID and Staff.StaffID=Attendance.StaffID and AttendanceDate=@Today";
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+
+            lstParams.Add(new SqlParameter("@DepartmentID", DepartmentID));
+            lstParams.Add(new SqlParameter("@AccountID", AccountID));
+            lstParams.Add(new SqlParameter("@Today", DateTime.Now.Date));
+
+            return (DBUtility.Select(query, lstParams).Rows.Count > 0);
+
         }
     }
 }
