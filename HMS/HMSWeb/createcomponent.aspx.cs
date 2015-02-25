@@ -26,7 +26,7 @@ public partial class createcomponent : System.Web.UI.Page
         String ticks = DateTime.Now.Ticks.ToString();
         
 
-        String Type = (radioYes.Checked)?"Room":"Other";
+        String Type = (cbxIsRoom.Checked)?"Room":"Other";
 
         Component componentObj = new ComponentLogic().create(new Component(0,
             txtComponentName.Text,

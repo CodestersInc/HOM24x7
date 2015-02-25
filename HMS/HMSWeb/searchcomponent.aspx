@@ -27,7 +27,7 @@
                 <div class="control-group">
                     <label class="control-label">Component Name</label>
                     <div class="controls">
-                        <asp:TextBox ID="txtName" runat="server" CssClass="span6  tooltips" data-trigger="hover" data-original-title="Enter Component name to search for." ></asp:TextBox>
+                        <asp:TextBox ID="txtName" runat="server" CssClass="span4  tooltips" data-trigger="hover" data-original-title="Enter Component name to search for." ></asp:TextBox>
                         <asp:Button ID="btnSubmit" CssClass="btn btn-info" runat="server" Text="Search" OnClick="btnSubmit_Click" />
                     </div>
                 </div>
@@ -59,18 +59,18 @@
                                     <ItemTemplate>
                                         <tr>
                                             <td style="max-height:70px; max-width: 70px">
-                                                <img src='<%# Eval("Image") %>' />
+                                                <img src='<%# Eval("Image") %>' style="max-width:70px; max-height:70px;" />
                                             </td>
-                                            <td>
+                                            <td style="vertical-align:middle">
                                                 <%# Eval("Name") %>
                                             </td>
-                                            <td>
+                                            <td style="vertical-align:middle">
                                                 <%# Eval("Type") %>
                                             </td>
-                                            <td>
+                                            <td style="vertical-align:middle">
                                                 <%# Eval("Description") %>
                                             </td>
-                                            <td>
+                                            <td style="vertical-align:middle">
                                                 <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewcomponent.aspx?ID=" + Eval("ComponentID") %>' runat="server"><i class="icon-edit"></i>Edit</asp:LinkButton>
                                                 <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#Eval("ComponentID")%>' CssClass="btn mini purple"><i class="icon-trash"></i>Remove</asp:LinkButton>
                                             </td>

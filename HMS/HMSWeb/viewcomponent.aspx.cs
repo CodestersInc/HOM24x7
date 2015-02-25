@@ -21,8 +21,10 @@ public partial class viewcomponent : System.Web.UI.Page
             int componentID = Convert.ToInt32(Request.QueryString["ID"]);
             Component component = new ComponentLogic().selectById(componentID);
             txtComponentName.Text = component.Name;
+            if (component.Type == "Room") cbxIsRoom.Checked = true; else cbxIsRoom.Checked = false;
             txtDescription.Text = component.Description;
-            if (component.Type == "Room") radioYes.Checked = true; else radioNo.Checked = true;
+            Image1.ImageUrl = component.Image;
+            
         }
     }
 
@@ -37,7 +39,7 @@ public partial class viewcomponent : System.Web.UI.Page
         String ticks = DateTime.Now.Ticks.ToString();
         int componentID = Convert.ToInt32(Request.QueryString["ID"]);
 
-        String Type = (radioYes.Checked) ? "Room" : "Other";
+        String Type = (cbxIsRoom.Checked) ? "Room" : "Other";
 
         int res = new ComponentLogic().update(new Component(componentID,
             txtComponentName.Text,

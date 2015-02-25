@@ -49,18 +49,17 @@
                                 <div class="control-group">
                                     <label class="control-label">Description</label>
                                     <div class="controls">
-                                        <asp:TextBox ID="txtDescription" runat="server" TextMode="MultiLine" CssClass="span5" Rows="4"></asp:TextBox>
+                                        <asp:TextBox ID="txtDescription" runat="server" TextMode="MultiLine" CssClass="span4" Rows="4"></asp:TextBox>
                                     </div>
                                 </div>
 
                                 <div class="control-group">
                                     <label class="control-label">Photo</label>
                                     <div class="controls">
-                                        <asp:FileUpload CssClass="fileupload-new" ID="FileUpload1" runat="server" /><br />
+                                        <asp:FileUpload ID="FileUpload1" runat="server" /><br />
                                         <br />
-                                        <span class="label label-important">NOTE!</span>
-                                        <span>Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only
-                                        </span>
+                                        <%--<span class="label label-important">NOTE!</span>
+                                        <span>Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only</span>--%>
                                     </div>
                                 </div>
                             </div>

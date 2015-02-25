@@ -260,7 +260,7 @@
 					            <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a href="createstaff.aspx">Register</a></li>
+                                    <li><a href="createstaff.aspx">Create</a></li>
                                     <li><a href="searchstaff.aspx">Search</a></li>
                                 </ul>
                             </li>

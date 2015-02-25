@@ -40,11 +40,11 @@ public partial class registrestaff : System.Web.UI.Page
             Utility.GetSHA512Hash(txtUsername.Text),
             Utility.GetSHA512Hash(txtPassword.Text),
             ddlUserType.SelectedValue,
-            ddlDesignation.SelectedValue,
+            txtDesignation.Text,
             Convert.ToDateTime(txtDOB.Text),
             System.DateTime.Now,
             Convert.ToInt32(txtSalary.Text),
-            radioYes.Checked,
+            cbxIsActive.Checked,
             Convert.ToInt32(ddlDepartment.SelectedValue),
             loggedInStaff.AccountID);
 

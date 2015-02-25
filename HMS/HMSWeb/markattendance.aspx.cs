@@ -12,22 +12,22 @@ public partial class markattendance : System.Web.UI.Page
     {
 
         Staff loggedUser = (Staff)Session["LoggedUser"];
-        if (loggedUser == null || loggedUser.UserType != "HotelAdmin")
+        if (loggedUser == null || loggedUser.UserType != "HotelAdmin" || loggedUser.UserType != "Manager")
         {
             Response.Redirect("login.aspx");
         }
 
         AttendanceLogic attendanceLogic = new AttendanceLogic();
 
-        if (attendanceLogic.isMarked(loggedUser.DepartmentID,loggedUser.AccountID))
+        if (attendanceLogic.isMarked(loggedUser.DepartmentID, loggedUser.AccountID))
         {
-            //Response.Redirect("viewattendance.aspx");
+            Response.Redirect("viewattendance.aspx");
         }
-
-
-        Repeater1.DataSource = attendanceLogic.getStaffByDepartment(loggedUser.DepartmentID, loggedUser.AccountID);
-        Repeater1.DataBind();
-
+        if (!IsPostBack)
+        {
+            Repeater1.DataSource = attendanceLogic.getStaffByDepartment(loggedUser.DepartmentID, loggedUser.AccountID);
+            Repeater1.DataBind();
+        }
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)
@@ -36,14 +36,12 @@ public partial class markattendance : System.Web.UI.Page
 
         for (int i = 0; i < Repeater1.Items.Count; i++)
         {
-            Boolean temp = ((CheckBox)Repeater1.Items[i].FindControl("cbxPresence")).Checked; 
             attendanceLogic.create(new Attendance(0,
                 Convert.ToInt32(((HiddenField)Repeater1.Items[i].FindControl("HiddenFieldStaffID")).Value),
                 DateTime.Now,
                 DateTime.Now,
                 DateTime.Now,
-                temp ));
-                
+                ((CheckBox)Repeater1.Items[i].FindControl("cbxPresence")).Checked));
         }
         Response.Redirect("viewattendance.aspx");
     }

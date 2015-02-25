@@ -1,7 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="createcomponent.aspx.cs" Inherits="createcomponent" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" runat="Server">
+    <link rel="stylesheet" href="assets/bootstrap-toggle-buttons/static/stylesheets/bootstrap-toggle-buttons.css" />
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="Server">
     <!-- BEGIN PAGE CONTAINER-->
     <div class="container-fluid">
@@ -46,52 +48,29 @@
                                 <div class="control-group">
                                     <label class="control-label">Is Room</label>
                                     <div class="controls">
-                                        <asp:RadioButton ID="radioYes" runat="server" GroupName="IsRoom" />
-                                        <span style="position: relative; top: 4px">Yes</span>
-                                        <asp:RadioButton ID="radioNo" runat="server" GroupName="IsRoom" />
-                                        <span style="position: relative; top: 4px">No</span>
+                                        <asp:CheckBox ID="cbxIsRoom" CssClass="success-toggle-button toggle-button" runat="server" />
                                     </div>
                                 </div>
-
-
-
 
                                 <div class="control-group">
                                     <label class="control-label">Description</label>
                                     <div class="controls">
-                                        <asp:TextBox ID="txtDescription" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter the name of season" data-original-title="Popover header"></asp:TextBox>
+                                        <asp:TextBox ID="txtDescription" runat="server" TextMode="MultiLine" CssClass="span4" Rows="4"></asp:TextBox>
                                     </div>
                                 </div>
 
-                                <div class="controls">
-                                    <%--                                        <div class="fileupload fileupload-new" data-provides="fileupload">
-                                            <input type="hidden">
-                                            <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                                                <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" />
-                                            </div>
-                                            <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
-                                            <div>                                                
-                                                <span class="btn btn-file"><span class="fileupload-new">select image</span>
-                                                    <span class="fileupload-exists">Change</span>
-                                                    <input class="default" type="file"></span>
-                                                <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
-                                            </div>
-                                        </div>--%>
-                                    <div class="fileupload-new thumbnail" style="max-width: 200px; max-height: 150px;">
-                                        <asp:Image ID="Image1" runat="server" />
+                                <div class="control-group">
+                                    <label class="control-label">Image</label>
+                                    <div class="controls">
+                                        <asp:FileUpload ID="FileUpload1" runat="server" /><br />
+                                        <br />
+                                        <%--<span class="label label-important">NOTE!</span>
+                                        <span>Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only</span>--%>
                                     </div>
-                                    <br />
-                                    <br />
-                                    <asp:FileUpload CssClass="fileupload-new" ID="FileUpload1" runat="server" /><br />
-                                    <br />
-                                    <span class="label label-important">NOTE!</span>
-                                    <span>Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only
-                                    </span>
                                 </div>
-
 
                                 <div class="form-actions">
-                                    <asp:Button ID="btnSubmit" CssClass="btn btn-success" OnClick="btnSubmit_Click" runat="server" Text="Update" />
+                                    <asp:Button ID="btnSubmit" CssClass="btn btn-success" OnClick="btnSubmit_Click" runat="server" Text="Submit" />
                                     <asp:Button ID="btnCancel" CssClass="btn btn-warning" OnClick="btnCancel_Click" runat="server" Text="Cancel" />
                                 </div>
                             </div>
@@ -106,5 +85,20 @@
     <!-- END PAGE CONTAINER-->
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
+    <script type="text/javascript" src="assets/bootstrap-toggle-buttons/static/js/jquery.toggle.yesno-buttons.js"></script>
+
+    <script>
+        var handleToggleButtons = function () {
+            if (!jQuery().toggleButtons) {
+                return;
+            }
+            $('.success-toggle-button').toggleButtons({
+                style: {
+                    enabled: "success",
+                    disabled: "danger"
+                }
+            });
+        }
+    </script>
 </asp:Content>
 

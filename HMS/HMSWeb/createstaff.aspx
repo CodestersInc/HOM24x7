@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="createstaff.aspx.cs" Inherits="registrestaff" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" runat="Server">
+    <link rel="stylesheet" href="assets/bootstrap-toggle-buttons/static/stylesheets/bootstrap-toggle-buttons.css" />
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="Server">
@@ -41,7 +42,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Name</label>
                                     <div class="controls">
-                                        <asp:TextBox ID="txtName" runat="server" CssClass="span6 popovers" data-trigger="hover" data-content="Enter the full name of staff member." data-original-title="Popover header"></asp:TextBox>
+                                        <asp:TextBox ID="txtName" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter the full name of staff member." data-original-title="Popover header"></asp:TextBox>
                                     </div>
                                 </div>
 
@@ -50,7 +51,7 @@
                                     <div class="controls">
                                         <div class="input-icon left">
                                             <i class="icon-envelope"></i>
-                                            <asp:TextBox ID="txtEmail" runat="server" placeholder="Email Address"></asp:TextBox>
+                                            <asp:TextBox ID="txtEmail" runat="server" CssClass="span4" placeholder="Email Address"></asp:TextBox>
                                         </div>
                                     </div>
                                 </div>
@@ -58,22 +59,21 @@
                                 <div class="control-group">
                                     <label class="control-label">Phone</label>
                                     <div class="controls">
-                                        <asp:TextBox ID="txtPhone" runat="server" data-mask="(999) 999-9999" CssClass="span5"></asp:TextBox>
-                                        <span class="help-inline">(999) 999-9999</span>
+                                        <asp:TextBox ID="txtPhone" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter a 10 digit number" data-original-title="Instructions"></asp:TextBox>                                        
                                     </div>
                                 </div>
 
                                 <div class="control-group">
                                     <label class="control-label">User Name</label>
                                     <div class="controls">
-                                        <asp:TextBox ID="txtUsername" runat="server" CssClass="span6 popovers" data-trigger="hover" data-content="Enter a distinct username." data-original-title="Suggestions"></asp:TextBox>
+                                        <asp:TextBox ID="txtUsername" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter a distinct username." data-original-title="Suggestion"></asp:TextBox>
                                     </div>
                                 </div>
 
                                 <div class="control-group">
                                     <label class="control-label">Password</label>
                                     <div class="controls">
-                                        <asp:TextBox ID="txtPassword" TextMode="Password" runat="server" CssClass="span6 popovers" data-trigger="hover" data-content="Enter a strong password(8-10 characters long)." data-original-title="Suggestions"></asp:TextBox>
+                                        <asp:TextBox ID="txtPassword" TextMode="Password" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter a strong password(8-10 characters long)." data-original-title="Suggestions"></asp:TextBox>
                                     </div>
                                 </div>
                             </div>
@@ -104,25 +104,18 @@
                                 <div class="control-group">
                                     <label class="control-label">User Type</label>
                                     <div class="controls">
-                                        <asp:DropDownList ID="ddlUserType" runat="server" CssClass="span6" data-placeholder="Choose a Category" TabIndex="1">
-                                            <asp:ListItem>Select...</asp:ListItem>
+                                        <asp:DropDownList ID="ddlUserType" runat="server" CssClass="span4" data-placeholder="Choose a Category" TabIndex="1">
                                             <asp:ListItem Value="HotelAdmin">Hotel Admin</asp:ListItem>
-                                            <asp:ListItem Value="Service">Service</asp:ListItem>
-                                            <asp:ListItem Value="Reception">Reception</asp:ListItem>
-                                            <asp:ListItem Value="DepartmentManager">Manager</asp:ListItem>
+                                            <asp:ListItem Value="Regular Staff">Reception Staff</asp:ListItem>
+                                            <asp:ListItem Value="Regular Staff">Regular Staff</asp:ListItem>
+                                            <asp:ListItem Value="Managerial Staff">Managerial Staff</asp:ListItem>
                                         </asp:DropDownList>
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Designation</label>
                                     <div class="controls">
-                                        <asp:DropDownList ID="ddlDesignation" runat="server" CssClass="span6" data-placeholder="Choose a Category" TabIndex="1">
-                                            <asp:ListItem>Select...</asp:ListItem>
-                                            <asp:ListItem Value="MaintainanceStaff">Maintainance Staff</asp:ListItem>
-                                            <asp:ListItem Value="DepartmentManager">Department Manager</asp:ListItem>
-                                            <asp:ListItem Value="Housekeeping">House keeping</asp:ListItem>
-                                            <asp:ListItem Value="AdminStaff">Administration Staff</asp:ListItem>
-                                        </asp:DropDownList>
+                                        <asp:TextBox ID="txtDesignation" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter the designation of staff member (eg: Cook, Manager, Receptionist,etc.)" data-original-title="Hint"></asp:TextBox>
                                     </div>
                                 </div>
 
@@ -130,8 +123,7 @@
                                     <label class="control-label">Date of Birth</label>
                                     <div class="controls">
                                         <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-                                            <asp:TextBox ID="txtDOB" runat="server" CssClass=" m-ctrl-medium date-picker" Text="dd-mm-yyyy"></asp:TextBox>--%>
-                                                <%--<input class=" m-ctrl-medium date-picker" size="16" type="text" value="12-02-2012" />--%>
+                                            <asp:TextBox ID="txtDOB" runat="server" Enabled="false" CssClass="span6" Text="dd-mm-yyyy"></asp:TextBox>
                                             <span class="add-on"><i class="icon-calendar"></i></span>
                                         </div>
                                     </div>
@@ -141,7 +133,7 @@
                                     <label class="control-label">Salary</label>
                                     <div class="controls">
                                         <div class="input-prepend input-append">
-                                            <span class="add-on">Rs.</span><asp:TextBox ID="txtSalary" runat="server"></asp:TextBox><span class="add-on">.00</span>
+                                            <span class="add-on">Rs.</span><asp:TextBox ID="txtSalary" CssClass="span6" runat="server"></asp:TextBox><span class="add-on">.00</span>
                                         </div>
                                     </div>
                                 </div>
@@ -149,18 +141,14 @@
                                 <div class="control-group">
                                     <label class="control-label">Is Active</label>
                                     <div class="controls">
-                                        <asp:RadioButton ID="radioYes" runat="server" GroupName="IsActive" />
-                                        <span style="position: relative; top: 4px">Yes</span>
-                                        <asp:RadioButton ID="radioNo" runat="server" GroupName="IsActive" />
-                                        <span style="position: relative; top: 4px">No</span>
+                                        <asp:CheckBox ID="cbxIsActive" CssClass="success-toggle-button toggle-button" runat="server" />
                                     </div>
                                 </div>
 
                                 <div class="control-group">
                                     <label class="control-label">Department</label>
                                     <div class="controls">
-                                        <asp:DropDownList ID="ddlDepartment" runat="server" CssClass="span6" data-placeholder="Choose a Category" TabIndex="1">
-                                            <asp:ListItem>Select...</asp:ListItem>
+                                        <asp:DropDownList ID="ddlDepartment" runat="server" CssClass="span4" data-placeholder="Choose a Category" TabIndex="1">
                                         </asp:DropDownList>
                                     </div>
                                 </div>
@@ -185,8 +173,21 @@
     <script type="text/javascript" src="assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="assets/bootstrap-daterangepicker/date.js"></script>
     <script type="text/javascript" src="assets/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script type="text/javascript" src="assets/bootstrap-toggle-buttons/static/js/jquery.toggle.yesno-buttons.js"></script>
 
     <script>
         $(".date-picker").datepicker();
+
+        var handleToggleButtons = function () {
+            if (!jQuery().toggleButtons) {
+                return;
+            }
+            $('.success-toggle-button').toggleButtons({
+                style: {
+                    enabled: "success",
+                    disabled: "danger"
+                }
+            });
+        }
     </script>
 </asp:Content>

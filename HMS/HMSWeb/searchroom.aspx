@@ -45,7 +45,7 @@
                                     </span>
                                 </div>
                                 <div class="widget-body">
-                                    <table class="table table-striped">
+                                    <table class="table table-striped border">
                                         <tr>
                                             <th>Room Number</th>
                                             <th>Room Type</th>
