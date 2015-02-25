@@ -24,7 +24,6 @@ public partial class viewcomponent : System.Web.UI.Page
             if (component.Type == "Room") cbxIsRoom.Checked = true; else cbxIsRoom.Checked = false;
             txtDescription.Text = component.Description;
             Image1.ImageUrl = component.Image;
-            
         }
     }
 
@@ -35,22 +34,31 @@ public partial class viewcomponent : System.Web.UI.Page
     protected void btnUpdate_Click(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["loggedUser"];
-
         String ticks = DateTime.Now.Ticks.ToString();
-        int componentID = Convert.ToInt32(Request.QueryString["ID"]);
 
-        String Type = (cbxIsRoom.Checked) ? "Room" : "Other";
+        Component component = new Component();
+        component.ComponentID = Convert.ToInt32(Request.QueryString["ID"]);
+        component.Name = txtComponentName.Text;
+        component.Type = (cbxIsRoom.Checked) ? "Room" : "Other";
+        component.Description = txtDescription.Text;
+        if (FileUpload1.HasFile)
+        {
+            component.Image = "img/component/" + ticks + FileUpload1.FileName;
+        }
+        else
+        {
+            component.Image = new ComponentLogic().selectById(Convert.ToInt32(Request.QueryString["ID"])).Image;
+        }
+        component.AccountID = loggedUser.AccountID;
 
-        int res = new ComponentLogic().update(new Component(componentID,
-            txtComponentName.Text,
-            Type,
-            txtDescription.Text,
-            "img/component/" + ticks + FileUpload1.FileName,
-            loggedUser.AccountID));
+        int res = new ComponentLogic().update(component);
 
         if (res != 0)
         {
-            FileUpload1.SaveAs(Server.MapPath("img/component/" + ticks + FileUpload1.FileName));
+            if (FileUpload1.HasFile)
+            {
+                FileUpload1.SaveAs(Server.MapPath("img/component/" + ticks + FileUpload1.FileName));
+            }
             Response.Redirect("searchcomponent.aspx");
         }
         else
