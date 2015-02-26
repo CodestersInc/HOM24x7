@@ -32,9 +32,9 @@ public partial class MasterPage : System.Web.UI.MasterPage
                     lblUsername.Text = staffObj.Name;
                     String userType = staffObj.UserType;
 
-                    if (userType == "HotelAdmin")
+                    if (userType == "Hotel Admin" || userType == "Managerial Staff")
                     {
-                        Session["StaffUserType"] = "HotelAdmin";
+                        Session["StaffUserType"] = "Hotel Admin";
                         attendancePlaceHolder.Visible = true;
                         departmentPlaceHolder.Visible = true;
                         payrollPlaceHolder.Visible = true;

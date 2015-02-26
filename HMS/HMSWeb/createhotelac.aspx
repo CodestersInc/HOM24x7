@@ -176,7 +176,7 @@
                                     <label class="control-label">Date of Birth</label>
                                     <div class="controls">
                                         <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-                                            <asp:TextBox ID="txtDOB" runat="server" Enabled="false" CssClass="span6" Text="dd-mm-yyyy"></asp:TextBox>
+                                            <asp:TextBox ID="txtDOB" runat="server" CssClass="span6" Text="dd-mm-yyyy"></asp:TextBox>
                                             <span class="add-on"><i class="icon-calendar"></i></span>
                                         </div>
                                     </div>

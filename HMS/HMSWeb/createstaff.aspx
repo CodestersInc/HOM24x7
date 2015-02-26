@@ -105,7 +105,7 @@
                                     <label class="control-label">User Type</label>
                                     <div class="controls">
                                         <asp:DropDownList ID="ddlUserType" runat="server" CssClass="span4" data-placeholder="Choose a Category" TabIndex="1">
-                                            <asp:ListItem Value="HotelAdmin">Hotel Admin</asp:ListItem>
+                                            <asp:ListItem Value="Hotel Admin">Hotel Admin</asp:ListItem>
                                             <asp:ListItem Value="Regular Staff">Reception Staff</asp:ListItem>
                                             <asp:ListItem Value="Regular Staff">Regular Staff</asp:ListItem>
                                             <asp:ListItem Value="Managerial Staff">Managerial Staff</asp:ListItem>
@@ -123,7 +123,7 @@
                                     <label class="control-label">Date of Birth</label>
                                     <div class="controls">
                                         <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-                                            <asp:TextBox ID="txtDOB" runat="server"  CssClass="span6" Text="dd-mm-yyyy"></asp:TextBox>
+                                            <asp:TextBox ID="txtDOB" runat="server"  CssClass="span6 txtDOB" Text="dd-mm-yyyy"></asp:TextBox>
                                             <span class="add-on"><i class="icon-calendar"></i></span>
                                         </div>
                                     </div>
@@ -148,8 +148,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Department</label>
                                     <div class="controls">
-                                        <asp:DropDownList ID="ddlDepartment" runat="server" CssClass="span4" data-placeholder="Choose a Category" TabIndex="1">
-                                        </asp:DropDownList>
+                                        <asp:DropDownList ID="ddlDepartment" runat="server" CssClass="span4" data-placeholder="Choose a Category" TabIndex="1"/>                                        
                                     </div>
                                 </div>
 
@@ -189,5 +188,10 @@
                 }
             });
         }
+
+        $(".txtDOB").keypress(function (e) {
+            e.preventDefault();
+        });
+
     </script>
 </asp:Content>

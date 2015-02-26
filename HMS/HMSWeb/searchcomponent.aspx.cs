@@ -11,7 +11,7 @@ public partial class searchcomponent : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["loggedUser"];
-        if (loggedUser == null || loggedUser.UserType != "HotelAdmin")
+        if (loggedUser == null || loggedUser.UserType != "Hotel Admin")
         {
             Response.Redirect("login.aspx");
         }

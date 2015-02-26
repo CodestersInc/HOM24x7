@@ -40,13 +40,13 @@ public partial class hacregister : System.Web.UI.Page
         if (accountobject != null)
         {
             Staff staffobj = new Staff(0,
-                txtName.Text,
                 txtStaffCode.Text,
+                txtName.Text,
                 txtEmail.Text,
                 Convert.ToString(accountobject.Phone),
                 Utility.GetSHA512Hash(txtUsername.Text),                           //to be modified in future to email id
                 Utility.GetSHA512Hash(txtPassword.Text),
-                "HotelAdmin",
+                "Hotel Admin",
                 "Admin",
                 Convert.ToDateTime(txtDOB.Text),
                 DateTime.Now,

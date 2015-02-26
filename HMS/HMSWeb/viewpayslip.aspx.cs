@@ -17,7 +17,7 @@ public partial class viewpayslip : System.Web.UI.Page
             {
                 Response.Redirect("login.aspx");
             }
-            else if (LoggedAppUser.UserType != "HotelAdmin" || LoggedAppUser.UserType != "Staff")
+            else if (LoggedAppUser.UserType != "Hotel Admin" || LoggedAppUser.UserType != "Staff")
             {
                 Response.Redirect("login.aspx");
             }

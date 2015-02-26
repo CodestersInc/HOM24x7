@@ -12,7 +12,7 @@ public partial class adddepartment : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["LoggedUser"];
-        if (loggedUser == null || Session["StaffUserType"].ToString() != "HotelAdmin")
+        if (loggedUser == null || Session["StaffUserType"].ToString() != "Hotel Admin")
         {
             Response.Redirect("login.aspx");
         }
@@ -20,7 +20,7 @@ public partial class adddepartment : System.Web.UI.Page
         if (Request.QueryString["ID"] == null && Request.QueryString["Name"] == null)
         {
             searchResultTable.Visible = true;
-            Repeater1.DataSource = new StaffLogic().search("", loggedUser.AccountID);
+            Repeater1.DataSource = new StaffLogic().searchManager(loggedUser.AccountID);
             Repeater1.DataBind();
         }
 

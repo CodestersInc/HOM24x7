@@ -5,13 +5,11 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="Server">
-
     <!-- BEGIN PAGE CONTAINER-->
     <div class="container-fluid">
         <!-- BEGIN PAGE HEADER-->
         <div class="row-fluid">
             <div class="span12">
-                <!-- BEGIN PAGE TITLE & BREADCRUMB-->
                 <h3 class="page-title">Mark Attendance</h3>
                 <ul class="breadcrumb">
                     <li>
@@ -20,39 +18,62 @@
                     <li>
                         <a href="#">Attendance</a> <span class="divider">&nbsp;</span>
                     </li>
-                    <li><a href="departmentsearch.aspx">Mark</a><span class="divider-last">&nbsp;</span></li>
+                    <li><a href="createstaff.aspx">Mark</a><span class="divider-last">&nbsp;</span></li>
                 </ul>
-                <!-- END PAGE TITLE & BREADCRUMB-->
             </div>
         </div>
-        <div class="widget-body form">
-        </div>
-        <table class="table table-striped table-bordered table-advance table-hover">
-            <tr>
-                <th>Staff Code</th>
-                <th>Name</th>
-                <th>Attendance</th>
-            </tr>
-            <asp:Repeater ID="Repeater1" runat="server">
-                <ItemTemplate>
-                    <tr>
-                        <td>
-                            <%# Eval("StaffCode") %>
-                            <asp:HiddenField ID="HiddenFieldStaffID" runat="server" Value='<%# Eval("StaffID") %>' />
-                        </td>
-                        <td><%# Eval("Name") %></td>
-                        <td>
-                            <div class="controls">
-                                <asp:CheckBox ID="cbxPresence" CssClass="success-toggle-button toggle-button" runat="server" />
+        <!-- END PAGE HEADER-->
+        <!-- BEGIN PAGE CONTENT-->
+        <div class="row-fluid">
+            <div class="span12">
+                <!-- BEGIN SAMPLE FORM widget-->
+                <div class="widget">
+                    <div class="widget-title">
+                        <h4><i class="icon-reorder"></i>Today's Attendance</h4>
+                        <span class="tools">
+                            <a href="javascript:;" class="icon-chevron-down"></a>
+                            <a href="javascript:;" class="icon-remove"></a>
+                        </span>
+                    </div>
+                    <div class="widget-body form">
+                        <!-- BEGIN FORM-->
+                        <div>
+                            <div class="form-horizontal">
+                                <table class="table table-striped table-bordered table-advance table-hover">
+                                    <tr>
+                                        <th>Staff Code</th>
+                                        <th>Name</th>
+                                        <th>Attendance</th>
+                                    </tr>
+                                    <asp:Repeater ID="Repeater1" runat="server">
+                                        <ItemTemplate>
+                                            <tr>
+                                                <td><%# Eval("StaffCode") %></td>
+                                                <td><%# Eval("Name") %></td>
+                                                <td>
+                                                    <asp:CheckBox ID="cbxPresence" CssClass="success-toggle-button toggle-button" runat="server" />
+                                                    <asp:HiddenField ID="HiddenFieldStaffID" runat="server" Value='<%# Eval("StaffID") %>' />
+                                                </td>
+                                            </tr>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </table>
+
+                                <div class="form-actions">
+                                    <asp:Button ID="btnSubmit" runat="server" Text="Submit Attendance" CssClass="btn btn-success" OnClick="btnSubmit_Click" />
+                                </div>
                             </div>
-                        </td>
-                    </tr>
-                </ItemTemplate>
-            </asp:Repeater>
-        </table>
-        <asp:Button ID="btnSubmit" runat="server" Text="Submit Attendance" CssClass="btn btn-success" OnClick="btnSubmit_Click" />
+                        </div>
+                    </div>
+                </div>
+                <!-- END SAMPLE FORM widget-->
+            </div>
+        </div>
+        <!-- END PAGE CONTENT-->
     </div>
-    <!-- END PAGE CONTAINER -->
+    <!-- END PAGE CONTAINER-->
+
+
 
 </asp:Content>
 

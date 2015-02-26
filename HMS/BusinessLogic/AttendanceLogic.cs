@@ -29,6 +29,34 @@ namespace BusinessLogic
             return DBUtility.Select(query, lstParams);
         }
 
+        public DataTable getAttendanceRange(DateTime FromDate, DateTime ToDate, int DepartmentID, int AccountID)
+        {
+            String query = "select * from Attendance, Staff where Attendance.StaffID=Staff.StaffID and AttendanceDate > @FromDate and AttendanceDate < @ToDate and DepartmentID = @DepartmentID and AccountID = @AccountID";
+
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+
+            lstParams.Add(new SqlParameter("@DepartmentID", DepartmentID));
+            lstParams.Add(new SqlParameter("@AccountID", AccountID));
+            lstParams.Add(new SqlParameter("@FromDate", FromDate));
+            lstParams.Add(new SqlParameter("@ToDate", ToDate));
+
+            return DBUtility.Select(query, lstParams);
+        }
+
+        public DataTable getAttendanceRange(DateTime FromDate, DateTime ToDate, int AccountID)
+        {
+            String query = "select * from Attendance, Staff where Attendance.StaffID=Staff.StaffID and AttendanceDate > @FromDate and AttendanceDate < @ToDate and AccountID = @AccountID";
+
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+
+            lstParams.Add(new SqlParameter("@AccountID", AccountID));
+            lstParams.Add(new SqlParameter("@FromDate", FromDate));
+            lstParams.Add(new SqlParameter("@ToDate", ToDate));
+
+            return DBUtility.Select(query, lstParams);
+        }
+
+
         public DataTable getTodaysAttendance(int AccountID)
         {
             throw new NotImplementedException();
@@ -133,7 +161,7 @@ namespace BusinessLogic
 
         public bool isMarked(int DepartmentID, int AccountID)
         {
-            String query = "select AttendanceID from Attendance, Staff where DepartmentID=@DepartmentID and AccountID=@AccountID and Staff.StaffID=Attendance.StaffID and AttendanceDate=@Today";
+            String query = "select * from Attendance, Staff where Staff.DepartmentID=@DepartmentID and AccountID=@AccountID and Staff.StaffID=Attendance.StaffID and AttendanceDate=@Today";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@DepartmentID", DepartmentID));

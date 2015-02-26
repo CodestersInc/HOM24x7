@@ -16,22 +16,30 @@ public partial class registrestaff : System.Web.UI.Page
     {
         Staff loggedUser = (Staff)Session["loggedUser"];
 
-        if (loggedUser == null || loggedUser.UserType != "HotelAdmin")
+        if (loggedUser == null || loggedUser.UserType != "Hotel Admin")
         {
             Response.Redirect("login.aspx");
         }
-        DataTable dt = new DepartmentLogic().selectDistinctDepartment(loggedUser.AccountID);
-        dt.Rows.Add(new object[]{"No Department",0});
-        ddlDepartment.DataSource = dt;
-        ddlDepartment.DataValueField = "DepartmentID";
-        ddlDepartment.DataTextField = "DepartmentChoices";
-        ddlDepartment.DataBind();
+        if(!IsPostBack)
+        {
+            DataTable dt = new DepartmentLogic().selectDistinctDepartment(loggedUser.AccountID);
+            dt.Rows.Add(new object[] { "No Department", 0 });
+            ddlDepartment.DataSource = dt;
+            ddlDepartment.DataValueField = "DepartmentID";
+            ddlDepartment.DataTextField = "DepartmentChoices";
+            ddlDepartment.DataBind();
+        }        
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         Staff loggedInStaff = (Staff)Session["LoggedUser"];
 
+        DateTime dt = new DateTime();
+        if (!DateTime.TryParseExact(txtDOB.Text, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out dt)) 
+        {
+            dt = DateTime.Today;
+        }
         Staff staffobject = new Staff(0,
             txtStaffCode.Text,
             txtName.Text,
@@ -41,7 +49,8 @@ public partial class registrestaff : System.Web.UI.Page
             Utility.GetSHA512Hash(txtPassword.Text),
             ddlUserType.SelectedValue,
             txtDesignation.Text,
-            Convert.ToDateTime(txtDOB.Text),
+            dt,
+            //Convert.ToDateTime(txtDOB.Text),
             System.DateTime.Now,
             Convert.ToInt32(txtSalary.Text),
             cbxIsActive.Checked,

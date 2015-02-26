@@ -13,7 +13,7 @@ public partial class generatepayslip : System.Web.UI.Page
         try
         {
             AppUser LoggedAppUser = (AppUser)Session["AppUser"];
-            if (LoggedAppUser == null || LoggedAppUser.UserType != "HotelAdmin")
+            if (LoggedAppUser == null || LoggedAppUser.UserType != "Hotel Admin")
             {
                 Response.Redirect("login.aspx");
             }

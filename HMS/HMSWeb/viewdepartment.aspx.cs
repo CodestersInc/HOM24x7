@@ -12,7 +12,7 @@ public partial class viewdepartment : System.Web.UI.Page
     {
         Staff loggedUser = (Staff)Session["LoggedUser"];
 
-        if (Session["StaffUserType"].ToString() != "HotelAdmin")
+        if (Session["StaffUserType"].ToString() != "Hotel Admin")
         {
             Response.Redirect("login.aspx");
         }

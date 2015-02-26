@@ -12,7 +12,7 @@ public partial class viewstaff : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["loggedUser"];
-        if (loggedUser == null || loggedUser.UserType != "HotelAdmin")
+        if (loggedUser == null || loggedUser.UserType != "Hotel Admin")
         {
             Response.Redirect("login.aspx");
         }
@@ -32,7 +32,7 @@ public partial class viewstaff : System.Web.UI.Page
             txtEmail.Text = staffobj.Email;
             txtPhone.Text = staffobj.Phone;
             ddlUserType.SelectedValue = staffobj.UserType;
-            ddlDesignation.SelectedValue = staffobj.Designation;
+            txtDesignation.Text = staffobj.Designation;
             txtDOB.Text = (staffobj.DOB).Date.ToString();
             txtDOJ.Text = (staffobj.DOJ).Date.ToString();
             txtSalary.Text = staffobj.Salary.ToString();
@@ -59,7 +59,7 @@ public partial class viewstaff : System.Web.UI.Page
         staffobj.Email = txtEmail.Text;
         staffobj.Phone = txtPhone.Text;
         staffobj.UserType = ddlUserType.SelectedValue;
-        staffobj.Designation = ddlDesignation.SelectedValue;
+        staffobj.Designation = txtDesignation.Text;
         staffobj.DOB = Convert.ToDateTime(txtDOB.Text);
         staffobj.DOJ = Convert.ToDateTime(txtDOJ.Text);
         staffobj.Salary = Convert.ToInt64(txtSalary.Text);

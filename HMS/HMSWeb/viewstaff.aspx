@@ -74,26 +74,19 @@
                                 <div class="control-group">
                                     <label class="control-label">User Type</label>
                                     <div class="controls">
-                                        <asp:DropDownList ID="ddlUserType" runat="server" CssClass="span6" data-placeholder="Choose a Category" TabIndex="1">
-                                            <asp:ListItem>Select...</asp:ListItem>
-                                            <asp:ListItem Value="HotelAdmin">Hotel Admin</asp:ListItem>
-                                            <asp:ListItem Value="Service">Service</asp:ListItem>
-                                            <asp:ListItem Value="Reception">Reception</asp:ListItem>
-                                            <asp:ListItem Value="DepartmentManager">Manager</asp:ListItem>
+                                        <asp:DropDownList ID="ddlUserType" runat="server" CssClass="span4" data-placeholder="Choose a Category" TabIndex="1">
+                                            <asp:ListItem Value="Hotel Admin">Hotel Admin</asp:ListItem>
+                                            <asp:ListItem Value="Regular Staff">Reception Staff</asp:ListItem>
+                                            <asp:ListItem Value="Regular Staff">Regular Staff</asp:ListItem>
+                                            <asp:ListItem Value="Managerial Staff">Managerial Staff</asp:ListItem>
                                         </asp:DropDownList>
                                     </div>
                                 </div>
-
+                                
                                 <div class="control-group">
                                     <label class="control-label">Designation</label>
                                     <div class="controls">
-                                        <asp:DropDownList ID="ddlDesignation" runat="server" CssClass="span6" data-placeholder="Choose a Category" TabIndex="1">
-                                            <asp:ListItem>Select...</asp:ListItem>
-                                            <asp:ListItem Value="MaintainanceStaff">Maintenance Staff</asp:ListItem>
-                                            <asp:ListItem Value="DepartmentManager">Department Manager</asp:ListItem>
-                                            <asp:ListItem Value="Housekeeping">House keeping</asp:ListItem>
-                                            <asp:ListItem Value="AdminStaff">Administration Staff</asp:ListItem>
-                                        </asp:DropDownList>
+                                        <asp:TextBox ID="txtDesignation" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter the designation of staff member (eg: Cook, Manager, Receptionist,etc.)" data-original-title="Hint"></asp:TextBox>
                                     </div>
                                 </div>
 
@@ -123,19 +116,7 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <%--                                <div class="control-group">
-                                    <label class="control-label">Salary Frequency</label>
-                                    <div class="controls">
-                                        <asp:DropDownList ID="ddlSalaryFrequency" runat="server" CssClass="span6" data-placeholder="Choose a Category" TabIndex="1">
-                                            <asp:ListItem>Select...</asp:ListItem>
-                                            <asp:ListItem Value="Monthly">Monthly</asp:ListItem>
-                                            <asp:ListItem Value="Weekly">Weekly</asp:ListItem>
-                                            <asp:ListItem Value="Hourly">Hourly</asp:ListItem>
-                                        </asp:DropDownList>
-                                    </div>
-                                </div>--%>
-
+                                
                                 <div class="control-group">
                                     <label class="control-label">Is Active</label>
                                     <div class="controls">
@@ -151,9 +132,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Department</label>
                                     <div class="controls">
-                                        <asp:DropDownList ID="ddlDepartment" runat="server" CssClass="span6" data-placeholder="Choose a Category" TabIndex="1">
-                                            <asp:ListItem>Select...</asp:ListItem>
-                                        </asp:DropDownList>
+                                        <asp:DropDownList ID="ddlDepartment" runat="server" CssClass="span6" data-placeholder="Choose a Category" TabIndex="1"/>                                            
                                     </div>
                                 </div>
 
