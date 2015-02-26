@@ -91,7 +91,7 @@
                                         <asp:Repeater ID="Repeater1" runat="server">
                                             <ItemTemplate>
                                                 <tr>
-                                                    <td><%# Eval("AttendanceDate") %></td>
+                                                    <td><%# Eval("AttendanceDate", "{0:dd-MM-yyyy}") %></td>
                                                     <td><%# Eval("StaffCode") %></td>
                                                     <td><%# Eval("Name") %></td>
                                                     <td>

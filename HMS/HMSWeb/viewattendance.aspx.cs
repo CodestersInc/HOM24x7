@@ -11,17 +11,20 @@ public partial class viewattendance : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["LoggedUser"];
-        
-        
-        if (loggedUser != null && (loggedUser.UserType == "Managerial Staff" || loggedUser.UserType != "Hotel Admin"))
-        {
-            //Do work if the logged user is a hotel admin or department manager
-
-        }
-        else
+        if (loggedUser == null || loggedUser.UserType != "Hotel Admin")
         {
             Response.Redirect("login.aspx");
         }
+        
+        //if (loggedUser != null && (loggedUser.UserType == "Managerial Staff" || loggedUser.UserType != "Hotel Admin"))
+        //{
+        //    //Do work if the logged user is a hotel admin or department manager
+
+        //}
+        //else
+        //{
+        //    Response.Redirect("login.aspx");
+        //}
 
         
     }
