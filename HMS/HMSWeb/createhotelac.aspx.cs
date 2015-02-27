@@ -39,6 +39,12 @@ public partial class hacregister : System.Web.UI.Page
 
         if (accountobject != null)
         {
+            DepartmentLogic departmentLogicObj = new DepartmentLogic();
+            Department firstDepartment = departmentLogicObj.create(new Department(0,
+            "Admin",
+            newaccount.AccountID,
+            0));
+           
             Staff staffobj = new Staff(0,
                 txtStaffCode.Text,
                 txtName.Text,
@@ -47,14 +53,16 @@ public partial class hacregister : System.Web.UI.Page
                 Utility.GetSHA512Hash(txtUsername.Text),                           //to be modified in future to email id
                 Utility.GetSHA512Hash(txtPassword.Text),
                 "Hotel Admin",
-                "Admin",
+                "Hotel Admin",
                 Convert.ToDateTime(txtDOB.Text),
                 DateTime.Now,
                 Convert.ToInt32(txtSalary.Text),
                 true,
-                0,
+                firstDepartment.DepartmentID,
                 accountobject.AccountID);
 
+            firstDepartment.ManagerID = staffobj.StaffID;
+            departmentLogicObj.update(firstDepartment);           
 
             Staff staffobject = staffLogic.create(staffobj);
             //START Add a regular season so the hotel can be managed using it on the regular basis
