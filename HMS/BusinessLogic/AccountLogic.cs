@@ -32,9 +32,7 @@ namespace BusinessLogic
 
         public Account create(Account obj)
         {
-            String insertQuery = "insert into Account values(@Company, @ContactPerson, @Email, @Phone, @Address, @Website, @Features)";
-            String selectQuery = "select * from Account where Company=@Company and ContactPerson=@ContactPerson and Email=@Email and Phone=@Phone and Address=@Address and Website=@Website and Features=@Features";
-
+            String insertQuery = "insert into Account values(@Company, @ContactPerson, @Email, @Phone, @Address, @Website, @Features)";       
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
@@ -50,7 +48,10 @@ namespace BusinessLogic
 
             if (res == 1)
             {
+                String selectQuery = "select * from Account where Company=@Company and ContactPerson=@ContactPerson and Email=@Email and Phone=@Phone and Address=@Address and Website=@Website and Features=@Features";
+
                 List<SqlParameter> lstParams1 = new List<SqlParameter>();
+
                 lstParams1.Add(new SqlParameter("@Company", obj.Company));
                 lstParams1.Add(new SqlParameter("@ContactPerson", obj.ContactPerson));
                 lstParams1.Add(new SqlParameter("@Email", obj.Email));
@@ -67,7 +68,7 @@ namespace BusinessLogic
                         dt.Rows[0]["Company"].ToString(),
                         dt.Rows[0]["ContactPerson"].ToString(),
                         dt.Rows[0]["Email"].ToString(),
-                        Convert.ToInt64(dt.Rows[0]["Phone"]),
+                        dt.Rows[0]["Phone"].ToString(),
                         dt.Rows[0]["Address"].ToString(),
                         dt.Rows[0]["WebSite"].ToString(),
                         Convert.ToBoolean(dt.Rows[0]["Features"]));
@@ -127,7 +128,7 @@ namespace BusinessLogic
                     dt.Rows[0]["Company"].ToString(),
                     dt.Rows[0]["ContactPerson"].ToString(),
                     dt.Rows[0]["Email"].ToString(),
-                    Convert.ToInt64(dt.Rows[0]["Phone"]),
+                    dt.Rows[0]["Phone"].ToString(),
                     dt.Rows[0]["Address"].ToString(),
                     dt.Rows[0]["WebSite"].ToString(),
                     Convert.ToBoolean(dt.Rows[0]["Features"]));
@@ -164,7 +165,7 @@ namespace BusinessLogic
                     dt.Rows[0]["Company"].ToString(),
                     dt.Rows[0]["ContactPerson"].ToString(),
                     dt.Rows[0]["Email"].ToString(),
-                    Convert.ToInt64(dt.Rows[0]["Phone"]),
+                    dt.Rows[0]["Phone"].ToString(),
                     dt.Rows[0]["Address"].ToString(),
                     dt.Rows[0]["WebSite"].ToString(),
                     Convert.ToBoolean(dt.Rows[0]["Features"]));

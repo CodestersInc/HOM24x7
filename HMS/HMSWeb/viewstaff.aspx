@@ -49,7 +49,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Name</label>
                                     <div class="controls">
-                                        <asp:TextBox ID="txtName" runat="server" CssClass="span6 popovers" data-trigger="hover" data-content="Enter the full name of staff member." data-original-title="Popover header"></asp:TextBox>
+                                        <asp:TextBox ID="txtName" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter the full name of staff member." data-original-title="Popover header"></asp:TextBox>
                                     </div>
                                 </div>
 
@@ -58,7 +58,7 @@
                                     <div class="controls">
                                         <div class="input-icon left">
                                             <i class="icon-envelope"></i>
-                                            <asp:TextBox ID="txtEmail" runat="server" placeholder="Email Address"></asp:TextBox>
+                                            <asp:TextBox ID="txtEmail" runat="server" placeholder="Email Address" CssClass="span4"></asp:TextBox>
                                         </div>
                                     </div>
                                 </div>
@@ -66,8 +66,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Phone</label>
                                     <div class="controls">
-                                        <asp:TextBox ID="txtPhone" runat="server" data-mask="(999) 999-9999" CssClass="span5"></asp:TextBox>
-                                        <span class="help-inline">(999) 999-9999</span>
+                                        <asp:TextBox ID="txtPhone" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter a 10 digit number" data-original-title="Instructions"></asp:TextBox>                                                                                
                                     </div>
                                 </div>
 
@@ -93,8 +92,8 @@
                                 <div class="control-group">
                                     <label class="control-label">Date of Birth</label>
                                     <div class="controls">
-                                        <div class="input-append date date-picker" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-                                            <asp:TextBox ID="txtDOB" runat="server" CssClass=" m-ctrl-medium date-picker" size="16"></asp:TextBox>
+                                        <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+                                            <asp:TextBox ID="txtDOB" runat="server"  CssClass="span6 txtDOB" Text="dd-mm-yyyy"></asp:TextBox>
                                             <span class="add-on"><i class="icon-calendar"></i></span>
                                         </div>
                                     </div>
@@ -103,7 +102,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Date of Join</label>
                                     <div class="controls">
-                                        <asp:TextBox ID="txtDOJ" Enabled="false" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txtDOJ" Enabled="false" runat="server" CssClass="span2"></asp:TextBox>
                                     </div>
                                 </div>
 
@@ -120,19 +119,14 @@
                                 <div class="control-group">
                                     <label class="control-label">Is Active</label>
                                     <div class="controls">
-                                        <asp:RadioButton ID="radioYes" runat="server" GroupName="IsActive" />
-                                        <span style="position: relative; top: 4px">Yes</span>
-
-                                        <asp:RadioButton ID="radioNo" runat="server" GroupName="IsActive" />
-                                        <span style="position: relative; top: 4px">No</span>
-
+                                        <asp:CheckBox ID="cbxIsActive" CssClass="success-toggle-button toggle-button" runat="server" />
                                     </div>
                                 </div>
 
                                 <div class="control-group">
                                     <label class="control-label">Department</label>
                                     <div class="controls">
-                                        <asp:DropDownList ID="ddlDepartment" runat="server" CssClass="span6" data-placeholder="Choose a Category" TabIndex="1"/>                                            
+                                        <asp:DropDownList ID="ddlDepartment" runat="server" CssClass="span4" data-placeholder="Choose a Category" TabIndex="1"/>                                            
                                     </div>
                                 </div>
 
@@ -157,8 +151,7 @@
     <script type="text/javascript" src="assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="assets/bootstrap-daterangepicker/date.js"></script>
     <script type="text/javascript" src="assets/bootstrap-daterangepicker/daterangepicker.js"></script>
-
-    <script type="text/javascript" src="assets/bootstrap-toggle-buttons/static/js/jquery.toggle.buttons.js"></script>
+    <script type="text/javascript" src="assets/bootstrap-toggle-buttons/static/js/jquery.toggle.yesno-buttons.js"></script>
 
     <script>
         $(".date-picker").datepicker();
@@ -167,57 +160,17 @@
             if (!jQuery().toggleButtons) {
                 return;
             }
-            $('.basic-toggle-button').toggleButtons();
-            $('.text-toggle-button').toggleButtons({
-                width: 200,
-                label: {
-                    enabled: "Lorem Ipsum",
-                    disabled: "Dolor Sit"
-                }
-            });
-            $('.danger-toggle-button').toggleButtons({
-                style: {
-                    // Accepted values ["primary", "danger", "info", "success", "warning"] or nothing
-                    enabled: "danger",
-                    disabled: "info"
-                }
-            });
-            $('.info-toggle-button').toggleButtons({
-                style: {
-                    enabled: "info",
-                    disabled: ""
-                }
-            });
             $('.success-toggle-button').toggleButtons({
                 style: {
                     enabled: "success",
                     disabled: "danger"
                 }
             });
-            $('.warning-toggle-button').toggleButtons({
-                style: {
-                    enabled: "warning",
-                    disabled: "success"
-                }
-            });
-
-            $('.height-toggle-button').toggleButtons({
-                height: 100,
-                font: {
-                    'line-height': '100px',
-                    'font-size': '20px',
-                    'font-style': 'italic'
-                }
-            });
-
-            $('.not-animated-toggle-button').toggleButtons({
-                animated: false
-            });
-
-            $('.transition-value-toggle-button').toggleButtons({
-                transitionspeed: 1 // default value: 0.05
-            });
-
         }
+
+        $(".txtDOB").keypress(function (e) {
+            e.preventDefault();
+        });
+
     </script>
 </asp:Content>

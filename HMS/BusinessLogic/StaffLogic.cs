@@ -15,7 +15,7 @@ namespace BusinessLogic
     {
         public DataTable searchManager(int ID)
         {
-            String query = "select Department.Name as 'DepartmentName', Staff.* from Department,Staff where Staff.AccountID=@ID order by Staff.StaffCode";
+            String query = "select Department.Name as 'DepartmentName', Staff.* from Department,Staff where staff.DepartmentID=Department.DepartmentID and Staff.AccountID=@ID order by Staff.StaffCode";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
             lstParams.Add(new SqlParameter("@ID", ID));

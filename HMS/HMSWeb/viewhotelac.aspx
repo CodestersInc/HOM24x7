@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="viewhotelac.aspx.cs" Inherits="viewhotelac" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" runat="Server">
+    <link rel="stylesheet" href="assets/bootstrap-toggle-buttons/static/stylesheets/bootstrap-toggle-buttons.css" />
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="Server">
@@ -39,61 +40,62 @@
                             <div class="control-group">
                                 <label class="control-label">Comapny</label>
                                 <div class="controls">
-                                    <asp:TextBox ID="txtCompany" runat="server" CssClass="span6 popovers" data-trigger="hover" data-content="Please enter the name of the registering organization." data-original-title="Suggestions"></asp:TextBox>
+                                    <asp:TextBox ID="txtCompany" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Please enter the name of the registering organization." data-original-title="Suggestions"></asp:TextBox>
                                 </div>
                             </div>
+
                             <div class="control-group">
                                 <label class="control-label">Contact Person</label>
                                 <div class="controls">
-                                    <asp:TextBox ID="txtContact" runat="server" CssClass="span6 popovers" data-trigger="hover" data-content="Enter the full name of the contact person representing the organization." data-original-title="Suggestions"></asp:TextBox>
+                                    <asp:TextBox ID="txtContact" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter the full name of the contact person representing the organization." data-original-title="Suggestions"></asp:TextBox>
                                 </div>
                             </div>
+
                             <div class="control-group">
                                 <label class="control-label">Email Address</label>
                                 <div class="controls">
                                     <div class="input-icon left">
                                         <i class="icon-envelope"></i>
-                                        <asp:TextBox ID="txtEmail" runat="server" placeholder="Email Address"></asp:TextBox>
+                                        <asp:TextBox ID="txtEmail" runat="server" CssClass="span4" placeholder="Email Address"></asp:TextBox>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="control-group">
                                 <label class="control-label">Phone</label>
                                 <div class="controls">
-                                    <asp:TextBox ID="txtPhone" runat="server" CssClass="span5"></asp:TextBox>
+                                    <asp:TextBox ID="txtPhone" runat="server" CssClass="span4"></asp:TextBox>
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
+
                             <div class="control-group">
                                 <label class="control-label">Address</label>
                                 <div class="controls">
-                                    <asp:TextBox ID="txtAddress" CssClass="span6" Rows="3" TextMode="MultiLine" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtAddress" CssClass="span4" Rows="3" TextMode="MultiLine" runat="server"></asp:TextBox>
                                 </div>
                             </div>
+
                             <div class="control-group">
                                 <label class="control-label">Website URL</label>
                                 <div class="controls">
-                                    <div class="input-prepend">
-                                        <span class="add-on">@</span>
+                                    <div class="input-prepend">                                        
+                                        <span class="add-on">URL</span>
                                         <asp:TextBox ID="txtWebsite" placeholder="Enter website URL" runat="server"></asp:TextBox>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="control-group">
                                 <label class="control-label">Features</label>
                                 <div class="controls">
-                                    <div class="checkbox line">
-                                        <label class="checker">
-                                            <asp:CheckBox ID="cbxFeatures" runat="server" />
-                                            Available
-                                        </label>
-                                    </div>
+                                    <asp:CheckBox ID="cbxFeatures" CssClass="success-toggle-button toggle-button" runat="server" />
                                 </div>
                             </div>
+
                             <div class="form-actions">
-                                <asp:LinkButton ID="btnUpdate" CssClass="btn btn-inverse" runat="server" OnClick="btnUpdate_Click"><i class="icon-refresh icon-white"></i>Update</asp:LinkButton>
-                                <asp:Button ID="btnReset" CssClass="btn" runat="server" Text="Reset" />
-                                <asp:Button ID="btnCancel" CssClass="btn" runat="server" Text="Cancel" />
+                                <asp:LinkButton ID="btnUpdate" CssClass="btn btn-inverse" runat="server" OnClick="btnUpdate_Click"><i class="icon-refresh icon-white"></i>Update</asp:LinkButton>                                
+                                <asp:Button ID="btnCancel" CssClass="btn" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
                             </div>
                         </div>
                     </div>
@@ -106,5 +108,25 @@
     <!-- END PAGE CONTAINER-->
 </asp:Content>
 
-<asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" Runat="Server">
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
+    <script type="text/javascript" src="assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="assets/bootstrap-daterangepicker/date.js"></script>
+    <script type="text/javascript" src="assets/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script type="text/javascript" src="assets/bootstrap-toggle-buttons/static/js/jquery.toggle.buttons.js"></script>
+
+    <script>
+        $(".date-picker").datepicker();
+
+        var handleToggleButtons = function () {
+            if (!jQuery().toggleButtons) {
+                return;
+            }
+            $('.success-toggle-button').toggleButtons({
+                style: {
+                    enabled: "success",
+                    disabled: "danger"
+                }
+            });
+        }
+    </script>
 </asp:Content>

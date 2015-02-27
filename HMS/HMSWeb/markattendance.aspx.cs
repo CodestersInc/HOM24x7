@@ -12,19 +12,11 @@ public partial class markattendance : System.Web.UI.Page
     {
 
         Staff loggedUser = (Staff)Session["LoggedUser"];
-        if (loggedUser == null || loggedUser.UserType != "Hotel Admin")
+        if (loggedUser == null || loggedUser.UserType != "HotelAdmin" || loggedUser.UserType != "Manager")
         {
             Response.Redirect("login.aspx");
         }
-        //if (loggedUser != null && (loggedUser.UserType == "Managerial Staff" || loggedUser.UserType != "Hotel Admin"))
-        //{
-        //    //Do work if the logged user is a hotel admin or department manager
 
-        //}
-        //else
-        //{
-        //    Response.Redirect("login.aspx");
-        //}
         AttendanceLogic attendanceLogic = new AttendanceLogic();
 
         if (attendanceLogic.isMarked(loggedUser.DepartmentID, loggedUser.AccountID))

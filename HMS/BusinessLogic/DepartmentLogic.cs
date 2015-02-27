@@ -117,5 +117,13 @@ namespace BusinessLogic
 
             return DBUtility.Select(query, lstParams);
         }
+
+        public int fetchLastRecordId()
+        {
+            String query = "select MAX(DepartmentID) from Department";
+            DataTable dt = DBUtility.Select(query, new List<SqlParameter>());
+
+            return Convert.ToInt32(dt.Rows[0][0]);
+        }
     }
 }

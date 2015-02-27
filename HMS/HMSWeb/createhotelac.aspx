@@ -40,14 +40,14 @@
                             <div class="control-group">
                                 <label class="control-label">Comapny</label>
                                 <div class="controls">
-                                    <asp:TextBox ID="txtCompany" runat="server" CssClass="span6 popovers" data-trigger="hover" data-content="Please enter the name of the registering organization." data-original-title="Suggestions"></asp:TextBox>
+                                    <asp:TextBox ID="txtCompany" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Please enter the name of the registering organization." data-original-title="Suggestions"></asp:TextBox>
                                 </div>
                             </div>
 
                             <div class="control-group">
                                 <label class="control-label">Contact Person</label>
                                 <div class="controls">
-                                    <asp:TextBox ID="txtContact" runat="server" CssClass="span6 popovers" data-trigger="hover" data-content="Enter the full name of the contact person representing the organization." data-original-title="Suggestions"></asp:TextBox>
+                                    <asp:TextBox ID="txtContact" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter the full name of the contact person representing the organization." data-original-title="Suggestions"></asp:TextBox>
                                 </div>
                             </div>
 
@@ -71,7 +71,7 @@
                             <div class="control-group">
                                 <label class="control-label">Address</label>
                                 <div class="controls">
-                                    <asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine" CssClass="span6" Rows="3"></asp:TextBox>
+                                    <asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine" CssClass="span4" Rows="3"></asp:TextBox>
                                 </div>
                             </div>
 
@@ -79,7 +79,7 @@
                                 <label class="control-label">Website URL</label>
                                 <div class="controls">
                                     <div class="input-prepend">
-                                        <span class="add-on">@</span>
+                                        <span class="add-on">URL</span>
                                         <asp:TextBox ID="txtWebsite" placeholder="Enter website URL" runat="server"></asp:TextBox>
                                     </div>
                                 </div>
@@ -112,7 +112,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Name</label>
                                     <div class="controls">
-                                        <asp:TextBox ID="txtName" runat="server" CssClass="span6 popovers" data-trigger="hover" data-content="Enter the full name of staff member." data-original-title="Popover header"></asp:TextBox>
+                                        <asp:TextBox ID="txtName" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter the full name of staff member." data-original-title="Popover header"></asp:TextBox>
                                     </div>
                                 </div>
 
@@ -136,14 +136,14 @@
                                 <div class="control-group">
                                     <label class="control-label">User Name</label>
                                     <div class="controls">
-                                        <asp:TextBox ID="txtUsername" runat="server" CssClass="span6 popovers" data-trigger="hover" data-content="Enter a distinct username." data-original-title="Suggestions"></asp:TextBox>
+                                        <asp:TextBox ID="txtUsername" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter a distinct username." data-original-title="Suggestions"></asp:TextBox>
                                     </div>
                                 </div>
 
                                 <div class="control-group">
                                     <label class="control-label">Password</label>
                                     <div class="controls">
-                                        <asp:TextBox ID="txtPassword" TextMode="Password" runat="server" CssClass="span6 popovers" data-trigger="hover" data-content="Enter a strong password(8-10 characters long)." data-original-title="Suggestions"></asp:TextBox>
+                                        <asp:TextBox ID="txtPassword" TextMode="Password" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter a strong password(8-10 characters long)." data-original-title="Suggestions"></asp:TextBox>
                                     </div>
                                 </div>
                             </div>

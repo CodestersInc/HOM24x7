@@ -36,7 +36,7 @@ public partial class viewhotelac : System.Web.UI.Page
         accountobj.Company = txtCompany.Text;
         accountobj.ContactPerson = txtContact.Text;
         accountobj.Email = txtEmail.Text;
-        accountobj.Phone = Convert.ToInt64(txtPhone.Text);
+        accountobj.Phone = txtPhone.Text;
         accountobj.Address = txtAddress.Text;
         accountobj.Website = txtWebsite.Text;
         accountobj.Features = cbxFeatures.Checked;
@@ -49,5 +49,9 @@ public partial class viewhotelac : System.Web.UI.Page
         {
             Response.Redirect("ErrorPage500.html");
         }
+    }
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("searchhotelac.aspx");
     }
 }

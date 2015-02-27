@@ -28,7 +28,7 @@
                 <div class="control-group">
                     <label class="control-label">Account Name</label>
                     <div class="controls">
-                        <asp:TextBox ID="txtName" runat="server" CssClass="span6  tooltips" data-trigger="hover" data-original-title="Enter account to search for."></asp:TextBox>
+                        <asp:TextBox ID="txtName" runat="server" CssClass="span4 tooltips" data-trigger="hover" data-original-title="Enter account to search for."></asp:TextBox>
                         <asp:Button ID="btnSubmit" CssClass="btn btn-info" runat="server" Text="Search" OnClick="btnSubmit_Click" />
                     </div>
                 </div>
@@ -50,18 +50,12 @@
                     <div class="widget-body">
                         <table class="table table-striped table-bordered table-advance table-hover">
                             <tr>
-                                <th>Company
-                                </th>
-                                <th>Contact person
-                                </th>
-                                <th>Email
-                                </th>
-                                <th>Phone
-                                </th>
-                                <th>Website
-                                </th>
-                                <th>
-                                </th>
+                                <th>Company</th>
+                                <th>Contact Person</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Website</th>
+                                <th></th>
                             </tr>
                             <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
                                 <ItemTemplate>
@@ -81,7 +75,7 @@
                                         <td>
                                             <%# Eval("Website") %>
                                         </td>
-                                        <td>
+                                        <td style="text-align:center">
                                             <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewhotelac.aspx?ID=" + Eval("AccountID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
                                             <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("AccountID") %>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>
                                         </td>

@@ -41,14 +41,14 @@
                                     <div class="control-group">
                                         <label class="control-label">Department Name</label>
                                         <div class="controls">
-                                            <asp:TextBox ID="txtName" runat="server" CssClass="span6 popovers" data-trigger="hover" data-content="Enter the department name." data-original-title="Popover header"></asp:TextBox>
+                                            <asp:TextBox ID="txtName" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter the department name." data-original-title="Popover header"></asp:TextBox>
                                         </div>
                                     </div>
 
                                     <div class="control-group">
                                         <label class="control-label">Manager Name</label>
                                         <div class="controls">
-                                            <asp:TextBox ID="txtManagerName" runat="server" CssClass="span6 " placeholder="Disabled input here..." disabled=""></asp:TextBox>
+                                            <asp:TextBox ID="txtManagerName" runat="server" CssClass="span4" placeholder="Disabled input here..." disabled=""></asp:TextBox>
                                         </div>
                                     </div>
 

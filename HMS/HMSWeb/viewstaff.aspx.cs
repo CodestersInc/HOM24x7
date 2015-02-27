@@ -33,17 +33,10 @@ public partial class viewstaff : System.Web.UI.Page
             txtPhone.Text = staffobj.Phone;
             ddlUserType.SelectedValue = staffobj.UserType;
             txtDesignation.Text = staffobj.Designation;
-            txtDOB.Text = (staffobj.DOB).Date.ToString();
-            txtDOJ.Text = (staffobj.DOJ).Date.ToString();
+            txtDOB.Text = (staffobj.DOB).ToShortDateString();
+            txtDOJ.Text = (staffobj.DOJ).ToShortDateString();
             txtSalary.Text = staffobj.Salary.ToString();
-
-            if (staffobj.IsActive == true)
-            {
-                radioYes.Checked = true;
-            }
-            else
-                radioNo.Checked = true;
-
+            cbxIsActive.Checked = staffobj.IsActive;
             ddlDepartment.SelectedValue = staffobj.DepartmentID.ToString();
         }
     }
@@ -63,7 +56,7 @@ public partial class viewstaff : System.Web.UI.Page
         staffobj.DOB = Convert.ToDateTime(txtDOB.Text);
         staffobj.DOJ = Convert.ToDateTime(txtDOJ.Text);
         staffobj.Salary = Convert.ToInt64(txtSalary.Text);
-        staffobj.IsActive = Convert.ToBoolean(radioYes.Checked);
+        staffobj.IsActive = Convert.ToBoolean(cbxIsActive.Checked);
         staffobj.DepartmentID = Convert.ToInt32(ddlDepartment.SelectedValue);
         staffobj.AccountID = loggedUser.AccountID;
 

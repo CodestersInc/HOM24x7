@@ -22,34 +22,34 @@ public partial class hacregister : System.Web.UI.Page
     }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
-        AccountLogic accountLogin = new AccountLogic();
+        AccountLogic accountLogic = new AccountLogic();
         StaffLogic staffLogic = new StaffLogic();
         SeasonLogic seasonLogic = new SeasonLogic();
+        DepartmentLogic departmentLogic = new DepartmentLogic();
 
-        Account newaccount = new Account(0,
+        Account newAccount = accountLogic.create(new Account(0,
             txtCompany.Text,
             txtContact.Text,
             txtAccountEmail.Text,
-            Convert.ToInt64(txtAccountPhone.Text),
+            txtAccountPhone.Text,
             txtAddress.Text,
             txtWebsite.Text,
-            cbxFeatures.Checked);
+            cbxFeatures.Checked));
 
-        Account accountobject = accountLogin.create(newaccount);
-
-        if (accountobject != null)
-        {
-            DepartmentLogic departmentLogicObj = new DepartmentLogic();
-            Department firstDepartment = departmentLogicObj.create(new Department(0,
+        if (newAccount != null)
+        {            
+            Department newDepartment = departmentLogic.create(new Department(0,
             "Admin",
-            newaccount.AccountID,
+            newAccount.AccountID,
             0));
-           
-            Staff staffobj = new Staff(0,
+
+            if (newDepartment != null)
+            {
+                Staff newstaff = staffLogic.create(new Staff(0,
                 txtStaffCode.Text,
                 txtName.Text,
                 txtEmail.Text,
-                Convert.ToString(accountobject.Phone),
+                Convert.ToString(newAccount.Phone),
                 Utility.GetSHA512Hash(txtUsername.Text),                           //to be modified in future to email id
                 Utility.GetSHA512Hash(txtPassword.Text),
                 "Hotel Admin",
@@ -58,36 +58,38 @@ public partial class hacregister : System.Web.UI.Page
                 DateTime.Now,
                 Convert.ToInt32(txtSalary.Text),
                 true,
-                firstDepartment.DepartmentID,
-                accountobject.AccountID);
+                newDepartment.DepartmentID,
+                newAccount.AccountID));
 
-            firstDepartment.ManagerID = staffobj.StaffID;
-            departmentLogicObj.update(firstDepartment);           
+                newDepartment.ManagerID = newstaff.StaffID;
+                departmentLogic.update(newDepartment);
 
-            Staff staffobject = staffLogic.create(staffobj);
-            //START Add a regular season so the hotel can be managed using it on the regular basis
-            Season RegularSeason = seasonLogic.create(new Season(0,
-                "Regular Season",
-                DateTime.Now,
-                DateTime.MaxValue,
-                accountobject.AccountID));
-            //END Add a regular season so the hotel can be managed using it on the regular basis
-            if(staffobject!=null)
-            {
-                if(RegularSeason!=null)
+                //START Add a regular season so the hotel can be managed using it on the regular basis
+                Season RegularSeason = seasonLogic.create(new Season(0,
+                    "Regular Season",
+                    DateTime.Now,
+                    DateTime.MaxValue,
+                    newAccount.AccountID));
+
+                //END Add a regular season so the hotel can be managed using it on the regular basis
+                if (newstaff != null)
                 {
-                    Response.Redirect("home.aspx");
-                }
-                else
-                {
-                    staffLogic.delete(staffobject.StaffID);
-                    accountLogin.delete(accountobject.AccountID);
-                }
+                    if (RegularSeason != null)
+                    {
+                        Response.Redirect("home.aspx");
+                    }
+                    else
+                    {
+                        departmentLogic.delete(newDepartment.DepartmentID);
+                        staffLogic.delete(newstaff.StaffID);
+                        accountLogic.delete(newAccount.AccountID);
+                    }
 
+                }
             }
             else
             {
-                accountLogin.delete(accountobject.AccountID);
+                accountLogic.delete(newAccount.AccountID);
             }
         }
     }

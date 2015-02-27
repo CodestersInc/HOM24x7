@@ -149,6 +149,7 @@
                                     <label class="control-label">Department</label>
                                     <div class="controls">
                                         <asp:DropDownList ID="ddlDepartment" runat="server" CssClass="span4" data-placeholder="Choose a Category" TabIndex="1"/>                                        
+                                        <b>OR</b> <asp:LinkButton ID="btnNewDepartment" runat="server" CssClass="btn" OnClick="btnNewDepartment_Click">Create New Department</asp:LinkButton>
                                     </div>
                                 </div>
 

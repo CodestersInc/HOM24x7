@@ -22,8 +22,8 @@ public partial class registrestaff : System.Web.UI.Page
         }
         if(!IsPostBack)
         {
+            //Fill Department List
             DataTable dt = new DepartmentLogic().selectDistinctDepartment(loggedUser.AccountID);
-            dt.Rows.Add(new object[] { "No Department", 0 });
             ddlDepartment.DataSource = dt;
             ddlDepartment.DataValueField = "DepartmentID";
             ddlDepartment.DataTextField = "DepartmentChoices";
@@ -35,11 +35,6 @@ public partial class registrestaff : System.Web.UI.Page
     {
         Staff loggedInStaff = (Staff)Session["LoggedUser"];
 
-        DateTime dt = new DateTime();
-        if (!DateTime.TryParseExact(txtDOB.Text, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out dt)) 
-        {
-            dt = DateTime.Today;
-        }
         Staff staffobject = new Staff(0,
             txtStaffCode.Text,
             txtName.Text,
@@ -49,9 +44,8 @@ public partial class registrestaff : System.Web.UI.Page
             Utility.GetSHA512Hash(txtPassword.Text),
             ddlUserType.SelectedValue,
             txtDesignation.Text,
-            dt,
-            //Convert.ToDateTime(txtDOB.Text),
-            System.DateTime.Now,
+            Convert.ToDateTime(txtDOB.Text),
+            DateTime.Now,
             Convert.ToInt32(txtSalary.Text),
             cbxIsActive.Checked,
             Convert.ToInt32(ddlDepartment.SelectedValue),
@@ -72,5 +66,9 @@ public partial class registrestaff : System.Web.UI.Page
     protected void btnCancel_Click(object sender, EventArgs e)
     {
         Response.Redirect("home.aspx");
+    }
+    protected void btnNewDepartment_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("createdepartment.aspx");
     }
 }

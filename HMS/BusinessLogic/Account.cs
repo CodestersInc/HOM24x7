@@ -12,7 +12,7 @@ namespace BusinessLogic
         public String Company;
         public String ContactPerson;
         public String Email;
-        public long Phone;              //to be modified later if needed
+        public String Phone;              //to be modified later if needed
         public String Address;
         public String Website;
         public Boolean Features;        //public List<Boolean> Features;
@@ -22,7 +22,7 @@ namespace BusinessLogic
 
         }
 
-        public Account(int AccountID, String Company, String ContactPerson, String Email, long Phone, String Address, String Website, Boolean Features)
+        public Account(int AccountID, String Company, String ContactPerson, String Email, String Phone, String Address, String Website, Boolean Features)
         {
             this.AccountID = AccountID;
             this.Company = Company;
