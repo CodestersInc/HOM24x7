@@ -25,21 +25,27 @@ public partial class viewhotelac : System.Web.UI.Page
             txtPhone.Text = accountobj.Phone.ToString();
             txtAddress.Text = accountobj.Address;
             txtWebsite.Text = accountobj.Website;
-            cbxFeatures.Checked = accountobj.Features;
+            String features = accountobj.Features;
+
+            cbxOnlineBooking.Checked = (features.Contains("#Online Booking#")) ? true : false;
+            cbxPayroll.Checked = (features.Contains("#Payroll#")) ? true : false;
+            cbxService.Checked = (features.Contains("#Service#")) ? true : false;
         }
     }
     protected void btnUpdate_Click(object sender, EventArgs e)
     {
-        Account accountobj = new Account();
+        String features = ((cbxOnlineBooking.Checked) ? "#Online Booking#" : "") +
+            ((cbxPayroll.Checked) ? "#Payroll#" : "") +
+            ((cbxService.Checked) ? "#Service#" : "");
 
-        accountobj.AccountID = Convert.ToInt32(Request.QueryString["ID"]);
-        accountobj.Company = txtCompany.Text;
-        accountobj.ContactPerson = txtContact.Text;
-        accountobj.Email = txtEmail.Text;
-        accountobj.Phone = txtPhone.Text;
-        accountobj.Address = txtAddress.Text;
-        accountobj.Website = txtWebsite.Text;
-        accountobj.Features = cbxFeatures.Checked;
+        Account accountobj = new Account(Convert.ToInt32(Request.QueryString["ID"]),
+            txtCompany.Text,
+            txtContact.Text,
+            txtEmail.Text,
+            txtPhone.Text,
+            txtAddress.Text,
+            txtWebsite.Text,
+            features);
 
         if (new AccountLogic().update(accountobj) == 1)
         {

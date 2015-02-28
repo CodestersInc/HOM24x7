@@ -87,9 +87,23 @@
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label">Features</label>
+                                <label class="control-label">Online Booking Feature</label>
                                 <div class="controls">
-                                    <asp:CheckBox ID="cbxFeatures" CssClass="success-toggle-button toggle-button" runat="server" />
+                                    <asp:CheckBox ID="cbxOnlineBooking" CssClass="success-toggle-button toggle-button" runat="server" />
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">Payroll Feature</label>
+                                <div class="controls">
+                                    <asp:CheckBox ID="cbxPayroll" CssClass="success-toggle-button toggle-button" runat="server" />
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">Service Feature</label>
+                                <div class="controls">
+                                    <asp:CheckBox ID="cbxService" CssClass="success-toggle-button toggle-button" runat="server" />
                                 </div>
                             </div>
 

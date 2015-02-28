@@ -27,6 +27,10 @@ public partial class hacregister : System.Web.UI.Page
         SeasonLogic seasonLogic = new SeasonLogic();
         DepartmentLogic departmentLogic = new DepartmentLogic();
 
+        String features = ((cbxOnlineBooking.Checked) ? "#Online Booking#" : "") +
+            ((cbxPayroll.Checked) ? "#Payroll#" : "") +
+            ((cbxService.Checked) ? "#Service#" : "");
+
         Account newAccount = accountLogic.create(new Account(0,
             txtCompany.Text,
             txtContact.Text,
@@ -34,10 +38,10 @@ public partial class hacregister : System.Web.UI.Page
             txtAccountPhone.Text,
             txtAddress.Text,
             txtWebsite.Text,
-            cbxFeatures.Checked));
+            features));
 
         if (newAccount != null)
-        {            
+        {
             Department newDepartment = departmentLogic.create(new Department(0,
             "Admin",
             newAccount.AccountID,

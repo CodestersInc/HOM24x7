@@ -15,14 +15,14 @@ namespace BusinessLogic
         public String Phone;              //to be modified later if needed
         public String Address;
         public String Website;
-        public Boolean Features;        //public List<Boolean> Features;
+        public String Features;
 
         public Account()
         {
 
         }
 
-        public Account(int AccountID, String Company, String ContactPerson, String Email, String Phone, String Address, String Website, Boolean Features)
+        public Account(int AccountID, String Company, String ContactPerson, String Email, String Phone, String Address, String Website, String Features)
         {
             this.AccountID = AccountID;
             this.Company = Company;

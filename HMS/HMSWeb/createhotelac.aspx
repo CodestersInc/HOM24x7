@@ -86,9 +86,23 @@
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label">Features</label>
+                                <label class="control-label">Online Booking Feature</label>
                                 <div class="controls">
-                                    <asp:CheckBox ID="cbxFeatures" CssClass="success-toggle-button toggle-button" runat="server" />
+                                    <asp:CheckBox ID="cbxOnlineBooking" CssClass="success-toggle-button toggle-button" runat="server" />
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">Payroll Feature</label>
+                                <div class="controls">
+                                    <asp:CheckBox ID="cbxPayroll" CssClass="success-toggle-button toggle-button" runat="server" />
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">Service Feature</label>
+                                <div class="controls">
+                                    <asp:CheckBox ID="cbxService" CssClass="success-toggle-button toggle-button" runat="server" />
                                 </div>
                             </div>
 
@@ -129,7 +143,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Phone</label>
                                     <div class="controls">
-                                        <asp:TextBox ID="txtPhone" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter a 10 digit number" data-original-title="Instructions"></asp:TextBox>                                        
+                                        <asp:TextBox ID="txtPhone" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter a 10 digit number" data-original-title="Instructions"></asp:TextBox>
                                     </div>
                                 </div>
 
@@ -167,7 +181,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Staff Code</label>
                                     <div class="controls">
-                                        <asp:TextBox ID="txtStaffCode" runat="server" CssClass="span2 popovers" data-trigger="hover" data-content="Enter the staff code of staff member (to be assigned or already assigned)" data-original-title="Hint"></asp:TextBox>                                        
+                                        <asp:TextBox ID="txtStaffCode" runat="server" CssClass="span2 popovers" data-trigger="hover" data-content="Enter the staff code of staff member (to be assigned or already assigned)" data-original-title="Hint"></asp:TextBox>
                                     </div>
                                 </div>
 
@@ -219,7 +233,7 @@
         var handleToggleButtons = function () {
             if (!jQuery().toggleButtons) {
                 return;
-            }           
+            }
             $('.success-toggle-button').toggleButtons({
                 style: {
                     enabled: "success",

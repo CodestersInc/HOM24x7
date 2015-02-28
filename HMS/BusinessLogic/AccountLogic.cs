@@ -71,7 +71,7 @@ namespace BusinessLogic
                         dt.Rows[0]["Phone"].ToString(),
                         dt.Rows[0]["Address"].ToString(),
                         dt.Rows[0]["WebSite"].ToString(),
-                        Convert.ToBoolean(dt.Rows[0]["Features"]));
+                        dt.Rows[0]["Features"].ToString());
                 }
                 else
                 {
@@ -86,13 +86,6 @@ namespace BusinessLogic
             String query = "update Account set Company=@Company, Contactperson=@ContactPerson, Email=@Email, Phone=@Phone, Address=@Address, Website=@Website, Features=@Features where AccountID=@AccountID";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
-            int dataVal;
-            if (obj.Features == true)
-            {
-                dataVal = 1;
-            }
-            else dataVal = 0;
-
             lstParams.Add(new SqlParameter("@AccountID", obj.AccountID));
             lstParams.Add(new SqlParameter("@Company", obj.Company));
             lstParams.Add(new SqlParameter("@ContactPerson", obj.ContactPerson));
@@ -100,7 +93,7 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@Phone", obj.Phone));
             lstParams.Add(new SqlParameter("@Address", obj.Address));
             lstParams.Add(new SqlParameter("@Website", obj.Website));
-            lstParams.Add(new SqlParameter("@Features", dataVal));
+            lstParams.Add(new SqlParameter("@Features", obj.Features));
 
             return DBUtility.Modify(query, lstParams);
         }
@@ -131,7 +124,7 @@ namespace BusinessLogic
                     dt.Rows[0]["Phone"].ToString(),
                     dt.Rows[0]["Address"].ToString(),
                     dt.Rows[0]["WebSite"].ToString(),
-                    Convert.ToBoolean(dt.Rows[0]["Features"]));
+                    dt.Rows[0]["Features"].ToString());
             }
             else
             {
@@ -168,7 +161,7 @@ namespace BusinessLogic
                     dt.Rows[0]["Phone"].ToString(),
                     dt.Rows[0]["Address"].ToString(),
                     dt.Rows[0]["WebSite"].ToString(),
-                    Convert.ToBoolean(dt.Rows[0]["Features"]));
+                    dt.Rows[0]["Features"].ToString());
             }
             else
             {

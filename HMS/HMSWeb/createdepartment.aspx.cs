@@ -96,6 +96,7 @@ public partial class adddepartment : System.Web.UI.Page
             managerNamePlaceHolder.Visible = true;
             Repeater1.Visible = false;
             managerChoicePlaceHolder.Visible = false;
+            btnNewManager.Visible = false;
             btnSubmit.Enabled = true;
         }
     }

@@ -148,7 +148,7 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
-    <script src="js/jquery-1.11.2.js"></script>
+    <%--<script src="js/jquery-1.11.2.js"></script>--%>
     <script src="js/jquery-ui.js"></script>
     <script src="js/jquery.ui.rotatable.min.js"></script>
     <link type="text/css" rel="stylesheet" href="css/jquery.ui.rotatable.css" />
@@ -169,7 +169,6 @@
         function save() {
             $("#canvas>.palleteComponent").each(function () {
                 alert($(this).attr('style'));
-                //$(this).attr('style', $(this).attr('style') + 'asdasd;');
             })
         }
     </script>
