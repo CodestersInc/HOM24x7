@@ -60,14 +60,14 @@ public partial class viewstaff : System.Web.UI.Page
         staffobj.DepartmentID = Convert.ToInt32(ddlDepartment.SelectedValue);
         staffobj.AccountID = loggedUser.AccountID;
 
-        if (new StaffLogic().update(staffobj) == 1)
-        {
+        try{
+            new StaffLogic().update(staffobj);
             Response.Redirect("searchstaff.aspx");
-        }
-        else
-        {
+        }catch (Exception ex){
+            
             Response.Redirect("ErrorPage500.html");
         }
+
     }
 
     protected void btnCancel_Click(object sender, EventArgs e)
