@@ -42,7 +42,8 @@
                                 <div class="control-group">
                                     <label class="control-label">Service Name</label>
                                     <div class="controls">
-                                        <asp:TextBox ID="txtName" runat="server" CssClass="span6 popovers" data-trigger="hover" data-content="Enter the full name of staff member." data-original-title="Popover header"></asp:TextBox>
+                                        <asp:TextBox ID="txtName" runat="server" CssClass="span6 popovers" data-trigger="hover" data-content="Enter the full name of Service." data-original-title="Popover header"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ControlToValidate="txtName" ID="ServiceNameRequiredFieldValidator" runat="server" ErrorMessage="Please enter the name of the new Service" ValidationGroup="First"></asp:RequiredFieldValidator>
                                     </div>
                                 </div>
 
@@ -60,12 +61,14 @@
                                     <div class="controls">
                                         <div class="input-prepend input-append">
                                             <span class="add-on">Rs.</span><asp:TextBox ID="txtRate" runat="server"></asp:TextBox><span class="add-on">.00</span>
+                                            <asp:RequiredFieldValidator ControlToValidate="txtRate" Display="Dynamic" ID="RateRequiredFieldValidator" runat="server" ErrorMessage="Please enter Rate of the Service" ValidationGroup="First"></asp:RequiredFieldValidator>
+                                            <asp:RegularExpressionValidator ControlToValidate="txtRate" Display="Dynamic" ID="RateRegularExpressionValidator" runat="server" ErrorMessage="Please enter a non negative Rate" ValidationExpression="^\d+(\.\d\d)?$" ValidationGroup="First"></asp:RegularExpressionValidator>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="form-actions">
-                                    <asp:Button ID="btnSubmit" CssClass="btn btn-success" OnClick="btnSubmit_Click" runat="server" Text="Submit" />
+                                    <asp:Button ID="btnSubmit" ValidationGroup="First" CssClass="btn btn-success" OnClick="btnSubmit_Click" runat="server" Text="Submit" />
                                     <asp:Button ID="btnCancel" CssClass="btn btn-warning" runat="server" Text="Cancel" />
                                 </div>
                             </div>
@@ -80,5 +83,5 @@
     <!-- END PAGE CONTAINER-->
 </asp:Content>
 
-<asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" Runat="Server">
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
 </asp:Content>

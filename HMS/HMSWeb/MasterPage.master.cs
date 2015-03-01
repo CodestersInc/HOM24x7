@@ -89,11 +89,4 @@ public partial class MasterPage : System.Web.UI.MasterPage
     {
         Response.Redirect("userprofile.aspx");
     }
-
-    protected void btnLogout_Click(object sender, EventArgs e)
-    {
-        Session["LoggedUser"] = null;
-        Session["UserType"] = null;
-        Response.Redirect("login.aspx");
-    }
 }

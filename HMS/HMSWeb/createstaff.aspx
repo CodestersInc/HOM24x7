@@ -43,8 +43,7 @@
                                     <label class="control-label">Name</label>
                                     <div class="controls">
                                         <asp:TextBox ID="txtName" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter the full name of staff member." data-original-title="Popover header"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="NameRequiredFieldValidator" runat="server" ErrorMessage="Please enter Staff Name" ControlToValidate="txtName" />
-                                        <asp:RegularExpressionValidator ID="NameRegularExpressionValidator" runat="server" ErrorMessage="The name does not caontain any special characters" ControlToValidate="txtName" ValidationExpression="^[a-zA-Z''-'\s]{1,90}$" />
+                                        <asp:RequiredFieldValidator ID="NameRequiredFieldValidator" runat="server" ErrorMessage="Please enter Staff Name" ControlToValidate="txtName" ValidationGroup="First" />
                                     </div>
                                 </div>
 
@@ -54,8 +53,8 @@
                                         <div class="input-icon left">
                                             <i class="icon-envelope"></i>
                                             <asp:TextBox ID="txtEmail" runat="server" CssClass="span4" placeholder="Email Address"></asp:TextBox>
-                                            <asp:RequiredFieldValidator ID="EmailRequiredFieldValidator" runat="server" ErrorMessage="Please Enter Email Address of the staff" ControlToValidate="txtEmail" />
-                                            <asp:RegularExpressionValidator ID="EmailRegularExpressionValidator" runat="server" ErrorMessage="Please enter valid email addres" ControlToValidate="txtEmail" ValidationExpression="^(?('')(''.+?''@)|(([0-9a-zA-Z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-zA-Z])@))(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,6}))$" />
+                                            <asp:RequiredFieldValidator ControlToValidate="txtEmail" Display="Dynamic" ID="EmailRequiredFieldValidator" runat="server" ErrorMessage="Please enter the Email Adress of the NEW Manager" ValidationGroup="First"></asp:RequiredFieldValidator>
+                                            <asp:RegularExpressionValidator ControlToValidate="txtEmail" Display="Dynamic" ID="EmailRegularExpressionValidator" runat="server" ErrorMessage="Please enter a valid Email address" ValidationGroup="First" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
                                         </div>
                                     </div>
                                 </div>
@@ -64,8 +63,8 @@
                                     <label class="control-label">Phone</label>
                                     <div class="controls">
                                         <asp:TextBox ID="txtPhone" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter a 10 digit number" data-original-title="Instructions"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="PhoneRequiredFieldValidator" runat="server" ErrorMessage="Please Enter 10 Digit Phone number" ControlToValidate="txtPhone" />
-                                        <asp:RegularExpressionValidator ID="PhoneRegularExpressionValidator" runat="server" ErrorMessage="Please enter a valid Phone number" ControlToValidate="txtPhone" ValidationExpression="^[0-9]?[0-9]?[- .]?(\([2-9]\d{2}\)|[2-9]\d{2})[- .]?\d{3}[- .]?\d{4}$" />
+                                        <asp:RequiredFieldValidator ControlToValidate="txtPhone" Display="Dynamic" ID="PhoneRequiredFieldValidator" runat="server" ErrorMessage="Please enter a phone number" ValidationGroup="First"></asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ControlToValidate="txtPhone" Display="Dynamic" ID="PhoneRegularExpressionValidator" runat="server" ErrorMessage="RegularExpressionValidator" ValidationExpression="^[0-1]?[0-1]?[- .]?(\([2-9]\d{2}\)|\d{3})[- .]?\d{3}[- .]?\d{4}$" ValidationGroup="First"></asp:RegularExpressionValidator>
                                     </div>
                                 </div>
 
@@ -73,7 +72,7 @@
                                     <label class="control-label">User Name</label>
                                     <div class="controls">
                                         <asp:TextBox ID="txtUsername" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter a distinct username." data-original-title="Suggestion"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="UsernameRequiredFieldValidator" runat="server" ErrorMessage="Enter a unique username" ControlToValidate="txtUsername" />
+                                        <asp:RequiredFieldValidator ID="UsernameRequiredFieldValidator" runat="server" ErrorMessage="Enter a unique username" ControlToValidate="txtUsername" ValidationGroup="First" />
                                     </div>
                                 </div>
 
@@ -81,7 +80,7 @@
                                     <label class="control-label">Password</label>
                                     <div class="controls">
                                         <asp:TextBox ID="txtPassword" TextMode="Password" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter a strong password(8-10 characters long)." data-original-title="Suggestions"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="PasswordRequiredFieldValidator" runat="server" ErrorMessage="Enter a strong password" ControlToValidate="txtPassword" />
+                                        <asp:RequiredFieldValidator ID="PasswordRequiredFieldValidator" runat="server" ErrorMessage="Enter a strong password" ControlToValidate="txtPassword" ValidationGroup="First" />
                                     </div>
                                 </div>
                             </div>
@@ -106,7 +105,7 @@
                                     <label class="control-label">Staff Code</label>
                                     <div class="controls">
                                         <asp:TextBox ID="txtStaffCode" runat="server" CssClass="span2 popovers" data-trigger="hover" data-content="Enter the staff code of staff member." data-original-title="Popover header"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="StaffCodeRequiredFieldValidator" runat="server" ErrorMessage="Please enter Staff Code" ControlToValidate="txtStaffCode" />
+                                        <asp:RequiredFieldValidator ID="StaffCodeRequiredFieldValidator" runat="server" ErrorMessage="Please enter Staff Code" ControlToValidate="txtStaffCode" ValidationGroup="First" />
                                     </div>
                                 </div>
 
@@ -143,6 +142,8 @@
                                     <div class="controls">
                                         <div class="input-prepend input-append">
                                             <span class="add-on">Rs.</span><asp:TextBox ID="txtSalary" CssClass="span6" runat="server"></asp:TextBox><span class="add-on">.00</span>
+                                            <asp:RequiredFieldValidator ControlToValidate="txtSalary" Display="Dynamic" ID="SalaryRequiredFieldValidator" runat="server" ErrorMessage="Please enter salary of the Staff" ValidationGroup="First"></asp:RequiredFieldValidator>
+                                            <asp:RegularExpressionValidator ControlToValidate="txtSalary" Display="Dynamic" ID="SalaryRegularExpressionValidator" runat="server" ErrorMessage="Please enter a non negative salary" ValidationExpression="^\d+(\.\d\d)?$" ValidationGroup="First"></asp:RegularExpressionValidator>
                                         </div>
                                     </div>
                                 </div>
@@ -164,7 +165,7 @@
                                 </div>
 
                                 <div class="form-actions">
-                                    <asp:Button ID="btnSubmit" CssClass="btn btn-success" runat="server" Text="Submit" OnClick="btnSubmit_Click" />
+                                    <asp:Button ID="btnSubmit" ValidationGroup="First" CssClass="btn btn-success" runat="server" Text="Submit" OnClick="btnSubmit_Click" />
                                     <asp:Button ID="btnCancel" CssClass="btn btn-warning" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
                                 </div>
                             </div>

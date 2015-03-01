@@ -50,7 +50,8 @@
                                 <div class="control-group">
                                     <label class="control-label">Name</label>
                                     <div class="controls">
-                                        <asp:TextBox ID="txtName" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter the full name of staff member." data-original-title="Popover header"></asp:TextBox>                                                                                
+                                        <asp:TextBox ID="txtName" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter the full name of staff member." data-original-title="Popover header"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="NameRequiredFieldValidator" runat="server" ErrorMessage="Please enter Staff Name" ControlToValidate="txtName" ValidationGroup="First" />
                                     </div>
                                 </div>
 
@@ -60,6 +61,8 @@
                                         <div class="input-icon left">
                                             <i class="icon-envelope"></i>
                                             <asp:TextBox ID="txtEmail" runat="server" placeholder="Email Address" CssClass="span4"></asp:TextBox>                                            
+                                            <asp:RequiredFieldValidator ControlToValidate="txtEmail" Display="Dynamic" ID="EmailRequiredFieldValidator" runat="server" ErrorMessage="Please enter the Email Adress of the NEW Manager" ValidationGroup="First"></asp:RequiredFieldValidator>
+                                            <asp:RegularExpressionValidator ControlToValidate="txtEmail" Display="Dynamic" ID="EmailRegularExpressionValidator" runat="server" ErrorMessage="Please enter a valid Email address" ValidationGroup="First" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
                                         </div>
                                     </div>
                                 </div>
@@ -68,6 +71,8 @@
                                     <label class="control-label">Phone</label>
                                     <div class="controls">
                                         <asp:TextBox ID="txtPhone" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter a 10 digit number" data-original-title="Instructions"></asp:TextBox>                                        
+                                        <asp:RequiredFieldValidator ControlToValidate="txtPhone" Display="Dynamic" ID="PhoneRequiredFieldValidator" runat="server" ErrorMessage="Please enter a phone number" ValidationGroup="First"></asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ControlToValidate="txtPhone" Display="Dynamic" ID="PhoneRegularExpressionValidator" runat="server" ErrorMessage="RegularExpressionValidator" ValidationExpression="^[0-1]?[0-1]?[- .]?(\([2-9]\d{2}\)|\d{3})[- .]?\d{3}[- .]?\d{4}$" ValidationGroup="First"></asp:RegularExpressionValidator>
                                     </div>
                                 </div>
 
@@ -113,6 +118,8 @@
                                         <div class="input-prepend input-append">
                                             <span class="add-on">Rs.</span>
                                             <asp:TextBox ID="txtSalary" runat="server"></asp:TextBox><span class="add-on">.00</span>                                            
+                                            <asp:RequiredFieldValidator ControlToValidate="txtSalary" Display="Dynamic" ID="SalaryRequiredFieldValidator" runat="server" ErrorMessage="Please enter salary of the Staff" ValidationGroup="First"></asp:RequiredFieldValidator>
+                                            <asp:RegularExpressionValidator ControlToValidate="txtSalary" Display="Dynamic" ID="SalaryRegularExpressionValidator" runat="server" ErrorMessage="Please enter a non negative salary" ValidationExpression="^\d+(\.\d\d)?$" ValidationGroup="First"></asp:RegularExpressionValidator>
                                         </div>
                                     </div>
                                 </div>

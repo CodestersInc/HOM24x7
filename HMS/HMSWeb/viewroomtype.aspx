@@ -41,6 +41,7 @@
                                     <label class="control-label">Room Type</label>
                                     <div class="controls">
                                         <asp:TextBox ID="txtRoomTypeName" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter a room type" data-original-title="Hint"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ControlToValidate="txtRoomTypeName" ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please add the room Type" Display="Dynamic" ValidationGroup="First"></asp:RequiredFieldValidator>
                                     </div>
                                 </div>
 
@@ -98,7 +99,7 @@
                                 <!--END Repeater-->
 
                                 <div class="form-actions">
-                                    <asp:LinkButton ID="btnUpdate" CssClass="btn btn-inverse" runat="server" OnClick="btnUpdate_Click"><i class="icon-refresh icon-white"></i>Update</asp:LinkButton>
+                                    <asp:LinkButton ID="btnUpdate" ValidationGroup="First" CssClass="btn btn-inverse" runat="server" OnClick="btnUpdate_Click"><i class="icon-refresh icon-white"></i>Update</asp:LinkButton>
                                     <asp:Button ID="btnCancel" CssClass="btn" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
                                 </div>
 

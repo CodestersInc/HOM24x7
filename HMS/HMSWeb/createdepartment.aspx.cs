@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using BusinessLogic;
 using WebUtility;
+using System.Text.RegularExpressions;
 
 public partial class adddepartment : System.Web.UI.Page
 {
@@ -19,8 +20,10 @@ public partial class adddepartment : System.Web.UI.Page
             Response.Redirect("login.aspx");
         }
 
+        //EmailRegularExpressionValidator.ValidationExpression = Regex.Escape(@"^(?("")("".+?""@)|(([0-9a-zA-Z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-zA-Z])@))(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,6}))$");
         if (!IsPostBack)
         {
+            
             Repeater1.DataSource = new StaffLogic().searchManager(loggedUser.AccountID);
             Repeater1.DataBind();
 
@@ -110,10 +113,12 @@ public partial class adddepartment : System.Web.UI.Page
 
     protected void btnNewManager_Click(object sender, EventArgs e)
     {
+        
         ViewState["deptName"] = txtDepartmentName.Text;
         managerChoicePlaceHolder.Visible = false;
         newManagerPlaceHolder.Visible = true;
         btnSubmit.Enabled = true;
         btnNewManager.Visible = false;
+        
     }
 }

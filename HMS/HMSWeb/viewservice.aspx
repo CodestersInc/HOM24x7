@@ -41,6 +41,7 @@
                                         <label class="control-label">Service Name</label>
                                         <div class="controls">
                                             <asp:TextBox ID="txtName" runat="server" CssClass="span6 popovers" data-trigger="hover" data-content="Enter the department name." data-original-title="Popover header"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ControlToValidate="txtName" ID="ServiceNameRequiredFieldValidator" runat="server" ErrorMessage="Please enter the name of the new Service" ValidationGroup="First"></asp:RequiredFieldValidator>
                                         </div>
                                     </div>
 
@@ -58,12 +59,14 @@
                                         <div class="controls">
                                             <div class="input-prepend input-append">
                                                 <span class="add-on">Rs.</span><asp:TextBox ID="txtRate" runat="server"></asp:TextBox><span class="add-on">.00</span>
+                                                <asp:RequiredFieldValidator ControlToValidate="txtRate" Display="Dynamic" ID="RateRequiredFieldValidator" runat="server" ErrorMessage="Please enter Rate of the Service" ValidationGroup="First"></asp:RequiredFieldValidator>
+                                            <asp:RegularExpressionValidator ControlToValidate="txtRate" Display="Dynamic" ID="RateRegularExpressionValidator" runat="server" ErrorMessage="Please enter a non negative Rate" ValidationExpression="^\d+(\.\d\d)?$" ValidationGroup="First"></asp:RegularExpressionValidator>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-actions">
-                                        <asp:LinkButton ID="btnUpdate" CssClass="btn btn-inverse" runat="server" OnClick="btnUpdate_Click"><i class="icon-refresh icon-white"></i>Update</asp:LinkButton>
+                                        <asp:LinkButton ID="btnUpdate" ValidationGroup="First" CssClass="btn btn-inverse" runat="server" OnClick="btnUpdate_Click"><i class="icon-refresh icon-white"></i>Update</asp:LinkButton>
                                         <asp:Button ID="btnCancel" OnClick="btnCancel_Click" CssClass="btn" runat="server" Text="Cancel" />
                                     </div>
                                 </div>

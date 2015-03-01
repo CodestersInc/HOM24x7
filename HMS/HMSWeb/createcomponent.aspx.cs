@@ -16,7 +16,6 @@ public partial class createcomponent : System.Web.UI.Page
         {
             Response.Redirect("login.aspx");
         }
-
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)

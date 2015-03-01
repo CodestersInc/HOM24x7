@@ -42,6 +42,7 @@
                                         <label class="control-label">Department Name</label>
                                         <div class="controls">
                                             <asp:TextBox ID="txtName" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter the department name." data-original-title="Popover header"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ControlToValidate="txtName" ID="NameRequiredFieldValidator" runat="server" ErrorMessage="Please Enter the Name of Department" ValidationGroup="First"></asp:RequiredFieldValidator>
                                         </div>
                                     </div>
 
@@ -78,7 +79,7 @@
                                     </asp:GridView>
 
                                     <div class="form-actions">
-                                        <asp:LinkButton ID="btnUpdate" CssClass="btn btn-inverse" runat="server" OnClick="btnUpdate_Click"><i class="icon-refresh icon-white"></i>Update</asp:LinkButton>
+                                        <asp:LinkButton ValidationGroup="First" ID="btnUpdate" CssClass="btn btn-inverse" runat="server" OnClick="btnUpdate_Click"><i class="icon-refresh icon-white"></i>Update</asp:LinkButton>
                                         <asp:Button ID="btnCancel" CssClass="btn" runat="server" Text="Cancel" />
                                     </div>
                                 </div>

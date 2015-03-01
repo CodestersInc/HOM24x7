@@ -84,7 +84,7 @@
                                         </li>
                                         <li class="divider"></li>
                                         <li>
-                                            <asp:LinkButton ID="btnLogout" OnClick="btnLogout_Click" runat="server"><i class="icon-key"></i> Log Out</asp:LinkButton>
+                                            <a id="btnLogout" href="login.aspx" runat="server"><i class="icon-key"></i> Log Out</a>
                                         </li>
                                     </ul>
                                 </li>

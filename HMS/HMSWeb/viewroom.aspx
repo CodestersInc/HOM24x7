@@ -42,6 +42,7 @@
                                     <label class="control-label">Room Number</label>
                                     <div class="controls">
                                         <asp:TextBox ID="txtRoomNumber" runat="server" CssClass="span2 popovers" data-trigger="hover" data-content="Enter a room number" data-original-title="Popover header"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ControlToValidate="txtRoomNumber" ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please add the room number" Display="Dynamic" ValidationGroup="First"></asp:RequiredFieldValidator>
                                     </div>
                                 </div>
 
@@ -72,7 +73,7 @@
                                 </div>
 
                                 <div class="form-actions">
-                                    <asp:LinkButton ID="btnUpdate" CssClass="btn btn-inverse" runat="server" OnClick="btnUpdate_Click"><i class="icon-refresh icon-white"></i>Update</asp:LinkButton>
+                                    <asp:LinkButton ID="btnUpdate" ValidationGroup="First" CssClass="btn btn-inverse" runat="server" OnClick="btnUpdate_Click"><i class="icon-refresh icon-white"></i>Update</asp:LinkButton>
                                     <asp:Button ID="btnCancel" CssClass="btn btn-warning" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
                                 </div>
                             </div>

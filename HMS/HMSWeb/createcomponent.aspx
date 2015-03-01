@@ -43,12 +43,13 @@
                                     <label class="control-label">Component Name</label>
                                     <div class="controls">
                                         <asp:TextBox ID="txtComponentName" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter the name of season" data-original-title="Popover header"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ControlToValidate="txtComponentName" ID="NameRequiredFieldValidator" ValidationGroup="First" runat="server" ErrorMessage="Please give a Name to the component"></asp:RequiredFieldValidator>
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Is Room</label>
                                     <div class="controls">
-                                        <asp:CheckBox ID="cbxIsRoom" CssClass="success-toggle-button toggle-button" runat="server" />
+                                        <asp:CheckBox ID="cbxIsRoom" Visible="false" CssClass="success-toggle-button toggle-button" runat="server" />
                                     </div>
                                 </div>
 
@@ -62,7 +63,9 @@
                                 <div class="control-group">
                                     <label class="control-label">Image</label>
                                     <div class="controls">
-                                        <asp:FileUpload ID="FileUpload1" runat="server" /><br />
+                                        <asp:FileUpload ID="FileUpload1" runat="server" />
+                                        <asp:RequiredFieldValidator ControlToValidate="FileUpload1" ID="FileUploadRequiredFieldValidator" runat="server" ErrorMessage="Please add an image file to be displayed on the plan" ValidationGroup="First"></asp:RequiredFieldValidator>
+                                        <br />
                                         <br />
                                         <%--<span class="label label-important">NOTE!</span>
                                         <span>Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only</span>--%>
@@ -70,7 +73,7 @@
                                 </div>
 
                                 <div class="form-actions">
-                                    <asp:Button ID="btnSubmit" CssClass="btn btn-success" OnClick="btnSubmit_Click" runat="server" Text="Submit" />
+                                    <asp:Button ID="btnSubmit" CssClass="btn btn-success" OnClick="btnSubmit_Click" runat="server" Text="Submit" ValidationGroup="First" />
                                     <asp:Button ID="btnCancel" CssClass="btn btn-warning" OnClick="btnCancel_Click" runat="server" Text="Cancel" />
                                 </div>
                             </div>

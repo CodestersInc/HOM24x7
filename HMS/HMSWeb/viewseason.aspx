@@ -42,6 +42,7 @@
                                     <label class="control-label">Season Name</label>
                                     <div class="controls">
                                         <asp:TextBox ID="txtSeasonName" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter the name of season" data-original-title="Popover header"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ControlToValidate="txtSeasonName" ID="SeasonNameRequiredFieldValidator" runat="server" ErrorMessage="Please enter the name of the new Season" ValidationGroup="First"></asp:RequiredFieldValidator>
                                     </div>
                                 </div>
 
@@ -66,7 +67,7 @@
                                 </div>
 
                                 <div class="form-actions">
-                                    <asp:LinkButton ID="btnUpdate" CssClass="btn btn-inverse" runat="server" OnClick="btnUpdate_Click"><i class="icon-refresh icon-white"></i>Update</asp:LinkButton>
+                                    <asp:LinkButton ID="btnUpdate" ValidationGroup="First" CssClass="btn btn-inverse" runat="server" OnClick="btnUpdate_Click"><i class="icon-refresh icon-white"></i>Update</asp:LinkButton>
                                     <%--<asp:Button ID="btnReset" CssClass="btn" runat="server" Text="Reset" />--%>
                                     <asp:Button ID="btnCancel" CssClass="btn" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
                                 </div>
