@@ -7,9 +7,6 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
-using System.Data;
-using System.Data.Sql;
-using System.Data.SqlClient;
 using BusinessLogic;
 
 public partial class createroom : System.Web.UI.Page

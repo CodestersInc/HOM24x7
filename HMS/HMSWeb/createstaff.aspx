@@ -115,7 +115,7 @@
                                     <div class="controls">
                                         <asp:DropDownList ID="ddlUserType" runat="server" CssClass="span4" data-placeholder="Choose a Category" TabIndex="1">
                                             <asp:ListItem Value="Hotel Admin">Hotel Admin</asp:ListItem>
-                                            <asp:ListItem Value="Regular Staff">Reception Staff</asp:ListItem>
+                                            <asp:ListItem Value="Reception Staff">Reception Staff</asp:ListItem>
                                             <asp:ListItem Value="Regular Staff">Regular Staff</asp:ListItem>
                                             <asp:ListItem Value="Managerial Staff">Managerial Staff</asp:ListItem>
                                         </asp:DropDownList>

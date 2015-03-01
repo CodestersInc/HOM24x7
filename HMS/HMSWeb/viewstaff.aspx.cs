@@ -21,7 +21,6 @@ public partial class viewstaff : System.Web.UI.Page
         {
             //Fill ddlDepartment
             DataTable dt = new DepartmentLogic().selectDistinctDepartment(loggedUser.AccountID);
-            dt.Rows.Add(new object[] { "No Department", 0 });
             ddlDepartment.DataSource = dt;
             ddlDepartment.DataValueField = "DepartmentID";
             ddlDepartment.DataTextField = "DepartmentChoices";
@@ -61,18 +60,18 @@ public partial class viewstaff : System.Web.UI.Page
         staffobj.DepartmentID = Convert.ToInt32(ddlDepartment.SelectedValue);
         staffobj.AccountID = loggedUser.AccountID;
 
-        try{
-            new StaffLogic().update(staffobj);
+        if(new StaffLogic().update(staffobj)==1)
+        {
             Response.Redirect("searchstaff.aspx");
-        }catch (Exception ex){
-            
-            Response.Redirect("ErrorPage500.html");
         }
-
+        else
+        {
+            Response.Redirect("ErrorPage500.aspx");
+        }
     }
 
     protected void btnCancel_Click(object sender, EventArgs e)
     {
-        Response.Redirect("home.aspx");
+        Response.Redirect("searchstaff.aspx");
     }
 }

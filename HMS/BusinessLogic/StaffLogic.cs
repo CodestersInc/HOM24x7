@@ -13,15 +13,6 @@ namespace BusinessLogic
 {
     public class StaffLogic : ILogic<Staff>
     {
-        public DataTable searchManager(int ID)
-        {
-            String query = "select Department.Name as 'DepartmentName', Staff.* from Department,Staff where staff.DepartmentID=Department.DepartmentID and Staff.AccountID=@ID order by Staff.StaffCode";
-
-            List<SqlParameter> lstParams = new List<SqlParameter>();
-            lstParams.Add(new SqlParameter("@ID", ID));
-
-            return DBUtility.Select(query, lstParams);
-        }
         public DataTable search(String searchstring, int ID)
         {
             String query = "select Department.Name as 'DepartmentName', Staff.* from Department,Staff where Staff.Name like @Name+'%' and Staff.AccountID=@ID and Department.DepartmentID=Staff.DepartmentID order by Staff.StaffCode";
