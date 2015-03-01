@@ -15,7 +15,7 @@ public partial class createseason : System.Web.UI.Page
     {
         Staff loggedUser = (Staff)Session["loggedUser"];
 
-        if (loggedUser == null || loggedUser.UserType != "Hotel Admin")
+        if (loggedUser == null || (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff"))
         {
             Response.Redirect("login.aspx");
         }

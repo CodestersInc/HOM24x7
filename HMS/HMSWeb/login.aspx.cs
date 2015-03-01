@@ -34,6 +34,11 @@ public partial class login : System.Web.UI.Page
                 Staff staffLogger = staffLogic.login(HashedUsername, HashedPassword);
                 if (staffLogger != null)
                 {
+                    Account caccount = new AccountLogic().selectById(staffLogger.AccountID);
+                    String features = caccount.Features;
+                    Session.Add("OnlineBooking",(features.Contains("#Online Booking#")) ? true : false);
+                    Session.Add("Payroll", (features.Contains("#Payroll#")) ? true : false);
+                    Session.Add("Service", (features.Contains("#Service#")) ? true : false);
                     Session.Add("LoggedUser", staffLogger);
                     Session.Add("UserType", "Staff");
                     Response.Redirect("home.aspx");

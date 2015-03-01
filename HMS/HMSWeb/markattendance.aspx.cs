@@ -12,7 +12,8 @@ public partial class markattendance : System.Web.UI.Page
     {
 
         Staff loggedUser = (Staff)Session["LoggedUser"];
-        if (loggedUser == null || loggedUser.UserType != "HotelAdmin" || loggedUser.UserType != "Manager")
+
+        if (loggedUser == null || (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff"))
         {
             Response.Redirect("login.aspx");
         }
@@ -23,6 +24,7 @@ public partial class markattendance : System.Web.UI.Page
         {
             Response.Redirect("viewattendance.aspx");
         }
+
         if (!IsPostBack)
         {
             Repeater1.DataSource = attendanceLogic.getStaffByDepartment(loggedUser.DepartmentID, loggedUser.AccountID);

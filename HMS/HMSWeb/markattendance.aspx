@@ -18,7 +18,7 @@
                     <li>
                         <a href="#">Attendance</a> <span class="divider">&nbsp;</span>
                     </li>
-                    <li><a href="createstaff.aspx">Mark</a><span class="divider-last">&nbsp;</span></li>
+                    <li><a href="markattendance.aspx">Mark</a><span class="divider-last">&nbsp;</span></li>
                 </ul>
             </div>
         </div>
@@ -64,6 +64,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- END FORM-->
                     </div>
                 </div>
                 <!-- END SAMPLE FORM widget-->
@@ -72,30 +73,18 @@
         <!-- END PAGE CONTENT-->
     </div>
     <!-- END PAGE CONTAINER-->
-
-
-
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
-    <script type="text/javascript" src="assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-    <script type="text/javascript" src="assets/bootstrap-daterangepicker/date.js"></script>
-    <script type="text/javascript" src="assets/bootstrap-daterangepicker/daterangepicker.js"></script>
     <script type="text/javascript" src="assets/bootstrap-toggle-buttons/static/js/jquery.toggle.attendance-buttons.js"></script>
 
     <script>
-        $(".date-picker").datepicker();
-
-        var handleToggleButtons = function () {
-            if (!jQuery().toggleButtons) {
-                return;
+        $('.success-toggle-button').toggleButtons({
+            style: {
+                enabled: "success",
+                disabled: "danger"
             }
-            $('.success-toggle-button').toggleButtons({
-                style: {
-                    enabled: "success",
-                    disabled: "danger"
-                }
-            });
+        });
         }
     </script>
 </asp:Content>

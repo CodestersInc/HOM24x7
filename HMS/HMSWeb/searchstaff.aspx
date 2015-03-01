@@ -77,7 +77,7 @@
                                             <td>
                                                 <%# Eval("Phone") %>
                                             </td>
-                                            <td>
+                                            <td style="text-align:center">
                                                 <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewstaff.aspx?ID=" + Eval("StaffID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
                                                 <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#Eval("StaffID")%>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>
                                             </td>

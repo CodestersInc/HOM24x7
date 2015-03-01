@@ -13,7 +13,8 @@ public partial class adddepartment : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["LoggedUser"];
-        if (loggedUser == null || Session["StaffUserType"].ToString() != "Hotel Admin")
+
+        if (loggedUser == null || (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff"))
         {
             Response.Redirect("login.aspx");
         }
@@ -27,6 +28,7 @@ public partial class adddepartment : System.Web.UI.Page
             newManagerPlaceHolder.Visible = false;
             managerChoicePlaceHolder.Visible = true;
             btnSubmit.Enabled = false;
+            ddlUserType.Enabled = false;
 
             if (ViewState["deptName"] != null)
                 txtDepartmentName.Text = ViewState["deptName"].ToString();
@@ -40,7 +42,7 @@ public partial class adddepartment : System.Web.UI.Page
         Department createdDepartment = new Department();
         DepartmentLogic departmentLogicObj = new DepartmentLogic();
 
-        if(newManagerPlaceHolder.Visible==true)
+        if (newManagerPlaceHolder.Visible == true)
         {
             int departmentID = departmentLogicObj.fetchLastRecordId();
 
@@ -57,10 +59,10 @@ public partial class adddepartment : System.Web.UI.Page
                 DateTime.Now,
                 Convert.ToInt32(txtSalary.Text),
                 cbxIsActive.Checked,
-                departmentID+1,
+                departmentID + 1,
                 loggedUser.AccountID));
-            
-            if(createdstaff!=null)
+
+            if (createdstaff != null)
             {
                 departmentobj.AccountID = loggedUser.AccountID;
                 departmentobj.Name = txtDepartmentName.Text;
@@ -103,15 +105,7 @@ public partial class adddepartment : System.Web.UI.Page
 
     protected void btnCancel_Click(object sender, EventArgs e)
     {
-        if (txtManagerName.Text.Length!=0)
-        {
-            Response.Redirect("createdepartment.aspx");
-        }
-        else
-        {
-            Response.Redirect("home.aspx");
-        }
-        
+        Response.Redirect("createdepartment.aspx");
     }
 
     protected void btnNewManager_Click(object sender, EventArgs e)

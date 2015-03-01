@@ -1,12 +1,13 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
 
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <!-- BEGIN HEAD -->
 <head runat="server">
     <title></title>
 
+    <!--Header contents from other pages-->
     <asp:ContentPlaceHolder ID="headContentPlaceHolder" runat="server">
     </asp:ContentPlaceHolder>
 
@@ -50,7 +51,7 @@
                     <div class="container-fluid">
                         <!-- BEGIN LOGO -->
                         <a class="brand" href="home.aspx">
-                            <img src="img/logo.png"/>
+                            <img src="img/logo.png" />
                         </a>
                         <!-- END LOGO -->
                         <!-- BEGIN RESPONSIVE MENU TOGGLER -->
@@ -104,7 +105,6 @@
                     <div class="sidebar-toggler hidden-phone"></div>
                     <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
 
-                    <!-- END RESPONSIVE QUICK SEARCH FORM -->
                     <!-- BEGIN SIDEBAR MENU -->
                     <ul class="sidebar-menu">
                         <!-- START Sidebar Element-Home -->
@@ -124,7 +124,7 @@
                                     <span class="icon-box"><i class="icon-book"></i></span>Accounts
 					            <span class="arrow"></span>
                                 </a>
-                                <ul class="sub">                                    
+                                <ul class="sub">
                                     <li><a href="createhotelac.aspx">Create</a></li>
                                     <li><a href="searchhotelac.aspx">Search</a></li>
                                 </ul>
@@ -273,6 +273,7 @@
                 <!-- BEGIN PAGE -->
                 <div id="main-content">
                     <!-- BEGIN PAGE CONTAINER-->
+                    <!--Visual contents from other pages-->
                     <asp:ContentPlaceHolder ID="bodyContentPlaceHolder" runat="server">
                     </asp:ContentPlaceHolder>
                     <!-- END PAGE CONTAINER-->
@@ -307,10 +308,11 @@
             <script src="js/scripts.js" type="text/javascript"></script>
             <script>
                 jQuery(document).ready(function () {
-                    // initiate layout and plugins
                     App.init();
                 });
             </script>
+
+            <!--Scripts from other pages-->
             <asp:ContentPlaceHolder ID="scriptsContentPlaceHolder" runat="server">
             </asp:ContentPlaceHolder>
             <!-- END JAVASCRIPTS -->

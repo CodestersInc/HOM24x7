@@ -18,50 +18,6 @@ namespace BusinessLogic
             throw new NotImplementedException();
         }
 
-        public DataTable getStaffByDepartment(int DepartmentID, int AccountID)
-        {
-            String query = "select * from Staff where AccountID=@AccountID and DepartmentID=@DepartmentID";
-            List<SqlParameter> lstParams = new List<SqlParameter>();
-
-            lstParams.Add(new SqlParameter("@DepartmentID", DepartmentID));
-            lstParams.Add(new SqlParameter("@AccountID", AccountID));
-
-            return DBUtility.Select(query, lstParams);
-        }
-
-        public DataTable getAttendanceRange(DateTime FromDate, DateTime ToDate, int DepartmentID, int AccountID)
-        {
-            String query = "select * from Attendance, Staff where Attendance.StaffID=Staff.StaffID and AttendanceDate > @FromDate and AttendanceDate < @ToDate and DepartmentID = @DepartmentID and AccountID = @AccountID";
-
-            List<SqlParameter> lstParams = new List<SqlParameter>();
-
-            lstParams.Add(new SqlParameter("@DepartmentID", DepartmentID));
-            lstParams.Add(new SqlParameter("@AccountID", AccountID));
-            lstParams.Add(new SqlParameter("@FromDate", FromDate));
-            lstParams.Add(new SqlParameter("@ToDate", ToDate));
-
-            return DBUtility.Select(query, lstParams);
-        }
-
-        public DataTable getAttendanceRange(DateTime FromDate, DateTime ToDate, int AccountID)
-        {
-            String query = "select * from Attendance, Staff where Attendance.StaffID=Staff.StaffID and AttendanceDate > @FromDate and AttendanceDate < @ToDate and AccountID = @AccountID";
-
-            List<SqlParameter> lstParams = new List<SqlParameter>();
-
-            lstParams.Add(new SqlParameter("@AccountID", AccountID));
-            lstParams.Add(new SqlParameter("@FromDate", FromDate));
-            lstParams.Add(new SqlParameter("@ToDate", ToDate));
-
-            return DBUtility.Select(query, lstParams);
-        }
-
-
-        public DataTable getTodaysAttendance(int AccountID)
-        {
-            throw new NotImplementedException();
-        }
-
         public Attendance create(Attendance obj)
         {
             String query = "insert into Attendance values(@StaffID, @AttendanceDate, @InTime, @OutTime, @AttendanceStatus);";
@@ -106,10 +62,11 @@ namespace BusinessLogic
 
         public int update(Attendance obj)
         {
-            String query = "update Attendance set StaffID=@StaffID, AttendanceDate=@AttendanceDate, InTime=@InTime, OutTime=@OutTime AttendanceStatus=@AttendanceStatus where AttendanceID=@AttendanceID";
+            String query = "update Attendance set AttendanceDate=@AttendanceDate, InTime=@InTime, OutTime=@OutTime, AttendanceStatus=@AttendanceStatus where AttendanceID=@AttendanceID and StaffID=@StaffID";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@StaffID", obj.StaffID));
+            lstParams.Add(new SqlParameter("@AttendanceID", obj.AttendanceID));
             lstParams.Add(new SqlParameter("@AttendanceDate", obj.AttendanceDate));
             lstParams.Add(new SqlParameter("@InTime", obj.InTime));
             lstParams.Add(new SqlParameter("@OutTime", obj.OutTime));
@@ -156,6 +113,49 @@ namespace BusinessLogic
             String query = "select * from Attendance";
 
             return DBUtility.Select(query, new List<SqlParameter>());
+        }
+
+
+        public DataTable getStaffByDepartment(int DepartmentID, int AccountID)
+        {
+            String query = "select * from Staff where AccountID=@AccountID and DepartmentID=@DepartmentID";
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+
+            lstParams.Add(new SqlParameter("@DepartmentID", DepartmentID));
+            lstParams.Add(new SqlParameter("@AccountID", AccountID));
+
+            return DBUtility.Select(query, lstParams);
+        }
+
+        public DataTable getAttendanceRange(DateTime FromDate, DateTime ToDate, int DepartmentID, int AccountID)
+        {
+            if (DepartmentID == 0)
+            {
+                return getAttendanceRange(FromDate, ToDate, AccountID);
+            }
+            String query = "select * from Attendance, Staff where Attendance.StaffID=Staff.StaffID and DepartmentID = @DepartmentID and AccountID = @AccountID and AttendanceDate between @FromDate and @ToDate";
+
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+
+            lstParams.Add(new SqlParameter("@DepartmentID", DepartmentID));
+            lstParams.Add(new SqlParameter("@AccountID", AccountID));
+            lstParams.Add(new SqlParameter("@FromDate", FromDate));
+            lstParams.Add(new SqlParameter("@ToDate", ToDate));
+
+            return DBUtility.Select(query, lstParams);
+        }
+
+        public DataTable getAttendanceRange(DateTime FromDate, DateTime ToDate, int AccountID)
+        {
+            String query = "select * from Attendance, Staff where Attendance.StaffID=Staff.StaffID and AccountID = @AccountID and AttendanceDate between @FromDate and @ToDate";
+
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+
+            lstParams.Add(new SqlParameter("@AccountID", AccountID));
+            lstParams.Add(new SqlParameter("@FromDate", FromDate));
+            lstParams.Add(new SqlParameter("@ToDate", ToDate));
+
+            return DBUtility.Select(query, lstParams);
         }
 
         public bool isMarked(int DepartmentID, int AccountID)

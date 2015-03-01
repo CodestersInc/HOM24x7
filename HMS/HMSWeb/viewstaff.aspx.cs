@@ -12,10 +12,11 @@ public partial class viewstaff : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["loggedUser"];
-        if (loggedUser == null || loggedUser.UserType != "Hotel Admin")
+        if (loggedUser == null || (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff"))
         {
             Response.Redirect("login.aspx");
         }
+
         if (!IsPostBack)
         {
             //Fill ddlDepartment

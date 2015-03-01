@@ -30,7 +30,7 @@
                     <!-- BEGIN SAMPLE FORM widget-->
                     <div class="widget">
                         <div class="widget-title">
-                            <h4><i class="icon-reorder"></i>Range of Attendance</h4>
+                            <h4><i class="icon-reorder"></i>Select a range of dates</h4>
                             <span class="tools">
                                 <a href="javascript:;" class="icon-chevron-down"></a>
                                 <a href="javascript:;" class="icon-remove"></a>
@@ -41,37 +41,47 @@
                             <div>
                                 <div class="form-horizontal">
                                     <div class="control-group">
-                                    <label class="control-label">FromDate</label>
-                                    <div class="controls">
-                                        <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-                                            <asp:TextBox ID="txtFromDate" runat="server" CssClass="span6" Text="dd-mm-yyyy"></asp:TextBox>
-                                            <span class="add-on"><i class="icon-calendar"></i></span>
+                                        <label class="control-label">From Date</label>
+                                        <div class="controls">
+                                            <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+                                                <asp:TextBox ID="txtFromDate" runat="server" CssClass="span6" Text="dd-mm-yyyy"></asp:TextBox>
+                                                <span class="add-on"><i class="icon-calendar"></i></span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+
                                     <div class="control-group">
-                                    <label class="control-label">To Date</label>
-                                    <div class="controls">
-                                        <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-                                            <asp:TextBox ID="txtToDate" runat="server" CssClass="span6" Text="dd-mm-yyyy"></asp:TextBox>
-                                            <span class="add-on"><i class="icon-calendar"></i></span>
+                                        <label class="control-label">To Date</label>
+                                        <div class="controls">
+                                            <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+                                                <asp:TextBox ID="txtToDate" runat="server" CssClass="span6" Text="dd-mm-yyyy"></asp:TextBox>
+                                                <span class="add-on"><i class="icon-calendar"></i></span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                    
-                                    
+
+                                    <asp:PlaceHolder ID="ddlDepartmentPlaceHolder" runat="server" Visible="false">
+                                        <div class="control-group">
+                                            <label class="control-label">Department</label>
+                                            <div class="controls">
+                                                <asp:DropDownList ID="ddlDepartment" runat="server" CssClass="span3" data-placeholder="Choose a Category" TabIndex="1" />
+                                            </div>
+                                        </div>
+                                    </asp:PlaceHolder>
+
                                     <div class="form-actions">
-                                        <asp:Button ID="btnSubmit" runat="server" Text="View Attendance" CssClass="btn btn-success" OnClick="btnSubmit_Click" />
+                                        <asp:Button ID="btnSubmit" CssClass="btn btn-success" runat="server" Text="View Attendance" OnClick="btnSubmit_Click" />
                                     </div>
                                 </div>
                             </div>
+                            <!-- END FORM-->
                         </div>
                     </div>
                     <!-- END SAMPLE FORM widget-->
                     <!-- BEGIN SAMPLE FORM widget-->
                     <div class="widget">
                         <div class="widget-title">
-                            <h4><i class="icon-reorder"></i>Select a range of Date</h4>
+                            <h4><i class="icon-reorder"></i>Attendance Details</h4>
                             <span class="tools">
                                 <a href="javascript:;" class="icon-chevron-down"></a>
                                 <a href="javascript:;" class="icon-remove"></a>
@@ -91,6 +101,11 @@
                                         <asp:Repeater ID="Repeater1" runat="server">
                                             <ItemTemplate>
                                                 <tr>
+                                                    <asp:HiddenField ID="HiddenFieldAttendanceID" Value='<%# Eval("AttendanceID") %>' runat="server" />
+                                                    <asp:HiddenField ID="HiddenFieldAttendanceDate" Value='<%# Eval("AttendanceDate") %>' runat="server" />
+                                                    <asp:HiddenField ID="HiddenFieldInTime" Value='<%# Eval("InTime") %>' runat="server" />
+                                                    <asp:HiddenField ID="HiddenFieldOutTime" Value='<%# Eval("OutTime") %>' runat="server" />
+                                                    
                                                     <td><%# Eval("AttendanceDate", "{0:dd-MM-yyyy}") %></td>
                                                     <td><%# Eval("StaffCode") %></td>
                                                     <td><%# Eval("Name") %></td>
@@ -102,8 +117,15 @@
                                             </ItemTemplate>
                                         </asp:Repeater>
                                     </table>
+
+                                    <div class="form-actions">
+                                        <asp:LinkButton ID="btnUpdate" CssClass="btn btn-inverse" runat="server" OnClick="btnUpdate_Click"><i class="icon-refresh icon-white"></i>Update</asp:LinkButton>
+                                        <asp:Button ID="btnCancel" CssClass="btn btn-warning" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
+                                    </div>
+
                                 </div>
                             </div>
+                            <!-- END FORM-->
                         </div>
                     </div>
                     <!-- END SAMPLE FORM widget-->

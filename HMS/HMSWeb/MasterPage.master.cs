@@ -34,16 +34,30 @@ public partial class MasterPage : System.Web.UI.MasterPage
 
                     if (userType == "Hotel Admin" || userType == "Managerial Staff")
                     {
-                        Session["StaffUserType"] = "Hotel Admin";
-                        attendancePlaceHolder.Visible = true;
+                        Session["StaffUserType"] = "Hotel Admin";                        
                         departmentPlaceHolder.Visible = true;
-                        payrollPlaceHolder.Visible = true;
                         planbuilderPlaceHolder.Visible = true;
                         roomPlaceHolder.Visible = true;
                         staffPlaceHolder.Visible = true;
                         seasonPlaceHolder.Visible = true;
-                        servicePlaceHolder.Visible = true;
-                        serviceRequestPlaceHolder.Visible = true;                        
+
+                        if (Convert.ToBoolean(Session["OnlineBooking"]) == true)
+                        {
+
+                        }
+
+                        if(Convert.ToBoolean(Session["Payroll"])==true)
+                        {
+                            attendancePlaceHolder.Visible = true;
+                            payrollPlaceHolder.Visible = true;
+                        }
+
+                        if (Convert.ToBoolean(Session["Service"]) == true)
+                        {
+                            servicePlaceHolder.Visible = true;
+                            serviceRequestPlaceHolder.Visible = true;
+                        }
+
                         lblUsername.Text = staffObj.Name;
                     }
                     if (userType == "Reception")
