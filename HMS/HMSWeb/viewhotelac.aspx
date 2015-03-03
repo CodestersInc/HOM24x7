@@ -41,7 +41,7 @@
                                 <label class="control-label">Comapny</label>
                                 <div class="controls">
                                     <asp:TextBox ID="txtCompany" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Please enter the name of the registering organization." data-original-title="Suggestions"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ControlToValidate="txtCompany" ID="CompanyRequiredFieldValidator" runat="server" Display="Dynamic" ErrorMessage="Please enter the registering organization" ValidationGroup="First"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ControlToValidate="txtCompany" ID="CompanyRequiredFieldValidator" runat="server" Display="Dynamic" ErrorMessage="Please enter the registering organization" ValidationGroup="First" CssClass="alert alert-error"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
 
@@ -49,7 +49,7 @@
                                 <label class="control-label">Contact Person</label>
                                 <div class="controls">
                                     <asp:TextBox ID="txtContact" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter the full name of the contact person representing the organization." data-original-title="Suggestions"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ControlToValidate="txtContact" ID="RequiredFieldValidator1" runat="server" ErrorMessage="Enter the full name of the contact person" ValidationGroup="First" Display="Dynamic"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ControlToValidate="txtContact" ID="RequiredFieldValidator1" runat="server" ErrorMessage="Enter the full name of the contact person" ValidationGroup="First" Display="Dynamic" CssClass="alert alert-error"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
 
@@ -59,8 +59,8 @@
                                     <div class="input-icon left">
                                         <i class="icon-envelope"></i>
                                         <asp:TextBox ID="txtEmail" runat="server" CssClass="span4" placeholder="Email Address"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ControlToValidate="txtEmail" Display="Dynamic" ID="EmailRequiredFieldValidator" runat="server" ErrorMessage="Please enter the Email Adress of the hotel" ValidationGroup="First"></asp:RequiredFieldValidator>
-                                        <asp:RegularExpressionValidator ControlToValidate="txtEmail" Display="Dynamic" ID="EmailRegularExpressionValidator" runat="server" ErrorMessage="Please enter a valid Email address" ValidationGroup="First" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
+                                        <asp:RequiredFieldValidator ControlToValidate="txtEmail" Display="Dynamic" ID="EmailRequiredFieldValidator" runat="server" ErrorMessage="Please enter the Email Adress of the hotel" ValidationGroup="First" CssClass="alert alert-error"></asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ControlToValidate="txtEmail" Display="Dynamic" ID="EmailRegularExpressionValidator" runat="server" ErrorMessage="Please enter a valid Email address" ValidationGroup="First" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" CssClass="alert alert-error"></asp:RegularExpressionValidator>
                                     </div>
                                 </div>
                             </div>
@@ -69,8 +69,8 @@
                                 <label class="control-label">Phone</label>
                                 <div class="controls">
                                     <asp:TextBox ID="txtPhone" runat="server" CssClass="span4"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ControlToValidate="txtPhone" Display="Dynamic" ID="PhoneRequiredFieldValidator" runat="server" ErrorMessage="Please enter a phone number" ValidationGroup="First"></asp:RequiredFieldValidator>
-                                    <asp:RegularExpressionValidator ControlToValidate="txtPhone" Display="Dynamic" ID="PhoneRegularExpressionValidator" runat="server" ErrorMessage="Please eneter a valid phone number" ValidationExpression="^[0-1]?[0-1]?[- .]?(\([2-9]\d{2}\)|\d{3})[- .]?\d{3}[- .]?\d{4}$" ValidationGroup="First"></asp:RegularExpressionValidator>
+                                    <asp:RequiredFieldValidator ControlToValidate="txtPhone" Display="Dynamic" ID="PhoneRequiredFieldValidator" runat="server" ErrorMessage="Please enter a phone number" ValidationGroup="First" CssClass="alert alert-error"></asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ControlToValidate="txtPhone" Display="Dynamic" ID="PhoneRegularExpressionValidator" runat="server" ErrorMessage="Please eneter a valid phone number" ValidationExpression="^[0-1]?[0-1]?[- .]?(\([2-9]\d{2}\)|\d{3})[- .]?\d{3}[- .]?\d{4}$" ValidationGroup="First" CssClass="alert alert-error"></asp:RegularExpressionValidator>
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
@@ -88,7 +88,7 @@
                                     <div class="input-prepend">                                        
                                         <span class="add-on">URL</span>
                                         <asp:TextBox ID="txtWebsite" placeholder="Enter website URL" runat="server"></asp:TextBox>
-                                        <asp:RegularExpressionValidator ControlToValidate="txtWebsite" ID="WebsiteRegularExpressionValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid website URL" ValidationExpression="/((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)/i" ValidationGroup="First"></asp:RegularExpressionValidator>
+                                        <asp:RegularExpressionValidator ControlToValidate="txtWebsite" ID="WebsiteRegularExpressionValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid website URL" ValidationExpression="/((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)/i" ValidationGroup="First" CssClass="alert alert-error"></asp:RegularExpressionValidator>
                                     </div>
                                 </div>
                             </div>

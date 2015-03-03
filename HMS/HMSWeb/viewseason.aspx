@@ -42,7 +42,7 @@
                                     <label class="control-label">Season Name</label>
                                     <div class="controls">
                                         <asp:TextBox ID="txtSeasonName" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter the name of season" data-original-title="Popover header"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ControlToValidate="txtSeasonName" ID="SeasonNameRequiredFieldValidator" runat="server" ErrorMessage="Please enter the name of the new Season" ValidationGroup="First"></asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ControlToValidate="txtSeasonName" ID="SeasonNameRequiredFieldValidator" runat="server" ErrorMessage="Please enter the name of the new Season" ValidationGroup="First" CssClass="alert alert-error"></asp:RequiredFieldValidator>
                                     </div>
                                 </div>
 

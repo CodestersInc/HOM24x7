@@ -42,45 +42,53 @@
                                         <label class="control-label">Department Name</label>
                                         <div class="controls">
                                             <asp:TextBox ID="txtName" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter the department name." data-original-title="Popover header"></asp:TextBox>
-                                            <asp:RequiredFieldValidator ControlToValidate="txtName" ID="NameRequiredFieldValidator" runat="server" ErrorMessage="Please Enter the Name of Department" ValidationGroup="First"></asp:RequiredFieldValidator>
+                                            <asp:RequiredFieldValidator ControlToValidate="txtName" ID="NameRequiredFieldValidator" runat="server" ErrorMessage="Please Enter the Name of Department" ValidationGroup="First" CssClass="alert alert-error"></asp:RequiredFieldValidator>
                                         </div>
                                     </div>
 
                                     <div class="control-group">
                                         <label class="control-label">Manager Name</label>
                                         <div class="controls">
-                                            <asp:TextBox ID="txtManagerName" runat="server" CssClass="span4" placeholder="Disabled input here..." disabled=""></asp:TextBox>
+                                            <asp:TextBox ID="txtManagerName" runat="server" CssClass="span4 txtManagerName"></asp:TextBox>
                                         </div>
                                     </div>
 
-                                    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" class="table table-striped table-bordered" OnRowCommand="GridView1_RowCommand">
-                                        <Columns>
-                                            <asp:TemplateField HeaderText="Name">
+                                    <asp:PlaceHolder ID="managerChoicePlaceHolder" runat="server">
+                                        <table class="table table-striped table-bordered table-advance table-hover">
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Phone</th>
+                                                <th>Department</th>
+                                                <th></th>
+                                            </tr>
+                                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
                                                 <ItemTemplate>
-                                                    <%# Eval("Name") %>
+                                                    <tr>
+                                                        <td>
+                                                            <%# Eval("Name") %>
+                                                        </td>
+                                                        <td>
+                                                            <%# Eval("Email") %>
+                                                        </td>
+                                                        <td>
+                                                            <%# Eval("Phone") %>
+                                                        </td>
+                                                        <td>
+                                                            <%# Eval("DepartmentName") %>
+                                                        </td>
+                                                        <td style="text-align: center">
+                                                            <asp:LinkButton ID="btnAddAsManager" runat="server" CommandName="Select" CommandArgument='<%#  Eval("StaffID") %>' CssClass="btn">Select as Manager</asp:LinkButton>
+                                                        </td>
+                                                    </tr>
                                                 </ItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Name">
-                                                <ItemTemplate>
-                                                    <%# Eval("Email") %>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Department Name">
-                                                <ItemTemplate>
-                                                    <%# Eval("Phone") %>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Department">
-                                                <ItemTemplate>
-                                                    <asp:LinkButton ID="LinkButton1" runat="server" class="btn mini purple" CommandName="Select" CommandArgument='<%#  Eval("StaffID") %>'> Select as Manager </asp:LinkButton>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                        </Columns>
-                                    </asp:GridView>
-
+                                            </asp:Repeater>
+                                            <!--END Repeater-->
+                                        </table>
+                                    </asp:PlaceHolder>
                                     <div class="form-actions">
                                         <asp:LinkButton ValidationGroup="First" ID="btnUpdate" CssClass="btn btn-inverse" runat="server" OnClick="btnUpdate_Click"><i class="icon-refresh icon-white"></i>Update</asp:LinkButton>
-                                        <asp:Button ID="btnCancel" CssClass="btn" runat="server" Text="Cancel" />
+                                        <asp:Button ID="btnCancel" CssClass="btn" runat="server" OnClick="btnCancel_Click" Text="Cancel" />
                                     </div>
                                 </div>
                             </div>
@@ -95,5 +103,10 @@
     <!-- END PAGE CONTAINER-->
 </asp:Content>
 
-<asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" Runat="Server">
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
+    <script>
+        $(".txtManagerName").keypress(function (e) {
+            e.preventDefault();
+        });
+    </script>
 </asp:Content>

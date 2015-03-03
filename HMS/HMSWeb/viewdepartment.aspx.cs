@@ -16,16 +16,17 @@ public partial class viewdepartment : System.Web.UI.Page
         {
             Response.Redirect("login.aspx");
         }
+        StaffLogic staffLogic = new StaffLogic(); 
 
-        GridView1.DataSource = new StaffLogic().getStaffNames(loggedUser.AccountID);
-        GridView1.DataBind();
+        Repeater1.DataSource = staffLogic.searchManager(loggedUser.AccountID);
+        Repeater1.DataBind();
 
         if (!IsPostBack)
         {
             btnUpdate.Enabled = false;
             Department departmentobj = new DepartmentLogic().selectById(Convert.ToInt32(Request.QueryString["ID"]));
             txtName.Text = departmentobj.Name;
-            txtManagerName.Text = new StaffLogic().selectById(departmentobj.ManagerID).Name;
+            txtManagerName.Text = staffLogic.selectById(departmentobj.ManagerID).Name;
         }
     }
     protected void btnUpdate_Click(object sender, EventArgs e)
@@ -50,19 +51,28 @@ public partial class viewdepartment : System.Web.UI.Page
 
     protected void btnCancel_Click(object sender, EventArgs e)
     {
-        Response.Redirect("home.aspx");
+        Staff loggedUser = (Staff)Session["LoggedUser"];
+        StaffLogic staffLogic = new StaffLogic();
+        String OriginalManagerName = staffLogic.selectById(new DepartmentLogic().selectById(Convert.ToInt32(Request.QueryString["ID"])).ManagerID).Name;
+        if (txtManagerName.Text.Equals( OriginalManagerName ) )
+        {
+            Response.Redirect("Home.aspx");
+        }
+        else
+        {
+            txtManagerName.Text = OriginalManagerName;
+        }
+        
     }
 
-    protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+    protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
     {
         if (e.CommandName == "Select")
         {
             int staffid = Convert.ToInt32(e.CommandArgument);
-            txtManagerName.Text = new StaffLogic().selectById(staffid).Name;
-            GridView1.Visible = false;
-
             ViewState["staffid"] = staffid;
-            btnUpdate.Enabled = true;
+            txtManagerName.Text = new StaffLogic().selectById(staffid).Name;
         }
     }
+
 }

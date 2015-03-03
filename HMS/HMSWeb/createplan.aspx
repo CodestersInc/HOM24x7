@@ -91,7 +91,7 @@
                             <label class="control-label">Room Number</label>
                             <div class="controls">
                                 <asp:TextBox ID="txtRoomNumber" runat="server" CssClass="span6 popovers" data-trigger="hover" data-content="Enter the full name of staff member." data-original-title="Popover header"></asp:TextBox>
-                                <asp:RequiredFieldValidator ControlToValidate="txtRoomNumber" ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please add the room number" Display="Dynamic" ValidationGroup="First"></asp:RequiredFieldValidator>
+                                <asp:RequiredFieldValidator ControlToValidate="txtRoomNumber" ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please add the room number" Display="Dynamic" ValidationGroup="First" CssClass="alert alert-error"></asp:RequiredFieldValidator>
                             </div>
                         </div>
 
