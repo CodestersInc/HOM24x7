@@ -110,30 +110,51 @@
                         </div>
 
                         <div class="control-group">
-                                    <label class="control-label">Status</label>
-                                    <div class="controls">
-                                        <asp:DropDownList ID="ddlStatus" runat="server" CssClass="span4" data-placeholder="Choose a Category" TabIndex="1">
-                                            <asp:ListItem>Select...</asp:ListItem>
-                                            <asp:ListItem>Empty</asp:ListItem>
-                                            <asp:ListItem>Occupied</asp:ListItem>
-                                            <asp:ListItem>Under Maintenance</asp:ListItem>
-                                        </asp:DropDownList>
-                                    </div>
-                                </div>
+                            <label class="control-label">Status</label>
+                            <div class="controls">
+                                <asp:DropDownList ID="ddlStatus" runat="server" CssClass="span4" data-placeholder="Choose a Category" TabIndex="1">
+                                    <asp:ListItem>Select...</asp:ListItem>
+                                    <asp:ListItem>Empty</asp:ListItem>
+                                    <asp:ListItem>Occupied</asp:ListItem>
+                                    <asp:ListItem>Under Maintenance</asp:ListItem>
+                                </asp:DropDownList>
+                            </div>
+                        </div>
 
                         <div class="form-actions">
-                                    <asp:Button ID="btnCreateRoom" ValidationGroup="First" CssClass="btn btn-success" runat="server" Text="Add to Plan" OnClick="btnCreateRoom_Click" />
-                                </div>
+                            <asp:Button ID="btnCreateRoom" ValidationGroup="First" CssClass="btn btn-success" runat="server" Text="Add to Plan" OnClick="btnCreateRoom_Click" />
+                        </div>
+                        <br />
 
                         <!--START PLAN BUILDER-->
                         <div id="planbuilder">
+                            <!--START PALLETTE-->
+                            <!-- BEGIN EXAMPLE TABLE widget-->
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h4><i class="icon-reorder"></i>Pallete</h4>
+                                    <span class="tools">
+                                        <a href="javascript:;" class="icon-chevron-down"></a>
+                                        <a href="javascript:;" class="icon-remove"></a>
+                                    </span>
+                                </div>
+                                <div class="widget-body">
+                                    <asp:Repeater ID="Repeater1" runat="server">
+                                        <ItemTemplate>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </div>
+                            </div>
+                            <!-- END EXAMPLE TABLE widget-->
                             <div id="pallete">
                                 <div class="draggableA palleteComponent"></div>
                                 <div class="draggableB palleteComponent"></div>
                             </div>
+                            <!--END PALLETTE-->
                             <div id="canvas">
                             </div>
                         </div>
+                        <!-- END PLAN BUILDER-->
 
                         <div class="form-actions">
                             <asp:Button ID="btnSubmit" CssClass="btn btn-success" runat="server" Text="Submit" OnClick="btnSubmit_Click" />
