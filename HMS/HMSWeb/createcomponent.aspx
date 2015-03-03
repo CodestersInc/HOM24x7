@@ -66,7 +66,7 @@
                                         <asp:FileUpload ID="FileUpload1" runat="server" />
                                         <asp:RequiredFieldValidator ControlToValidate="FileUpload1" ID="FileUploadRequiredFieldValidator" runat="server" ErrorMessage="Please add an image file to be displayed on the plan" ValidationGroup="First" CssClass="alert alert-error"></asp:RequiredFieldValidator>
                                         <br />
-                                        <br />                                        
+                                        <br />
                                     </div>
                                 </div>
 

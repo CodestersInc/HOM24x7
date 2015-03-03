@@ -73,7 +73,7 @@
                                             <%# Eval("Phone") %>
                                         </td>
                                         <td>
-                                            <%# Eval("Website") %>
+                                            <a href='http://<%# Eval("Website") %>'><%# Eval("Website") %></a>
                                         </td>
                                         <td style="text-align:center">
                                             <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewhotelac.aspx?ID=" + Eval("AccountID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>

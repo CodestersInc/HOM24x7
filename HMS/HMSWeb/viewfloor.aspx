@@ -1,14 +1,14 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="createfloor.aspx.cs" Inherits="createfloor" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="viewfloor.aspx.cs" Inherits="viewfloor" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" Runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="Server">
-    <!-- BEGIN PAGE CONTAINER-->
+<asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" Runat="Server">
+        <!-- BEGIN PAGE CONTAINER-->
     <div class="container-fluid">
         <!-- BEGIN PAGE HEADER-->
         <div class="row-fluid">
             <div class="span12">
-                <h3 class="page-title">Create a Floor</h3>
+                <h3 class="page-title">View a Floor</h3>
                 <ul class="breadcrumb">
                     <li>
                         <a href="home.aspx"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
@@ -16,7 +16,7 @@
                     <li>
                         <a href="#">Floor</a> <span class="divider">&nbsp;</span>
                     </li>
-                    <li><a href="createfloor.aspx">Create</a><span class="divider-last">&nbsp;</span></li>
+                    <li><a href="createfloor.aspx">View</a><span class="divider-last">&nbsp;</span></li>
                 </ul>
             </div>
         </div>
@@ -28,7 +28,7 @@
                 <!-- BEGIN Create Room FORM-->
                 <div class="widget">
                     <div class="widget-title">
-                        <h4><i class="icon-reorder"></i>Create a new floor</h4>
+                        <h4><i class="icon-reorder"></i>View a floor</h4>
                         <span class="tools">
                             <a href="javascript:;" class="icon-chevron-down"></a>
                             <a href="javascript:;" class="icon-remove"></a>
@@ -54,7 +54,7 @@
                                 </div>
 
                                 <div class="form-actions">
-                                    <asp:Button ID="btnSubmit" CssClass="btn btn-success" runat="server" Text="Submit" OnClick="btnSubmit_Click" />
+                                    <asp:Button ID="btnSubmit" CssClass="btn btn-inverse" runat="server" Text="Update" OnClick="btnSubmit_Click" />
                                     <asp:Button ID="btnCancel" CssClass="btn btn-warning" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
                                 </div>
                             </div>
@@ -68,7 +68,8 @@
         <!-- END PAGE CONTENT-->
     </div>
     <!-- END PAGE CONTAINER-->
+
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" Runat="Server">
 </asp:Content>
 

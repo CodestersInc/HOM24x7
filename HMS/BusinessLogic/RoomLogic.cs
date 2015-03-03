@@ -15,7 +15,7 @@ namespace BusinessLogic
     {
         public DataTable search(string searchstring, int ID)
         {
-            String query = "select Room.*, RoomType.Name, Floor.FloorNumber from Room, RoomType, Floor where Room.RoomNumber like @RoomNumber+'%' and Room.FloorID=Floor.FloorID and Room.RoomTypeID=RoomType.RoomTypeID and RoomType.AccountID=@ID;";
+            String query = "select Room.*, RoomType.Name, Floor.FloorNumber, Floor.FloorID from Room, RoomType, Floor where Room.RoomNumber like @RoomNumber+'%' and Room.FloorID=Floor.FloorID and Room.RoomTypeID=RoomType.RoomTypeID and RoomType.AccountID=@ID;";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
             lstParams.Add(new SqlParameter("@RoomNumber", searchstring));

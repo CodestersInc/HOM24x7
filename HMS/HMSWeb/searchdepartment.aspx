@@ -63,7 +63,7 @@
                                                 <%# Eval("Department") %>
                                             </td>
                                             <td>
-                                                <%# Eval("Manager") %>
+                                                <a href="viewstaff.aspx?ID= <%# Eval("StaffID") %>"><%# Eval("Manager") %></a>
                                             </td>
                                             <td style="text-align:center">
                                                 <asp:LinkButton ID="btnEdit1" CssClass="btn mini purple" PostBackUrl='<%# "viewdepartment.aspx?ID=" + Eval("DepartmentID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>

@@ -69,7 +69,7 @@
                                                 <%# Eval("Name") %>
                                             </td>
                                             <td>
-                                                <%# Eval("DepartmentName") %>
+                                                <a href='viewdepartment.aspx?ID=<%# Eval("DepartmentID") %>'><%# Eval("DepartmentName") %></a>
                                             </td>
                                             <td>
                                                 <%# Eval("Email") %>

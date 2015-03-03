@@ -62,7 +62,7 @@
                                                 <img src='<%# Eval("Image") %>' style="max-width:70px; max-height:70px;" />
                                             </td>
                                             <td style="vertical-align:middle">
-                                                <%# Eval("Name") %>
+                                                <a href='viewcomponent.aspx?ID=<%# Eval("ComponentID") %>'> <%# Eval("Name") %></a>
                                             </td>
                                             <td style="vertical-align:middle">
                                                 <%# Eval("Type") %>

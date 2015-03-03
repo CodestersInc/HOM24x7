@@ -59,9 +59,9 @@
                                             <ItemTemplate>
                                                 <tr>
                                                     <td><%#Eval("RoomNumber")%></td>
-                                                    <td><%#Eval("Name")%></td>
+                                                    <td><a href='viewroomtype.aspx?ID=<%#Eval("RoomTypeID")%>'><%#Eval("Name") %> </a> </td>
                                                     <td><%#Eval("Status")%></td>
-                                                    <td><%#Eval("FloorNumber")%></td>
+                                                    <td><a href='viewfloor.aspx?ID=<%#Eval("RoomTypeID")%>'><%#Eval("FloorNumber")%></a></td>
 
                                                     <td style="text-align:center">
                                                         <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewroom.aspx?ID=" + Eval("RoomID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
