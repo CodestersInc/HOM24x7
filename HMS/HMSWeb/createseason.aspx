@@ -46,25 +46,25 @@
                                     </div>
                                 </div>
 
-                                <div class="control-group">
-                                    <label class="control-label">From Date</label>
-                                    <div class="controls">
-                                        <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-                                            <asp:TextBox ID="txtFromDate" runat="server" CssClass=" m-ctrl-medium date-picker" size="16" Text="DD-MM-YYYY"></asp:TextBox>
-                                            <span class="add-on"><i class="icon-calendar"></i></span>
+                                    <div class="control-group">
+                                        <label class="control-label">From Date</label>
+                                        <div class="controls">
+                                            <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+                                                <asp:TextBox ID="txtFromDate" runat="server" CssClass="span6 non-editable" Text="dd-mm-yyyy"></asp:TextBox>
+                                                <span class="add-on"><i class="icon-calendar"></i></span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="control-group">
-                                    <label class="control-label">To Date</label>
-                                    <div class="controls">
-                                        <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-                                            <asp:TextBox ID="txtToDate" runat="server" CssClass=" m-ctrl-medium date-picker" size="16" Text="DD-MM-YYYY"></asp:TextBox>
-                                            <span class="add-on"><i class="icon-calendar"></i></span>
+                                    <div class="control-group">
+                                        <label class="control-label">To Date</label>
+                                        <div class="controls">
+                                            <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+                                                <asp:TextBox ID="txtToDate" runat="server" CssClass="span6 non-editable" Text="dd-mm-yyyy"></asp:TextBox>
+                                                <span class="add-on"><i class="icon-calendar"></i></span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
                                 <div class="form-actions">
                                     <asp:Button ID="btnSubmit" ValidationGroup="First" CssClass="btn btn-success" OnClick="btnSubmit_Click" runat="server" Text="Submit" />
@@ -89,5 +89,9 @@
 
     <script>
         $(".date-picker").datepicker();
+
+        $(".non-editable").keypress(function (e) {
+            e.preventDefault();
+        });
     </script>
 </asp:Content>

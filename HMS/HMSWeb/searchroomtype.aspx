@@ -50,14 +50,18 @@
                             <table class="table table-striped table-bordered">
                                 <tr>
                                     <th>Room Type</th>
+                                    <th style="text-align:center">Photo</th>
                                     <th></th>
                                 </tr>
 
                                 <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
                                     <ItemTemplate>
                                         <tr>
-                                            <td><%#Eval("Name")%></td>
-                                            <td>
+                                            <td style="vertical-align:middle""><%#Eval("Name")%></td>
+                                            <td style="text-align:center">
+                                                <asp:Image ID="Image1" ImageUrl='<%#Eval("Photo")%>' Width="100px" Height="80px" runat="server" />
+                                            </td>
+                                            <td style="text-align:center; vertical-align:middle">
                                                 <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewroomtype.aspx?ID=" + Eval("RoomTypeID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
                                                 <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("RoomTypeID") %>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>
                                             </td>

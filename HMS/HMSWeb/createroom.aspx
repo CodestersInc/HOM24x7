@@ -57,6 +57,8 @@
                                     <label class="control-label">Floor</label>
                                     <div class="controls">
                                         <asp:DropDownList ID="ddlFloor" runat="server" CssClass="span4" data-placeholder="Choose a Category" TabIndex="1"/>
+                                        <b>OR</b>
+                                        <asp:LinkButton ID="btnNewFloor" runat="server" CssClass="btn" OnClick="btnNewFloor_Click">Create New Floor</asp:LinkButton>
                                     </div>
                                 </div>
 

@@ -90,22 +90,22 @@
                         <div class="control-group">
                             <label class="control-label">Room Number</label>
                             <div class="controls">
-                                <asp:TextBox ID="txtRoomNumber" runat="server" CssClass="span6 popovers" data-trigger="hover" data-content="Enter the full name of staff member." data-original-title="Popover header"></asp:TextBox>
+                                <asp:TextBox ID="txtRoomNumber" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter the full name of staff member." data-original-title="Popover header"></asp:TextBox>
                                 <asp:RequiredFieldValidator ControlToValidate="txtRoomNumber" ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please add the room number" Display="Dynamic" ValidationGroup="First" CssClass="alert alert-error"></asp:RequiredFieldValidator>
                             </div>
                         </div>
 
                         <div class="control-group">
-                            <label class="control-label">Floor Number</label>
+                            <label class="control-label">Floor</label>
                             <div class="controls">
-                                <asp:DropDownList ID="ddlFloorNumber" runat="server" CssClass="span2" data-placeholder="Choose a floor" TabIndex="1" />
+                                <asp:DropDownList ID="ddlFloorNumber" runat="server" CssClass="span4" data-placeholder="Choose a floor" TabIndex="1" />
                             </div>
                         </div>
 
                         <div class="control-group">
                             <label class="control-label">Room Type</label>
                             <div class="controls">
-                                <asp:DropDownList ID="ddlRoomType" runat="server" CssClass="span2" data-placeholder="Choose a floor" TabIndex="1" />
+                                <asp:DropDownList ID="ddlRoomType" runat="server" CssClass="span4" data-placeholder="Choose a floor" TabIndex="1" />
                             </div>
                         </div>
 

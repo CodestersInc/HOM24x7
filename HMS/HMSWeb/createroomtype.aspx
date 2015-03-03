@@ -58,9 +58,7 @@
                                     <label class="control-label">Photo</label>
                                     <div class="controls">
                                         <asp:FileUpload ID="FileUpload1" runat="server" /><br />
-                                        <br />
-                                        <%--<span class="label label-important">NOTE!</span>
-                                        <span>Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only</span>--%>
+                                        <br />                                        
                                     </div>
                                 </div>
                             </div>

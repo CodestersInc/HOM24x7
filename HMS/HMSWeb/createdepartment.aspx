@@ -194,7 +194,7 @@
                                                                     <label class="control-label">Date of Birth</label>
                                                                     <div class="controls">
                                                                         <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-                                                                            <asp:TextBox ID="txtDOB" runat="server" CssClass="span6 txtDOB" Text="dd-mm-yyyy"></asp:TextBox>
+                                                                            <asp:TextBox ID="txtDOB" runat="server" CssClass="span6 non-editable" Text="dd-mm-yyyy"></asp:TextBox>
                                                                             <span class="add-on"><i class="icon-calendar"></i></span>
                                                                         </div>
                                                                     </div>
@@ -225,7 +225,6 @@
                                             </div>
                                         </div>
                                     </asp:PlaceHolder>
-
 
                                     <div class="form-actions">
                                         <asp:Button ID="btnSubmit" ValidationGroup="First" CssClass="btn btn-success" runat="server" Text="Submit" OnClick="btnSubmit_Click" />
@@ -266,7 +265,7 @@
             });
         }
 
-        $(".txtDOB").keypress(function (e) {
+        $(".non-editable").keypress(function (e) {
             e.preventDefault();
         });
 

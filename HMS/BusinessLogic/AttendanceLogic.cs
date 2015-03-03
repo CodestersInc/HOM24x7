@@ -133,7 +133,7 @@ namespace BusinessLogic
             {
                 return getAttendanceRange(FromDate, ToDate, AccountID);
             }
-            String query = "select * from Attendance, Staff where Attendance.StaffID=Staff.StaffID and DepartmentID = @DepartmentID and AccountID = @AccountID and AttendanceDate between @FromDate and @ToDate";
+            String query = "select Department.Name as 'DepartmentName', Staff.*, Attendance.* from Attendance, Staff, Department where Attendance.StaffID=Staff.StaffID and Staff.DepartmentID=Department.DepartmentID and Staff.DepartmentID = @DepartmentID and Staff.AccountID = @AccountID and AttendanceDate between @FromDate and @ToDate";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
@@ -147,7 +147,7 @@ namespace BusinessLogic
 
         public DataTable getAttendanceRange(DateTime FromDate, DateTime ToDate, int AccountID)
         {
-            String query = "select * from Attendance, Staff where Attendance.StaffID=Staff.StaffID and AccountID = @AccountID and AttendanceDate between @FromDate and @ToDate";
+            String query = "select Department.Name as 'DepartmentName', Staff.*, Attendance.* from Attendance, Staff, Department where Attendance.StaffID=Staff.StaffID and Staff.DepartmentID=Department.DepartmentID and Staff.AccountID = @AccountID and AttendanceDate between @FromDate and @ToDate";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
 

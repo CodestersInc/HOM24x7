@@ -43,14 +43,14 @@
                                     <tr>
                                         <th>Staff Code</th>
                                         <th>Name</th>
-                                        <th>Attendance</th>
+                                        <th style="text-align:center">Attendance</th>
                                     </tr>
                                     <asp:Repeater ID="Repeater1" runat="server">
                                         <ItemTemplate>
                                             <tr>
                                                 <td><%# Eval("StaffCode") %></td>
                                                 <td><%# Eval("Name") %></td>
-                                                <td>
+                                                <td style="text-align:center">
                                                     <asp:CheckBox ID="cbxPresence" CssClass="success-toggle-button toggle-button" runat="server" />
                                                     <asp:HiddenField ID="HiddenFieldStaffID" runat="server" Value='<%# Eval("StaffID") %>' />
                                                 </td>

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
+using WebUtility;
 
 public partial class viewdepartment : System.Web.UI.Page
 {
@@ -18,28 +19,72 @@ public partial class viewdepartment : System.Web.UI.Page
         }
         StaffLogic staffLogic = new StaffLogic(); 
 
-        Repeater1.DataSource = staffLogic.searchManager(loggedUser.AccountID);
-        Repeater1.DataBind();
-
         if (!IsPostBack)
         {
-            btnUpdate.Enabled = false;
+            Repeater1.DataSource = new StaffLogic().getStaffNames(loggedUser.AccountID);
+            Repeater1.DataBind();
             Department departmentobj = new DepartmentLogic().selectById(Convert.ToInt32(Request.QueryString["ID"]));
-            txtName.Text = departmentobj.Name;
-            txtManagerName.Text = staffLogic.selectById(departmentobj.ManagerID).Name;
+            txtDepartmentName.Text = departmentobj.Name;
+            txtManagerName.Text = new StaffLogic().selectById(departmentobj.ManagerID).Name;
+
+            managerChoicePlaceHolder.Visible = true;
+            btnUpdate.Enabled = false;
+            newManagerPlaceHolder.Visible = false;
         }
     }
     protected void btnUpdate_Click(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["LoggedUser"];
-
         Department departmentobj = new Department();
-        departmentobj.DepartmentID = Convert.ToInt32(Request.QueryString["ID"]);
-        departmentobj.Name = txtName.Text;
-        departmentobj.AccountID = loggedUser.AccountID;
-        departmentobj.ManagerID = Convert.ToInt32(ViewState["staffid"]);
+        Department createdDepartment = new Department();
+        StaffLogic staffLogicObj = new StaffLogic();
+        DepartmentLogic departmentLogicObj = new DepartmentLogic();
+        int res=0;
 
-        if (new DepartmentLogic().update(departmentobj) == 1)
+        if (newManagerPlaceHolder.Visible == true)
+        {
+            int departmentID = departmentLogicObj.fetchLastRecordId();
+
+            Staff createdstaff = new StaffLogic().create(new Staff(0,
+                txtStaffCode.Text,
+                txtName.Text,
+                txtEmail.Text,
+                txtPhone.Text,
+                Utility.GetSHA512Hash(txtUsername.Text),
+                Utility.GetSHA512Hash(txtPassword.Text),
+                ddlUserType.SelectedValue,
+                txtDesignation.Text,
+                Convert.ToDateTime(txtDOB.Text),
+                DateTime.Now,
+                Convert.ToInt32(txtSalary.Text),
+                cbxIsActive.Checked,
+                departmentID + 1,
+                loggedUser.AccountID));
+
+            if (createdstaff != null)
+            {
+                departmentobj = new Department(Convert.ToInt32(Request.QueryString["ID"]),
+                                txtDepartmentName.Text,
+                                loggedUser.AccountID,
+                                createdstaff.StaffID);
+                res = departmentLogicObj.update(departmentobj);
+            }
+        }
+        else
+        {
+            Staff staff = staffLogicObj.selectById(Convert.ToInt32(ViewState["staffid"]));
+            staff.UserType = "Managerial Staff";
+            staffLogicObj.update(staff);
+
+            departmentobj = new Department(Convert.ToInt32(Request.QueryString["ID"]),
+                                            txtDepartmentName.Text,
+                                            loggedUser.AccountID,
+                                            Convert.ToInt32(ViewState["staffid"]));
+
+            res = departmentLogicObj.update(departmentobj);            
+        }
+
+        if (res == 1)
         {
             Response.Redirect("searchdepartment.aspx");
         }
@@ -54,7 +99,7 @@ public partial class viewdepartment : System.Web.UI.Page
         Staff loggedUser = (Staff)Session["LoggedUser"];
         StaffLogic staffLogic = new StaffLogic();
         String OriginalManagerName = staffLogic.selectById(new DepartmentLogic().selectById(Convert.ToInt32(Request.QueryString["ID"])).ManagerID).Name;
-        if (txtManagerName.Text.Equals( OriginalManagerName ) )
+        if (txtManagerName.Text.Equals(OriginalManagerName))
         {
             Response.Redirect("Home.aspx");
         }
@@ -62,7 +107,6 @@ public partial class viewdepartment : System.Web.UI.Page
         {
             txtManagerName.Text = OriginalManagerName;
         }
-        
     }
 
     protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -72,7 +116,22 @@ public partial class viewdepartment : System.Web.UI.Page
             int staffid = Convert.ToInt32(e.CommandArgument);
             ViewState["staffid"] = staffid;
             txtManagerName.Text = new StaffLogic().selectById(staffid).Name;
+            Repeater1.Visible = false;
+            managerChoicePlaceHolder.Visible = false;
+            btnUpdate.Enabled = true;
+            btnNewManager.Visible = false;
         }
+    }
+
+    protected void btnNewManager_Click(object sender, EventArgs e)
+    {
+        ViewState["deptName"] = txtDepartmentName.Text;
+        managerChoicePlaceHolder.Visible = false;
+        newManagerPlaceHolder.Visible = true;
+        btnUpdate.Enabled = true;
+        btnNewManager.Visible = false;
+        ddlUserType.Enabled = false;
+        managerNamePlaceHolder.Visible = false;
     }
 
 }

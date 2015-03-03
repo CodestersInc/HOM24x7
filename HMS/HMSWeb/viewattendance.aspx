@@ -96,7 +96,8 @@
                                             <th>Date</th>
                                             <th>Staff Code</th>
                                             <th>Name</th>
-                                            <th>Attendance</th>
+                                            <th>Department</th>
+                                            <th style="text-align:center">Attendance</th>
                                         </tr>
                                         <asp:Repeater ID="Repeater1" runat="server">
                                             <ItemTemplate>
@@ -109,7 +110,8 @@
                                                     <td><%# Eval("AttendanceDate", "{0:dd-MM-yyyy}") %></td>
                                                     <td><%# Eval("StaffCode") %></td>
                                                     <td><%# Eval("Name") %></td>
-                                                    <td>
+                                                    <td><%# Eval("DepartmentName") %></td>
+                                                    <td style="text-align:center">
                                                         <asp:CheckBox ID="cbxPresence" Checked='<%# Eval("AttendanceStatus") %>' CssClass="success-toggle-button toggle-button" runat="server" />
                                                         <asp:HiddenField ID="HiddenFieldStaffID" runat="server" Value='<%# Eval("StaffID") %>' />
                                                     </td>
@@ -119,7 +121,7 @@
                                     </table>
 
                                     <div class="form-actions">
-                                        <asp:LinkButton ID="btnUpdate" CssClass="btn btn-inverse" runat="server" OnClick="btnUpdate_Click"><i class="icon-refresh icon-white"></i>Update</asp:LinkButton>
+                                        <asp:LinkButton ID="btnUpdate" CssClass="btn btn-inverse" runat="server" OnClick="btnUpdate_Click"><i class="icon-refresh icon-white"></i> Update</asp:LinkButton>
                                         <asp:Button ID="btnCancel" CssClass="btn btn-warning" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
                                     </div>
 
@@ -141,7 +143,7 @@
     <script type="text/javascript" src="assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="assets/bootstrap-daterangepicker/date.js"></script>
     <script type="text/javascript" src="assets/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <script type="text/javascript" src="assets/bootstrap-toggle-buttons/static/js/jquery.toggle.yesno-buttons.js"></script>
+    <script type="text/javascript" src="assets/bootstrap-toggle-buttons/static/js/jquery.toggle.attendance-buttons.js"></script>
 
     <script>
         $(".date-picker").datepicker();

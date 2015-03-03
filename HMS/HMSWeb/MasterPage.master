@@ -147,31 +147,46 @@
                         </asp:PlaceHolder>
                         <!-- END Sidebar Element-Attendance -->
 
-                        <!-- START Sidebar Element-Department -->
-                        <asp:PlaceHolder ID="departmentPlaceHolder" runat="server" Visible="false">
+                        <!-- START Sidebar Element-Attendance -->
+                        <asp:PlaceHolder ID="bookingPlaceHolder" runat="server" Visible="false">
                             <li class="has-sub">
                                 <a href="javascript:;">
-                                    <span class="icon-box"><i class="icon-bell-alt"></i></span>Department
-					            <span class="arrow"></span>
+                                    <span class="icon-box"><i class="icon-book"></i></span>Booking
+                                <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a href="createdepartment.aspx">Create</a></li>
-                                    <li><a href="searchdepartment.aspx">Search</a></li>
+                                    <li><a href="#">Create new Booking</a></li>
+                                    <li><a href="#">Search a Booking</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
-                        <!-- END-Sidebar Element-Department -->
+                        <!-- END Sidebar Element-Attendance -->
+
+                        <!-- START Sidebar Element-Booking -->
+                        <asp:PlaceHolder ID="departmentPlaceHolder" runat="server" Visible="false">
+                            <li class="has-sub">
+                                <a href="javascript:;">
+                                    <span class="icon-box"><i class="icon-bookmark"></i></span>Department
+					            <span class="arrow"></span>
+                                </a>
+                                <ul class="sub">
+                                    <li><a href="createdepartment.aspx">Create New Department</a></li>
+                                    <li><a href="searchdepartment.aspx">Search a Department</a></li>
+                                </ul>
+                            </li>
+                        </asp:PlaceHolder>
+                        <!-- END-Sidebar Element-Booking -->
 
                         <!-- START Sidebar Element-Payroll -->
                         <asp:PlaceHolder ID="payrollPlaceHolder" runat="server" Visible="false">
                             <li class="has-sub">
                                 <a href="javascript:;">
-                                    <span class="icon-box"><i class="icon-cogs"></i></span>Payroll
+                                    <span class="icon-box"><i class="icon-money"></i></span>Payroll
 					            <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a href="generatepayslip.aspx">Generate Payslip</a></li>
-                                    <li><a href="viewpayslip.aspx">View Payslip</a></li>
+                                    <li><a href="#">Generate Payslip</a></li>
+                                    <li><a href="#">View Payslip</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
@@ -256,7 +271,7 @@
                         <asp:PlaceHolder ID="staffPlaceHolder" runat="server" Visible="false">
                             <li class="has-sub">
                                 <a href="javascript:;">
-                                    <span class="icon-box"><i class="icon-book"></i></span>Staff
+                                    <span class="icon-box"><i class="icon-group"></i></span>Staff
 					            <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">

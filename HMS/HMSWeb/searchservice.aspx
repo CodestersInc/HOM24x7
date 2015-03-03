@@ -28,7 +28,7 @@
                 <div class="control-group">
                     <label class="control-label">Service Name</label>
                     <div class="controls">
-                        <asp:TextBox ID="txtName" runat="server" CssClass="span6  tooltips" data-trigger="hover" data-original-title="Enter the service name."></asp:TextBox>
+                        <asp:TextBox ID="txtName" runat="server" CssClass="span4  tooltips" data-trigger="hover" data-original-title="Enter the service name."></asp:TextBox>
                         <asp:Button ID="btnSearch" OnClick="btnSearch_Click" CssClass="btn btn-info" runat="server" Text="Search" />
                     </div>
                 </div>

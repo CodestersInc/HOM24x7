@@ -24,7 +24,7 @@ namespace BusinessLogic
         }
         public Floor create(Floor obj)
         {
-            String query = "insert into Floor(FloorNumber, Description, AccountID) values(@FloorNumber, @Description, @AccountID);";
+            String query = "insert into Floor(FloorNumber, Description, AccountID) values(@FloorNumber, @Description, @AccountID)";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@FloorNumber", obj.FloorNumber));
@@ -35,7 +35,7 @@ namespace BusinessLogic
 
             if (res == 1)
             {
-                String selectquery = "select * from Season where FloorNumber=@FloorNumber and AccountID=@AccountID";
+                String selectquery = "select * from Floor where FloorNumber=@FloorNumber and AccountID=@AccountID";
                 List<SqlParameter> lstParams1 = new List<SqlParameter>();
 
                 lstParams1.Add(new SqlParameter("@FloorNumber", obj.FloorNumber));

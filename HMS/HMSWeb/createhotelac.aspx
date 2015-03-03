@@ -87,7 +87,7 @@
                                     <div class="input-prepend">
                                         <span class="add-on">URL</span>
                                         <asp:TextBox ID="txtWebsite" placeholder="Enter website URL" runat="server"></asp:TextBox>
-                                        <asp:RegularExpressionValidator ControlToValidate="txtWebsite" ID="WebsiteRegularExpressionValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid website URL" ValidationExpression="/((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)/i" ValidationGroup="First" <%--CssClass="alert alert-error"--%>></asp:RegularExpressionValidator>
+                                        <asp:RegularExpressionValidator ControlToValidate="txtWebsite" ID="WebsiteRegularExpressionValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid website URL" ValidationExpression="/((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)/i" ValidationGroup="First"></asp:RegularExpressionValidator><%--CssClass="alert alert-error"--%>
                                     </div>
                                 </div>
                             </div>

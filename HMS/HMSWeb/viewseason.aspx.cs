@@ -19,8 +19,8 @@ public partial class viewseason : System.Web.UI.Page
         {
             Season seasonobject = new SeasonLogic().selectById(Convert.ToInt32(Request.QueryString["ID"]));
             txtSeasonName.Text = seasonobject.Name;
-            txtFromDate.Text = (seasonobject.FromDate).Date.ToString();
-            txtToDate.Text = (seasonobject.ToDate).Date.ToString();
+            txtFromDate.Text = (seasonobject.FromDate).Date.ToString("dd-MM-yyyy");
+            txtToDate.Text = (seasonobject.ToDate).Date.ToString("dd-MM-yyyy");
         }
     }
     protected void btnUpdate_Click(object sender, EventArgs e)

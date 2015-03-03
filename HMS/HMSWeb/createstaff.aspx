@@ -43,10 +43,8 @@
                                     <label class="control-label">Name</label>
                                     <div class="controls">
                                         <asp:TextBox ID="txtName" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter the full name of staff member." data-original-title="Popover header"></asp:TextBox>
-                                         
-                                            <asp:RequiredFieldValidator ID="NameRequiredFieldValidator" runat="server" ErrorMessage="Please enter Staff Name" ControlToValidate="txtName" ValidationGroup="First" CssClass="alert alert-error" />
-                                        
-                                        
+                                        <asp:RequiredFieldValidator ID="NameRequiredFieldValidator" runat="server" ValidationGroup="First" ErrorMessage="Please enter Staff Name" CssClass="alert alert-error" ControlToValidate="txtName" />
+                                        <asp:RegularExpressionValidator ID="NameRegularExpressionValidator" runat="server" ValidationGroup="First" ErrorMessage="The name cannot contain any special characters" CssClass="alert alert-error" ControlToValidate="txtName" ValidationExpression="^[a-zA-Z''-'\s]{1,90}$" />
                                     </div>
                                 </div>
 
@@ -56,8 +54,8 @@
                                         <div class="input-icon left">
                                             <i class="icon-envelope"></i>
                                             <asp:TextBox ID="txtEmail" runat="server" CssClass="span4" placeholder="Email Address"></asp:TextBox>
-                                            <asp:RequiredFieldValidator ControlToValidate="txtEmail" Display="Dynamic" ID="EmailRequiredFieldValidator" runat="server" ErrorMessage="Please enter the Email Adress of the NEW Manager" ValidationGroup="First" CssClass="alert alert-error"></asp:RequiredFieldValidator>
-                                            <asp:RegularExpressionValidator ControlToValidate="txtEmail" Display="Dynamic" ID="EmailRegularExpressionValidator" runat="server" ErrorMessage="Please enter a valid Email address" ValidationGroup="First" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" CssClass="alert alert-error"></asp:RegularExpressionValidator>
+                                            <asp:RequiredFieldValidator ControlToValidate="txtEmail" Display="Dynamic" ID="EmailRequiredFieldValidator" runat="server" ErrorMessage="Please enter an email address" ValidationGroup="First" CssClass="alert alert-error"></asp:RequiredFieldValidator>
+                                            <asp:RegularExpressionValidator ControlToValidate="txtEmail" Display="Dynamic" ID="EmailRegularExpressionValidator" runat="server" ErrorMessage="Please enter a valid email address" ValidationGroup="First" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" CssClass="alert alert-error"></asp:RegularExpressionValidator>
                                         </div>
                                     </div>
                                 </div>
@@ -127,6 +125,8 @@
                                     <label class="control-label">Designation</label>
                                     <div class="controls">
                                         <asp:TextBox ID="txtDesignation" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter the designation of staff member (eg: Cook, Manager, Receptionist,etc.)" data-original-title="Hint"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="DesignationRequiredFieldValidator" runat="server" ValidationGroup="First" ErrorMessage="Please enter a designation" CssClass="alert alert-error" ControlToValidate="txtName" />
+                                        <asp:RegularExpressionValidator ID="DesignationRegularExpressionValidator" runat="server" ValidationGroup="First" ErrorMessage="The designation cannot contain any special characters" CssClass="alert alert-error" ControlToValidate="txtName" ValidationExpression="^[a-zA-Z''-'\s]{1,90}$" />
                                     </div>
                                 </div>
 
@@ -134,7 +134,7 @@
                                     <label class="control-label">Date of Birth</label>
                                     <div class="controls">
                                         <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-                                            <asp:TextBox ID="txtDOB" runat="server" CssClass="span6 txtDOB" Text="dd-mm-yyyy"></asp:TextBox>
+                                            <asp:TextBox ID="txtDOB" runat="server" CssClass="span6 non-editable" Text="dd-mm-yyyy"></asp:TextBox>
                                             <span class="add-on"><i class="icon-calendar"></i></span>
                                         </div>
                                     </div>
@@ -145,8 +145,8 @@
                                     <div class="controls">
                                         <div class="input-prepend input-append">
                                             <span class="add-on">Rs.</span><asp:TextBox ID="txtSalary" CssClass="span6" runat="server"></asp:TextBox><span class="add-on">.00</span>
-                                            <asp:RequiredFieldValidator ControlToValidate="txtSalary" Display="Dynamic" ID="SalaryRequiredFieldValidator" runat="server" ErrorMessage="Please enter salary of the Staff" ValidationGroup="First" <%--CssClass="alert alert-error"--%>></asp:RequiredFieldValidator><%-- we need to fix the bug for showing the message--%>
-                                            <asp:RegularExpressionValidator ControlToValidate="txtSalary" Display="Dynamic" ID="SalaryRegularExpressionValidator" runat="server" ErrorMessage="Please enter a non negative salary" ValidationExpression="^\d+(\.\d\d)?$" ValidationGroup="First" <%--CssClass="alert alert-error"--%>></asp:RegularExpressionValidator>
+                                            <asp:RequiredFieldValidator ControlToValidate="txtSalary" Display="Dynamic" ID="SalaryRequiredFieldValidator" runat="server" ErrorMessage="Please enter salary of the Staff" ValidationGroup="First"></asp:RequiredFieldValidator> <%--CssClass="alert alert-error"--%><%-- we need to fix the bug for showing the message--%>
+                                            <asp:RegularExpressionValidator ControlToValidate="txtSalary" Display="Dynamic" ID="SalaryRegularExpressionValidator" runat="server" ErrorMessage="Please enter a non negative salary" ValidationExpression="^\d+(\.\d\d)?$" ValidationGroup="First"></asp:RegularExpressionValidator><%--CssClass="alert alert-error"--%>
                                         </div>
                                     </div>
                                 </div>
@@ -204,7 +204,7 @@
             });
         }
 
-        $(".txtDOB").keypress(function (e) {
+        $(".non-editable").keypress(function (e) {
             e.preventDefault();
         });
 

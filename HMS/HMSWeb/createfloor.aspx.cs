@@ -9,7 +9,7 @@ using System.Data.Sql;
 using System.Data.SqlClient;
 using BusinessLogic;
 
-public partial class createservice : System.Web.UI.Page
+public partial class createfloor : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -19,37 +19,25 @@ public partial class createservice : System.Web.UI.Page
         {
             Response.Redirect("login.aspx");
         }
-        if(!IsPostBack)
-        {
-            DataTable dt = new DepartmentLogic().selectDistinctDepartment(loggedUser.AccountID);
-            ddlDepartment.DataSource = dt;
-            ddlDepartment.DataValueField = "DepartmentID";
-            ddlDepartment.DataTextField = "DepartmentChoices";
-            ddlDepartment.DataBind();
-        }        
     }
-
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["loggedUser"];
-        Service createdservice = new ServiceLogic().create(new Service(0,
-             txtName.Text,
-             Convert.ToInt32(ddlDepartment.SelectedValue),
-             Convert.ToDouble(txtRate.Text),
-             loggedUser.AccountID));
 
-        if (createdservice != null)
+        if (new FloorLogic().create(new Floor(0,
+            txtFloorNumber.Text,
+            txtDescription.Text,
+            loggedUser.AccountID))!=null)
         {
-            Response.Redirect("home.aspx");
+            Response.Redirect("createroom.aspx");
         }
         else
         {
             Response.Redirect("ErrorPage500.html");
         }
     }
-
     protected void btnCancel_Click(object sender, EventArgs e)
     {
-        Response.Redirect("home.aspx");
+        Response.Redirect("createroom.aspx");
     }
 }

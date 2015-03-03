@@ -20,18 +20,20 @@ public partial class createroom : System.Web.UI.Page
             Response.Redirect("login.aspx");
         }
 
-        DataTable dt1 = new RoomTypeLogic().selectAll(loggedUser.AccountID);
-        ddlRoomType.DataSource = dt1;
-        ddlRoomType.DataValueField = "RoomTypeID";
-        ddlRoomType.DataTextField = "Name";
-        ddlRoomType.DataBind();
+        if(!IsPostBack)
+        {
+            DataTable dt1 = new RoomTypeLogic().selectAll(loggedUser.AccountID);
+            ddlRoomType.DataSource = dt1;
+            ddlRoomType.DataValueField = "RoomTypeID";
+            ddlRoomType.DataTextField = "Name";
+            ddlRoomType.DataBind();
 
-        DataTable dt2 = new FloorLogic().selectAll(loggedUser.AccountID);
-        ddlFloor.DataSource = dt2;
-        ddlFloor.DataValueField = "FloorID";
-        ddlFloor.DataTextField = "FloorNumber";
-        ddlFloor.DataBind();
-
+            DataTable dt2 = new FloorLogic().selectAll(loggedUser.AccountID);
+            ddlFloor.DataSource = dt2;
+            ddlFloor.DataValueField = "FloorID";
+            ddlFloor.DataTextField = "FloorNumber";
+            ddlFloor.DataBind();
+        }       
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)
@@ -50,5 +52,9 @@ public partial class createroom : System.Web.UI.Page
     protected void btnCancel_Click(object sender, EventArgs e)
     {
         Response.Redirect("home.aspx");
+    }
+    protected void btnNewFloor_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("createfloor.aspx");
     }
 }

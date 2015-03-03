@@ -36,10 +36,11 @@ public partial class MasterPage : System.Web.UI.MasterPage
                     {
                         Session["StaffUserType"] = "Hotel Admin";                        
                         departmentPlaceHolder.Visible = true;
-                        planbuilderPlaceHolder.Visible = true;
+                        planbuilderPlaceHolder.Visible = true;                        
                         roomPlaceHolder.Visible = true;
                         staffPlaceHolder.Visible = true;
                         seasonPlaceHolder.Visible = true;
+                        bookingPlaceHolder.Visible = true;
 
                         if (Convert.ToBoolean(Session["OnlineBooking"]) == true)
                         {

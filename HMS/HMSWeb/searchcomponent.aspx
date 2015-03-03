@@ -58,7 +58,7 @@
                                 <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
                                     <ItemTemplate>
                                         <tr>
-                                            <td style="max-height:70px; max-width: 70px">
+                                            <td style="max-height:70px; max-width: 70px; text-align:center">
                                                 <img src='<%# Eval("Image") %>' style="max-width:70px; max-height:70px;" />
                                             </td>
                                             <td style="vertical-align:middle">
