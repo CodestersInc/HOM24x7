@@ -60,7 +60,7 @@
                                     <ItemTemplate>
                                         <tr>
                                             <td>
-                                                <%# Eval("Department") %>
+                                                <a href='viewdepartment.aspx?ID=<%# Eval("DepartmentID") %>' ><%# Eval("Department") %></a>
                                             </td>
                                             <td>
                                                 <a href="viewstaff.aspx?ID= <%# Eval("StaffID") %>"><%# Eval("Manager") %></a>

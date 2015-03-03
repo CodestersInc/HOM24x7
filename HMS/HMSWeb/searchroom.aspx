@@ -58,7 +58,7 @@
                                         <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
                                             <ItemTemplate>
                                                 <tr>
-                                                    <td><%#Eval("RoomNumber")%></td>
+                                                    <td><a href='viewroom.aspx?ID=<%# Eval("RoomID")%>' ><%#Eval("RoomNumber")%></a></td>
                                                     <td><a href='viewroomtype.aspx?ID=<%#Eval("RoomTypeID")%>'><%#Eval("Name") %> </a> </td>
                                                     <td><%#Eval("Status")%></td>
                                                     <td><a href='viewfloor.aspx?ID=<%#Eval("RoomTypeID")%>'><%#Eval("FloorNumber")%></a></td>

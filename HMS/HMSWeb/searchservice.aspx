@@ -60,10 +60,10 @@
                                     <ItemTemplate>
                                         <tr>
                                             <td>
-                                                <%# Eval("Name") %>
+                                                <a href='viewservice.aspx?ID=<%# Eval("ServiceID") %>'><%# Eval("Name") %></a>
                                             </td>
                                             <td>
-                                                <%# Eval("DepartmentName") %>
+                                                <a href='viewdepartment.aspx?ID=<%# Eval("DepartmentID")%>'><%# Eval("DepartmentName") %>
                                             </td>
                                             <td>
                                                 <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewservice.aspx?ID=" + Eval("ServiceID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>

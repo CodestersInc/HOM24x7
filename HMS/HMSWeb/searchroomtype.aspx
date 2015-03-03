@@ -57,7 +57,7 @@
                                 <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
                                     <ItemTemplate>
                                         <tr>
-                                            <td style="vertical-align:middle""><%#Eval("Name")%></td>
+                                            <td style="vertical-align:middle""><a href='viewroomtype.aspx?ID=<%# Eval("RoomTypeID") %>'><%#Eval("Name")%></a></td>
                                             <td style="text-align:center">
                                                 <asp:Image ID="Image1" ImageUrl='<%#Eval("Photo")%>' Width="100px" Height="80px" runat="server" />
                                             </td>

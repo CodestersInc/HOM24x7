@@ -66,13 +66,13 @@
                                                 <%# Eval("StaffCode") %>
                                             </td>
                                             <td>
-                                                <%# Eval("Name") %>
+                                                <a href='viewstaff.aspx?ID=<%# Eval("StaffID")%>'><%# Eval("Name") %></a>
                                             </td>
                                             <td>
                                                 <a href='viewdepartment.aspx?ID=<%# Eval("DepartmentID") %>'><%# Eval("DepartmentName") %></a>
                                             </td>
                                             <td>
-                                                <%# Eval("Email") %>
+                                                <a href="mailto:<%# Eval("Email") %>"><%# Eval("Email") %></a>
                                             </td>
                                             <td>
                                                 <%# Eval("Phone") %>

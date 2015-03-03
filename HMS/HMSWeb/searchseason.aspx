@@ -63,7 +63,7 @@
                                     <ItemTemplate>
                                         <tr>
                                             <td>
-                                                <%# Eval("Name") %>
+                                                <a href='viewseason.aspx?ID=<%# Eval("SeasonID") %>'><%# Eval("Name") %></a>
                                             </td>
                                             <td>
                                                 <%# Eval("FromDate") %>

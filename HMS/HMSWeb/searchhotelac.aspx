@@ -61,7 +61,7 @@
                                 <ItemTemplate>
                                     <tr>
                                         <td>
-                                            <%# Eval("Company") %>
+                                            <a href='viewhotelac.aspx?ID=<%# Eval("AccountID") %>'> <%# Eval("Company") %></a>  
                                         </td>
                                         <td>
                                             <%# Eval("ContactPerson") %>

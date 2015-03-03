@@ -78,7 +78,7 @@
                                                 <td>
                                                     <asp:HiddenField ID="HiddenFieldSeasonRoomID" Value='<%# Eval("SeasonRoomID") %>' runat="server" />
                                                     <asp:HiddenField ID="HiddenFieldSeasonID" Value='<%# Eval("SeasonID") %>' runat="server" />
-                                                    <b><%# Eval("Name") %></b>
+                                                    <a href='viewseason.aspx?ID=<%# Eval("SeasonID")%>'><b><%# Eval("Name") %></b></a>
                                                 </td>
                                                 <td>
                                                     <asp:TextBox ID="txtRate" Text='<%# Eval("Rate") %>' runat="server"></asp:TextBox>
