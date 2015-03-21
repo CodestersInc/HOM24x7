@@ -22,6 +22,7 @@ namespace BusinessLogic
 
             return DBUtility.Select(query, lstParams);
         }
+
         public Floor create(Floor obj)
         {
             String query = "insert into Floor(FloorNumber, Description, AccountID) values(@FloorNumber, @Description, @AccountID)";
@@ -101,6 +102,7 @@ namespace BusinessLogic
             }
 
         }
+
         public DataTable selectAll()
         {
             String query = "select * from Floor";
@@ -114,6 +116,17 @@ namespace BusinessLogic
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@id", id));
+            return DBUtility.Select(query, lstParams);
+        }
+
+        public DataTable getFloorsForRoomType(int RoomTypeID, int AccountID)
+        {
+            String query = "select DISTINCT Floor.FloorNumber, Floor.FloorID from Floor, Room, RoomType where Room.FloorID = Floor.FloorID and Room.RoomTypeID=RoomType.RoomTypeID and Room.RoomTypeID =@RoomTypeID and Floor.AccountID=@AccountID";
+
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+
+            lstParams.Add(new SqlParameter("@RoomTypeID", RoomTypeID));
+            lstParams.Add(new SqlParameter("@AccountID", AccountID));
             return DBUtility.Select(query, lstParams);
         }
     }

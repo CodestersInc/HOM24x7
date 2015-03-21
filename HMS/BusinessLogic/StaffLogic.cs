@@ -173,6 +173,16 @@ namespace BusinessLogic
             return DBUtility.Select(query, lstParams);
         }
 
+        public DataTable getManagers(int AccountID)
+        {
+            String query = "select Name, StaffID from Staff where Staff.AccountID=@AccountID  and ( UserType = 'Managerial Staff' or UserType = 'Hotel Admin')";
+
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+            lstParams.Add(new SqlParameter("@AccountID", AccountID));
+
+            return DBUtility.Select(query, lstParams);
+        }
+
         public DataTable searchManager(int ID)
         {
             String query = "select Department.Name as 'DepartmentName', Staff.* from Department,Staff where staff.DepartmentID=Department.DepartmentID and Staff.AccountID=@ID order by Staff.StaffCode";

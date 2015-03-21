@@ -18,7 +18,7 @@ public partial class registrestaff : System.Web.UI.Page
 
         if (loggedUser == null || (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff"))
         {
-            Response.Redirect("login.aspx");
+            Response.Redirect("login.aspx?url=" + Request.Url);
         }
         if(!IsPostBack)
         {

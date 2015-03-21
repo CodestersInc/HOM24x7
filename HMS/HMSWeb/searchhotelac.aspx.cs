@@ -13,7 +13,7 @@ public partial class hacsearch : System.Web.UI.Page
         SystemAdmin loggedUser = (SystemAdmin)Session["LoggedUser"];
         if (loggedUser == null || Session["UserType"].ToString() != "SystemAdmin")
         {
-            Response.Redirect("login.aspx");
+            Response.Redirect("login.aspx?url=" + Request.Url);
         }
     }
 

@@ -12,14 +12,20 @@ namespace BusinessLogic
 {
     public class CustomerLogic : ILogic<Customer>
     {
-        public System.Data.DataTable search(string searchstring, int ID)
+        public DataTable search(string searchstring, int ID)
         {
-            throw new NotImplementedException();
+            String query = "select * from Customer where Name like @Name+'%' and AccountID=@ID order by Name";
+
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+            lstParams.Add(new SqlParameter("@Name", searchstring));
+            lstParams.Add(new SqlParameter("@ID", ID));
+
+            return DBUtility.Select(query, lstParams);
         }
 
         public Customer create(Customer obj)
         {
-            String query = "insert into Customer values(@CreateDate, @Name, @Email, @Phone, @Username, @Password, @IsActive, @AccountID); select * from Customer where Username=@Username and Password=@Password;";
+            String query = "insert into Customer values(@CreateDate, @Name, @Email, @Phone, @Username, @Password, @IsActive, @AccountID);";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@CreateDate", obj.CreateDate));
@@ -30,25 +36,41 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@Password", obj.Password));
             lstParams.Add(new SqlParameter("@IsActive", obj.IsActive));
             lstParams.Add(new SqlParameter("@AccountID", obj.AccountID));
-            
-            DataTable dt = DBUtility.InsertAndFetch(query, lstParams);
 
-            if (dt.Rows.Count == 1)
+            int res = DBUtility.Modify(query, lstParams);
+
+            if (res == 1)
             {
-                return new Customer(Convert.ToInt32(dt.Rows[0]["CustomerID"]),
-                    Convert.ToDateTime(dt.Rows[0]["CreateDate"]),
-                    dt.Rows[0]["Name"].ToString(),
-                    dt.Rows[0]["Email"].ToString(),
-                    dt.Rows[0]["Phone"].ToString(),
-                    dt.Rows[0]["Username"].ToString(),
-                    dt.Rows[0]["Password"].ToString(),
-                    Convert.ToBoolean(dt.Rows[0]["IsActive"]),
-                    Convert.ToInt32(dt.Rows[0]["AccountID"]));
+                String fetchquery = "select * from Customer where CreateDate=@CreateDate and Name=@Name and Email=@Email and Phone=@Phone and Username=@Username and Password=@Password and IsActive=@IsActive and AccountID=@AccountID";
+                List<SqlParameter> lstParams1 = new List<SqlParameter>();
+
+                lstParams1.Add(new SqlParameter("@CreateDate", obj.CreateDate));
+                lstParams1.Add(new SqlParameter("@Name", obj.Name));
+                lstParams1.Add(new SqlParameter("@Email", obj.Email));
+                lstParams1.Add(new SqlParameter("@Phone", obj.Phone));
+                lstParams1.Add(new SqlParameter("@Username", obj.Username));
+                lstParams1.Add(new SqlParameter("@Password", obj.Password));
+                lstParams1.Add(new SqlParameter("@IsActive", obj.IsActive));
+                lstParams1.Add(new SqlParameter("@AccountID", obj.AccountID));
+                DataTable dt = DBUtility.Select(fetchquery, lstParams1);
+                if (dt.Rows.Count == 1)
+                {
+                    return new Customer(Convert.ToInt32(dt.Rows[0]["CustomerID"]),
+                        Convert.ToDateTime(dt.Rows[0]["CreateDate"]),
+                        dt.Rows[0]["Name"].ToString(),
+                        dt.Rows[0]["Email"].ToString(),
+                        dt.Rows[0]["Phone"].ToString(),
+                        dt.Rows[0]["Username"].ToString(),
+                        dt.Rows[0]["Password"].ToString(),
+                        Convert.ToBoolean(dt.Rows[0]["IsActive"]),
+                        Convert.ToInt32(dt.Rows[0]["AccountID"]));
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
-            {
-                return null; 
-            }
+            return null;
         }
 
         public int update(Customer obj)
@@ -114,7 +136,7 @@ namespace BusinessLogic
 
         public Customer login(String username, String password)
         {
-            String query = "select * from SystemAdmin where Username=@Username and Password=@Password";
+            String query = "select * from customer where Username=@Username and Password=@Password";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
             lstParams.Add(new SqlParameter("@Username", username));

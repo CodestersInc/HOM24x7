@@ -20,7 +20,7 @@ namespace BusinessLogic
 
         public Booking create(Booking obj)
         {
-            String query = "insert into Booking values(@RoomID, @NumberOfPersons, @CheckInDate, @PlannedCheckOutDate, @Status, @PaidAmount, @CustomerID, @ApproverID, @ReceiverID, @StaffRemarks, @CustomerRemarks, @RoomRate, @PaymentMode, @ChequeNo, @BankName, @OnlineBookingID); select * from Booking where RoomID=@RoomID and NumberOfPersons=@NumberOfPersons and CheckInDate=@CheckInDate and PlannedCheckOutDate=@PlannedCheckOutDate and Status=@Status and PaidAmount=@PaidAmount and CustomerID=@CustomerID and ApproverID=@ApproverID and ReceiverID=@ReceiverID and StaffRemarks=@StaffRemarks and CustomerRemarks=@CustomerRemarks and RoomRate=@RoomRate and PaymentMode=@PaymentMode and ChequeNo=@ChequeNo and BankName=@BankName and OnlineBookingID=@OnlineBookingID;";
+            String query = "insert into Booking values(@RoomID, @NumberOfPersons, @CheckInDate, @PlannedCheckOutDate, @CheckOutDate, @Status, @PaidAmount, @CustomerID, @ApproverID, @ReceiverID, @StaffRemarks, @CustomerRemarks, @RoomRate, @PaymentMode, @ChequeNo, @BankName, @OnlineBookingID);";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@RoomID", obj.RoomID));
@@ -42,10 +42,34 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@OnlineBookingID", obj.OnlineBookingID));
 
 
-            DataTable dt = DBUtility.InsertAndFetch(query, lstParams);
+            int res = DBUtility.Modify(query, lstParams);
 
-            if (dt.Rows.Count == 1)
+            if (res == 1)
             {
+                String fetchquery = " select * from Booking where RoomID=@RoomID and NoOfPersons=@NumberOfPersons and CheckInDate=@CheckInDate and PlannedCheckOutDate=@PlannedCheckOutDate and Status=@Status and PaidAmount=@PaidAmount and CustomerID=@CustomerID and ApproverID=@ApproverID and ReceiverID=@ReceiverID and StaffRemarks=@StaffRemarks and CustomerRemarks=@CustomerRemarks and RoomRate=@RoomRate and PaymentMode=@PaymentMode and ChequeNo=@ChequeNo and BankName=@BankName and OnlineBookingID=@OnlineBookingID;";
+
+                lstParams = new List<SqlParameter>();
+
+                lstParams.Add(new SqlParameter("@RoomID", obj.RoomID));
+                lstParams.Add(new SqlParameter("@NumberOfPersons", obj.NumberOfPersons));
+                lstParams.Add(new SqlParameter("@CheckInDate", obj.CheckInDate));
+                lstParams.Add(new SqlParameter("@PlannedCheckOutDate", obj.PlannedCheckOutDate));
+                lstParams.Add(new SqlParameter("@CheckOutDate", obj.CheckOutDate));
+                lstParams.Add(new SqlParameter("@Status", obj.Status));
+                lstParams.Add(new SqlParameter("@PaidAmount", obj.PaidAmount));
+                lstParams.Add(new SqlParameter("@CustomerID", obj.CustomerID));
+                lstParams.Add(new SqlParameter("@ApproverID", obj.ApproverID));
+                lstParams.Add(new SqlParameter("@ReceiverID", obj.ReceiverID));
+                lstParams.Add(new SqlParameter("@StaffRemarks", obj.StaffRemarks));
+                lstParams.Add(new SqlParameter("@CustomerRemarks", obj.CustomerRemarks));
+                lstParams.Add(new SqlParameter("@RoomRate", obj.RoomRate));
+                lstParams.Add(new SqlParameter("@PaymentMode", obj.PaymentMode));
+                lstParams.Add(new SqlParameter("@ChequeNo", obj.ChequeNo));
+                lstParams.Add(new SqlParameter("@BankName", obj.BankName));
+                lstParams.Add(new SqlParameter("@OnlineBookingID", obj.OnlineBookingID));
+
+                DataTable dt = DBUtility.Select(fetchquery, lstParams);
+
                 return new Booking(Convert.ToInt32(dt.Rows[0]["BookingID"]),
                 Convert.ToInt32(dt.Rows[0]["RoomID"]),
                 Convert.ToInt32(dt.Rows[0]["NumberOfPersons"]),

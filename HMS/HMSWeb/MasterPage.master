@@ -155,7 +155,7 @@
                                 <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a href="#">Create new Booking</a></li>
+                                    <li><a href="createbooking.aspx">Create new Booking</a></li>
                                     <li><a href="#">Search a Booking</a></li>
                                 </ul>
                             </li>

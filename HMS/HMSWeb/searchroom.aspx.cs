@@ -13,7 +13,7 @@ public partial class searchroom : System.Web.UI.Page
         Staff loggedUser = (Staff)Session["LoggedUser"];
         if (loggedUser == null || loggedUser.UserType != "Hotel Admin")
         {
-            Response.Redirect("login.aspx");
+            Response.Redirect("login.aspx?url=" + Request.Url);
         }
     }
 

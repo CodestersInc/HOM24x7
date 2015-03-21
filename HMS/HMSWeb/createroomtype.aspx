@@ -58,7 +58,7 @@
                                     <label class="control-label">Photo</label>
                                     <div class="controls">
                                         <asp:FileUpload ID="FileUpload1" runat="server" />
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Please add a photo of that perticula room type" CssClass="alert alert-error"></asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ControlToValidate="FileUpload1" ID="FileUploadRequiredFieldValidator" runat="server" ErrorMessage="Please add a photo of that perticula room type" CssClass="alert alert-error"></asp:RequiredFieldValidator>
                                         <br />
                                         <br />
                                     </div>

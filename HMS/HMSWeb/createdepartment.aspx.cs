@@ -17,7 +17,7 @@ public partial class adddepartment : System.Web.UI.Page
 
         if (loggedUser == null || (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff"))
         {
-            Response.Redirect("login.aspx");
+            Response.Redirect("login.aspx?url=" + Request.Url);
         }
 
         //EmailRegularExpressionValidator.ValidationExpression = Regex.Escape(@"^(?("")("".+?""@)|(([0-9a-zA-Z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-zA-Z])@))(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,6}))$");
@@ -113,7 +113,6 @@ public partial class adddepartment : System.Web.UI.Page
 
     protected void btnNewManager_Click(object sender, EventArgs e)
     {
-        
         ViewState["deptName"] = txtDepartmentName.Text;
         managerChoicePlaceHolder.Visible = false;
         newManagerPlaceHolder.Visible = true;

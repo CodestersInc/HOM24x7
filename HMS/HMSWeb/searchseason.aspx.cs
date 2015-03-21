@@ -15,7 +15,7 @@ public partial class searchseason : System.Web.UI.Page
 
         if (loggedUser == null || loggedUser.UserType != "Hotel Admin")
         {
-            Response.Redirect("login.aspx");
+            Response.Redirect("login.aspx?url=" + Request.Url);
         }
     }
 

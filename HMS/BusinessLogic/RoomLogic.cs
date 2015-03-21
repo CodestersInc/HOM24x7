@@ -115,5 +115,17 @@ namespace BusinessLogic
 
             return DBUtility.Select(query, new List<SqlParameter>());
         }
+
+        public DataTable getFilteredRooms(int RoomTypeID, int FloorID)
+        {
+            String query = "select * from Room where RoomTypeID=@RoomTypeID and FloorID=@FloorID";
+
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+
+            lstParams.Add(new SqlParameter("@RoomTypeID", RoomTypeID));
+            lstParams.Add(new SqlParameter("@FloorID", FloorID));
+            return DBUtility.Select(query, lstParams);
+
+        }
     }
 }

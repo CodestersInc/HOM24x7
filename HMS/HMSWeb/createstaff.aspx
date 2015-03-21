@@ -43,8 +43,8 @@
                                     <label class="control-label">Name</label>
                                     <div class="controls">
                                         <asp:TextBox ID="txtName" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter the full name of staff member." data-original-title="Popover header"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="NameRequiredFieldValidator" runat="server" ValidationGroup="First" ErrorMessage="Please enter Staff Name" CssClass="alert alert-error" ControlToValidate="txtName" />
-                                        <asp:RegularExpressionValidator ID="NameRegularExpressionValidator" runat="server" ValidationGroup="First" ErrorMessage="The name cannot contain any special characters" CssClass="alert alert-error" ControlToValidate="txtName" ValidationExpression="^[a-zA-Z''-'\s]{1,90}$" />
+                                        <asp:RequiredFieldValidator ID="NameRequiredFieldValidator" runat="server" ValidationGroup="First" ErrorMessage="Please enter Staff Name" Display="Dynamic" CssClass="alert alert-error" ControlToValidate="txtName" />
+                                        <asp:RegularExpressionValidator ID="NameRegularExpressionValidator" runat="server" ValidationGroup="First" ErrorMessage="The name cannot contain any special characters" CssClass="alert alert-error" Display="Dynamic" ControlToValidate="txtName" ValidationExpression="^[a-zA-Z''-'\s]{1,90}$" />
                                     </div>
                                 </div>
 
@@ -65,7 +65,7 @@
                                     <div class="controls">
                                         <asp:TextBox ID="txtPhone" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter a 10 digit number" data-original-title="Instructions"></asp:TextBox>
                                         <asp:RequiredFieldValidator ControlToValidate="txtPhone" Display="Dynamic" ID="PhoneRequiredFieldValidator" runat="server" ErrorMessage="Please enter a phone number" ValidationGroup="First" CssClass="alert alert-error"></asp:RequiredFieldValidator>
-                                        <asp:RegularExpressionValidator ControlToValidate="txtPhone" Display="Dynamic" ID="PhoneRegularExpressionValidator" runat="server" ErrorMessage="RegularExpressionValidator" ValidationExpression="^[0-1]?[0-1]?[- .]?(\([2-9]\d{2}\)|\d{3})[- .]?\d{3}[- .]?\d{4}$" ValidationGroup="First" CssClass="alert alert-error"></asp:RegularExpressionValidator>
+                                        <asp:RegularExpressionValidator ControlToValidate="txtPhone" Display="Dynamic" ID="PhoneRegularExpressionValidator" runat="server" ErrorMessage="Please enter 10 digit valid phone number" ValidationExpression="^[0-1]?[0-1]?[- .]?(\([2-9]\d{2}\)|\d{3})[- .]?\d{3}[- .]?\d{4}$" ValidationGroup="First" CssClass="alert alert-error"></asp:RegularExpressionValidator>
                                     </div>
                                 </div>
 

@@ -34,7 +34,7 @@
                 </div>
             </div>
         </div>
-        <asp:PlaceHolder ID="searchResultArea" Visible="false" runat="server">
+        <asp:PlaceHolder ID="searchResultArea" Visible="true" runat="server">
             <!-- BEGIN ADVANCED TABLE widget-->
             <div class="row-fluid">
                 <div class="span12">

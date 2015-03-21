@@ -18,6 +18,7 @@ public partial class login : System.Web.UI.Page
             Session.RemoveAll();
         }
         errorMessagePlaceHolder.Visible = false;
+        
     }
 
     protected void btnLogin_Click(object sender, EventArgs e)
@@ -32,7 +33,7 @@ public partial class login : System.Web.UI.Page
             {
                 Session.Add("LoggedUser", systemAdminLogger);
                 Session.Add("UserType", "SystemAdmin");
-                Response.Redirect("home.aspx");
+                redirectAsNeeded();
             }
             else
             {
@@ -47,7 +48,7 @@ public partial class login : System.Web.UI.Page
                     Session.Add("Service", (features.Contains("#Service#")) ? true : false);
                     Session.Add("LoggedUser", staffLogger);
                     Session.Add("UserType", "Staff");
-                    Response.Redirect("home.aspx");
+                    redirectAsNeeded();
                 }
                 else
                 {
@@ -56,7 +57,7 @@ public partial class login : System.Web.UI.Page
                     {
                         Session.Add("LoggedUser", customerLogger);
                         Session.Add("UserType", "Customer");
-                        Response.Redirect("home.aspx");
+                        redirectAsNeeded();
                     }
                     else
                     {
@@ -69,6 +70,16 @@ public partial class login : System.Web.UI.Page
         {
             errorMessagePlaceHolder.Visible = true;
         }
+    }
+
+    private void redirectAsNeeded()
+    {
+        String redirectionUrl = Request["url"];
+        if (redirectionUrl.Equals("/login.aspx"))
+        {
+            redirectionUrl = "home.aspx";
+        }
+        Response.Redirect(redirectionUrl);
     }
 
     protected void forgotPassword(object sender, EventArgs e)
