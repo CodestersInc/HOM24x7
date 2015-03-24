@@ -108,6 +108,15 @@ namespace BusinessLogic
             return DBUtility.Select(query, new List<SqlParameter>());
         }
 
+        public DataTable selectAll(int AccountID)
+        {
+            String query = "select * from Department where AccountID=@AccountID";
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+            lstParams.Add(new SqlParameter("@AccountID", AccountID));
+
+            return DBUtility.Select(query, lstParams);
+        }
+
         public DataTable selectDistinctDepartment(int AccountID)
         {
             String query = "select DISTINCT Name as 'DepartmentChoices', DepartmentID from Department where AccountID=@AccountID";

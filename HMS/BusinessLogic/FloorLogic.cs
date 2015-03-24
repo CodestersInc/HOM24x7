@@ -119,6 +119,15 @@ namespace BusinessLogic
             return DBUtility.Select(query, lstParams);
         }
 
+        public DataTable selectFloorsWithoutPlan(int AccountID)
+        {
+            String query = "select * from Floor where Floor.FloorID NOT IN (select FloorPlan.FloorID from FloorPlan) and Floor.AccountID = @AccountID";
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+
+            lstParams.Add(new SqlParameter("@AccountID", AccountID));
+            return DBUtility.Select(query, lstParams);
+        }
+
         public DataTable getFloorsForRoomType(int RoomTypeID, int AccountID)
         {
             String query = "select DISTINCT Floor.FloorNumber, Floor.FloorID from Floor, Room, RoomType where Room.FloorID = Floor.FloorID and Room.RoomTypeID=RoomType.RoomTypeID and Room.RoomTypeID =@RoomTypeID and Floor.AccountID=@AccountID";

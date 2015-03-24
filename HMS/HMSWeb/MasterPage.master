@@ -111,7 +111,7 @@
                         <asp:PlaceHolder ID="homePlaceHolder" runat="server" Visible="false">
                             <li class="has-sub active">
                                 <a href="home.aspx">
-                                    <span class="icon-box"><i class="icon-dashboard"></i></span>Home
+                                    <span class="icon-box"><i class="icon-home"></i></span>Home
                                 </a>
                             </li>
                         </asp:PlaceHolder>

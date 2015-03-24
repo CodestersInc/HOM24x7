@@ -10,18 +10,6 @@ public partial class generatepayslip : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        try
-        {
-            AppUser LoggedAppUser = (AppUser)Session["AppUser"];
-            if (LoggedAppUser == null || LoggedAppUser.UserType != "Hotel Admin")
-            {
-                Response.Redirect("login.aspx?url=" + Request.Url);
-            }
-        }
-        catch (Exception ex)
-        {
-            Response.Redirect("ErrorPage500.html");
-        }
 
     }
 }

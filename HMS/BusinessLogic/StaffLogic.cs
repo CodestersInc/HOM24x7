@@ -153,6 +153,15 @@ namespace BusinessLogic
             return DBUtility.Select(query, new List<SqlParameter>());
         }
 
+        public DataTable selectAll(int AccountID)
+        {
+            String query = "select * from Staff where AccountID=@AccountID";
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+            lstParams.Add(new SqlParameter("@AccountID", AccountID));
+
+            return DBUtility.Select(query, lstParams);
+        }
+
         public DataTable getStaffNames(int AccountID)
         {
             String query = "select Staff.*, Department.Name as 'DepartmentName' from Staff, Department where Staff.DepartmentID = Department.DepartmentID and Staff.AccountID=@AccountID ";

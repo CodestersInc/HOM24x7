@@ -112,11 +112,21 @@ namespace BusinessLogic
             }
         }
 
-        public System.Data.DataTable selectAll()
+        public DataTable selectAll()
         {
             String query = "select * from Component";
 
             return DBUtility.Select(query, new List<SqlParameter>());
+        }
+
+        public DataTable selectAll(int AccountID)
+        {
+            String query = "select * from Component where AccountID=@AccountID";
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+
+            lstParams.Add(new SqlParameter("@AccountID", AccountID));
+
+            return DBUtility.Select(query, lstParams);
         }
     }
 }

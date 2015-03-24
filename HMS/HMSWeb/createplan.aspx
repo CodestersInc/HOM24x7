@@ -3,38 +3,24 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" runat="Server">
     <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
     <style>
-        .draggableA {
+        .paletteComponent {
             width: 70px;
-            background-color: blue;
-            margin: 5px;
-        }
-
-        .draggableB {
-            width: 70px;
-            background-color: chocolate;
-            margin: 5px;
-        }
-
-        .palleteComponent {
-            width: 70px;
+            height: 70px;
             float: left;
-            min-height: 70px;
-            margin: 5px;
         }
 
-        .draggableA, .draggableB {
-            float: left;
-            min-height: 70px;
-            color: white;
-        }
-
-        #pallete {
-            padding: 5px;
-            border-style: solid;
-            border-width: 1px;
-            min-width: 800px;
+        #palette {
+            min-width: 400px;
             min-height: 80px;
-            margin: 5px;
+        }
+
+        .room {
+            width: 50px;
+            height: 50px;
+            background-color: gray;
+            text-align: left;
+            vertical-align: middle;
+            color: white;
         }
 
         #canvas {
@@ -73,99 +59,99 @@
             </div>
         </div>
         <!-- END PAGE HEADER-->
-        <!-- BEGIN SAMPLE FORM widget-->
-        <div class="widget">
-            <div class="widget-title">
-                <h4><i class="icon-reorder"></i>Add Room</h4>
-                <span class="tools">
-                    <a href="javascript:;" class="icon-chevron-down"></a>
-                    <a href="javascript:;" class="icon-remove"></a>
-                </span>
-            </div>
+
+        <asp:PlaceHolder ID="floorNumberPlaceHolder" runat="server">
             <div class="widget-body form">
-                <!-- BEGIN FORM-->
-                <div>
-                    <div class="form-horizontal">
-
-                        <div class="control-group">
-                            <label class="control-label">Room Number</label>
-                            <div class="controls">
-                                <asp:TextBox ID="txtRoomNumber" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter the full name of staff member." data-original-title="Popover header"></asp:TextBox>
-                                <asp:RequiredFieldValidator ControlToValidate="txtRoomNumber" ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please add the room number" Display="Dynamic" ValidationGroup="First" CssClass="alert alert-error"></asp:RequiredFieldValidator>
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label class="control-label">Floor</label>
-                            <div class="controls">
-                                <asp:DropDownList ID="ddlFloorNumber" runat="server" CssClass="span4" data-placeholder="Choose a floor" TabIndex="1" />
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label class="control-label">Room Type</label>
-                            <div class="controls">
-                                <asp:DropDownList ID="ddlRoomType" runat="server" CssClass="span4" data-placeholder="Choose a floor" TabIndex="1" />
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label class="control-label">Status</label>
-                            <div class="controls">
-                                <asp:DropDownList ID="ddlStatus" runat="server" CssClass="span4" data-placeholder="Choose a Category" TabIndex="1">
-                                    <asp:ListItem>Select...</asp:ListItem>
-                                    <asp:ListItem>Empty</asp:ListItem>
-                                    <asp:ListItem>Occupied</asp:ListItem>
-                                    <asp:ListItem>Under Maintenance</asp:ListItem>
-                                </asp:DropDownList>
-                            </div>
-                        </div>
-
-                        <div class="form-actions">
-                            <asp:Button ID="btnCreateRoom" ValidationGroup="First" CssClass="btn btn-success" runat="server" Text="Add to Plan" OnClick="btnCreateRoom_Click" />
-                        </div>
-                        <br />
-
-                        <!--START PLAN BUILDER-->
-                        <div id="planbuilder">
-                            <!--START PALLETTE-->
-                            <!-- BEGIN EXAMPLE TABLE widget-->
-                            <div class="widget">
-                                <div class="widget-title">
-                                    <h4><i class="icon-reorder"></i>Pallete</h4>
-                                    <span class="tools">
-                                        <a href="javascript:;" class="icon-chevron-down"></a>
-                                        <a href="javascript:;" class="icon-remove"></a>
-                                    </span>
-                                </div>
-                                <div class="widget-body">
-                                    <asp:Repeater ID="Repeater1" runat="server">
-                                        <ItemTemplate>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-                                </div>
-                            </div>
-                            <!-- END EXAMPLE TABLE widget-->
-                            <div id="pallete">
-                                <div class="draggableA palleteComponent"></div>
-                                <div class="draggableB palleteComponent"></div>
-                            </div>
-                            <!--END PALLETTE-->
-                            <div id="canvas">
-                            </div>
-                        </div>
-                        <!-- END PLAN BUILDER-->
-
-                        <div class="form-actions">
-                            <asp:Button ID="btnSubmit" CssClass="btn btn-success" runat="server" Text="Submit" OnClick="btnSubmit_Click" />
-                            <asp:Button ID="btnCancel" CssClass="btn btn-warning" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
+                <div class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label">Select a Floor</label>
+                        <div class="controls">
+                            <asp:DropDownList ID="ddlFloor" runat="server" CssClass="span3" data-placeholder="Choose a floor" TabIndex="1" />
+                            <asp:HiddenField ID="floorHiddenField" runat="server" />
+                            <span></span>
+                            <asp:Button ID="createPlan" CssClass="btn btn-info" runat="server" Text="Create Plan" OnClick="createPlan_Click" />
                         </div>
                     </div>
                 </div>
-                <!-- END SAMPLE FORM widget-->
             </div>
-            <!-- END PAGE CONTAINER-->
-        </div>
+        </asp:PlaceHolder>
+
+        <asp:PlaceHolder ID="planBuilderPlaceHolder" runat="server" Visible="false">
+            <!-- BEGIN SAMPLE FORM widget-->
+            <div class="widget">
+                <div class="widget-title">
+                    <h4><i class="icon-reorder"></i>Add Room</h4>
+                    <span class="tools">
+                        <a href="javascript:;" class="icon-chevron-down"></a>
+                        <a href="javascript:;" class="icon-remove"></a>
+                    </span>
+                </div>
+                <div class="widget-body form">
+                    <!-- BEGIN FORM-->
+                    <div>
+                        <div class="form-horizontal">
+                            <div class="control-group">
+                                <label class="control-label">Room Number</label>
+                                <div class="controls">
+                                    <select id="roomList" class="span3">
+                                        <asp:Repeater ID="selectionRepeater" runat="server">
+                                            <ItemTemplate>
+                                                <option value='<%# Eval("RoomID") %>'><%# Eval("RoomNumber") %></option>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </select>
+                                    <b>OR</b>
+                                    <asp:LinkButton ID="btnNewRoom" runat="server" CssClass="btn-mini" OnClick="btnNewRoom_Click">Create New Room</asp:LinkButton>
+                                </div>
+                                <br />
+                                <div class="controls">
+                                    <input id="btnAddToCanvas" class="btn-primary" type="button" value="Add to Plan" />
+                                </div>
+                            </div>
+
+                            <!--START PLAN BUILDER-->
+                            <!--START PALLETTE-->
+                            <!-- BEGIN EXAMPLE TABLE widget-->
+                            <asp:PlaceHolder ID="palettePlaceHolder" runat="server" Visible="false">
+                                <div class="widget" style="padding-left: 5px">
+                                    <div class="widget-title">
+                                        <h4><i class="icon-reorder"></i>Pallete</h4>
+                                        <span class="tools">
+                                            <a href="javascript:;" class="icon-chevron-down"></a>
+                                            <a href="javascript:;" class="icon-remove"></a>
+                                        </span>
+                                    </div>
+                                    <div id="room">ROOM</div>
+
+                                    <div class="widget-body" style="min-height: 80px">
+                                        <asp:Repeater ID="Repeater1" runat="server">
+                                            <ItemTemplate>
+                                                <div class="paletteComponent" style="vertical-align: middle">
+                                                    <asp:Image ID="Image1" ImageUrl='<%# Eval("Image") %>' runat="server" />
+                                                </div>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </div>
+                                </div>
+                                <!-- END EXAMPLE TABLE widget-->
+                            </asp:PlaceHolder>
+                            <!--END PALLETTE-->
+                            <div id="canvas"></div>
+                            <!-- END PLAN BUILDER-->
+
+                            <div class="form-actions">
+                                <asp:Button ID="btnSubmit" CssClass="btn btn-success" runat="server" Text="Submit" OnClientClick="createPlan()"/>
+                                <asp:Button ID="btnCancel" CssClass="btn btn-warning" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
+                            </div>
+
+                            <asp:TextBox ID="txtData" CssClass="txtData" runat="server"></asp:TextBox>
+                        </div>
+                    </div>
+                    <!-- END SAMPLE FORM widget-->
+                </div>
+                <!-- END PAGE CONTAINER-->
+            </div>
+        </asp:PlaceHolder>
     </div>
 </asp:Content>
 
@@ -180,18 +166,42 @@
             $(this).clone().appendTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" });
         });
 
-        $('.draggableA').click(function () {
-            $(this).clone().appendTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" });
-        });
-
-        $('.draggableB').click(function () {
+        $('.paletteComponent').click(function () {
             $(this).clone().appendTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" });
         });
 
         function save() {
-            $("#canvas>.palleteComponent").each(function () {
+            $("#canvas>.paletteComponent").each(function () {
                 alert($(this).attr('style'));
             })
         }
+
+        //$('#btnAddToCanvas').click(function () {
+        //    $('#room').clone().appendTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" }).attr("RoomID", $("#selectRoomNumber").val());
+        //});
+
+        //$('#btnAddToCanvas').click(function () {
+        //    $('#canvas').append("<div id='room'>ROOM</div>").draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" }).attr("RoomID", $("#selectRoomNumber").val());
+        //});
+
+        $('#btnAddToCanvas').click(function () {
+            $("<div class='room' >Room: </div>").appendTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" }).attr("RoomID", $("#roomList").val()).append($("#roomList").val());;
+
+            var x = document.getElementById("roomList");
+            x.remove(x.selectedIndex);
+        });
+
+    </script>
+
+    <script type="text/javascript">
+        var data="";
+        function createPlan() {
+            $("#canvas>.room").each(function () {                             
+                data += "##" + $(this).attr('RoomID') + "#" + $(this).attr('style');
+                alert(data);
+            });
+            $('.txtData').val(data);
+        }
+        
     </script>
 </asp:Content>

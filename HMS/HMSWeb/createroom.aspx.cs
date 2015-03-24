@@ -22,12 +22,14 @@ public partial class createroom : System.Web.UI.Page
 
         if(!IsPostBack)
         {
+            //Fill ddlRoomType
             DataTable dt1 = new RoomTypeLogic().selectAll(loggedUser.AccountID);
             ddlRoomType.DataSource = dt1;
             ddlRoomType.DataValueField = "RoomTypeID";
             ddlRoomType.DataTextField = "Name";
             ddlRoomType.DataBind();
 
+            //Fill ddlFloor
             DataTable dt2 = new FloorLogic().selectAll(loggedUser.AccountID);
             ddlFloor.DataSource = dt2;
             ddlFloor.DataValueField = "FloorID";

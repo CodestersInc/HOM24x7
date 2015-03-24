@@ -45,8 +45,6 @@
   <ItemGroup>
     <Compile Include="AccountLogic.cs" />
     <Compile Include="Account.cs" />
-    <Compile Include="AppUserLogic.cs" />
-    <Compile Include="AppUser.cs" />
     <Compile Include="AttendanceLogic.cs" />
     <Compile Include="Attendance.cs" />
     <Compile Include="BookingLogic.cs" />

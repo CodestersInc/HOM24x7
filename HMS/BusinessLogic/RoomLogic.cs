@@ -127,5 +127,26 @@ namespace BusinessLogic
             return DBUtility.Select(query, lstParams);
 
         }
+
+        public DataTable selectAll(int AccountID)
+        {
+            String query = "select Room.* from Room, RoomType where Room.RoomTypeID = RoomType.RoomTypeID and RoomType.AccountID=@AccountID";
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+            lstParams.Add(new SqlParameter("@AccountID", AccountID));
+
+            return DBUtility.Select(query, lstParams);
+        }
+
+        public DataTable getRooms(int FloorID, int AccountID)
+        {
+            String query = "select Room.* from Room, Floor where Room.FloorID=@FloorID and Floor.FloorID=Room.FloorID and Floor.AccountID=@AccountID";
+
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+
+            lstParams.Add(new SqlParameter("@FloorID", FloorID));
+            lstParams.Add(new SqlParameter("@AccountID", AccountID));
+
+            return DBUtility.Select(query, lstParams);
+        }
     }
 }
