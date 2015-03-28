@@ -15,6 +15,10 @@ public partial class searchstaff : System.Web.UI.Page
         {
             Response.Redirect("login.aspx?url=" + Request.Url);
         }
+        if (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff")
+        {
+            Response.Redirect("home.aspx");
+        }
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)

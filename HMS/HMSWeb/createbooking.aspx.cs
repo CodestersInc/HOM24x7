@@ -120,9 +120,7 @@ public partial class createbooking : System.Web.UI.Page
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)
-    {
-        
-        
+    {        
         Booking bookingObj = new BookingLogic().create(new Booking(0,
             Convert.ToInt32(ddlRoom.SelectedValue),
             Convert.ToInt32(txtNoOfPersons.Text),
@@ -138,8 +136,8 @@ public partial class createbooking : System.Web.UI.Page
             txtCustomerRemarks.Text,
             Convert.ToDouble(txtRoomRates.Text),
             ddlPaymentMode.SelectedValue,
-            0,
-            "",
+            (txtChequeNumber.Text.Equals("")) ? 0 : Convert.ToInt32(txtChequeNumber.Text),
+            txtBankName.Text,
             0));
 
         if (bookingObj == null)

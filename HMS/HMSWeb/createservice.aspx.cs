@@ -15,9 +15,13 @@ public partial class createservice : System.Web.UI.Page
     {
         Staff loggedUser = (Staff)Session["loggedUser"];
 
-        if (loggedUser == null || (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff"))
+        if (loggedUser == null)
         {
             Response.Redirect("login.aspx?url=" + Request.Url);
+        }
+        if (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff")
+        {
+            Response.Redirect("home.aspx");
         }
         if(!IsPostBack)
         {

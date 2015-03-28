@@ -15,9 +15,13 @@ public partial class adddepartment : System.Web.UI.Page
     {
         Staff loggedUser = (Staff)Session["LoggedUser"];
 
-        if (loggedUser == null || (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff"))
+        if (loggedUser == null)
         {
             Response.Redirect("login.aspx?url=" + Request.Url);
+        }
+        if (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff")
+        {
+            Response.Redirect("home.aspx");
         }
 
         //EmailRegularExpressionValidator.ValidationExpression = Regex.Escape(@"^(?("")("".+?""@)|(([0-9a-zA-Z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-zA-Z])@))(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,6}))$");

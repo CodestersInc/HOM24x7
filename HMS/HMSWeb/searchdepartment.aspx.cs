@@ -12,10 +12,15 @@ public partial class searchdepartment : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["LoggedUser"];
-        if (loggedUser == null || (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff"))
+        if (loggedUser == null)
         {
             Response.Redirect("login.aspx?url=" + Request.Url);
         }
+        if (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff")
+        {
+            Response.Redirect("home.aspx");
+        }
+
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)

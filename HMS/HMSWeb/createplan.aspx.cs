@@ -16,13 +16,18 @@ public partial class createplan : System.Web.UI.Page
     {
         Staff loggedUser = (Staff)Session["loggedUser"];
 
-        if (loggedUser == null || loggedUser.UserType != "Hotel Admin")
+        if (loggedUser == null)
         {
             Response.Redirect("login.aspx?url=" + Request.Url);
         }
+        if (loggedUser.UserType != "Hotel Admin")
+        {
+            Response.Redirect("home.aspx");
+        }
+    }
 
         if (!IsPostBack)
-        {
+    {
             Repeater1.DataSource = new ComponentLogic().selectAll(loggedUser.AccountID);
             Repeater1.DataBind();
 
@@ -47,7 +52,7 @@ public partial class createplan : System.Web.UI.Page
     {
 
     }
-
+    
     protected void createPlan_Click(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["loggedUser"];

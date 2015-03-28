@@ -306,6 +306,25 @@
                                             </div>
                                         </div>
 
+                                        <div class="control-group">
+                                            <label class="control-label">Cheque Number</label>
+                                            <div class="controls">
+                                                <div class="input-prepend input-append">
+                                                    <asp:TextBox ID="txtChequeNumber" CssClass="span6" runat="server"></asp:TextBox>                                                   
+                                                    <asp:RegularExpressionValidator ControlToValidate="txtChequeNumber" Display="Dynamic" ID="RegularExpressionValidator2" runat="server" ErrorMessage="Please enter a non negative numerical value" ValidationExpression="^\d+(\.\d\d)?$" ValidationGroup="First"></asp:RegularExpressionValidator><%--CssClass="alert alert-error"--%>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="control-group">
+                                            <label class="control-label">Bank Name</label>
+                                            <div class="controls">
+                                                <asp:TextBox ID="txtBankName" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter the full name of staff member." data-original-title="Popover header"></asp:TextBox>
+                                                <asp:RegularExpressionValidator ID="NameRegularExpressionValidator" runat="server" ValidationGroup="First" ErrorMessage="The name cannot contain any special characters" CssClass="alert alert-error" Display="Dynamic" ControlToValidate="txtBankName" ValidationExpression="^[a-zA-Z''-'\s]{1,90}$" />
+                                            </div>
+                                        </div>
+
+
                                         <div class="form-actions">
                                             <asp:Button ID="btnSubmit" ValidationGroup="First" CssClass="btn btn-success" runat="server" Text="Submit" OnClick="btnSubmit_Click" />
                                             <asp:Button ID="btnCancel" CssClass="btn btn-warning" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
