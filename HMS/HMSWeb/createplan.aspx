@@ -140,11 +140,12 @@
                             <!-- END PLAN BUILDER-->
 
                             <div class="form-actions">
-                                <asp:Button ID="btnSubmit" CssClass="btn btn-success" runat="server" Text="Submit" OnClientClick="createPlan()"/>
+                                <asp:Button ID="btnSubmit" CssClass="btn btn-success" runat="server" Text="Submit" OnClientClick="savePlanData()"/>
                                 <asp:Button ID="btnCancel" CssClass="btn btn-warning" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
                             </div>
 
-                            <asp:TextBox ID="txtData" CssClass="txtData" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtPlanData"  CssClass="txtPlanData" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtPlanComponentData" CssClass="txtPlanComponentData" runat="server"></asp:TextBox>
                         </div>
                     </div>
                     <!-- END SAMPLE FORM widget-->
@@ -170,12 +171,6 @@
             $(this).clone().appendTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" });
         });
 
-        function save() {
-            $("#canvas>.paletteComponent").each(function () {
-                alert($(this).attr('style'));
-            })
-        }
-
         //$('#btnAddToCanvas').click(function () {
         //    $('#room').clone().appendTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" }).attr("RoomID", $("#selectRoomNumber").val());
         //});
@@ -194,13 +189,22 @@
     </script>
 
     <script type="text/javascript">
-        var data="";
-        function createPlan() {
+
+        <%--Save PlanComponent details--%>
+        var data = "";
+        var canvasData = ""
+        function savePlanData() {
+
+            <%--Save PlanComponent details--%>
             $("#canvas>.room").each(function () {                             
-                data += "##" + $(this).attr('RoomID') + "#" + $(this).attr('style');
-                alert(data);
+                data += $(this).attr('RoomID') + "&" + $(this).attr('style') + "#";
             });
-            $('.txtData').val(data);
+            $('.txtPlanComponentData').val(data);
+
+            <%--Save Plan details--%>
+            canvasData = $('#canvas').attr('style');
+            alert(canvasData);
+            $('.txtPlanData').val(canvasData);
         }
         
     </script>

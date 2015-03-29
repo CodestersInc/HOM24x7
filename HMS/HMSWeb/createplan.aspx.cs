@@ -38,13 +38,24 @@ public partial class createplan : System.Web.UI.Page
             ddlFloor.DataTextField = "FloorNumber";
             ddlFloor.DataBind();
 
-            txtData.Text = "";
+            txtPlanComponentData.Text = "";
         }
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
+        String data = txtPlanComponentData.Text;
+        String[] entries = data.Split('#');
 
+        PlanComponentLogic planComponentLogic = new PlanComponentLogic();
+        PlanComponent planComponent = new PlanComponent();
+
+        for(int i=0; i<entries.Length; i++)
+        {
+            String[] entryDetail = entries[i].Split('&');
+            planComponent.RoomID = Convert.ToInt32(entryDetail[0]);
+            planComponent.PlanComponentStyle = entryDetail[1];
+        }
     }
 
 
