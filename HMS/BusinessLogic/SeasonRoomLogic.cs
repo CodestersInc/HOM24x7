@@ -133,5 +133,16 @@ namespace BusinessLogic
 
             return DBUtility.Select(query, lstParams);
         }
+
+        public Double fetchCurrentRoomRate(int RoomTypeID, int AccountID)
+        {
+            String query = "select SeasonRoom.Rate from SeasonRoom, Season where SeasonRoom.SeasonID = (select Max(SeasonID) from Season where Season.FromDate < '2015/03/29' and Season.ToDate > '2015/03/29' and AccountID=@AccountID) and SeasonRoom.RoomTypeID=@RoomTypeID and Season.SeasonID = SeasonRoom.SeasonID";
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+            lstParams.Add(new SqlParameter("@AccountID", AccountID));
+            lstParams.Add(new SqlParameter("@RoomTypeID", RoomTypeID));
+
+            DataTable dt = DBUtility.Select(query, lstParams);
+            return Convert.ToDouble(dt.Rows[0][0]);
+        }
     }
 }

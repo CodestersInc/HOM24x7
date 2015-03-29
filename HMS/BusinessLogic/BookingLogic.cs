@@ -72,7 +72,7 @@ namespace BusinessLogic
 
                 return new Booking(Convert.ToInt32(dt.Rows[0]["BookingID"]),
                 Convert.ToInt32(dt.Rows[0]["RoomID"]),
-                Convert.ToInt32(dt.Rows[0]["NumberOfPersons"]),
+                Convert.ToInt32(dt.Rows[0]["NoOfPersons"]),
                 Convert.ToDateTime(dt.Rows[0]["CheckInDate"]),
                 Convert.ToDateTime(dt.Rows[0]["PlannedCheckoutDate"]),
                 Convert.ToDateTime(dt.Rows[0]["CheckOutDate"]),
@@ -97,7 +97,7 @@ namespace BusinessLogic
 
         public int update(Booking obj)
         {
-            String query = "update Booking set RoomID=@RoomID, NumberOfPersons=@NumberOfPersons, CheckInDate=@CheckInDate, PlannedCheckOutDate=@PlannedCheckOutDate, Status=@Status, PaidAmount=@PaidAmount, CustomerID=@CustomerID, ApproverID=@ApproverID, ReceiverID=@ReceiverID, StaffRemarks=@StaffRemarks, CustomerRemarks=@CustomerRemarks, RoomRate=@RoomRate, PaymentMode=@PaymentMode, ChequeNo=@ChequeNo, BankName=@BankName, OnlineBookingID=@OnlineBookingID where BookingID=@BookingID";
+            String query = "update Booking set RoomID=@RoomID, NoOfPersons=@NumberOfPersons, CheckInDate=@CheckInDate, PlannedCheckOutDate=@PlannedCheckOutDate, Status=@Status, PaidAmount=@PaidAmount, CustomerID=@CustomerID, ApproverID=@ApproverID, ReceiverID=@ReceiverID, StaffRemarks=@StaffRemarks, CustomerRemarks=@CustomerRemarks, RoomRate=@RoomRate, PaymentMode=@PaymentMode, ChequeNo=@ChequeNo, BankName=@BankName, OnlineBookingID=@OnlineBookingID where BookingID=@BookingID";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@BookingID", obj.BookingID));
@@ -144,7 +144,7 @@ namespace BusinessLogic
             {
                 return new Booking(Convert.ToInt32(dt.Rows[0]["BookingID"]),
                 Convert.ToInt32(dt.Rows[0]["RoomID"]),
-                Convert.ToInt32(dt.Rows[0]["NumberOfPersons"]),
+                Convert.ToInt32(dt.Rows[0]["NoOfPersons"]),
                 Convert.ToDateTime(dt.Rows[0]["CheckInDate"]),
                 Convert.ToDateTime(dt.Rows[0]["PlannedCheckoutDate"]),
                 Convert.ToDateTime(dt.Rows[0]["CheckOutDate"]),

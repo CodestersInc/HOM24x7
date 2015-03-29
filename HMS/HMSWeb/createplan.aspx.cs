@@ -24,10 +24,9 @@ public partial class createplan : System.Web.UI.Page
         {
             Response.Redirect("home.aspx");
         }
-    }
 
         if (!IsPostBack)
-    {
+        {
             Repeater1.DataSource = new ComponentLogic().selectAll(loggedUser.AccountID);
             Repeater1.DataBind();
 
@@ -50,7 +49,7 @@ public partial class createplan : System.Web.UI.Page
         PlanComponentLogic planComponentLogic = new PlanComponentLogic();
         PlanComponent planComponent = new PlanComponent();
 
-        for(int i=0; i<entries.Length; i++)
+        for (int i = 0; i < entries.Length; i++)
         {
             String[] entryDetail = entries[i].Split('&');
             planComponent.RoomID = Convert.ToInt32(entryDetail[0]);
@@ -63,7 +62,7 @@ public partial class createplan : System.Web.UI.Page
     {
 
     }
-    
+
     protected void createPlan_Click(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["loggedUser"];

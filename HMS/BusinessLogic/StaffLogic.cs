@@ -182,9 +182,19 @@ namespace BusinessLogic
             return DBUtility.Select(query, lstParams);
         }
 
-        public DataTable getManagers(int AccountID)
+        public DataTable getReceptionManager(int AccountID)
         {
-            String query = "select Name, StaffID from Staff where Staff.AccountID=@AccountID  and ( UserType = 'Managerial Staff' or UserType = 'Hotel Admin')";
+            String query = "select Staff.Name, Staff.StaffID from Staff, Department where Staff.AccountID=@AccountID  and Staff.StaffID = Department.ManagerID and Department.Name like 'Reception'";
+
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+            lstParams.Add(new SqlParameter("@AccountID", AccountID));
+
+            return DBUtility.Select(query, lstParams);
+        }
+
+        public DataTable getReceptionStaff(int AccountID)
+        {
+            String query = "select Staff.Name, Staff.StaffID from Staff, Department where Staff.AccountID=@AccountID  and Staff.DepartmentID = Department.DepartmentID and Department.Name like 'Reception'";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
             lstParams.Add(new SqlParameter("@AccountID", AccountID));
