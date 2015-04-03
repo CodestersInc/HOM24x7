@@ -11,7 +11,9 @@ namespace DataAccess
 {
     public class DBUtility
     {
-        private static String connectionString = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=\"|DataDirectory|\\HMSDB.mdf\";Integrated Security=True";
+        //non relative con string: @"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\App_Data\HMSDB.mdf;Integrated Security=True"
+        //relative con string:"Data Source=(LocalDB)\\v11.0;AttachDbFilename=\"|DataDirectory|HMSDB.mdf\";Integrated Security=True"
+        private static String connectionString = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=\"|DataDirectory|HMSDB.mdf\";Integrated Security=True";
 
         public static int Modify(String query, List<SqlParameter> lstParams)
         {

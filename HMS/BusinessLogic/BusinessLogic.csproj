@@ -86,7 +86,6 @@
     <Compile Include="Staff.cs" />
     <Compile Include="SystemAdmin.cs" />
     <Compile Include="SystemAdminLogic.cs" />
-    <Compile Include="Utility.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">

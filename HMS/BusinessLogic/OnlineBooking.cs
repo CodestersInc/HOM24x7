@@ -8,17 +8,17 @@ namespace BusinessLogic
 {
     public class OnlineBooking : IModel
     {
-        public int OnlineBookingID;
-        public int RoomTypeID;
-        public int NumberOfPersons;
-        public DateTime CheckInDate;
-        public DateTime PlannedCheckOutDate;
-        public String Status;
-        public int CustomerID;
-        public int ConverterID;
-        public String StaffRemarks;
-        public String CustomerRemarks;
-        public double WebsiteRate;
+        public int OnlineBookingID { get; set; }
+        public int RoomTypeID { get; set; }
+        public int NumberOfPersons { get; set; }
+        public DateTime CheckInDate { get; set; }
+        public DateTime PlannedCheckOutDate { get; set; }
+        public string Status { get; set; }
+        public int CustomerID { get; set; }
+        public int ConverterID { get; set; }
+        public string StaffRemarks { get; set; }
+        public string CustomerRemarks { get; set; }
+        public double WebsiteRate { get; set; }
 
         public OnlineBooking()
         {

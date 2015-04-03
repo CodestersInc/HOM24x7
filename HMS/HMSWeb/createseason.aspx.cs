@@ -23,6 +23,12 @@ public partial class createseason : System.Web.UI.Page
         {
             Response.Redirect("home.aspx");
         }
+
+        if (!IsPostBack)
+        {
+            Repeater1.DataSource = new RoomTypeLogic().selectAll(loggedUser.AccountID);
+            Repeater1.DataBind();
+        }
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)
@@ -41,15 +47,19 @@ public partial class createseason : System.Web.UI.Page
 
         if (seasonobject != null)
         {
-            DataTable roomTypes = roomTypeLogic.selectAll(loggedUser.AccountID);
-
-            for (int i = 0; i < roomTypes.Rows.Count; i++)
+            SeasonRoomLogic seasonroomlogic = new SeasonRoomLogic();
+            
+            for (int i = 0; i < Repeater1.Items.Count; i++)
             {
-                seasonRoomLogic.create(new SeasonRoom(0,
-                    seasonobject.SeasonID, Convert.ToInt32(roomTypes.Rows[i]["RoomTypeID"]),
-                    0, 0, 0, 0));
+                seasonroomlogic.create(new SeasonRoom(0,
+                    seasonobject.SeasonID,
+                    Convert.ToInt32(((HiddenField)Repeater1.Items[i].FindControl("HiddenFieldSeasonID")).Value),
+                    Convert.ToSingle(((TextBox)Repeater1.Items[i].FindControl("txtRate")).Text),
+                    Convert.ToSingle(((TextBox)Repeater1.Items[i].FindControl("txtAgentDiscount")).Text),
+                    Convert.ToSingle(((TextBox)Repeater1.Items[i].FindControl("txtMaxDiscount")).Text),
+                    Convert.ToSingle(((TextBox)Repeater1.Items[i].FindControl("txtWebsiteRate")).Text)));
             }
-
+            
             Response.Redirect("home.aspx");
         }
         else
@@ -61,5 +71,9 @@ public partial class createseason : System.Web.UI.Page
     protected void btnCancel_Click(object sender, EventArgs e)
     {
         Response.Redirect("home.aspx");
+    }
+    protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
+    {
+
     }
 }

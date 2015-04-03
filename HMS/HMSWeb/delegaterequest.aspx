@@ -1,24 +1,23 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="searchstaff.aspx.cs" Inherits="searchstaff" MaintainScrollPositionOnPostback="true"%>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="delegaterequest.aspx.cs" Inherits="delegaterequest" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" Runat="Server">
 </asp:Content>
-
-<asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="Server">
-    <!-- BEGIN PAGE CONTAINER-->
+<asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" Runat="Server">
+        <!-- BEGIN PAGE CONTAINER-->
     <div class="container-fluid">
         <!-- BEGIN PAGE HEADER-->
         <div class="row-fluid">
             <div class="span12">
                 <!-- BEGIN PAGE TITLE & BREADCRUMB-->
-                <h3 class="page-title">Search Staff</h3>
+                <h3 class="page-title">Delegate Request</h3>
                 <ul class="breadcrumb">
                     <li>
                         <a href="home.aspx"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                     </li>
                     <li>
-                        <a href="#">Staff</a> <span class="divider">&nbsp;</span>
+                        <a href="#">Service request</a> <span class="divider">&nbsp;</span>
                     </li>
-                    <li><a href="#">Search</a><span class="divider-last">&nbsp;</span></li>
+                    <li><a href="#">Delegation</a><span class="divider-last">&nbsp;</span></li>
                 </ul>
                 <!-- END PAGE TITLE & BREADCRUMB-->
             </div>
@@ -52,30 +51,34 @@
 
                             <table class="table table-striped table-bordered table-advance table-hover">
                                 <tr>
-                                    <th>Staff Code</th>
-                                    <th>Name</th>
-                                    <th>Department Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
+                                    <th>Service</th>
+                                    <th>Room number</th>
+                                    <th>Requested Date/Time</th>
+                                    <th>Customer remarks</th>
+                                    <th>AssignedID</th>
+                                    <th>Unit</th>
                                     <th></th>
                                 </tr>
                                 <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
                                     <ItemTemplate>
                                         <tr>
                                             <td>
-                                                <%# Eval("StaffCode") %>
+                                                <a href="viewservice.aspx"><%# Eval("Name") %></a>
                                             </td>
                                             <td>
-                                                <a href='viewstaff.aspx?ID=<%# Eval("StaffID")%>'><%# Eval("Name") %></a>
+                                                <a href="viewroom.aspx"><%# Eval("RoomNumber") %></a>
                                             </td>
                                             <td>
-                                                <a href='viewdepartment.aspx?ID=<%# Eval("DepartmentID") %>'><%# Eval("DepartmentName") %></a>
+                                                <%# Eval("RequestedDate") %></a>
+                                            </td>
+                                            <td>
+                                                <%# Eval("CustomerRemarks") %></a>
                                             </td>
                                             <td>
                                                 <a href="mailto:<%# Eval("Email") %>"><%# Eval("Email") %></a>
                                             </td>
                                             <td>
-                                                <%# Eval("Phone") %>
+                                                <%# Eval("Unit") %>
                                             </td>
                                             <td style="text-align:center">
                                                 <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewstaff.aspx?ID=" + Eval("StaffID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
@@ -95,5 +98,8 @@
         </asp:PlaceHolder>
     </div>
     <!-- END PAGE CONTAINER -->
+
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" Runat="Server">
 </asp:Content>
 

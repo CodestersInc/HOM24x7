@@ -263,6 +263,9 @@
                                     <span class="icon-box"><i class="icon-file-alt"></i></span>Service Request
 					                <span class="arrow"></span>
                                 </a>
+                                <ul class="sub">
+                                    <li><a href="delegaterequest.aspx">Delegate</a></li>
+                                </ul>
                             </li>
                         </asp:PlaceHolder>
                         <!-- END Sidebar Element-Service Request -->

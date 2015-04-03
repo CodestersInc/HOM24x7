@@ -8,15 +8,15 @@ namespace BusinessLogic
 {
     public class Customer : IModel
     {
-        public int CustomerID;
-        public DateTime CreateDate;
-        public String Name;
-        public String Email;
-        public String Phone;
-        public String Username;
-        public String Password;
-        public Boolean IsActive;
-        public int AccountID;
+        public int CustomerID { get; set; }
+        public DateTime CreateDate { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public bool IsActive { get; set; }
+        public int AccountID { get; set; }
 
         public Customer()
         {

@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using System.Data;
+using System.Runtime.Serialization.Json;
 
 public partial class createbooking : System.Web.UI.Page
 {
@@ -26,6 +27,8 @@ public partial class createbooking : System.Web.UI.Page
         RoomTypeLogic roomTypeLogic = new RoomTypeLogic();
         if (!IsPostBack)
         {
+            txtCheckInDate.Text = DateTime.Now.Date.ToString();
+            txtPlannedCheckoutDate.Text = DateTime.Now.Date.AddDays(1).ToString();
             ddlRoomType.DataSource = roomTypeLogic.selectAll(loggedUser.AccountID);
             ddlRoomType.DataValueField = "RoomTypeID";
             ddlRoomType.DataTextField = "Name";

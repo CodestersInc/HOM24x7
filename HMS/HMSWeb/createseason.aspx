@@ -65,6 +65,56 @@
                                             </div>
                                         </div>
                                     </div>
+                                <!-- BEGIN Create Room Type FORM-->
+                <div class="widget">
+                    <div class="widget-title">
+                        <h4><i class="icon-reorder"></i>Room type rate for season</h4>
+                        <span class="tools">
+                            <a href="javascript:;" class="icon-chevron-down"></a>
+                            <a href="javascript:;" class="icon-remove"></a>
+                        </span>
+                    </div>
+                    <div class="widget-body form">
+                        <!-- BEGIN FORM-->
+                        <div>
+                            <div>
+                                <!-- START SEASON MAPPING -->
+                                <!--START Repeater-->
+                                <table class="table table-striped table-bordered table-advance table-hover">
+                                    <tr>
+                                        <th>Room type</th>
+                                        <th style="text-align:center">Rate</th>
+                                        <th style="text-align:center">Agent Discount</th>
+                                        <th style="text-align:center">Max Discount</th>
+                                        <th style="text-align:center">Website Rate</th>
+                                    </tr>
+                                    <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
+                                        <ItemTemplate>
+                                            <tr>
+                                                <td >
+                                                    <asp:HiddenField ID="HiddenFieldSeasonID" Value='<%# Eval("RoomTypeID") %>' runat="server" />
+                                                    <b><%# Eval("Name") %></b>
+                                                </td>
+                                                <td style="text-align:center">
+                                                    <asp:TextBox ID="txtRate" CssClass="span12" runat="server"></asp:TextBox>
+                                                </td>
+                                                <td style="text-align:center">
+                                                    <asp:TextBox ID="txtAgentDiscount" CssClass="span12" runat="server"></asp:TextBox>
+                                                </td>
+                                                <td style="text-align:center">
+                                                    <asp:TextBox ID="txtMaxDiscount" CssClass="span12" runat="server"></asp:TextBox>
+                                                </td>
+                                                <td style="text-align:center">
+                                                    <asp:TextBox ID="txtWebsiteRate" CssClass="span12" runat="server"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </table>
+                                <!--END Repeater-->
+                                <!-- END SEASON MAPPING -->
+                            </div>
+
 
                                 <div class="form-actions">
                                     <asp:Button ID="btnSubmit" ValidationGroup="First" CssClass="btn btn-success" OnClick="btnSubmit_Click" runat="server" Text="Submit" />
