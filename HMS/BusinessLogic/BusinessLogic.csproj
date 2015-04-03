@@ -82,6 +82,8 @@
     <Compile Include="Service.cs" />
     <Compile Include="ServiceRequestLogic.cs" />
     <Compile Include="ServiceRequest.cs" />
+    <Compile Include="ServiceType.cs" />
+    <Compile Include="ServiceTypeLogic.cs" />
     <Compile Include="StaffLogic.cs" />
     <Compile Include="Staff.cs" />
     <Compile Include="SystemAdmin.cs" />

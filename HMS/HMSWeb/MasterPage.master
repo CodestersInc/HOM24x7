@@ -249,8 +249,10 @@
 					            <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a href="createservice.aspx">Create</a></li>
-                                    <li><a href="searchservice.aspx">Search</a></li>
+                                    <li><a href="createservice.aspx">Create Service</a></li>
+                                    <li><a href="searchservice.aspx">Search Service</a></li>
+                                    <li><a href="createserviceType.aspx">Create Service Type</a></li>
+                                    <li><a href="searchserviceType.aspx">Search Service Type</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>

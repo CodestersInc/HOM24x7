@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Services;
 using BusinessLogic;
 using WebUtility;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 /// <summary>
 /// Summary description for CustomerService
@@ -34,7 +36,7 @@ public class CustomerService : System.Web.Services.WebService {
 
         Customer customerLogger = new CustomerLogic().login(HashedUsername, HashedPassword);
 
-        return customerLogger;
+        return customerLogger; 
     }
 
     [WebMethod]

@@ -98,17 +98,6 @@
         function customerLogin() {
             var Username = document.getElementById("CustomerUsername").value;
             var Password = document.getElementById("CustomerPassword").value;
-            
-            var value = new Date
-            (
-                 parseInt(data.CreateDate.replace(/(^.*\()|([+-].*$)/g, ''))
-            );
-            var dat = value.getMonth() +
-                                     1 +
-                                   "/" +
-                       value.getDate() +
-                                   "/" +
-                   value.getFullYear();
 
             var dataTemp = "{ username:'" + Username + "',password:'" + Password + "'}";
             $.ajax({
@@ -118,9 +107,22 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (jsondata) {
+
                     var data = jsondata.d;
+
+                    var MyDate_String_Value = data.CreateDate;
+                    var value = new Date
+                                (
+                                     parseInt(MyDate_String_Value.replace(/(^.*\()|([+-].*$)/g, ''))
+                                );
+                    var dat = value.getMonth() +
+                                             1 +
+                                           "/" +
+                               value.getDate() +
+                                           "/" +
+                           value.getFullYear();                    
                     alert(data.Name);
-                    alert(dat);
+                    alert(value);
                     alert(data.Email);
                     alert(data.Phone);
                     alert(data.IsActive);
