@@ -10,7 +10,7 @@ using DataAccess;
 
 namespace BusinessLogic
 {
-    class ServiceTypeLogic : ILogic<ServiceType>
+    public class ServiceTypeLogic : ILogic<ServiceType>
     {
         public DataTable search(string searchstring, int ID)
         {
@@ -23,7 +23,7 @@ namespace BusinessLogic
             return DBUtility.Select(query, lstParams);
         }
 
-        public ServiceType create(Component obj)
+        public ServiceType create(ServiceType obj)
         {
             String query = "insert into ServiceType values(@Name, @Description, @Image, @AccountID)";
             List<SqlParameter> lstParams = new List<SqlParameter>();
@@ -48,7 +48,7 @@ namespace BusinessLogic
                 DataTable dt = DBUtility.Select(fetchquery, lstParams1);
                 if (dt.Rows.Count == 1)
                 {
-                    return new ServiceType(Convert.ToInt32(dt.Rows[0]["ComponentID"]),
+                    return new ServiceType(Convert.ToInt32(dt.Rows[0]["ServiceTypeID"]),
                     dt.Rows[0]["Name"].ToString(),
                     dt.Rows[0]["Description"].ToString(),
                     dt.Rows[0]["Image"].ToString(),
@@ -95,7 +95,7 @@ namespace BusinessLogic
 
             if (dt.Rows.Count == 1)
             {
-                return new ServiceType(Convert.ToInt32(dt.Rows[0]["ComponentID"]),
+                return new ServiceType(Convert.ToInt32(dt.Rows[0]["ServiceTypeID"]),
                     dt.Rows[0]["Name"].ToString(),
                     dt.Rows[0]["Description"].ToString(),
                     dt.Rows[0]["Image"].ToString(),

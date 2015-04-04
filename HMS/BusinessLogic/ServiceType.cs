@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-    class ServiceType: IModel
+    public class ServiceType: IModel
     {
         public int ServiceTypeID;
         public string Name;
