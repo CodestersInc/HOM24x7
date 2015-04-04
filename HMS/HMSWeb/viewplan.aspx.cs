@@ -18,6 +18,9 @@ public partial class viewplan : System.Web.UI.Page
         }
         if (!IsPostBack)
         {
+            componentRepeater.DataSource = new ComponentLogic().selectAll(loggedUser.AccountID);
+            componentRepeater.DataBind();
+
             selectionRepeater.DataSource = new RoomLogic().getRemainingRooms(Convert.ToInt32(Request.QueryString["ID"]));
             selectionRepeater.DataBind();
 

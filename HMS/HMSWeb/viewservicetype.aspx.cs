@@ -37,7 +37,7 @@ public partial class viewservicetype : System.Web.UI.Page
         serviceTypeObj.Description = txtDescription.Text;
         if (FileUpload1.HasFile)
         {
-            serviceTypeObj.Image = "img/ServiceType/" + ticks + FileUpload1.FileName;
+            serviceTypeObj.Image = "img/servicetype/" + ticks + FileUpload1.FileName;
         }
         else
         {

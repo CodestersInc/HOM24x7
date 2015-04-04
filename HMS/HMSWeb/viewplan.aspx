@@ -2,6 +2,24 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" runat="Server">
     <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+    <style>
+        .paletteComponent {
+            width: 70px;
+            height: 70px;
+            float: left;
+        }
+
+        #palette {
+            min-width: 400px;
+            min-height: 80px;
+        }
+
+        #planbuilder {
+            border-style: solid;
+            border-width: 1px;
+            padding: 10px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="Server">
     <!-- BEGIN PAGE CONTAINER-->
@@ -52,11 +70,37 @@
                                 </div>
                                 <br />
                                 <div class="controls">
-                                    <input id="btnAddToCanvas" class="btn-primary" type="button" value="Add to Plan" />
+                                    <input id="btnAddRoomToCanvas" class="btn-primary" type="button" value="Add to Plan" />
+                                    <input id="btnAddOtherComponentToCanvas" class="btn-primary" type="button" value="Add other component" />
                                 </div>
                             </div>
 
                             <!--START PLAN BUILDER-->
+                            <!--START PALLETTE-->
+                            <asp:PlaceHolder ID="palettePlaceHolder" runat="server">
+                                <div class="widget palette" style="padding-left: 5px; display: none">
+                                    <div class="widget-title">
+                                        <h4><i class="icon-reorder"></i>Pallete (Click on the component to add to canvas)</h4>
+                                        <span class="tools">
+                                            <a href="javascript:;" class="icon-chevron-down"></a>
+                                            <a href="javascript:;" class="icon-remove"></a>
+                                        </span>
+                                    </div>
+
+                                    <div class="widget-body" style="min-height: 80px">
+                                        <asp:Repeater ID="componentRepeater" runat="server">
+                                            <ItemTemplate>
+                                                <div class="paletteComponent" componentid='<%# Eval("ComponentID") %>'>
+                                                    <asp:Image ID="Image1" ImageUrl='<%# Eval("Image") %>' runat="server" />
+                                                </div>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </div>
+                                </div>
+                            </asp:PlaceHolder>
+                            <!--END PALLETTE-->
+
+                            <!--START CANVAS-->
                             <asp:Repeater ID="planCanvasRepeater" runat="server">
                                 <ItemTemplate>
                                     <div id="canvas" style='<%# Eval("PlanStyle") %>'>
@@ -68,6 +112,7 @@
                                     <div class="room" roomid='<%# Eval("RoomID") %>' style='<%# Eval("PlanComponentStyle") %>'></div>
                                 </ItemTemplate>
                             </asp:Repeater>
+                            <!--END CANVAS-->
                         </div>
                         <!-- END PLAN BUILDER-->
 
@@ -92,27 +137,54 @@
     <script src="js/jquery.ui.rotatable.min.js"></script>
     <link type="text/css" rel="stylesheet" href="css/jquery.ui.rotatable.css" />
 
+    <%--Manage plan components on document load--%>
     <script type="text/javascript">
         $(document).ready(function () {
+            <%--Making canvas resizable--%>
             $('#canvas').resizable();
+
+            <%--Making plan components draggable, resizable, and rotatable--%>
             $("#canvas>.room").each(function () {
                 $(this).draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" });
             });
+
+            <%--Hide AddRoomTOCanvas button if no rooms--%>
+            var x = document.getElementById("roomList");
+            if (x.length == 0) {
+                $('#btnAddRoomToCanvas').hide();
+            }
         });
     </script>
 
+    <%--Add rooms to canvas--%>
     <script type="text/javascript">
-        $('#btnAddToCanvas').click(function () {
+        $('#btnAddRoomToCanvas').click(function () {
             var x = document.getElementById("roomList");
 
             if (x.length != 0) {
                 $("<div class='room' style= 'width: 50px; height: 50px; background-color: gray; text-align: left; vertical-align: middle; color: white;'></div>").appendTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" }).attr("roomid", $("#roomList").val());
                 x.remove(x.selectedIndex);
+                if (x.length == 0)
+                    $('#btnAddRoomToCanvas').hide();
             }
         });
-
     </script>
 
+    <%--Add other components to canvas--%>
+    <script type="text/javascript">
+        $('#btnAddOtherComponentToCanvas').click(function () {
+            $('.palette').show();
+            $('#btnAddOtherComponentToCanvas').hide();
+        });
+
+        $('.paletteComponent').click(function () {
+            alert("Hello");
+            $(this).clone().appendto('#canvas');//.draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" });
+            alert("Hi");
+        });
+    </script>
+
+    <%--Grabbing css of plan and plan components--%>
     <script type="text/javascript">
         var data = "";
         var canvasData = ""

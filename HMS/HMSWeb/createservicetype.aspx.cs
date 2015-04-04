@@ -31,7 +31,7 @@ public partial class createServiceType : System.Web.UI.Page
         ServiceType serviceTypeObj = new ServiceTypeLogic().create(new ServiceType(0,
             txtServiceTypeName.Text,
             txtDescription.Text,
-            "img/ServiceType/" + ticks + FileUpload1.FileName,
+            "img/servicetype/" + ticks + FileUpload1.FileName,
             loggedUser.AccountID));
 
         if (serviceTypeObj != null)

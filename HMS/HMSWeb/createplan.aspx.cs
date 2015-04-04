@@ -27,8 +27,8 @@ public partial class createplan : System.Web.UI.Page
 
         if (!IsPostBack)
         {
-            Repeater1.DataSource = new ComponentLogic().selectAll(loggedUser.AccountID);
-            Repeater1.DataBind();
+            componentRepeater.DataSource = new ComponentLogic().selectAll(loggedUser.AccountID);
+            componentRepeater.DataBind();
 
             //Fill ddlFloor
             DataTable dt1 = new FloorLogic().selectFloorsWithoutPlan(loggedUser.AccountID);
@@ -77,8 +77,7 @@ public partial class createplan : System.Web.UI.Page
     {
         Staff loggedUser = (Staff)Session["loggedUser"];
 
-        planBuilderPlaceHolder.Visible = true;
-        //ViewState["FloorNumber"] = ddlFloor.SelectedValue.ToString();
+        planBuilderPlaceHolder.Visible = true;        
         Session["CurrentFloor"] = ddlFloor.SelectedValue.ToString();
         floorHiddenField.Value = ddlFloor.SelectedValue;
         selectionRepeater.DataSource = new RoomLogic().getRooms(Convert.ToInt32(floorHiddenField.Value), loggedUser.AccountID);
