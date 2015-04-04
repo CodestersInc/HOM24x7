@@ -50,20 +50,29 @@
                         <div class="widget-body">
                             <table class="table table-striped table-bordered table-advance table-hover">
                                 <tr>
+                                    <th>Image
+                                    </th>
                                     <th>Name
                                     </th>
                                     <th>Department Name
                                     </th>
+                                    <th>Type</th>
                                     <th></th>
                                 </tr>
                                 <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
                                     <ItemTemplate>
                                         <tr>
+                                            <td style="max-height: 70px; max-width: 70px; text-align: center">
+                                                <img src='<%# Eval("Image") %>' style="max-width: 70px; max-height: 70px;" />
+                                            </td>
                                             <td>
                                                 <a href='viewservice.aspx?ID=<%# Eval("ServiceID") %>'><%# Eval("Name") %></a>
                                             </td>
                                             <td>
                                                 <a href='viewdepartment.aspx?ID=<%# Eval("DepartmentID")%>'><%# Eval("DepartmentName") %>
+                                            </td>
+                                            <td>
+                                                <a href='viewservicetype.aspx?ID=<%# Eval("ServiceTypeID") %>'><%# Eval("ServiceTypeName")%></a>
                                             </td>
                                             <td>
                                                 <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewservice.aspx?ID=" + Eval("ServiceID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>

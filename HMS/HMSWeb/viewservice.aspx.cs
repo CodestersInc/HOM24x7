@@ -30,24 +30,38 @@ public partial class viewservice : System.Web.UI.Page
             ddlDepartment.DataTextField = "DepartmentChoices";
             ddlDepartment.DataBind();
 
+            DataTable dt1 = new ServiceTypeLogic().selectAll(loggedUser.AccountID);
+            ddlServiceType.DataSource = dt1;
+            ddlServiceType.DataValueField = "ServiceTypeID";
+            ddlServiceType.DataTextField = "Name";
+            ddlServiceType.DataBind();
+
             Service serviceobj = new ServiceLogic().selectById(Convert.ToInt32(Request.QueryString["ID"]));
             txtName.Text = serviceobj.Name;
             ddlDepartment.SelectedValue = departmentlogicobj.selectById(serviceobj.DepartmentID).Name;
             txtRate.Text = serviceobj.Rate.ToString();
+            Image1.ImageUrl = serviceobj.Image;
         }
     }
     protected void btnUpdate_Click(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["loggedUser"];
+        String ticks = DateTime.Now.Ticks.ToString();
 
         Service serviceobj = new Service(Convert.ToInt32(Request.QueryString["ID"]),
             txtName.Text,
             Convert.ToInt32(ddlDepartment.SelectedValue),
             Convert.ToDouble(txtRate.Text),
-            loggedUser.AccountID);
+            (FileUpload1.HasFile)? "img/service/" + ticks + FileUpload1.FileName : new ServiceLogic().selectById(Convert.ToInt32(Request.QueryString["ID"])).Image,
+            Convert.ToInt32(ddlServiceType.SelectedValue));
+
 
         if (new ServiceLogic().update(serviceobj) == 1)
         {
+            if (FileUpload1.HasFile)
+            {
+                FileUpload1.SaveAs(Server.MapPath("img/service/" + ticks + FileUpload1.FileName));
+            }
             Response.Redirect("searchservice.aspx");
         }
         else

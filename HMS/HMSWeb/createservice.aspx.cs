@@ -30,25 +30,36 @@ public partial class createservice : System.Web.UI.Page
             ddlDepartment.DataValueField = "DepartmentID";
             ddlDepartment.DataTextField = "DepartmentChoices";
             ddlDepartment.DataBind();
+
+            DataTable dt1 = new ServiceTypeLogic().selectAll(loggedUser.AccountID);
+            ddlServiceType.DataSource = dt1;
+            ddlServiceType.DataValueField = "ServiceTypeID";
+            ddlServiceType.DataTextField = "Name";
+            ddlServiceType.DataBind();
         }        
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["loggedUser"];
+
+        String ticks = DateTime.Now.Ticks.ToString();
+
         Service createdservice = new ServiceLogic().create(new Service(0,
              txtName.Text,
              Convert.ToInt32(ddlDepartment.SelectedValue),
              Convert.ToDouble(txtRate.Text),
-             loggedUser.AccountID));
+             "img/service/" + ticks + FileUpload1.FileName,
+             Convert.ToInt32(ddlServiceType.SelectedValue)));
 
         if (createdservice != null)
         {
+            FileUpload1.SaveAs(Server.MapPath("img/service/" + ticks + FileUpload1.FileName));
             Response.Redirect("home.aspx");
         }
         else
         {
-            Response.Redirect("ErrorPage500.html");
+            Server.TransferRequest("ErrorPage500.html");
         }
     }
 

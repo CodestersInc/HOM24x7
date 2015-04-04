@@ -66,6 +66,24 @@
                                     </div>
                                 </div>
 
+                                <div class="control-group">
+                                    <label class="control-label">Image</label>
+                                    <div class="controls">
+                                        <asp:FileUpload ID="FileUpload1" runat="server" />
+                                        <asp:RequiredFieldValidator ControlToValidate="FileUpload1" ID="FileUploadRequiredFieldValidator" runat="server" ErrorMessage="Please add an image file to be displayed on the plan" ValidationGroup="First" CssClass="alert alert-error"></asp:RequiredFieldValidator>
+                                        <br />
+                                        <br />
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label">ServiceType</label>
+                                    <div class="controls">
+                                        <asp:DropDownList ID="ddlServiceType" runat="server" CssClass="span4" data-placeholder="Choose a Type of Service" TabIndex="1">
+                                        </asp:DropDownList>
+                                    </div>
+                                </div>
+
                                 <div class="form-actions">
                                     <asp:Button ID="btnSubmit" ValidationGroup="First" CssClass="btn btn-success" OnClick="btnSubmit_Click" runat="server" Text="Submit" />
                                     <asp:Button ID="btnCancel" CssClass="btn btn-warning" runat="server" Text="Cancel" />

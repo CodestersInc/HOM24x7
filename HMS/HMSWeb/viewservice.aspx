@@ -64,6 +64,28 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Image</label>
+                                        <div class="controls">
+                                            <div class="fileupload-new thumbnail" style="max-width: 100px; max-height: 100px;">
+                                                <asp:Image ID="Image1" runat="server" />
+                                            </div>
+                                            <asp:FileUpload ID="FileUpload1" runat="server" />
+                                            <asp:RequiredFieldValidator ControlToValidate="FileUpload1" ID="FileUploadRequiredFieldValidator" runat="server" ErrorMessage="Please add an image file to be displayed on the plan" ValidationGroup="First" CssClass="alert alert-error"></asp:RequiredFieldValidator>
+                                            <br />
+                                            <br />
+                                            <%--<span class="label label-important">NOTE!</span>
+                                        <span>Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only</span>--%>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label">ServiceType</label>
+                                        <div class="controls">
+                                            <asp:DropDownList ID="ddlServiceType" runat="server" CssClass="span4" data-placeholder="Choose a Type of Service" TabIndex="1">
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
 
                                     <div class="form-actions">
                                         <asp:LinkButton ID="btnUpdate" ValidationGroup="First" CssClass="btn btn-inverse" runat="server" OnClick="btnUpdate_Click"><i class="icon-refresh icon-white"></i>Update</asp:LinkButton>
