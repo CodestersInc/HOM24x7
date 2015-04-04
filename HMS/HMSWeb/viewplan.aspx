@@ -90,8 +90,8 @@
                                     <div class="widget-body" style="min-height: 80px">
                                         <asp:Repeater ID="componentRepeater" runat="server">
                                             <ItemTemplate>
-                                                <div class="paletteComponent" componentid='<%# Eval("ComponentID") %>'>
-                                                    <asp:Image ID="Image1" ImageUrl='<%# Eval("Image") %>' runat="server" />
+                                                <div class="paletteComponent" style='<%# "background-image:url("+Eval("Image")+");background-repeat:no-repeat;background-size:contain;" %>'' componentid='<%# Eval("ComponentID") %>'>
+                                                    <%--<asp:Image ID="Image1" ImageUrl='<%# Eval("Image") %>' runat="server" />--%>
                                                 </div>
                                             </ItemTemplate>
                                         </asp:Repeater>
@@ -179,7 +179,7 @@
 
         $('.paletteComponent').click(function () {
             alert("Hello");
-            $(this).clone().appendto('#canvas');//.draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" });
+            $(this).clone().appendTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" });
             alert("Hi");
         });
     </script>

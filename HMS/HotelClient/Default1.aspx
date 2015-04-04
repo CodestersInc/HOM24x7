@@ -70,7 +70,7 @@
                                 <h5>type of room:</h5>
                                 <!----------start section_room----------->
                                 <div class="section_room">
-                                    <select id="country" onchange="change_country(this.value)" class="frm-field required">
+                                    <select onchange="change_country(this.value)" class="frm-field required">
                                         <option value="null">Select a type of room</option>
                                         <option value="null">Suite room</option>
                                         <option value="AX">Single room</option>
@@ -114,7 +114,6 @@
                                     </form>
                                 </div>
                             </li>
-                            <div class="clear"></div>
                         </ul>
                     </div>
                     <div class="clear"></div>
