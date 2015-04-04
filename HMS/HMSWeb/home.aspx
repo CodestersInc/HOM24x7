@@ -26,51 +26,51 @@
     <br />
 
     <!-- BEGIN OVERVIEW STATISTIC BARS-->
-    <div class="row-fluid circle-state-overview">
-
-        <div class="span2 responsive clearfix" data-tablet="span3" data-desktop="span2">
-            <div class="circle-wrap">
-                <div class="stats-circle turquoise-color">
-                    <i class="icon-user"></i>
+    <asp:PlaceHolder ID="statisticsPlaceHolder" runat="server" Visible="false">
+        <div class="row-fluid circle-state-overview" style="margin:0px 0px 0px 300px">
+            <div class="span2 responsive clearfix" data-tablet="span3" data-desktop="span2">
+                <div class="circle-wrap">
+                    <div class="stats-circle turquoise-color">
+                        <i class="icon-user"></i>
+                    </div>
+                    <p>
+                        <strong>
+                            <asp:Label ID="lblStaffMembers" runat="server"></asp:Label>
+                        </strong>
+                        Staff Members
+                    </p>
                 </div>
-                <p>
-                    <strong>
-                        <asp:Label ID="lblStaffMembers" runat="server"></asp:Label>
-                    </strong>
-                    Staff Members
-                </p>
+            </div>
+
+            <div class="span2 responsive" data-tablet="span3" data-desktop="span2">
+                <div class="circle-wrap">
+                    <div class="stats-circle red-color">
+                        <i class="icon-columns"></i>
+                    </div>
+                    <p>
+                        <strong>
+                            <asp:Label ID="lblDepartments" runat="server"></asp:Label>
+                        </strong>
+                        Departments
+                    </p>
+                </div>
+            </div>
+
+            <div class="span2 responsive" data-tablet="span3" data-desktop="span2">
+                <div class="circle-wrap">
+                    <div class="stats-circle green-color">
+                        <i class="icon-key"></i>
+                    </div>
+                    <p>
+                        <strong>
+                            <asp:Label ID="lblRooms" runat="server"></asp:Label>
+                        </strong>
+                        Rooms
+                    </p>
+                </div>
             </div>
         </div>
-
-        <div class="span2 responsive" data-tablet="span3" data-desktop="span2">
-            <div class="circle-wrap">
-                <div class="stats-circle red-color">
-                    <i class="icon-columns"></i>
-                </div>
-                <p>
-                    <strong>
-                        <asp:Label ID="lblDepartments" runat="server"></asp:Label>
-                    </strong>
-                    Departments
-                </p>
-            </div>
-        </div>
-
-        <div class="span2 responsive" data-tablet="span3" data-desktop="span2">
-            <div class="circle-wrap">
-                <div class="stats-circle green-color">
-                    <i class="icon-key"></i>
-                </div>
-                <p>
-                    <strong>
-                        <asp:Label ID="lblRooms" runat="server"></asp:Label>
-                    </strong>
-                    Rooms
-                </p>
-            </div>
-        </div>
-
-    </div>
+    </asp:PlaceHolder>
     <!-- END OVERVIEW STATISTIC BARS-->
 </asp:Content>
 

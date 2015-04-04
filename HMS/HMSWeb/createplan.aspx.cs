@@ -36,8 +36,6 @@ public partial class createplan : System.Web.UI.Page
             ddlFloor.DataValueField = "FloorID";
             ddlFloor.DataTextField = "FloorNumber";
             ddlFloor.DataBind();
-            txtPlanComponentData.Text = "";
-            txtPlanData.Text = "";
         }
     }
 
@@ -49,11 +47,11 @@ public partial class createplan : System.Web.UI.Page
             ""));
         if (plan!=null)
         {
-            String data = txtPlanComponentData.Text;
-            String[] entries = data.Split('#');
-
             PlanComponentLogic planComponentLogic = new PlanComponentLogic();
             PlanComponent planComponent = new PlanComponent();
+
+            String roomComponentData = txtRoomComponentData.Text;
+            String[] entries = roomComponentData.Split('#');
 
             for (int i = 0; i < entries.Length-1; i++)
             {
@@ -61,6 +59,19 @@ public partial class createplan : System.Web.UI.Page
                 planComponent.RoomID = Convert.ToInt32(entryDetail[0]);
                 planComponent.PlanComponentStyle = entryDetail[1];
                 planComponent.PlanID = plan.PlanID;
+                planComponentLogic.create(planComponent);
+            }
+
+            String otherComponentData = txtOtherComponentData.Text;
+            String[] components = otherComponentData.Split('#');
+
+            for (int i = 0; i < components.Length - 1; i++)
+            {
+                String[] componentDetail = components[i].Split('&');
+                planComponent.RoomID = 0;
+                planComponent.PlanComponentStyle = componentDetail[1];
+                planComponent.PlanID = plan.PlanID;
+                planComponent.ComponentID = Convert.ToInt32(componentDetail[0]);
                 planComponentLogic.create(planComponent);
             }
         }

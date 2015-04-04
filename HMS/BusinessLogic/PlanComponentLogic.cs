@@ -118,14 +118,25 @@ namespace BusinessLogic
             return DBUtility.Select(query, new List<SqlParameter>());
         }
 
-        public DataTable selectAll(int PlanID)
+        public DataTable selectAllRoomComponents(int PlanID)
         {
-            String query = "select * from PlanComponent where PlanID=@PlanID";
+            String query = "select * from PlanComponent where PlanID=@PlanID and ComponentID=0";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@PlanID", PlanID));  
         
+            return DBUtility.Select(query, lstParams);
+        }
+
+        public DataTable selectAllOtherComponents(int PlanID)
+        {
+            String query = "select * from PlanComponent where PlanID=@PlanID and RoomID=0";
+
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+
+            lstParams.Add(new SqlParameter("@PlanID", PlanID));
+
             return DBUtility.Select(query, lstParams);
         }
     }

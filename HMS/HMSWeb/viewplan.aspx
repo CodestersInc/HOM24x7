@@ -90,7 +90,7 @@
                                     <div class="widget-body" style="min-height: 80px">
                                         <asp:Repeater ID="componentRepeater" runat="server">
                                             <ItemTemplate>
-                                                <div class="paletteComponent" style='<%# "background-image:url("+Eval("Image")+");background-repeat:no-repeat;background-size:contain;" %>'' componentid='<%# Eval("ComponentID") %>'>
+                                                <div class="paletteComponent" style='<%# "background-image:url("+Eval("Image")+");background-repeat:no-repeat;background-size:contain;width:70px;height:70px;" %>'' componentid='<%# Eval("ComponentID") %>'>
                                                     <%--<asp:Image ID="Image1" ImageUrl='<%# Eval("Image") %>' runat="server" />--%>
                                                 </div>
                                             </ItemTemplate>
@@ -107,13 +107,19 @@
                                 </ItemTemplate>
                             </asp:Repeater>
 
-                            <asp:Repeater ID="planComponentRepeater" runat="server">
+                            <asp:Repeater ID="roomComponentRepeater" runat="server">
                                 <ItemTemplate>
                                     <div class="room" roomid='<%# Eval("RoomID") %>' style='<%# Eval("PlanComponentStyle") %>'></div>
                                 </ItemTemplate>
                             </asp:Repeater>
+
+                            <asp:Repeater ID="otherComponentRepeater" runat="server">
+                                <ItemTemplate>
+                                    <div class="otherComponent" componentid='<%# Eval("ComponentID") %>' style='<%# Eval("PlanComponentStyle") %>'></div>
+                                </ItemTemplate>
+                            </asp:Repeater>
                             <!--END CANVAS-->
-                        </div>
+                                    </div>
                         <!-- END PLAN BUILDER-->
 
                         <div class="form-actions">
@@ -125,8 +131,9 @@
                 </div>
                 <!-- END SAMPLE FORM widget-->
             </div>
-            <asp:TextBox ID="txtPlanData" CssClass="txtPlanData" runat="server"></asp:TextBox>
-            <asp:TextBox ID="txtPlanComponentData" CssClass="txtPlanComponentData" runat="server"></asp:TextBox>
+            <asp:TextBox ID="txtPlanData" CssClass="txtPlanData" style="display:none" runat="server"></asp:TextBox>
+            <asp:TextBox ID="txtRoomComponentData" CssClass="txtRoomComponentData" style="display:none" runat="server"></asp:TextBox>
+            <asp:TextBox ID="txtOtherComponentData" CssClass="txtOtherComponentData" style="display:none" runat="server"></asp:TextBox>
             <!-- END PAGE CONTAINER-->
     </div>
     </asp:PlaceHolder>
@@ -144,7 +151,7 @@
             $('#canvas').resizable();
 
             <%--Making plan components draggable, resizable, and rotatable--%>
-            $("#canvas>.room").each(function () {
+            $("#canvas>.room, .otherComponent").each(function () {
                 $(this).draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" });
             });
 
@@ -162,7 +169,7 @@
             var x = document.getElementById("roomList");
 
             if (x.length != 0) {
-                $("<div class='room' style= 'width: 50px; height: 50px; background-color: gray; text-align: left; vertical-align: middle; color: white;'></div>").appendTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" }).attr("roomid", $("#roomList").val());
+                $("<div class='room' style= 'width: 50px; height: 50px; background-color: gray; text-align: left; vertical-align: middle; color: white;'></div>").prependTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" }).attr("roomid", $("#roomList").val());
                 x.remove(x.selectedIndex);
                 if (x.length == 0)
                     $('#btnAddRoomToCanvas').hide();
@@ -178,27 +185,32 @@
         });
 
         $('.paletteComponent').click(function () {
-            alert("Hello");
-            $(this).clone().appendTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" });
-            alert("Hi");
+            $(this).clone().prependTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" }).addClass('otherComponent').removeClass('paletteComponent');            
         });
     </script>
 
     <%--Grabbing css of plan and plan components--%>
-    <script type="text/javascript">
-        var data = "";
+    <script type="text/javascript">      
         var canvasData = ""
+        var roomComponentData = "";
+        var otherComponentData = "";
+
         function savePlanData() {
-
-            <%--Save PlanComponent details--%>
-            $("#canvas>.room").each(function () {
-                data += $(this).attr('roomid') + "&" + $(this).attr('style') + "#";
-            });
-            $('.txtPlanComponentData').val(data);
-
             <%--Save Plan details--%>
             canvasData = $('#canvas').attr('style');
             $('.txtPlanData').val(canvasData);
+
+            <%--Save PlanComponent details--%>
+            $("#canvas>.room").each(function () {
+                roomComponentData += $(this).attr('roomid') + "&" + $(this).attr('style') + "#";
+            });
+            $('.txtRoomComponentData').val(roomComponentData);
+
+            <%--Save PlanComponent details--%>
+            $("#canvas>.otherComponent").each(function () {
+                otherComponentData += $(this).attr('componentid') + "&" + $(this).attr('style') + "#";
+            });
+            $('.txtOtherComponentData').val(otherComponentData);
         }
     </script>
 </asp:Content>

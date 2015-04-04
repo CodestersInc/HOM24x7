@@ -17,8 +17,7 @@ public partial class login : System.Web.UI.Page
             Session.Abandon();
             Session.RemoveAll();
         }
-        errorMessagePlaceHolder.Visible = false;
-        
+        errorMessagePlaceHolder.Visible = false;        
     }
 
     protected void btnLogin_Click(object sender, EventArgs e)

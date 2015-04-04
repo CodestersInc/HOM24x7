@@ -107,8 +107,8 @@
                                     <div class="widget-body" style="min-height: 80px">
                                         <asp:Repeater ID="componentRepeater" runat="server">
                                             <ItemTemplate>
-                                                <div class="paletteComponent" componentid='<%# Eval("ComponentID") %>'>
-                                                    <asp:Image ID="Image1" ImageUrl='<%# Eval("Image") %>' runat="server" />
+                                                <div class="paletteComponent" style='<%# "background-image:url("+Eval("Image")+");background-repeat:no-repeat;background-size:contain;width:70px;height:70px;" %>'' componentid='<%# Eval("ComponentID") %>'>                                                    
+                                                    <%--<asp:Image ID="Image1" ImageUrl='<%# Eval("Image") %>' runat="server" />--%>
                                                 </div>
                                             </ItemTemplate>
                                         </asp:Repeater>
@@ -129,7 +129,8 @@
                             </div>
 
                             <asp:TextBox ID="txtPlanData" CssClass="txtPlanData" Style="display: none" runat="server"></asp:TextBox>
-                            <asp:TextBox ID="txtPlanComponentData" CssClass="txtPlanComponentData" Style="display: none" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtRoomComponentData" CssClass="txtRoomComponentData" Style="display: none" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtOtherComponentData" CssClass="txtOtherComponentData" Style="display: none" runat="server"></asp:TextBox>
                         </div>
                     </div>
                     <!-- END SAMPLE FORM widget-->
@@ -165,7 +166,7 @@
             var x = document.getElementById("roomList");
 
             if (x.length != 0) {
-                $("<div class='room' style= 'width: 50px; height: 50px; background-color: gray; text-align: left; vertical-align: middle; color: white;'></div>").appendTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" }).attr("roomid", $("#roomList").val());
+                $("<div class='room' style= 'width: 50px; height: 50px; background-color: gray; text-align: left; vertical-align: middle; color: white;'></div>").prependTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" }).attr("roomid", $("#roomList").val());
                 x.remove(x.selectedIndex);
                 if (x.length == 0)
                     $('#btnAddRoomToCanvas').hide();
@@ -181,27 +182,32 @@
         });
 
         $('.paletteComponent').click(function () {
-            alert("Hello");
-            $(this).clone().appendto('#canvas');//.draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" });
-            alert("Hi");
+            $(this).clone().prependTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" }).removeClass('paletteComponent').addClass('otherComponent');
         });
     </script>
 
-    <%--Grabbing css of plan and plan components--%>
+    <%--Grabbing css of plan, plan components and other components--%>
     <script type="text/javascript">
-        var data = "";
         var canvasData = ""
+        var roomComponentData = "";
+        var otherComponentData = "";
+
         function savePlanData() {
-
-            <%--Save PlanComponent details--%>
-            $("#canvas>.room").each(function () {
-                data += $(this).attr('roomid') + "&" + $(this).attr('style') + "#";
-            });
-            $('.txtPlanComponentData').val(data);
-
             <%--Save Plan details--%>
             canvasData = $('#canvas').attr('style');
             $('.txtPlanData').val(canvasData);
+
+            <%--Save PlanComponent details--%>
+            $("#canvas>.room").each(function () {
+                roomComponentData += $(this).attr('roomid') + "&" + $(this).attr('style') + "#";
+            });
+            $('.txtRoomComponentData').val(roomComponentData);
+
+            <%--Save PlanComponent details--%>
+            $("#canvas>.otherComponent").each(function () {
+                otherComponentData += $(this).attr('componentid') + "&" + $(this).attr('style') + "#";
+            });
+            $('.txtOtherComponentData').val(otherComponentData);
         }
     </script>
 </asp:Content>
