@@ -27,8 +27,8 @@ public partial class createbooking : System.Web.UI.Page
         RoomTypeLogic roomTypeLogic = new RoomTypeLogic();
         if (!IsPostBack)
         {
-            txtCheckInDate.Text = DateTime.Now.Date.ToString();
-            txtPlannedCheckoutDate.Text = DateTime.Now.Date.AddDays(1).ToString();
+            txtCheckInDate.Text = DateTime.Now.Date.ToString("dd-MM-yyyy");
+            txtPlannedCheckoutDate.Text = DateTime.Now.Date.AddDays(1).ToString("dd-MM-yyyy");
             ddlRoomType.DataSource = roomTypeLogic.selectAll(loggedUser.AccountID);
             ddlRoomType.DataValueField = "RoomTypeID";
             ddlRoomType.DataTextField = "Name";

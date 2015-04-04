@@ -16,7 +16,7 @@
                     <li>
                         <a href="#">Booking</a> <span class="divider">&nbsp;</span>
                     </li>
-                    <li><a href="createstaff.aspx">Create</a><span class="divider-last">&nbsp;</span></li>
+                    <li><a href="createbooking.aspx">Create</a><span class="divider-last">&nbsp;</span></li>
                 </ul>
             </div>
         </div>
@@ -112,8 +112,8 @@
                                                 <asp:ListItem Value="Pending">Pending</asp:ListItem>
                                                 <asp:ListItem Value="Approved">Approved</asp:ListItem>
                                                 <asp:ListItem Value="Advance Paid">Advance Paid</asp:ListItem>
-                                                <asp:ListItem Value="CheckedIn">Checked in</asp:ListItem>
-                                                <asp:ListItem Value="CheckedOut">Checked out</asp:ListItem>
+                                                <asp:ListItem Value="Checked In">Checked in</asp:ListItem>
+                                                <asp:ListItem Value="Checked Out">Checked out</asp:ListItem>
                                                 <asp:ListItem Value="Cancelled">Cancelled</asp:ListItem>
                                             </asp:DropDownList>
                                         </div>

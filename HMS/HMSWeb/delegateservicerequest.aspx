@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="delegaterequest.aspx.cs" Inherits="delegaterequest" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="delegateservicerequest.aspx.cs" Inherits="delegaterequest" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" Runat="Server">
 </asp:Content>
@@ -15,24 +15,14 @@
                         <a href="home.aspx"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                     </li>
                     <li>
-                        <a href="#">Service request</a> <span class="divider">&nbsp;</span>
+                        <a href="#">Service Request</a> <span class="divider">&nbsp;</span>
                     </li>
-                    <li><a href="#">Delegation</a><span class="divider-last">&nbsp;</span></li>
+                    <li><a href="delegateservicerequest.aspx">Delegate Request</a><span class="divider-last">&nbsp;</span></li>
                 </ul>
                 <!-- END PAGE TITLE & BREADCRUMB-->
             </div>
         </div>
-        <div class="widget-body form">
-            <div class="form-horizontal">
-                <div class="control-group">
-                    <label class="control-label">Staff Name</label>
-                    <div class="controls">
-                        <asp:TextBox ID="txtName" runat="server" CssClass="span4  tooltips" data-trigger="hover" data-original-title="Enter staff name to search for."></asp:TextBox>
-                        <asp:Button ID="btnSubmit" CssClass="btn btn-info" runat="server" Text="Search" OnClick="btnSubmit_Click" />
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <asp:PlaceHolder ID="searchResultArea" Visible="true" runat="server">
             <!-- BEGIN ADVANCED TABLE widget-->
             <div class="row-fluid">
@@ -40,7 +30,7 @@
                     <!-- BEGIN EXAMPLE TABLE widget-->
                     <div class="widget">
                         <div class="widget-title">
-                            <h4><i class="icon-reorder"></i>Staff Record</h4>
+                            <h4><i class="icon-reorder"></i>Pending Service Requests</h4>
                             <span class="tools">
                                 <a href="javascript:;" class="icon-chevron-down"></a>
                                 <a href="javascript:;" class="icon-remove"></a>

@@ -156,7 +156,7 @@
                                 </a>
                                 <ul class="sub">
                                     <li><a href="createbooking.aspx">Create new Booking</a></li>
-                                    <li><a href="#">Search a Booking</a></li>
+                                    <li><a href="searchbooking.aspx">Search a Booking</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
@@ -266,7 +266,7 @@
 					                <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a href="delegaterequest.aspx">Delegate</a></li>
+                                    <li><a href="delegateservicerequest.aspx">Delegate Request</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>

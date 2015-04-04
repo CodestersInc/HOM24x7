@@ -15,7 +15,12 @@ namespace BusinessLogic
     {
         public DataTable search(string searchstring, int ID)
         {
-            throw new NotImplementedException();
+            String query = "select Room.RoomNumber, Customer.*, Booking.* from Room, Customer, Booking where Customer.CustomerID = Booking.CustomerID and Customer.Name like @Name+'%' and Customer.AccountID=@AccountID and Room.RoomID = Booking.RoomID order by Customer.Name";
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+            lstParams.Add(new SqlParameter("@Name", searchstring));
+            lstParams.Add(new SqlParameter("@AccountID", ID));
+
+            return DBUtility.Select(query, lstParams);
         }
 
         public Booking create(Booking obj)
