@@ -119,6 +119,7 @@ namespace BusinessLogic
             return DBUtility.Select(query, lstParams);
         }
 
+        /* Obtain floors whose plan isn't configured yet */
         public DataTable selectFloorsWithoutPlan(int AccountID)
         {
             String query = "select * from Floor where Floor.FloorID NOT IN (select FloorPlan.FloorID from FloorPlan) and Floor.AccountID = @AccountID";

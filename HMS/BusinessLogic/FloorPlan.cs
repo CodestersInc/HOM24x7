@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-    public class Plan : IModel
+    public class FloorPlan : IModel
     {
         public int PlanID;
         public String PlanStyle;
-        public String FloorID;
+        public int FloorID;
         public String Image;
 
-        public Plan()
+        public FloorPlan()
         {
 
         }
 
-        public Plan(int PlanID, String PlanStyle, String FloorID, String Image)
+        public FloorPlan(int PlanID, String PlanStyle, int FloorID, String Image)
         {
             this.PlanID = PlanID;
             this.PlanStyle = PlanStyle;

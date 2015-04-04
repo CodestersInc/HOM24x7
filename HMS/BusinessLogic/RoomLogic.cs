@@ -148,5 +148,15 @@ namespace BusinessLogic
 
             return DBUtility.Select(query, lstParams);
         }
+
+        /* Rooms not added to plan */
+        public DataTable getRemainingRooms(int PlanID)
+        {
+            String query = "select * from Room where Room.RoomID NOT IN (select PlanComponent.RoomID from PlanComponent where PlanComponent.PlanID=@PlanID) and Room.FloorID = (select FloorID from FloorPlan where PlanID = @PlanID)";
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+
+            lstParams.Add(new SqlParameter("@PlanID", PlanID));
+            return DBUtility.Select(query, lstParams);
+        }
     }
 }

@@ -14,23 +14,23 @@
             min-height: 80px;
         }
 
-        .room {
+        /*.room {
             width: 50px;
             height: 50px;
             background-color: gray;
             text-align: left;
             vertical-align: middle;
             color: white;
-        }
+        }*/
 
-        #canvas {
+        /*#canvas {
             min-height: 400px;
             min-width: 400px;
             padding: 5px;
             border-style: solid;
             border-width: 1px;
             margin: 5px;
-        }
+        }*/
 
         #planbuilder {
             border-style: solid;
@@ -101,7 +101,7 @@
                                         </asp:Repeater>
                                     </select>
                                     <b>OR</b>
-                                    <asp:LinkButton ID="btnNewRoom" runat="server" CssClass="btn-mini" OnClick="btnNewRoom_Click">Create New Room</asp:LinkButton>
+                                    <a href="createroom.aspx"><b>Create a new room</b></a>
                                 </div>
                                 <br />
                                 <div class="controls">
@@ -136,15 +136,16 @@
                                 <!-- END EXAMPLE TABLE widget-->
                             </asp:PlaceHolder>
                             <!--END PALLETTE-->
-                            <div id="canvas"></div>
+                            <div id="canvas" style="min-height: 400px; min-width: 400px; padding: 5px; border-style: solid; border-width: 1px; margin: 5px;"></div>
                             <!-- END PLAN BUILDER-->
 
                             <div class="form-actions">
-                                <asp:Button ID="btnSubmit" CssClass="btn btn-success" runat="server" Text="Submit" OnClientClick="savePlanData()"/>
+                                <asp:Button ID="btnSubmit" CssClass="btn btn-success" runat="server" Text="Submit" OnClientClick="savePlanData()" OnClick="btnSubmit_Click" />
+                                <span></span>
                                 <asp:Button ID="btnCancel" CssClass="btn btn-warning" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
                             </div>
 
-                            <asp:TextBox ID="txtPlanData"  CssClass="txtPlanData" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtPlanData" CssClass="txtPlanData" runat="server"></asp:TextBox>
                             <asp:TextBox ID="txtPlanComponentData" CssClass="txtPlanComponentData" runat="server"></asp:TextBox>
                         </div>
                     </div>
@@ -157,55 +158,48 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
-    <%--<script src="js/jquery-1.11.2.js"></script>--%>
     <script src="js/jquery-ui.js"></script>
     <script src="js/jquery.ui.rotatable.min.js"></script>
     <link type="text/css" rel="stylesheet" href="css/jquery.ui.rotatable.css" />
     <script type="text/javascript">
+        //$(document).ready(function () {
+        //    $('#canvas').resizable();
+        //    $(this).clone().appendTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" });
+        //});
+
+        //$('.paletteComponent').click(function () {
+        //    $(this).clone().appendTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" });
+        //});
+
         $(document).ready(function () {
             $('#canvas').resizable();
-            $(this).clone().appendTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" });
         });
-
-        $('.paletteComponent').click(function () {
-            $(this).clone().appendTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" });
-        });
-
-        //$('#btnAddToCanvas').click(function () {
-        //    $('#room').clone().appendTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" }).attr("RoomID", $("#selectRoomNumber").val());
-        //});
-
-        //$('#btnAddToCanvas').click(function () {
-        //    $('#canvas').append("<div id='room'>ROOM</div>").draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" }).attr("RoomID", $("#selectRoomNumber").val());
-        //});
 
         $('#btnAddToCanvas').click(function () {
-            $("<div class='room' >Room: </div>").appendTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" }).attr("RoomID", $("#roomList").val()).append($("#roomList").val());;
-
             var x = document.getElementById("roomList");
-            x.remove(x.selectedIndex);
+
+            if (x.length != 0) {
+                $("<div class='room' style= 'width: 50px; height: 50px; background-color: gray; text-align: left; vertical-align: middle; color: white;'></div>").appendTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" }).attr("roomid", $("#roomList").val());
+                x.remove(x.selectedIndex);
+            }
         });
 
     </script>
 
     <script type="text/javascript">
-
-        <%--Save PlanComponent details--%>
         var data = "";
         var canvasData = ""
         function savePlanData() {
 
             <%--Save PlanComponent details--%>
-            $("#canvas>.room").each(function () {                             
-                data += $(this).attr('RoomID') + "&" + $(this).attr('style') + "#";
+            $("#canvas>.room").each(function () {
+                data += $(this).attr('roomid') + "&" + $(this).attr('style') + "#";
             });
             $('.txtPlanComponentData').val(data);
 
             <%--Save Plan details--%>
             canvasData = $('#canvas').attr('style');
-            alert(canvasData);
             $('.txtPlanData').val(canvasData);
         }
-        
     </script>
 </asp:Content>

@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 
-public partial class searchroom : System.Web.UI.Page
+public partial class searchplan : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -19,25 +19,23 @@ public partial class searchroom : System.Web.UI.Page
         {
             Response.Redirect("home.aspx");
         }
-    }
-
-    protected void btnSubmit_Click(object sender, EventArgs e)
-    {
-        Staff loggedUser = (Staff)Session["LoggedUser"];
-        searchResultArea.Visible = true;
-        Repeater1.DataSource = new RoomLogic().search(txtName.Text, loggedUser.AccountID);
-        Repeater1.DataBind();
+        if (!IsPostBack)
+        {
+            searchResultArea.Visible = true;
+            Repeater1.DataSource = new FloorPlanLogic().search(loggedUser.AccountID);
+            Repeater1.DataBind();
+        }
     }
 
     protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
     {
         if (e.CommandName == "Remove")
         {
-            RoomLogic roomLogic = new RoomLogic();
-            roomLogic.delete(Convert.ToInt32(e.CommandArgument));
+            FloorPlanLogic planLogic = new FloorPlanLogic();
+            planLogic.delete(Convert.ToInt32(e.CommandArgument));
             Staff loggedUser = (Staff)Session["LoggedUser"];
             searchResultArea.Visible = true;
-            Repeater1.DataSource = roomLogic.search(txtName.Text, loggedUser.AccountID);
+            Repeater1.DataSource = planLogic.search(loggedUser.AccountID);
             Repeater1.DataBind();
         }
     }

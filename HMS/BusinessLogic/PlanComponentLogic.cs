@@ -32,7 +32,7 @@ namespace BusinessLogic
 
             if (res == 1)
             {
-                String fetchquery = "select * from PlanComponent where PlanComponentStyle=@PlanComponentStyle and RoomID=@RoomID and PlanID=@PlanID and ComponentID=@ComponentID;";
+                String fetchquery = "select * from PlanComponent where PlanComponentStyle=@PlanComponentStyle and RoomID=@RoomID and PlanID=@PlanID and ComponentID=@ComponentID";
                 List<SqlParameter> lstParams1 = new List<SqlParameter>();
 
                 lstParams1.Add(new SqlParameter("@PlanComponentStyle", obj.PlanComponentStyle));
@@ -59,7 +59,7 @@ namespace BusinessLogic
 
         public int update(PlanComponent obj)
         {
-            String query = "update PlanComponent set  PlanComponentStyle=@PlanComponentStyle, RoomID=@RoomID, PlanID=@PlanID, ComponentID=@ComponentID where PlanComponentID=@PlanComponentID";
+            String query = "update PlanComponent set PlanComponentStyle=@PlanComponentStyle, RoomID=@RoomID, PlanID=@PlanID, ComponentID=@ComponentID where PlanComponentID=@PlanComponentID";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@PlanComponentStyle", obj.PlanComponentStyle));
@@ -71,13 +71,22 @@ namespace BusinessLogic
             return DBUtility.Modify(query, lstParams); 
         }
 
-        public int delete(int id)
+        public int delete(int PlanComponentID)
         {
-            String query = "delete from PlanComponent where PlanComponent=@ID";
+            String query = "delete from PlanComponent where PlanComponentID=@ID";
             List<SqlParameter> lstParams = new List<SqlParameter>();
-            lstParams.Add(new SqlParameter("@ID", id));
+            lstParams.Add(new SqlParameter("@ID", PlanComponentID));
 
             return DBUtility.Modify(query, lstParams);  
+        }
+
+        public int deleteAll(int PlanID)
+        {
+            String query = "delete from PlanComponent where PlanID=@ID";
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+            lstParams.Add(new SqlParameter("@ID", PlanID));
+
+            return DBUtility.Modify(query, lstParams);
         }
 
         public PlanComponent selectById(int id)
@@ -107,6 +116,17 @@ namespace BusinessLogic
             String query = "select * from PlanComponent";
 
             return DBUtility.Select(query, new List<SqlParameter>());
+        }
+
+        public DataTable selectAll(int PlanID)
+        {
+            String query = "select * from PlanComponent where PlanID=@PlanID";
+
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+
+            lstParams.Add(new SqlParameter("@PlanID", PlanID));  
+        
+            return DBUtility.Select(query, lstParams);
         }
     }
 }

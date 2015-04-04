@@ -36,31 +36,41 @@ public partial class createplan : System.Web.UI.Page
             ddlFloor.DataValueField = "FloorID";
             ddlFloor.DataTextField = "FloorNumber";
             ddlFloor.DataBind();
-
             txtPlanComponentData.Text = "";
+            txtPlanData.Text = "";
         }
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
-        String data = txtPlanComponentData.Text;
-        String[] entries = data.Split('#');
-
-        PlanComponentLogic planComponentLogic = new PlanComponentLogic();
-        PlanComponent planComponent = new PlanComponent();
-
-        for (int i = 0; i < entries.Length; i++)
+        FloorPlan plan = new FloorPlanLogic().create(new FloorPlan(0,
+            txtPlanData.Text,
+            Convert.ToInt32(floorHiddenField.Value),
+            ""));
+        if (plan!=null)
         {
-            String[] entryDetail = entries[i].Split('&');
-            planComponent.RoomID = Convert.ToInt32(entryDetail[0]);
-            planComponent.PlanComponentStyle = entryDetail[1];
+            String data = txtPlanComponentData.Text;
+            String[] entries = data.Split('#');
+
+            PlanComponentLogic planComponentLogic = new PlanComponentLogic();
+            PlanComponent planComponent = new PlanComponent();
+
+            for (int i = 0; i < entries.Length-1; i++)
+            {
+                String[] entryDetail = entries[i].Split('&');
+                planComponent.RoomID = Convert.ToInt32(entryDetail[0]);
+                planComponent.PlanComponentStyle = entryDetail[1];
+                planComponent.PlanID = plan.PlanID;
+                planComponentLogic.create(planComponent);
+            }
         }
+        Response.Redirect("home.aspx");
     }
 
 
     protected void btnCancel_Click(object sender, EventArgs e)
     {
-
+        Response.Redirect("searchplan.aspx");
     }
 
     protected void createPlan_Click(object sender, EventArgs e)
@@ -74,9 +84,5 @@ public partial class createplan : System.Web.UI.Page
         selectionRepeater.DataSource = new RoomLogic().getRooms(Convert.ToInt32(floorHiddenField.Value), loggedUser.AccountID);
         selectionRepeater.DataBind();
         floorNumberPlaceHolder.Visible = false;
-    }
-    protected void btnNewRoom_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("createroom.aspx");
     }
 }

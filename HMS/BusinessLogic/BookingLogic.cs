@@ -13,7 +13,7 @@ namespace BusinessLogic
 {
     public class BookingLogic : ILogic<Booking>
     {
-        public System.Data.DataTable search(string searchstring, int ID)
+        public DataTable search(string searchstring, int ID)
         {
             throw new NotImplementedException();
         }

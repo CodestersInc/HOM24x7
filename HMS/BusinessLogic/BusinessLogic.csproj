@@ -65,10 +65,10 @@
     <Compile Include="OnlineBookingLogic.cs" />
     <Compile Include="PaySlipLogic.cs" />
     <Compile Include="PaySlip.cs" />
-    <Compile Include="Plan.cs" />
+    <Compile Include="FloorPlan.cs" />
     <Compile Include="PlanComponent.cs" />
-    <Compile Include="PlanComponentLogics.cs" />
-    <Compile Include="PlanLogic.cs" />
+    <Compile Include="PlanComponentLogic.cs" />
+    <Compile Include="FloorPlanLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Room.cs" />
     <Compile Include="RoomLogic.cs" />
