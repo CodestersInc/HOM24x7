@@ -86,7 +86,7 @@
                                     </div>
 
                                     <div class="control-group">
-                                        <label class="control-label">Check in Date</label>
+                                        <label class="control-label">Check-in Date</label>
                                         <div class="controls">
                                             <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
                                                 <asp:TextBox ID="txtCheckInDate" runat="server" CssClass="span6 non-editable" Text="dd-mm-yyyy"></asp:TextBox>
@@ -96,7 +96,7 @@
                                     </div>
 
                                     <div class="control-group">
-                                        <label class="control-label">Planned check out Date</label>
+                                        <label class="control-label">Planned check-out Date</label>
                                         <div class="controls">
                                             <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
                                                 <asp:TextBox ID="txtPlannedCheckoutDate" runat="server" CssClass="span6 non-editable" Text="dd-mm-yyyy"></asp:TextBox>

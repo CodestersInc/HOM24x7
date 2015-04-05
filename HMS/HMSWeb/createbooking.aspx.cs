@@ -23,10 +23,11 @@ public partial class createbooking : System.Web.UI.Page
             Response.Redirect("home.aspx");
         }
 
-        StaffLogic staffLogic = new StaffLogic();
-        RoomTypeLogic roomTypeLogic = new RoomTypeLogic();
         if (!IsPostBack)
         {
+            StaffLogic staffLogic = new StaffLogic();
+            RoomTypeLogic roomTypeLogic = new RoomTypeLogic();
+
             txtCheckInDate.Text = DateTime.Now.Date.ToString("dd-MM-yyyy");
             txtPlannedCheckoutDate.Text = DateTime.Now.Date.AddDays(1).ToString("dd-MM-yyyy");
             ddlRoomType.DataSource = roomTypeLogic.selectAll(loggedUser.AccountID);
@@ -58,7 +59,7 @@ public partial class createbooking : System.Web.UI.Page
             ddlFloor.DataBind();
             ddlFloor_SelectedIndexChanged(sender, null);
 
-            txtRoomRates.Text = (new SeasonRoomLogic().fetchCurrentRoomRate(Convert.ToInt32(ddlRoomType.SelectedValue), loggedUser.AccountID)).ToString();                 
+            txtRoomRates.Text = (new SeasonRoomLogic().fetchCurrentRoomRate(Convert.ToInt32(ddlRoomType.SelectedValue), loggedUser.AccountID)).ToString();
         }
         catch (FormatException)
         {
@@ -145,7 +146,8 @@ public partial class createbooking : System.Web.UI.Page
         {
             Response.Redirect("ErrorPage.htm;");
         }
-        Response.Redirect("Home.aspx");
+        else
+            Response.Redirect("Home.aspx");
     }
 
     protected void btnCancel_Click(object sender, EventArgs e)

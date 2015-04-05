@@ -34,7 +34,7 @@ namespace BusinessLogic
 
         public Booking(int BookingID, int RoomID, int NumberOfPersons, DateTime CheckInDate, DateTime PlannedCheckOutDate, DateTime CheckOutDate, String Status, double PaidAmount, int CustomerID, int ApproverID, int ReceiverID, String StaffRemarks, String CustomerRemarks, double RoomRate, String PaymentMode, int ChequeNo, String BankName, int OnlineBookingID)
         {
-            this.BookingID = OnlineBookingID;
+            this.BookingID = BookingID;
             this.RoomID = RoomID;
             this.NumberOfPersons = NumberOfPersons;
             this.CheckInDate = CheckInDate;

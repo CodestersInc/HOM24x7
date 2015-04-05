@@ -102,7 +102,7 @@ namespace BusinessLogic
 
         public int update(Booking obj)
         {
-            String query = "update Booking set RoomID=@RoomID, NoOfPersons=@NumberOfPersons, CheckInDate=@CheckInDate, PlannedCheckOutDate=@PlannedCheckOutDate, Status=@Status, PaidAmount=@PaidAmount, CustomerID=@CustomerID, ApproverID=@ApproverID, ReceiverID=@ReceiverID, StaffRemarks=@StaffRemarks, CustomerRemarks=@CustomerRemarks, RoomRate=@RoomRate, PaymentMode=@PaymentMode, ChequeNo=@ChequeNo, BankName=@BankName, OnlineBookingID=@OnlineBookingID where BookingID=@BookingID";
+            String query = "update Booking set RoomID=@RoomID, NoOfPersons=@NumberOfPersons, CheckInDate=@CheckInDate, PlannedCheckOutDate=@PlannedCheckOutDate, CheckOutDate=@CheckOutDate, Status=@Status, PaidAmount=@PaidAmount, CustomerID=@CustomerID, ApproverID=@ApproverID, ReceiverID=@ReceiverID, StaffRemarks=@StaffRemarks, CustomerRemarks=@CustomerRemarks, RoomRate=@RoomRate, PaymentMode=@PaymentMode, ChequeNo=@ChequeNo, BankName=@BankName, OnlineBookingID=@OnlineBookingID where BookingID=@BookingID";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@BookingID", obj.BookingID));
@@ -123,7 +123,6 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@ChequeNo", obj.ChequeNo));
             lstParams.Add(new SqlParameter("@BankName", obj.BankName));
             lstParams.Add(new SqlParameter("@OnlineBookingID", obj.OnlineBookingID));
-
 
             return DBUtility.Modify(query, lstParams);
         }
