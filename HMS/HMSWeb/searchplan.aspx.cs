@@ -31,8 +31,12 @@ public partial class searchplan : System.Web.UI.Page
     {
         if (e.CommandName == "Remove")
         {
+            /*Remove all Plan Components for the plan to be deleted*/
+            new PlanComponentLogic().deleteAll(Convert.ToInt32(e.CommandArgument));
+
+            /*Delete plan*/
             FloorPlanLogic planLogic = new FloorPlanLogic();
-            planLogic.delete(Convert.ToInt32(e.CommandArgument));
+            planLogic.delete(Convert.ToInt32(e.CommandArgument));            
             Staff loggedUser = (Staff)Session["LoggedUser"];
             searchResultArea.Visible = true;
             Repeater1.DataSource = planLogic.search(loggedUser.AccountID);

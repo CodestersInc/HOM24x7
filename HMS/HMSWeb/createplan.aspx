@@ -7,6 +7,7 @@
             width: 70px;
             height: 70px;
             float: left;
+            padding-left:30px;                                                
         }
 
         #palette {
@@ -87,29 +88,27 @@
                                 </div>
                                 <br />
                                 <div class="controls">
-                                    <input id="btnAddRoomToCanvas" class="btn-primary" type="button" value="Add room to plan" />
-                                    <input id="btnAddOtherComponentToCanvas" class="btn-primary" type="button" value="Add other component" />
+                                    <input id="btnAddRoomToCanvas" class="btn-primary" type="button" value="Add room to plan" />                                    
                                 </div>
                             </div>
 
                             <!--START PLAN BUILDER-->
                             <!--START PALLETTE-->
-                            <asp:PlaceHolder ID="palettePlaceHolder" runat="server">
-                                <div class="widget palette" style="padding-left: 5px; display: none">
+                            <asp:PlaceHolder ID="palettePlaceHolder" runat="server" Visible="true">
+                                <div class="widget palette" >
                                     <div class="widget-title">
                                         <h4><i class="icon-reorder"></i>Pallete (Click on the component to add to canvas)</h4>
                                         <span class="tools">
                                             <a href="javascript:;" class="icon-chevron-down"></a>
                                             <a href="javascript:;" class="icon-remove"></a>
                                         </span>
-                                    </div>
-
-                                    <div class="widget-body" style="min-height: 80px">
+                                    </div>                                    
+                                    
+                                    <div class="widget-body" style="min-height: 80px;">
+                                        <label class="noComponentsMessage" style="display:none; font-size:20px; text-align:center; padding-top:20px">No custom components added yet...!!</label>
                                         <asp:Repeater ID="componentRepeater" runat="server">
                                             <ItemTemplate>
-                                                <div class="paletteComponent" style='<%# "background-image:url("+Eval("Image")+");background-repeat:no-repeat;background-size:contain;width:70px;height:70px;" %>'' componentid='<%# Eval("ComponentID") %>'>                                                    
-                                                    <%--<asp:Image ID="Image1" ImageUrl='<%# Eval("Image") %>' runat="server" />--%>
-                                                </div>
+                                                <div class="paletteComponent" style='<%# "background-image:url("+Eval("Image")+");background-repeat:no-repeat;background-size:contain;width:70px;height:70px;" %>'' componentid='<%# Eval("ComponentID") %>'></div>
                                             </ItemTemplate>
                                         </asp:Repeater>
                                     </div>
@@ -152,10 +151,10 @@
             <%--Making canvas resizable--%>
             $('#canvas').resizable();
 
-            <%--Hide AddRoomTOCanvas button if no rooms--%>
-            var x = document.getElementById("roomList");
-            if (x.length == 0) {
-                $('#btnAddRoomToCanvas').hide();
+            <%--Palette has no custom components---%>
+            var items = $('div.paletteComponent').length;
+            if (items == 0) {
+                $('.noComponentsMessage').show();
             }
         });
     </script>
@@ -168,19 +167,17 @@
             if (x.length != 0) {
                 $("<div class='room' style= 'width: 50px; height: 50px; background-color: gray; text-align: left; vertical-align: middle; color: white;'></div>").prependTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" }).attr("roomid", $("#roomList").val());
                 x.remove(x.selectedIndex);
-                if (x.length == 0)
-                    $('#btnAddRoomToCanvas').hide();
+                
+                <%--Disable AddRoomTOCanvas button if no rooms--%>
+                if (x.length == 0) {
+                    $('#btnAddRoomToCanvas').attr("disabled", true);
+                }
             }
         });
     </script>
 
     <%--Add other components to canvas--%>
     <script type="text/javascript">
-        $('#btnAddOtherComponentToCanvas').click(function () {
-            $('.palette').show();
-            $('#btnAddOtherComponentToCanvas').hide();
-        });
-
         $('.paletteComponent').click(function () {
             $(this).clone().prependTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" }).removeClass('paletteComponent').addClass('otherComponent');
         });

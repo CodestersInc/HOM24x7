@@ -82,9 +82,9 @@ namespace BusinessLogic
 
         public int deleteAll(int PlanID)
         {
-            String query = "delete from PlanComponent where PlanID=@ID";
+            String query = "delete from PlanComponent where PlanID=@PlanID";
             List<SqlParameter> lstParams = new List<SqlParameter>();
-            lstParams.Add(new SqlParameter("@ID", PlanID));
+            lstParams.Add(new SqlParameter("@PlanID", PlanID));
 
             return DBUtility.Modify(query, lstParams);
         }

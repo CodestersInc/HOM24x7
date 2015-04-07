@@ -19,7 +19,7 @@ namespace BusinessLogic
 
         public DataTable search(int AccountID)
         {
-            String query = "select Floor.FloorNumber as 'FloorNumber', FloorPlan.* from Floor, FloorPlan where Floor.FloorID = FloorPlan.FloorID and Floor.AccountID=@AccountID";
+            String query = "select Floor.FloorNumber as 'FloorNumber', FloorPlan.* from Floor, FloorPlan where Floor.FloorID = FloorPlan.FloorID and Floor.AccountID=@AccountID order by Floor.FloorNumber";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
             lstParams.Add(new SqlParameter("@AccountID", AccountID));
@@ -76,7 +76,7 @@ namespace BusinessLogic
 
         public int delete(int id)
         {
-            String query = "delete from Plan where PlanID=@PlanID";
+            String query = "delete from FloorPlan where PlanID=@PlanID";
             List<SqlParameter> lstParams = new List<SqlParameter>();
             lstParams.Add(new SqlParameter("@PlanID", id));
 
