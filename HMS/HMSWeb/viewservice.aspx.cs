@@ -41,6 +41,7 @@ public partial class viewservice : System.Web.UI.Page
             ddlDepartment.SelectedValue = departmentlogicobj.selectById(serviceobj.DepartmentID).Name;
             txtRate.Text = serviceobj.Rate.ToString();
             Image1.ImageUrl = serviceobj.Image;
+            ddlServiceType.SelectedValue = serviceobj.ServiceTypeID.ToString();
         }
     }
     protected void btnUpdate_Click(object sender, EventArgs e)

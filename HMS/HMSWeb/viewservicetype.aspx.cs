@@ -26,7 +26,7 @@ public partial class viewservicetype : System.Web.UI.Page
         }
     }
 
-    protected void btnSubmit_Click(object sender, EventArgs e)
+    protected void btnUpdate_Click(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["loggedUser"];
         String ticks = DateTime.Now.Ticks.ToString();

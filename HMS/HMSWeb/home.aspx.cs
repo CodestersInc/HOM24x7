@@ -14,14 +14,20 @@ public partial class home : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["UserType"] == "SystemAdmin")
-        {
-            SystemAdmin loggedUser = (SystemAdmin)Session["loggedUser"];
-        }
-        else
-        {
-            Staff loggedUser = (Staff)Session["loggedUser"];
 
+        Staff loggedUser = (Staff)Session["loggedUser"];
+
+        if (loggedUser == null)
+        {
+            Response.Redirect("login.aspx?url=" + Request.Url);
+        }
+        if (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff")
+        {
+            Response.Redirect("home.aspx");
+        }
+
+        if (!IsPostBack)
+        {
             statisticsPlaceHolder.Visible = true;
 
             DataTable dt = new StaffLogic().selectAll(loggedUser.AccountID);
@@ -31,12 +37,7 @@ public partial class home : System.Web.UI.Page
             lblDepartments.Text = dt1.Rows.Count.ToString();
 
             DataTable dt2 = new RoomLogic().selectAll(loggedUser.AccountID);
-            lblRooms.Text = dt2.Rows.Count.ToString();
+            lblRooms.Text = dt2.Rows.Count.ToString();      
         }        
-
-        if(Session["UserType"]==null)
-        {
-            Response.Redirect("login.aspx");
-        }
     }
 }

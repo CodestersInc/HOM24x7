@@ -28,7 +28,7 @@
                 <div class="control-group">
                     <label class="control-label">Service Name</label>
                     <div class="controls">
-                        <asp:TextBox ID="txtName" runat="server" CssClass="span4  tooltips" data-trigger="hover" data-original-title="Enter the service name."></asp:TextBox>
+                        <asp:TextBox ID="txtName" runat="server" CssClass="span3 tooltips" data-trigger="hover" data-original-title="Enter the service name."></asp:TextBox>
                         <asp:Button ID="btnSearch" OnClick="btnSearch_Click" CssClass="btn btn-info" runat="server" Text="Search" />
                     </div>
                 </div>
@@ -50,31 +50,28 @@
                         <div class="widget-body">
                             <table class="table table-striped table-bordered table-advance table-hover">
                                 <tr>
-                                    <th>Image
-                                    </th>
-                                    <th>Name
-                                    </th>
-                                    <th>Department Name
-                                    </th>
-                                    <th>Type</th>
+                                    <th style="text-align:center">Name</th>
+                                    <th style="text-align:center">Department Name</th>
+                                    <th style="text-align:center">Type</th>
+                                    <th style="text-align:center">Photo</th>
                                     <th></th>
                                 </tr>
                                 <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
                                     <ItemTemplate>
                                         <tr>
-                                            <td style="max-height: 70px; max-width: 70px; text-align: center">
-                                                <img src='<%# Eval("Image") %>' style="max-width: 70px; max-height: 70px;" />
-                                            </td>
-                                            <td>
+                                            <td  style="vertical-align: middle; text-align:center">
                                                 <a href='viewservice.aspx?ID=<%# Eval("ServiceID") %>'><%# Eval("Name") %></a>
                                             </td>
-                                            <td>
+                                            <td  style="vertical-align: middle; text-align:center">
                                                 <a href='viewdepartment.aspx?ID=<%# Eval("DepartmentID")%>'><%# Eval("DepartmentName") %>
                                             </td>
-                                            <td>
+                                            <td  style=" vertical-align: middle; text-align:center">
                                                 <a href='viewservicetype.aspx?ID=<%# Eval("ServiceTypeID") %>'><%# Eval("ServiceTypeName")%></a>
                                             </td>
-                                            <td>
+                                            <td style="text-align: center">
+                                                <img src='<%# Eval("Image") %>' style="max-height: 100px; max-width: 150px;" />
+                                            </td>
+                                            <td  style="vertical-align: middle; text-align:center">
                                                 <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewservice.aspx?ID=" + Eval("ServiceID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
                                                 <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("ServiceID") %>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>
                                             </td>

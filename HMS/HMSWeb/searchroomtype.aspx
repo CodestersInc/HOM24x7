@@ -49,7 +49,7 @@
                         <div class="widget-body">
                             <table class="table table-striped table-bordered">
                                 <tr>
-                                    <th>Room Type</th>
+                                    <th style="text-align:center">Room Type</th>
                                     <th style="text-align:center">Photo</th>
                                     <th></th>
                                 </tr>
@@ -57,9 +57,9 @@
                                 <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
                                     <ItemTemplate>
                                         <tr>
-                                            <td style="vertical-align:middle""><a href='viewroomtype.aspx?ID=<%# Eval("RoomTypeID") %>'><%#Eval("Name")%></a></td>
+                                            <td style="vertical-align:middle; text-align:center"><a href='viewroomtype.aspx?ID=<%# Eval("RoomTypeID") %>'><%#Eval("Name")%></a></td>
                                             <td style="text-align:center">
-                                                <asp:Image ID="Image1" ImageUrl='<%#Eval("Photo")%>' Width="100px" Height="80px" runat="server" />
+                                                <asp:Image ID="Image1" ImageUrl='<%#Eval("Photo")%>' Width="200px" Height="100px" runat="server" />
                                             </td>
                                             <td style="text-align:center; vertical-align:middle">
                                                 <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewroomtype.aspx?ID=" + Eval("RoomTypeID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>

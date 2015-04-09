@@ -19,15 +19,13 @@
     </div>
     <!-- END THEME CUSTOMIZER-->
 
-    <div style="text-align: center">
+    <div style="text-align: center; padding-top:20px">
         <h2><b>Home Page</b></h2>
-        <asp:Image ID="Image1" ImageUrl="~/img/logo-cropped.png" runat="server" />
     </div>
-    <br />
 
     <!-- BEGIN OVERVIEW STATISTIC BARS-->
     <asp:PlaceHolder ID="statisticsPlaceHolder" runat="server" Visible="false">
-        <div class="row-fluid circle-state-overview" style="margin:0px 0px 0px 300px">
+        <div class="row-fluid circle-state-overview" style="padding:150px 0px 0px 280px">
             <div class="span2 responsive clearfix" data-tablet="span3" data-desktop="span2">
                 <div class="circle-wrap">
                     <div class="stats-circle turquoise-color">

@@ -204,7 +204,7 @@ namespace BusinessLogic
 
         public DataTable searchManager(int ID)
         {
-            String query = "select Department.Name as 'DepartmentName', Staff.* from Department,Staff where staff.DepartmentID=Department.DepartmentID and Staff.AccountID=@ID order by Staff.StaffCode";
+            String query = "select Department.Name as 'DepartmentName', Staff.* from Department, Staff where Staff.DepartmentID=Department.DepartmentID and Staff.AccountID=@ID order by Staff.StaffCode";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
             lstParams.Add(new SqlParameter("@ID", ID));
@@ -244,6 +244,16 @@ namespace BusinessLogic
             {
                 return null;
             }
+        }
+
+        public DataTable getStaffForPayroll(int AccountID)
+        {
+            String query = "select Department.Name as 'DepartmentName', Staff.* from Department, Staff where StaffID NOT IN (select StaffID from PaySlip) and  Staff.DepartmentID=Department.DepartmentID and Staff.AccountID=@AccountID order by Staff.StaffCode";
+
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+            lstParams.Add(new SqlParameter("@AccountID", AccountID));
+
+            return DBUtility.Select(query, lstParams);
         }
     }
 }

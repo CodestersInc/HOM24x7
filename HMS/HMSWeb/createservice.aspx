@@ -42,7 +42,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Service Name</label>
                                     <div class="controls">
-                                        <asp:TextBox ID="txtName" runat="server" CssClass="span6 popovers" data-trigger="hover" data-content="Enter the full name of Service." data-original-title="Popover header"></asp:TextBox>
+                                        <asp:TextBox ID="txtName" runat="server" CssClass="span3 popovers" data-trigger="hover" data-content="Enter the Service name" data-original-title="Hint"></asp:TextBox>
                                         <asp:RequiredFieldValidator ControlToValidate="txtName" ID="ServiceNameRequiredFieldValidator" runat="server" ErrorMessage="Please enter the name of the new Service" ValidationGroup="First" CssClass="alert alert-error"></asp:RequiredFieldValidator>
                                     </div>
                                 </div>
@@ -50,7 +50,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Department</label>
                                     <div class="controls">
-                                        <asp:DropDownList ID="ddlDepartment" runat="server" CssClass="span4" data-placeholder="Choose a Category" TabIndex="1">
+                                        <asp:DropDownList ID="ddlDepartment" runat="server" CssClass="span3" data-placeholder="Choose a Category" TabIndex="1">
                                         </asp:DropDownList>
                                     </div>
                                 </div>
@@ -59,7 +59,7 @@
                                     <label class="control-label">Rate</label>
                                     <div class="controls">
                                         <div class="input-prepend input-append">
-                                            <span class="add-on">Rs.</span><asp:TextBox ID="txtRate" runat="server"></asp:TextBox><span class="add-on">.00</span>
+                                            <span class="add-on">Rs.</span><asp:TextBox ID="txtRate" CssClass="span8" runat="server"></asp:TextBox><span class="add-on">.00</span>
                                             <asp:RequiredFieldValidator ControlToValidate="txtRate" Display="Dynamic" ID="RateRequiredFieldValidator" runat="server" ErrorMessage="Please enter Rate of the Service" ValidationGroup="First" CssClass="alert alert-error"></asp:RequiredFieldValidator>
                                             <asp:RegularExpressionValidator ControlToValidate="txtRate" Display="Dynamic" ID="RateRegularExpressionValidator" runat="server" ErrorMessage="Please enter a non negative Rate" ValidationExpression="^\d+(\.\d\d)?$" ValidationGroup="First" CssClass="alert alert-error"></asp:RegularExpressionValidator>
                                         </div>
@@ -72,14 +72,13 @@
                                         <asp:FileUpload ID="FileUpload1" runat="server" />
                                         <asp:RequiredFieldValidator ControlToValidate="FileUpload1" ID="FileUploadRequiredFieldValidator" runat="server" ErrorMessage="Please add an image file to be displayed on the plan" ValidationGroup="First" CssClass="alert alert-error"></asp:RequiredFieldValidator>
                                         <br />
-                                        <br />
                                     </div>
                                 </div>
 
                                 <div class="control-group">
-                                    <label class="control-label">ServiceType</label>
+                                    <label class="control-label">Service Type</label>
                                     <div class="controls">
-                                        <asp:DropDownList ID="ddlServiceType" runat="server" CssClass="span4" data-placeholder="Choose a Type of Service" TabIndex="1">
+                                        <asp:DropDownList ID="ddlServiceType" runat="server" CssClass="span3" data-placeholder="Choose a Type of Service" TabIndex="1">
                                         </asp:DropDownList>
                                     </div>
                                 </div>

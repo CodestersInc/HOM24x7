@@ -17,7 +17,7 @@ public partial class login : System.Web.UI.Page
             Session.Abandon();
             Session.RemoveAll();
         }
-        errorMessagePlaceHolder.Visible = false;        
+        errorMessagePlaceHolder.Visible = false;
     }
 
     protected void btnLogin_Click(object sender, EventArgs e)
@@ -42,7 +42,7 @@ public partial class login : System.Web.UI.Page
                 {
                     Account caccount = new AccountLogic().selectById(staffLogger.AccountID);
                     String features = caccount.Features;
-                    Session.Add("OnlineBooking",(features.Contains("#Online Booking#")) ? true : false);
+                    Session.Add("OnlineBooking", (features.Contains("#Online Booking#")) ? true : false);
                     Session.Add("Payroll", (features.Contains("#Payroll#")) ? true : false);
                     Session.Add("Service", (features.Contains("#Service#")) ? true : false);
                     Session.Add("LoggedUser", staffLogger);
@@ -74,9 +74,13 @@ public partial class login : System.Web.UI.Page
     private void redirectAsNeeded()
     {
         String redirectionUrl = Request["url"];
-        if (redirectionUrl.Equals("/login.aspx"))
+        if (redirectionUrl.Equals("/login.aspx") && Session["UserType"]=="Staff")
         {
             redirectionUrl = "home.aspx";
+        }
+        if (redirectionUrl.Equals("/login.aspx") && Session["UserType"] == "SystemAdmin")
+        {
+            redirectionUrl="systemadminhome.aspx";
         }
         Response.Redirect(redirectionUrl);
     }

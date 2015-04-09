@@ -125,8 +125,8 @@
 					            <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a href="createhotelac.aspx">Create</a></li>
-                                    <li><a href="searchhotelac.aspx">Search</a></li>
+                                    <li><a href="createhotelac.aspx">Create Account</a></li>
+                                    <li><a href="searchhotelac.aspx">Search Account</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
@@ -140,8 +140,8 @@
                                 <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a href="markattendance.aspx">Mark</a></li>
-                                    <li><a href="viewattendance.aspx">View</a></li>
+                                    <li><a href="markattendance.aspx">Mark Attendance</a></li>
+                                    <li><a href="viewattendance.aspx">View Attendance</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
@@ -155,8 +155,8 @@
                                 <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a href="createbooking.aspx">Create new Booking</a></li>
-                                    <li><a href="searchbooking.aspx">Search a Booking</a></li>
+                                    <li><a href="createbooking.aspx">Create Booking</a></li>
+                                    <li><a href="searchbooking.aspx">Search Booking</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
@@ -170,8 +170,8 @@
 					            <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a href="createdepartment.aspx">Create New Department</a></li>
-                                    <li><a href="searchdepartment.aspx">Search a Department</a></li>
+                                    <li><a href="createdepartment.aspx">Create Department</a></li>
+                                    <li><a href="searchdepartment.aspx">Search Department</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
@@ -185,8 +185,8 @@
 					            <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a href="#">Generate Payslip</a></li>
-                                    <li><a href="#">View Payslip</a></li>
+                                    <li><a href="createpayslip.aspx">Generate Payslip</a></li>
+                                    <li><a href="searchpayslip.aspx">Search Payslip</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
@@ -200,10 +200,10 @@
                                     <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a href="createcomponent.aspx">Create a Component</a></li>
-                                    <li><a href="searchcomponent.aspx">Search a Component</a></li>
-                                    <li><a href="createplan.aspx">Create a Plan</a></li>
-                                    <li><a href="searchplan.aspx">Search a Plan</a></li>
+                                    <li><a href="createcomponent.aspx">Create Component</a></li>
+                                    <li><a href="searchcomponent.aspx">Search Component</a></li>
+                                    <li><a href="createplan.aspx">Create Plan</a></li>
+                                    <li><a href="searchplan.aspx">Search Plan</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
@@ -217,10 +217,10 @@
                                 <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a href="createroom.aspx">Create a Room</a></li>
-                                    <li><a href="searchroom.aspx">Search a Room</a></li>
-                                    <li><a href="createroomtype.aspx">Create a Room Type</a></li>
-                                    <li><a href="searchroomtype.aspx">Search a Room Type</a></li>
+                                    <li><a href="createroom.aspx">Create Room</a></li>
+                                    <li><a href="searchroom.aspx">Search Room</a></li>
+                                    <li><a href="createroomtype.aspx">Create Room Type</a></li>
+                                    <li><a href="searchroomtype.aspx">Search Room Type</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
@@ -234,8 +234,8 @@
 	                            <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a href="createseason.aspx">Create</a></li>
-                                    <li><a href="searchseason.aspx">Search</a></li>
+                                    <li><a href="createseason.aspx">Create Season</a></li>
+                                    <li><a href="searchseason.aspx">Search Season</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
@@ -266,7 +266,7 @@
 					                <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a href="delegateservicerequest.aspx">Delegate Request</a></li>
+                                    <li><a href="delegateservicerequest.aspx">Delegate Service Request</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
@@ -280,8 +280,8 @@
 					            <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a href="createstaff.aspx">Create</a></li>
-                                    <li><a href="searchstaff.aspx">Search</a></li>
+                                    <li><a href="createstaff.aspx">Create Staff</a></li>
+                                    <li><a href="searchstaff.aspx">Search Staff</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>

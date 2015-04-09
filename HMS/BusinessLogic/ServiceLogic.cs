@@ -12,20 +12,20 @@ namespace BusinessLogic
 {
     public class ServiceLogic : ILogic<Service>
     {
-        public DataTable search(String searchstring, int ID)
+        public DataTable search(String searchstring, int AccountID)
         {
-            String query = "select Department.Name as 'DepartmentName', ServiceType.Name as 'ServiceTypeName', Service.* from Department, Service, ServiceType where Service.Name like @Name+'%' and Service.ServiceTypeID=@ID and Department.DepartmentID=Service.DepartmentID and ServiceType.ServiceTypeID = Service.ServiceTypeID order by Service.Name";
+            String query = "select Department.Name as 'DepartmentName', ServiceType.Name as 'ServiceTypeName', Service.* from Department, Service, ServiceType where Service.Name like @Name+'%'  and Department.DepartmentID=Service.DepartmentID and ServiceType.ServiceTypeID = Service.ServiceTypeID and ServiceType.AccountID=@AccountID order by Service.Name";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
             lstParams.Add(new SqlParameter("@Name", searchstring));
-            lstParams.Add(new SqlParameter("@ID", ID));
+            lstParams.Add(new SqlParameter("@AccountID", AccountID));
 
             return DBUtility.Select(query, lstParams);
         }
 
         public Service create(Service obj)
         {
-            String query = "insert into Service values(@Name, @DepartmentID, @Rate, @Image @ServiceTypeID)";
+            String query = "insert into Service values(@Name, @DepartmentID, @Rate, @Image, @ServiceTypeID)";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@Name", obj.Name));
@@ -43,6 +43,7 @@ namespace BusinessLogic
 
                 lstParams1.Add(new SqlParameter("@ServiceName", obj.Name));
                 lstParams1.Add(new SqlParameter("@DepartmentID", obj.DepartmentID));
+                lstParams1.Add(new SqlParameter("@Image", obj.Image));
                 lstParams1.Add(new SqlParameter("@ServiceTypeID", obj.ServiceTypeID));
 
                 DataTable dt = DBUtility.Select(selectquery, lstParams1);
@@ -66,7 +67,7 @@ namespace BusinessLogic
 
         public int update(Service obj)
         {
-            String query = "update Service set Name=@Name, DepartmentID=@DepartmentID, Rate=@Rate Image=@Image where ServiceID=@ServiceID and ServiceTypeID=@ServiceTypeID";
+            String query = "update Service set Name=@Name, DepartmentID=@DepartmentID, Rate=@Rate, Image=@Image where ServiceID=@ServiceID and ServiceTypeID=@ServiceTypeID";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@ServiceID", obj.ServiceID));
