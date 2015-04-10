@@ -45,8 +45,6 @@
                                                 <label>Please create a room before you can generate any bookings</label>
                                                 <a href="createroom.aspx">Create a new room NOW</a>
                                             </div>
-
-
                                         </div>
                                     </div>
                                 </asp:PlaceHolder>

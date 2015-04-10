@@ -69,7 +69,7 @@
                                 <label class="control-label">Phone</label>
                                 <div class="controls">
                                     <asp:TextBox ID="txtAccountPhone" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter a 10 digit number" data-original-title="Instructions"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ControlToValidate="txtAccountPhone" Display="Dynamic" ID="PhoneRequiredFieldValidator" runat="server" ErrorMessage="Please enter a phone number" ValidationGroup="First"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ControlToValidate="txtAccountPhone" Display="Dynamic" ID="PhoneRequiredFieldValidator" runat="server" ErrorMessage="Please enter a phone number" ValidationGroup="First" CssClass="alert alert-error"></asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ControlToValidate="txtAccountPhone" Display="Dynamic" ID="PhoneRegularExpressionValidator" runat="server" ErrorMessage="Please eneter a valid phone number" ValidationExpression="^[0-1]?[0-1]?[- .]?(\([2-9]\d{2}\)|\d{3})[- .]?\d{3}[- .]?\d{4}$" ValidationGroup="First" CssClass="alert alert-error"></asp:RegularExpressionValidator>
                                 </div>
                             </div>
@@ -87,7 +87,7 @@
                                     <div class="input-prepend">
                                         <span class="add-on">URL</span>
                                         <asp:TextBox ID="txtWebsite" placeholder="Enter website URL" runat="server"></asp:TextBox>
-                                        <asp:RegularExpressionValidator ControlToValidate="txtWebsite" ID="WebsiteRegularExpressionValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid website URL" ValidationExpression="/((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)/i" ValidationGroup="First"></asp:RegularExpressionValidator><%--CssClass="alert alert-error"--%>
+                                        <asp:RegularExpressionValidator ControlToValidate="txtWebsite" ID="WebsiteRegularExpressionValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid website URL" ValidationExpression="/((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)/i" ValidationGroup="First" CssClass="alert alert-error"></asp:RegularExpressionValidator>
                                     </div>
                                 </div>
                             </div>
@@ -134,7 +134,7 @@
                                     <label class="control-label">Name</label>
                                     <div class="controls">
                                         <asp:TextBox ID="txtName" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter the full name of staff member." data-original-title="Staff name"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ControlToValidate="txtName" ID="StaffNameRequiredFieldValidator" runat="server" ErrorMessage="Please enter the name of the hotel admin" ValidationGroup="First"></asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ControlToValidate="txtName" ID="StaffNameRequiredFieldValidator" runat="server" ErrorMessage="Please enter the name of the hotel admin" ValidationGroup="First" CssClass="alert alert-error"></asp:RequiredFieldValidator>
                                     </div>
                                 </div>
 
@@ -144,8 +144,8 @@
                                         <div class="input-icon left">
                                             <i class="icon-envelope"></i>
                                             <asp:TextBox ID="txtEmail" runat="server" placeholder="Email Address"></asp:TextBox>
-                                            <asp:RequiredFieldValidator ControlToValidate="txtEmail" Display="Dynamic" ID="StaffEmailRequiredFieldValidator" runat="server" ErrorMessage="Please enter the Email Adress of the hotel admin" ValidationGroup="First"></asp:RequiredFieldValidator>
-                                            <asp:RegularExpressionValidator ControlToValidate="txtEmail" Display="Dynamic" ID="StaffEmailRegularExpressionValidator" runat="server" ErrorMessage="Please enter a valid Email address" ValidationGroup="First" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
+                                            <asp:RequiredFieldValidator ControlToValidate="txtEmail" Display="Dynamic" ID="StaffEmailRequiredFieldValidator" runat="server" ErrorMessage="Please enter the Email Adress of the hotel admin" ValidationGroup="First" CssClass="alert alert-error"></asp:RequiredFieldValidator>
+                                            <asp:RegularExpressionValidator ControlToValidate="txtEmail" Display="Dynamic" ID="StaffEmailRegularExpressionValidator" runat="server" ErrorMessage="Please enter a valid Email address" ValidationGroup="First" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" CssClass="alert alert-error"></asp:RegularExpressionValidator>
                                         </div>
                                     </div>
                                 </div>
@@ -154,7 +154,7 @@
                                     <label class="control-label">Phone</label>
                                     <div class="controls">
                                         <asp:TextBox ID="txtPhone" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter a 10 digit number" data-original-title="Instructions"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ControlToValidate="txtPhone" Display="Dynamic" ID="StaffPhoneRequiredFieldValidator" runat="server" ErrorMessage="Please enter a phone number" ValidationGroup="First"></asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ControlToValidate="txtPhone" Display="Dynamic" ID="StaffPhoneRequiredFieldValidator" runat="server" ErrorMessage="Please enter a phone number" ValidationGroup="First" CssClass="alert alert-error"></asp:RequiredFieldValidator>
                                         <asp:RegularExpressionValidator ControlToValidate="txtPhone" Display="Dynamic" ID="StaffPhoneRegularExpressionValidator" runat="server" ErrorMessage="RegularExpressionValidator" ValidationExpression="^[0-1]?[0-1]?[- .]?(\([2-9]\d{2}\)|\d{3})[- .]?\d{3}[- .]?\d{4}$" ValidationGroup="First"></asp:RegularExpressionValidator>
                                     </div>
                                 </div>
@@ -163,7 +163,7 @@
                                     <label class="control-label">User Name</label>
                                     <div class="controls">
                                         <asp:TextBox ID="txtUsername" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter a distinct username." data-original-title="Suggestions"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ControlToValidate="txtUsername" ID="UsernameRequiredFieldValidator" runat="server" ErrorMessage="Please enter the Username for the manager" ValidationGroup="First"></asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ControlToValidate="txtUsername" ID="UsernameRequiredFieldValidator" runat="server" ErrorMessage="Please enter the Username for the manager" ValidationGroup="First" CssClass="alert alert-error"></asp:RequiredFieldValidator>
                                     </div>
                                 </div>
 
@@ -171,7 +171,7 @@
                                     <label class="control-label">Password</label>
                                     <div class="controls">
                                         <asp:TextBox ID="txtPassword" TextMode="Password" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter a strong password(8-10 characters long)." data-original-title="Suggestions"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ControlToValidate="txtPassword" ID="PasswordRequiredFieldValidator" runat="server" ErrorMessage="Please enter the password" ValidationGroup="First"></asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ControlToValidate="txtPassword" ID="PasswordRequiredFieldValidator" runat="server" ErrorMessage="Please enter the password" ValidationGroup="First" CssClass="alert alert-error"></asp:RequiredFieldValidator>
                                     </div>
                                 </div>
                             </div>
@@ -196,7 +196,7 @@
                                     <label class="control-label">Staff Code</label>
                                     <div class="controls">
                                         <asp:TextBox ID="txtStaffCode" runat="server" CssClass="span2 popovers" data-trigger="hover" data-content="Enter the staff code of staff member (to be assigned or already assigned)" data-original-title="Hint"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ControlToValidate="txtStaffCode" ID="StaffCodeRequiredFieldValidator" runat="server" ErrorMessage="Please enter the staff-code" ValidationGroup="First"></asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ControlToValidate="txtStaffCode" ID="StaffCodeRequiredFieldValidator" runat="server" ErrorMessage="Please enter the staff-code" ValidationGroup="First" CssClass="alert alert-error"></asp:RequiredFieldValidator>
                                     </div>
                                 </div>
 
@@ -205,7 +205,7 @@
                                     <label class="control-label">Date of Birth</label>
                                     <div class="controls">
                                         <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-                                            <asp:TextBox ID="txtDOB" runat="server" CssClass="span6" Text="dd-mm-yyyy"></asp:TextBox>
+                                            <asp:TextBox ID="txtDOB" runat="server" CssClass="span6 non-editable" Text="dd-mm-yyyy"></asp:TextBox>
                                             <span class="add-on"><i class="icon-calendar"></i></span>
                                         </div>
                                     </div>
@@ -217,7 +217,7 @@
                                         <div class="input-prepend input-append">
                                             <span class="add-on">Rs.</span><asp:TextBox ID="txtSalary" runat="server"></asp:TextBox><span class="add-on">.00</span>
                                             <asp:RequiredFieldValidator ControlToValidate="txtSalary" Display="Dynamic" ID="SalaryRequiredFieldValidator" runat="server" ErrorMessage="Please enter salary of the Staff" ValidationGroup="First"></asp:RequiredFieldValidator>
-                                            <asp:RegularExpressionValidator ControlToValidate="txtSalary" Display="Dynamic" ID="SalaryRegularExpressionValidator" runat="server" ErrorMessage="Please enter a non negative salary" ValidationExpression="^\d+(\.\d\d)?$" ValidationGroup="First"></asp:RegularExpressionValidator>
+                                            <asp:RegularExpressionValidator ControlToValidate="txtSalary" Display="Dynamic" ID="SalaryRegularExpressionValidator" runat="server" ErrorMessage="Please enter a non negative salary" ValidationExpression="^\d+(\.\d\d)?$" ValidationGroup="First" CssClass="alert alert-error"></asp:RegularExpressionValidator>
                                         </div>
                                     </div>
                                 </div>
@@ -246,6 +246,10 @@
 
     <script>
         $(".date-picker").datepicker();
+
+        $(".non-editable").keypress(function (e) {
+            e.preventDefault();
+        });
 
         var handleToggleButtons = function () {
             if (!jQuery().toggleButtons) {

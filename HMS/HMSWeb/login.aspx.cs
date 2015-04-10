@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using WebUtility;
+using System.Net.Mail;
 
 public partial class login : System.Web.UI.Page
 {
@@ -17,7 +18,6 @@ public partial class login : System.Web.UI.Page
             Session.Abandon();
             Session.RemoveAll();
         }
-        errorMessagePlaceHolder.Visible = false;
     }
 
     protected void btnLogin_Click(object sender, EventArgs e)
@@ -74,19 +74,14 @@ public partial class login : System.Web.UI.Page
     private void redirectAsNeeded()
     {
         String redirectionUrl = Request["url"];
-        if (redirectionUrl.Equals("/login.aspx") && Session["UserType"]=="Staff")
+        if (redirectionUrl.Equals("/login.aspx") && Session["UserType"] == "Staff")
         {
             redirectionUrl = "home.aspx";
         }
         if (redirectionUrl.Equals("/login.aspx") && Session["UserType"] == "SystemAdmin")
         {
-            redirectionUrl="systemadminhome.aspx";
+            redirectionUrl = "systemadminhome.aspx";
         }
         Response.Redirect(redirectionUrl);
-    }
-
-    protected void forgotPassword(object sender, EventArgs e)
-    {
-        Response.Redirect("login.aspx");
     }
 }

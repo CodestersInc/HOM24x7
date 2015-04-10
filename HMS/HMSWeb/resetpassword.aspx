@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="login.aspx.cs" Inherits="login" %>
+﻿<%@ Page Title="" Language="C#" AutoEventWireup="true" CodeFile="resetpassword.aspx.cs" Inherits="resetpassword" %>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head runat="server">
     <meta charset="utf-8" />
-    <title>Login page</title>
+    <title>Reset Password</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -26,55 +26,41 @@
             <!-- END LOGO -->
         </div>
 
-        <!-- BEGIN LOGIN -->
         <div id="login">
-            <!-- BEGIN LOGIN FORM -->
+            <!-- BEGIN RESET PASSWORD FORM -->
             <div id="loginform" class="form-vertical no-padding no-margin">
-                <div class="lock">
-                    <i class="icon-lock"></i>
-                </div>
                 <div class="control-wrap">
-                    <h4>User Login</h4>
-                    <div class="control-group">
-                        <div class="controls">
-                            <div class="input-prepend">
-                                <span class="add-on"><i class="icon-user"></i></span>
-                                <asp:TextBox ID="txtUsername" runat="server"></asp:TextBox>                                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="control-group">
+                    <h4 style="padding-left: 10px">Reset Password</h4>
+                    <div class="control-group" style="padding-left: 10px">
                         <div class="controls">
                             <div class="input-prepend">
                                 <span class="add-on"><i class="icon-key"></i></span>
-                                <asp:TextBox ID="txtPassword" TextMode="Password" runat="server"></asp:TextBox>                               
+                                <asp:TextBox ID="txtPassword" TextMode="Password" CssClass="span4" placeholder="New Password" runat="server"></asp:TextBox>
                             </div>
-                            <div class="mtop10">
-                                <div class="block-hint pull-left small">
-                                    <asp:CheckBox ID="cbxRemember" runat="server" />
-                                    Remember Me
-                                </div>
-                                <div class="block-hint pull-right">
-                                    <a href="forgotpassword.aspx">Forgot Password?</a>
-                                </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="control-group" style="padding-left: 10px">
+                        <div class="controls">
+                            <div class="input-prepend">
+                                <span class="add-on"><i class="icon-key"></i></span>
+                                <asp:TextBox ID="txtConfirmPassword" TextMode="Password" CssClass="span4" placeholder="Confirm Password" runat="server"></asp:TextBox>
                             </div>
                             <div class="clearfix space5"></div>
                         </div>
                     </div>
                 </div>
 
-                <asp:Button ID="btnLogin" runat="server" Text="Login" CssClass="btn btn-block login-btn" OnClick="btnLogin_Click" />
+                <asp:Button ID="btnSubmit" ValidationGroup="First" runat="server" Text="Submit" CssClass="btn btn-block login-btn" OnClick="btnSubmit_Click" />
             </div>
-            <!-- END LOGIN FORM -->
+            <!-- END RESET PASSWORD FORM -->
         </div>
-        <!-- END LOGIN -->
 
         <asp:PlaceHolder ID="errorMessagePlaceHolder" Visible="false" runat="server">
             <script type="text/javascript">
-                alert("Invalid username or password...!!");
+                alert("Please re-enter the details...!!");
             </script>
         </asp:PlaceHolder>
-
         <!-- BEGIN COPYRIGHT -->
         <div id="login-copyright">
             2015 &copy; Host of the most.
@@ -96,3 +82,4 @@
 </body>
 <!-- END BODY -->
 </html>
+

@@ -104,6 +104,17 @@ namespace BusinessLogic
             return DBUtility.Modify(query, lstParams);
         }
 
+        public int resetPassword(int StaffID, String Password)
+        {
+            String query = "update Staff set Password=@Password where StaffID=@ID";
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+            
+            lstParams.Add(new SqlParameter("@Password", Password));
+            lstParams.Add(new SqlParameter("@ID", StaffID));
+
+            return DBUtility.Modify(query, lstParams);
+        }
+
         public int delete(int id)
         {
             String query = "delete from Staff where StaffID=@ID";
@@ -254,6 +265,39 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@AccountID", AccountID));
 
             return DBUtility.Select(query, lstParams);
+        }
+
+        public Staff getUserByEmail(string Email)
+        {
+            String query = "select * from Staff where Email=@Email";
+
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+            lstParams.Add(new SqlParameter("@Email", Email));
+
+            DataTable dt = DBUtility.Select(query, lstParams);
+
+            if (dt.Rows.Count == 1)
+            {
+                return new Staff(Convert.ToInt32(dt.Rows[0]["StaffID"]),
+                dt.Rows[0]["StaffCode"].ToString(),
+                dt.Rows[0]["Name"].ToString(),
+                dt.Rows[0]["Email"].ToString(),
+                dt.Rows[0]["Phone"].ToString(),
+                dt.Rows[0]["Username"].ToString(),
+                dt.Rows[0]["Password"].ToString(),
+                dt.Rows[0]["UserType"].ToString(),
+                dt.Rows[0]["Designation"].ToString(),
+                Convert.ToDateTime(dt.Rows[0]["DOB"]),
+                Convert.ToDateTime(dt.Rows[0]["DOJ"]),
+                Convert.ToDouble(dt.Rows[0]["Salary"]),
+                Convert.ToBoolean(dt.Rows[0]["IsActive"]),
+                Convert.ToInt32(dt.Rows[0]["DepartmentID"]),
+                Convert.ToInt32(dt.Rows[0]["AccountID"]));
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
