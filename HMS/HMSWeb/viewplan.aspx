@@ -4,8 +4,6 @@
     <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
     <style>
         .paletteComponent {
-            width: 70px;
-            height: 70px;
             float: left;
             padding-left:10px;
         }
@@ -124,7 +122,7 @@
                         <div class="form-actions">
                             <asp:LinkButton ID="btnUpdate" CssClass="btn btn-inverse" runat="server" OnClientClick="savePlanData()" OnClick="btnUpdate_Click"><i class="icon-refresh icon-white"></i>Update</asp:LinkButton>
                             <span></span>
-                            <asp:Button ID="btnCancel" CssClass="btn btn-warning" runat="server" Text="Cancel" />
+                            <asp:Button ID="btnCancel" CssClass="btn btn-warning" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
                         </div>
                     </div>
                 </div>

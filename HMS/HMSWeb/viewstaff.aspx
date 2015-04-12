@@ -36,7 +36,7 @@
                         </span>
                     </div>
                     <div class="widget-body form">
-                        <!-- BEGIN FORM-->
+                        <!-- BEGIN FORM -->
                         <div>
                             <div class="form-horizontal">
                                 <div class="control-group">
@@ -124,6 +124,14 @@
                                 </div>
 
                                 <div class="control-group">
+                                    <label class="control-label">Bank AC Number</label>
+                                    <div class="controls">
+                                        <asp:TextBox ID="txtBankACNumber" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter bank AC number (if any)" data-original-title="Hint"></asp:TextBox>
+                                        <asp:RegularExpressionValidator ControlToValidate="txtBankACNumber" Display="Dynamic" ID="BankACNoRegularExpressionValidator" runat="server" ErrorMessage="Please enter a valid AC number" ValidationExpression="[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}([a-zA-Z0-9]?){0,16}" ValidationGroup="First" CssClass="alert alert-error"></asp:RegularExpressionValidator>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
                                     <label class="control-label">Is Active</label>
                                     <div class="controls">
                                         <asp:CheckBox ID="cbxIsActive" CssClass="success-toggle-button toggle-button" runat="server" />
@@ -143,6 +151,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- END FORM -->
                     </div>
                 </div>
                 <!-- END SAMPLE FORM widget-->

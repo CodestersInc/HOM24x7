@@ -4,8 +4,6 @@
     <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
     <style>
         .paletteComponent {
-            width: 70px;
-            height: 70px;
             float: left;
             padding-left:30px;                                                
         }
@@ -117,7 +115,7 @@
                             <!--END PALLETTE-->
 
                             <!--START CANVAS-->
-                            <div id="canvas" style="min-height: 400px; min-width: 400px; padding: 5px; border-style: solid; border-width: 1px; margin: 5px; border: dashed;"></div>
+                            <div id="canvas" style="height: 400px; width: 1044px; padding: 5px; border-width: 1px; margin: 5px; border: dashed;"></div>
                             <!--END CANVAS-->
                             <!-- END PLAN BUILDER-->
 
@@ -179,7 +177,7 @@
     <%--Add other components to canvas--%>
     <script type="text/javascript">
         $('.paletteComponent').click(function () {
-            $(this).clone().prependTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" }).removeClass('paletteComponent').addClass('otherComponent');
+            $(this).clone().prependTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" }).addClass('otherComponent').removeClass('paletteComponent');
         });
     </script>
 

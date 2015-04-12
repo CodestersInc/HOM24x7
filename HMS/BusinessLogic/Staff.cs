@@ -21,6 +21,7 @@ namespace BusinessLogic
         public DateTime DOJ;
         public double Salary;
         public Boolean IsActive;
+        public String BankACNumber;
         public int DepartmentID;
         public int AccountID;
 
@@ -29,7 +30,7 @@ namespace BusinessLogic
 
         }
 
-        public Staff(int StaffID, String StaffCode, String Name,String Email, String Phone, String Username, String Password, String UserType, String Designation, DateTime DOB, DateTime DOJ, double Salary, Boolean IsActive, int DepartmentID, int AccountID)
+        public Staff(int StaffID, String StaffCode, String Name, String Email, String Phone, String Username, String Password, String UserType, String Designation, DateTime DOB, DateTime DOJ, double Salary, Boolean IsActive, String BankACNumber, int DepartmentID, int AccountID)
         {
             this.StaffID = StaffID;
             this.StaffCode = StaffCode;
@@ -44,6 +45,7 @@ namespace BusinessLogic
             this.DOJ = DOJ;
             this.Salary = Salary;
             this.IsActive = IsActive;
+            this.BankACNumber = BankACNumber;
             this.DepartmentID = DepartmentID;
             this.AccountID = AccountID;
         }

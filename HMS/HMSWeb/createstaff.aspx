@@ -73,7 +73,7 @@
                                     <label class="control-label">User Name</label>
                                     <div class="controls">
                                         <asp:TextBox ID="txtUsername" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter a distinct username." data-original-title="Suggestion"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="UsernameRequiredFieldValidator" runat="server" ErrorMessage="Enter a unique username" ControlToValidate="txtUsername" ValidationGroup="First" CssClass="alert alert-error"/>
+                                        <asp:RequiredFieldValidator ID="UsernameRequiredFieldValidator" runat="server" ErrorMessage="Enter a unique username" ControlToValidate="txtUsername" ValidationGroup="First" CssClass="alert alert-error" />
                                     </div>
                                 </div>
 
@@ -81,7 +81,7 @@
                                     <label class="control-label">Password</label>
                                     <div class="controls">
                                         <asp:TextBox ID="txtPassword" TextMode="Password" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter a strong password(8-10 characters long)." data-original-title="Suggestions"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="PasswordRequiredFieldValidator" runat="server" ErrorMessage="Enter a strong password" ControlToValidate="txtPassword" ValidationGroup="First" CssClass="alert alert-error"/>
+                                        <asp:RequiredFieldValidator ID="PasswordRequiredFieldValidator" runat="server" ErrorMessage="Enter a strong password" ControlToValidate="txtPassword" ValidationGroup="First" CssClass="alert alert-error" />
                                     </div>
                                 </div>
                             </div>
@@ -106,7 +106,7 @@
                                     <label class="control-label">Staff Code</label>
                                     <div class="controls">
                                         <asp:TextBox ID="txtStaffCode" runat="server" CssClass="span2 popovers" data-trigger="hover" data-content="Enter the staff code of staff member." data-original-title="Popover header"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="StaffCodeRequiredFieldValidator" runat="server" ErrorMessage="Please enter Staff Code" ControlToValidate="txtStaffCode" ValidationGroup="First" CssClass="alert alert-error"/>
+                                        <asp:RequiredFieldValidator ID="StaffCodeRequiredFieldValidator" runat="server" ErrorMessage="Please enter Staff Code" ControlToValidate="txtStaffCode" ValidationGroup="First" CssClass="alert alert-error" />
                                     </div>
                                 </div>
 
@@ -121,7 +121,7 @@
                                         </asp:DropDownList>
                                     </div>
                                 </div>
-                                
+
                                 <div class="control-group">
                                     <label class="control-label">Department</label>
                                     <div class="controls">
@@ -155,9 +155,17 @@
                                     <div class="controls">
                                         <div class="input-prepend input-append">
                                             <span class="add-on">Rs.</span><asp:TextBox ID="txtSalary" CssClass="span6" runat="server"></asp:TextBox><span class="add-on">.00</span>
-                                            <asp:RequiredFieldValidator ControlToValidate="txtSalary" Display="Dynamic" ID="SalaryRequiredFieldValidator" runat="server" ErrorMessage="Please enter salary of the Staff" ValidationGroup="First"></asp:RequiredFieldValidator> <%--CssClass="alert alert-error"--%><%-- we need to fix the bug for showing the message--%>
+                                            <asp:RequiredFieldValidator ControlToValidate="txtSalary" Display="Dynamic" ID="SalaryRequiredFieldValidator" runat="server" ErrorMessage="Please enter salary of the Staff" ValidationGroup="First"></asp:RequiredFieldValidator>                                            
                                             <asp:RegularExpressionValidator ControlToValidate="txtSalary" Display="Dynamic" ID="SalaryRegularExpressionValidator" runat="server" ErrorMessage="Please enter a non negative salary" ValidationExpression="^\d+(\.\d\d)?$" ValidationGroup="First"></asp:RegularExpressionValidator><%--CssClass="alert alert-error"--%>
                                         </div>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label">Bank AC Number</label>
+                                    <div class="controls">
+                                        <asp:TextBox ID="txtBankACNumber" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter bank AC number (if any)" data-original-title="Hint"></asp:TextBox>
+                                        <asp:RegularExpressionValidator ControlToValidate="txtBankACNumber" Display="Dynamic" ID="BankACNoRegularExpressionValidator" runat="server" ErrorMessage="Please enter a valid AC number" ValidationExpression="[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}([a-zA-Z0-9]?){0,16}" ValidationGroup="First" CssClass="alert alert-error"></asp:RegularExpressionValidator>
                                     </div>
                                 </div>
 

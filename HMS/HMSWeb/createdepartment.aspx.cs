@@ -66,6 +66,7 @@ public partial class adddepartment : System.Web.UI.Page
                 DateTime.Now,
                 Convert.ToInt32(txtSalary.Text),
                 cbxIsActive.Checked,
+                txtBankACNumber.Text,
                 departmentID + 1,
                 loggedUser.AccountID));
 

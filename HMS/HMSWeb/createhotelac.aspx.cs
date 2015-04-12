@@ -66,6 +66,7 @@ public partial class hacregister : System.Web.UI.Page
                 DateTime.Now,
                 Convert.ToInt32(txtSalary.Text),
                 true,
+                txtBankACNumber.Text,
                 newDepartment.DepartmentID,
                 newAccount.AccountID));
 

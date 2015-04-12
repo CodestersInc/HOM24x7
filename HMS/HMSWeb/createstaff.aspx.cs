@@ -52,6 +52,7 @@ public partial class registrestaff : System.Web.UI.Page
             DateTime.Now,
             Convert.ToInt32(txtSalary.Text),
             cbxIsActive.Checked,
+            txtBankACNumber.Text,
             Convert.ToInt32(ddlDepartment.SelectedValue),
             loggedInStaff.AccountID);
 

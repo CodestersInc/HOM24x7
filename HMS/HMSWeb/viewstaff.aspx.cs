@@ -36,6 +36,7 @@ public partial class viewstaff : System.Web.UI.Page
             txtDOB.Text = (staffobj.DOB).ToShortDateString();
             txtDOJ.Text = (staffobj.DOJ).ToShortDateString();
             txtSalary.Text = staffobj.Salary.ToString();
+            txtBankACNumber.Text = staffobj.BankACNumber.ToString();
             cbxIsActive.Checked = staffobj.IsActive;
             ddlDepartment.SelectedValue = staffobj.DepartmentID.ToString();
         }
@@ -57,6 +58,7 @@ public partial class viewstaff : System.Web.UI.Page
         staffobj.DOJ = Convert.ToDateTime(txtDOJ.Text);
         staffobj.Salary = Convert.ToInt64(txtSalary.Text);
         staffobj.IsActive = Convert.ToBoolean(cbxIsActive.Checked);
+        staffobj.BankACNumber = txtBankACNumber.Text;
         staffobj.DepartmentID = Convert.ToInt32(ddlDepartment.SelectedValue);
         staffobj.AccountID = loggedUser.AccountID;
 

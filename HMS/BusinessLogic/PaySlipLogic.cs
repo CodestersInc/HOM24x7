@@ -42,6 +42,7 @@ namespace BusinessLogic
                 Convert.ToDouble(dt.Rows[0]["BasicSalary"]),
                 Convert.ToDouble(dt.Rows[0]["Allowance"]),
                 Convert.ToDouble(dt.Rows[0]["Deduction"]),
+                Convert.ToDouble(dt.Rows[0]["NetPay"]),
                 Convert.ToDateTime(dt.Rows[0]["FromDate"]),
                 Convert.ToDateTime(dt.Rows[0]["ToDate"]),
                 Convert.ToDateTime(dt.Rows[0]["GeneratedDate"]),
@@ -57,7 +58,7 @@ namespace BusinessLogic
 
         public int update(PaySlip obj)
         {
-            String query = "update PaySlip set SaffID=@SaffID, BasicSalary=@BasicSalary, Allowance=@Allowance, Deduction=@Deduction, FromDate=@FromDate, ToDate=@ToDate, GenerateDate=@GenerateDate, ApproverID=@ApproverID where PaySlipID=@PaySlipID";
+            String query = "update PaySlip set SaffID=@SaffID, BasicSalary=@BasicSalary, Allowance=@Allowance, Deduction=@Deduction, NetPay=@NetPay FromDate=@FromDate, ToDate=@ToDate, GenerateDate=@GenerateDate, ApproverID=@ApproverID where PaySlipID=@PaySlipID";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@PaySlipID", obj.PaySlipID));
@@ -65,6 +66,7 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@BasicSalary", obj.BasicSalary));
             lstParams.Add(new SqlParameter("@Allowance", obj.Allowance));
             lstParams.Add(new SqlParameter("@Deduction", obj.Deduction));
+            lstParams.Add(new SqlParameter("@NetPay", obj.NetPay));
             lstParams.Add(new SqlParameter("@FromDate", obj.FromDate));
             lstParams.Add(new SqlParameter("@ToDate", obj.ToDate));
             lstParams.Add(new SqlParameter("@GenerateDate", obj.GenerateDate));
@@ -97,6 +99,7 @@ namespace BusinessLogic
                 Convert.ToDouble(dt.Rows[0]["BasicSalary"]),
                 Convert.ToDouble(dt.Rows[0]["Allowance"]),
                 Convert.ToDouble(dt.Rows[0]["Deduction"]),
+                Convert.ToDouble(dt.Rows[0]["NetPay"]),
                 Convert.ToDateTime(dt.Rows[0]["FromDate"]),
                 Convert.ToDateTime(dt.Rows[0]["ToDate"]),
                 Convert.ToDateTime(dt.Rows[0]["GeneratedDate"]),

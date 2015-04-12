@@ -19,6 +19,21 @@ public partial class generatepayslip : System.Web.UI.Page
         {
             Response.Redirect("home.aspx");
         }
+        if (!IsPostBack)
+        {
+            staffInfoRepeater.DataSource = new StaffLogic().getStaffMember(Convert.ToInt32(Request.QueryString["ID"]));
+            staffInfoRepeater.DataBind();
+
+            payrollInfoRepeater.DataSource = new StaffLogic().getStaffMember(Convert.ToInt32(Request.QueryString["ID"]));
+            payrollInfoRepeater.DataBind();
+        }
+    }
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("createpayslip.aspx");
+    }
+    protected void btnGenerate_Click(object sender, EventArgs e)
+    {
 
     }
 }

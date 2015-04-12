@@ -87,4 +87,8 @@ public partial class viewplan : System.Web.UI.Page
             Response.Redirect("ErrorPage500.html");
         }
     }
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("searchplan.aspx");
+    }
 }

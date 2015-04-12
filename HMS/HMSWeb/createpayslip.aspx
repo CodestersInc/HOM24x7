@@ -36,41 +36,53 @@
                             </span>
                         </div>
                         <div class="widget-body">
-
-
-                            <table class="table table-striped table-bordered table-advance table-hover">
-                                <tr>
-                                    <th>Staff Code</th>
-                                    <th>Name</th>
-                                    <th>Department Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th></th>
-                                </tr>
-                                <asp:Repeater ID="Repeater1" runat="server">
-                                    <ItemTemplate>
-                                        <tr>
-                                            <td>
-                                                <%# Eval("StaffCode") %>
-                                            </td>
-                                            <td>
-                                                <a href='viewstaff.aspx?ID=<%# Eval("StaffID")%>'><%# Eval("Name") %></a>
-                                            </td>
-                                            <td>
-                                                <a href='viewdepartment.aspx?ID=<%# Eval("DepartmentID") %>'><%# Eval("DepartmentName") %></a>
-                                            </td>
-                                            <td>
-                                                <a href="mailto:<%# Eval("Email") %>"><%# Eval("Email") %></a>
-                                            </td>
-                                            <td>
-                                                <%# Eval("Phone") %>
-                                            </td>
-                                            <td style="text-align: center">
-                                                <asp:LinkButton ID="btnGeneratePayslip" CssClass="btn btn-success" PostBackUrl='<%# "generatepayslip.aspx?ID=" + Eval("StaffID") %>' runat="server"><i class="icon-edit"></i> Generate Payslip</asp:LinkButton>                                                
-                                            </td>
-                                        </tr>
-                                    </ItemTemplate>
-                                </asp:Repeater>
+                            <table id="tableTT" class="table table-striped table-bordered table-advance table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align:center">Staff Code</th>
+                                        <th style="text-align:center">Name</th>
+                                        <th style="text-align:center">Department Name</th>
+                                        <th style="text-align:center">Email</th>
+                                        <th style="text-align:center">Phone</th>
+                                        <th style="text-align:center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <asp:Repeater ID="Repeater1" runat="server">
+                                        <ItemTemplate>
+                                            <tr>
+                                                <td style="text-align:center">
+                                                    <%# Eval("StaffCode") %>
+                                                </td>
+                                                <td style="text-align:center">
+                                                    <a href='viewstaff.aspx?ID=<%# Eval("StaffID")%>'><%# Eval("Name") %></a>
+                                                </td>
+                                                <td style="text-align:center">
+                                                    <a href='viewdepartment.aspx?ID=<%# Eval("DepartmentID") %>'><%# Eval("DepartmentName") %></a>
+                                                </td>
+                                                <td style="text-align:center">
+                                                    <a href="mailto:<%# Eval("Email") %>"><%# Eval("Email") %></a>
+                                                </td>
+                                                <td style="text-align:center">
+                                                    <%# Eval("Phone") %>
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <asp:LinkButton ID="btnGeneratePayslip" CssClass="btn btn-success" PostBackUrl='<%# "generatepayslip.aspx?ID=" + Eval("StaffID") %>' runat="server"><i class="icon-edit"></i> Generate Payslip</asp:LinkButton>
+                                                </td>
+                                            </tr>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th style="text-align:center">Staff Code</th>
+                                        <th style="text-align:center">Name</th>
+                                        <th style="text-align:center">Department Name</th>
+                                        <th style="text-align:center">Email</th>
+                                        <th style="text-align:center">Phone</th>
+                                        <th style="text-align:center">Action</th>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>
