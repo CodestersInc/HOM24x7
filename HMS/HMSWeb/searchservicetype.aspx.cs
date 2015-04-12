@@ -19,15 +19,13 @@ public partial class searchservicetype : System.Web.UI.Page
         {
             Response.Redirect("home.aspx");
         }
+        if (!IsPostBack)
+        {
+            Repeater1.DataSource = new ServiceTypeLogic().search("", loggedUser.AccountID);
+            Repeater1.DataBind();
+        }
     }
-    protected void btnSubmit_Click(object sender, EventArgs e)
-    {
-        Staff loggedUser = (Staff)Session["loggedUser"];
-        searchResultArea.Visible = true;
 
-        Repeater1.DataSource = new ServiceTypeLogic().search(txtName.Text, loggedUser.AccountID);
-        Repeater1.DataBind();
-    }
     protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
     {
         if (e.CommandName == "Remove")
@@ -37,7 +35,7 @@ public partial class searchservicetype : System.Web.UI.Page
             Staff loggedUser = (Staff)Session["loggeduser"];
 
             searchResultArea.Visible = true;
-            Repeater1.DataSource = serviceTypeLogic.search(txtName.Text, loggedUser.AccountID);
+            Repeater1.DataSource = serviceTypeLogic.search("", loggedUser.AccountID);
             Repeater1.DataBind();
         }
     }

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="searchseason.aspx.cs" Inherits="searchseason" MaintainScrollPositionOnPostback="true"%>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="searchseason.aspx.cs" Inherits="searchseason" MaintainScrollPositionOnPostback="true" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" runat="Server">
 </asp:Content>
@@ -18,23 +18,12 @@
                     <li>
                         <a href="#">Season</a> <span class="divider">&nbsp;</span>
                     </li>
-                    <li><a href="#">Search</a><span class="divider-last">&nbsp;</span></li>
+                    <li><a href="searchseason.aspx">Search</a><span class="divider-last">&nbsp;</span></li>
                 </ul>
                 <!-- END PAGE TITLE & BREADCRUMB-->
             </div>
         </div>
-        <div class="widget-body form">
-            <div class="form-horizontal">
-                <div class="control-group">
-                    <label class="control-label">Search Season</label>
-                    <div class="controls">
-                        <asp:TextBox ID="txtSeasonName" runat="server" CssClass="span4 tooltips" data-trigger="hover" data-original-title="Enter season name to search for"></asp:TextBox>
-                        <asp:Button ID="btnSubmit" CssClass="btn btn-info" OnClick="btnSubmit_Click" runat="server" Text="Search" />
-                    </div>
-                </div>
-            </div>
-        </div>
-        <asp:PlaceHolder ID="searchResultArea" Visible="false" runat="server">
+        <asp:PlaceHolder ID="searchResultArea" runat="server">
             <!-- BEGIN ADVANCED TABLE widget-->
             <div class="row-fluid">
                 <div class="span12">
@@ -48,36 +37,44 @@
                             </span>
                         </div>
                         <div class="widget-body">
-                            <table class="table table-striped table-bordered table-advance table-hover">
-                                <tr>
-                                    <th>Name
-                                    </th>
-                                    <th>From Date
-                                    </th>
-                                    <th>To Date
-                                    </th>
-
-                                    <th></th>
-                                </tr>
-                                <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
-                                    <ItemTemplate>
-                                        <tr>
-                                            <td>
-                                                <a href='viewseason.aspx?ID=<%# Eval("SeasonID") %>'><%# Eval("Name") %></a>
-                                            </td>
-                                            <td>
-                                                <%# Eval("FromDate") %>
-                                            </td>
-                                            <td>
-                                                <%# Eval("ToDate") %>
-                                            </td>
-                                            <td style="text-align:center">
-                                                <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewseason.aspx?ID=" + Eval("SeasonID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
-                                                <asp:LinkButton ID="btnRemove1" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("SeasonID") %>' CssClass="btn"><i class="icon-trash"></i> Remove</asp:LinkButton>
-                                            </td>
-                                        </tr>
-                                    </ItemTemplate>
-                                </asp:Repeater>
+                            <table id="tableTT" class="table table-striped table-bordered table-advance table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center">Name</th>
+                                        <th style="text-align: center">From Date</th>
+                                        <th style="text-align: center">To Date</th>
+                                        <th style="text-align: center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
+                                        <ItemTemplate>
+                                            <tr>
+                                                <td style="text-align: center">
+                                                    <a href='viewseason.aspx?ID=<%# Eval("SeasonID") %>'><%# Eval("Name") %></a>
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <%# Eval("FromDate", "{0:dd-MM-yyyy}") %>
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <%# Eval("ToDate", "{0:dd-MM-yyyy}") %>
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewseason.aspx?ID=" + Eval("SeasonID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
+                                                    <asp:LinkButton ID="btnRemove1" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("SeasonID") %>' CssClass="btn"><i class="icon-trash"></i> Remove</asp:LinkButton>
+                                                </td>
+                                            </tr>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th style="text-align: center">Name</th>
+                                        <th style="text-align: center">From Date</th>
+                                        <th style="text-align: center">To Date</th>
+                                        <th style="text-align: center">Action</th>
+                                    </tr>
+                                </tfoot>
                             </table>
                             <!--END Repeater-->
                         </div>

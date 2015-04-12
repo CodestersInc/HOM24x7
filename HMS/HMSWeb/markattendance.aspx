@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="markattendance.aspx.cs" Inherits="markattendance" MaintainScrollPositionOnPostback="true"%>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="markattendance.aspx.cs" Inherits="markattendance" MaintainScrollPositionOnPostback="true" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" runat="Server">
     <link rel="stylesheet" href="assets/bootstrap-toggle-buttons/static/stylesheets/bootstrap-toggle-buttons.css" />
@@ -43,14 +43,14 @@
                                     <tr>
                                         <th>Staff Code</th>
                                         <th>Name</th>
-                                        <th style="text-align:center">Attendance</th>
+                                        <th style="text-align: center">Attendance</th>
                                     </tr>
                                     <asp:Repeater ID="Repeater1" runat="server">
                                         <ItemTemplate>
                                             <tr>
                                                 <td><%# Eval("StaffCode") %></td>
                                                 <td><%# Eval("Name") %></td>
-                                                <td style="text-align:center">
+                                                <td style="text-align: center">
                                                     <asp:CheckBox ID="cbxPresence" CssClass="success-toggle-button toggle-button" runat="server" />
                                                     <asp:HiddenField ID="HiddenFieldStaffID" runat="server" Value='<%# Eval("StaffID") %>' />
                                                 </td>
@@ -79,11 +79,16 @@
     <script type="text/javascript" src="assets/bootstrap-toggle-buttons/static/js/jquery.toggle.attendance-buttons.js"></script>
 
     <script>
-        $('.success-toggle-button').toggleButtons({
-            style: {
-                enabled: "success",
-                disabled: "danger"
+        var handleToggleButtons = function () {
+            if (!jQuery().toggleButtons) {
+                return;
             }
-        });        
+            $('.success-toggle-button').toggleButtons({
+                style: {
+                    enabled: "success",
+                    disabled: "danger"
+                }
+            });
+        }
     </script>
 </asp:Content>

@@ -20,18 +20,12 @@ public partial class searchdepartment : System.Web.UI.Page
         {
             Response.Redirect("home.aspx");
         }
-
+        if (!IsPostBack)
+        {
+            Repeater1.DataSource = new DepartmentLogic().search("", loggedUser.AccountID);
+            Repeater1.DataBind();
+        }
     }
-
-    protected void btnSubmit_Click(object sender, EventArgs e)
-    {
-        Staff loggedUser = (Staff)Session["LoggedUser"];
-        searchResultArea.Visible = true;
-
-        Repeater1.DataSource = new DepartmentLogic().search(txtName.Text, loggedUser.AccountID);
-        Repeater1.DataBind();
-    }
-
     
     protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
     {
@@ -42,7 +36,7 @@ public partial class searchdepartment : System.Web.UI.Page
             Staff loggedUser = (Staff)Session["LoggedUser"];
 
             searchResultArea.Visible = true;
-            Repeater1.DataSource = departmentLogic.search(txtName.Text, loggedUser.AccountID);
+            Repeater1.DataSource = departmentLogic.search("", loggedUser.AccountID);
             Repeater1.DataBind();
         }
     }

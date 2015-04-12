@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="searchroomtype.aspx.cs" Inherits="searchroomtype" MaintainScrollPositionOnPostback="true"%>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="searchroomtype.aspx.cs" Inherits="searchroomtype" MaintainScrollPositionOnPostback="true" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" runat="Server">
 </asp:Content>
@@ -22,18 +22,8 @@
                 <!-- END PAGE TITLE & BREADCRUMB-->
             </div>
         </div>
-        <div class="widget-body form">
-            <div class="form-horizontal">
-                <div class="control-group">
-                    <label class="control-label">Room Type Name</label>
-                    <div class="controls">
-                        <asp:TextBox ID="txtRoomTypeName" runat="server" CssClass="span3  tooltips" data-trigger="hover" data-original-title="Enter Room Type name to search for."></asp:TextBox>
-                        <asp:Button ID="btnSubmit" CssClass="btn btn-info" runat="server" Text="Search" OnClick="btnSubmit_Click" />
-                    </div>
-                </div>
-            </div>
-        </div>
-        <asp:PlaceHolder ID="searchResultArea" Visible="false" runat="server">
+
+        <asp:PlaceHolder ID="searchResultArea" runat="server">
             <!-- BEGIN ADVANCED TABLE widget-->
             <div class="row-fluid">
                 <div class="span12">
@@ -47,28 +37,37 @@
                             </span>
                         </div>
                         <div class="widget-body">
-                            <table class="table table-striped table-bordered">
-                                <tr>
-                                    <th style="text-align:center">Room Type</th>
-                                    <th style="text-align:center">Photo</th>
-                                    <th></th>
-                                </tr>
-
-                                <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
-                                    <ItemTemplate>
-                                        <tr>
-                                            <td style="vertical-align:middle; text-align:center"><a href='viewroomtype.aspx?ID=<%# Eval("RoomTypeID") %>'><%#Eval("Name")%></a></td>
-                                            <td style="text-align:center">
-                                                <asp:Image ID="Image1" ImageUrl='<%#Eval("Photo")%>' Width="200px" Height="100px" runat="server" />
-                                            </td>
-                                            <td style="text-align:center; vertical-align:middle">
-                                                <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewroomtype.aspx?ID=" + Eval("RoomTypeID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
-                                                <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("RoomTypeID") %>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>
-                                            </td>
-                                        </tr>
-                                    </ItemTemplate>
-                                </asp:Repeater>
-
+                            <table id="tableTT" class="table table-striped table-bordered table-advance table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center">Room Type</th>
+                                        <th style="text-align: center">Photo</th>
+                                        <th style="text-align: center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
+                                        <ItemTemplate>
+                                            <tr>
+                                                <td style="vertical-align: middle; text-align: center"><a href='viewroomtype.aspx?ID=<%# Eval("RoomTypeID") %>'><%#Eval("Name")%></a></td>
+                                                <td style="text-align: center">
+                                                    <asp:Image ID="Image1" ImageUrl='<%#Eval("Photo")%>' Width="200px" Height="100px" runat="server" />
+                                                </td>
+                                                <td style="text-align: center; vertical-align: middle">
+                                                    <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewroomtype.aspx?ID=" + Eval("RoomTypeID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
+                                                    <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("RoomTypeID") %>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>
+                                                </td>
+                                            </tr>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th style="text-align: center">Room Type</th>
+                                        <th style="text-align: center">Photo</th>
+                                        <th style="text-align: center">Action</th>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>

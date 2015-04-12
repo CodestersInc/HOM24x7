@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="searchdepartment.aspx.cs" Inherits="searchdepartment" MaintainScrollPositionOnPostback="true"%>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="searchdepartment.aspx.cs" Inherits="searchdepartment" MaintainScrollPositionOnPostback="true" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" runat="Server">
 </asp:Content>
@@ -18,23 +18,13 @@
                     <li>
                         <a href="#">Department</a> <span class="divider">&nbsp;</span>
                     </li>
-                    <li><a href="departmentsearch.aspx">Search</a><span class="divider-last">&nbsp;</span></li>
+                    <li><a href="searchdepartment.aspx">Search</a><span class="divider-last">&nbsp;</span></li>
                 </ul>
                 <!-- END PAGE TITLE & BREADCRUMB-->
             </div>
         </div>
-        <div class="widget-body form">
-            <div class="form-horizontal">
-                <div class="control-group">
-                    <label class="control-label">Department Name</label>
-                    <div class="controls">
-                        <asp:TextBox ID="txtName" runat="server" CssClass="span4 tooltips" data-trigger="hover" data-original-title="Enter department name to search for."></asp:TextBox>
-                        <asp:Button ID="btnSubmit" CssClass="btn btn-info" runat="server" Text="Search" OnClick="btnSubmit_Click" />
-                    </div>
-                </div>
-            </div>
-        </div>
-        <asp:PlaceHolder ID="searchResultArea" Visible="false" runat="server">
+
+        <asp:PlaceHolder ID="searchResultArea" runat="server">
             <!-- BEGIN ADVANCED TABLE widget-->
             <div class="row-fluid">
                 <div class="span12">
@@ -48,30 +38,39 @@
                             </span>
                         </div>
                         <div class="widget-body">
-                            <table class="table table-striped table-bordered table-advance table-hover">
-                                <tr>
-                                    <th>Department
-                                    </th>
-                                    <th>Manager
-                                    </th>
-                                    <th></th>
-                                </tr>
-                                <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
-                                    <ItemTemplate>
-                                        <tr>
-                                            <td>
-                                                <a href='viewdepartment.aspx?ID=<%# Eval("DepartmentID") %>' ><%# Eval("Department") %></a>
-                                            </td>
-                                            <td>
-                                                <a href="viewstaff.aspx?ID= <%# Eval("StaffID") %>"><%# Eval("Manager") %></a>
-                                            </td>
-                                            <td style="text-align:center">
-                                                <asp:LinkButton ID="btnEdit1" CssClass="btn mini purple" PostBackUrl='<%# "viewdepartment.aspx?ID=" + Eval("DepartmentID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
-                                                <asp:LinkButton ID="btnRemove1" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("DepartmentID") %>' CssClass="btn"><i class="icon-trash"></i> Remove</asp:LinkButton>
-                                            </td>
-                                        </tr>
-                                    </ItemTemplate>
-                                </asp:Repeater>
+                            <table id="tableTT" class="table table-striped table-bordered table-advance table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align:center">Department</th>
+                                        <th style="text-align:center">Manager</th>
+                                        <th style="text-align:center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
+                                        <ItemTemplate>
+                                            <tr>
+                                                <td style="text-align:center">
+                                                    <a href='viewdepartment.aspx?ID=<%# Eval("DepartmentID") %>'><%# Eval("Department") %></a>
+                                                </td>
+                                                <td style="text-align:center">
+                                                    <a href="viewstaff.aspx?ID= <%# Eval("StaffID") %>"><%# Eval("Manager") %></a>
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <asp:LinkButton ID="btnEdit1" CssClass="btn mini purple" PostBackUrl='<%# "viewdepartment.aspx?ID=" + Eval("DepartmentID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
+                                                    <asp:LinkButton ID="btnRemove1" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("DepartmentID") %>' CssClass="btn"><i class="icon-trash"></i> Remove</asp:LinkButton>
+                                                </td>
+                                            </tr>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th style="text-align:center">Department</th>
+                                        <th style="text-align:center">Manager</th>
+                                        <th style="text-align:center">Action</th>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>

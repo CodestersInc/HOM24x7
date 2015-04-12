@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="searchstaff.aspx.cs" Inherits="searchstaff" MaintainScrollPositionOnPostback="true"%>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="searchstaff.aspx.cs" Inherits="searchstaff" MaintainScrollPositionOnPostback="true" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" runat="Server">
 </asp:Content>
@@ -18,23 +18,12 @@
                     <li>
                         <a href="#">Staff</a> <span class="divider">&nbsp;</span>
                     </li>
-                    <li><a href="#">Search</a><span class="divider-last">&nbsp;</span></li>
+                    <li><a href="searchstaff.aspx">Search</a><span class="divider-last">&nbsp;</span></li>
                 </ul>
                 <!-- END PAGE TITLE & BREADCRUMB-->
             </div>
         </div>
-        <div class="widget-body form">
-            <div class="form-horizontal">
-                <div class="control-group">
-                    <label class="control-label">Staff Name</label>
-                    <div class="controls">
-                        <asp:TextBox ID="txtName" runat="server" CssClass="span4  tooltips" data-trigger="hover" data-original-title="Enter staff name to search for."></asp:TextBox>
-                        <asp:Button ID="btnSubmit" CssClass="btn btn-info" runat="server" Text="Search" OnClick="btnSubmit_Click" />
-                    </div>
-                </div>
-            </div>
-        </div>
-        <asp:PlaceHolder ID="searchResultArea" Visible="true" runat="server">
+        <asp:PlaceHolder ID="searchResultArea" runat="server">
             <!-- BEGIN ADVANCED TABLE widget-->
             <div class="row-fluid">
                 <div class="span12">
@@ -49,41 +38,54 @@
                         </div>
                         <div class="widget-body">
 
-
-                            <table class="table table-striped table-bordered table-advance table-hover">
-                                <tr>
-                                    <th>Staff Code</th>
-                                    <th>Name</th>
-                                    <th>Department Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th></th>
-                                </tr>
-                                <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
-                                    <ItemTemplate>
-                                        <tr>
-                                            <td>
-                                                <%# Eval("StaffCode") %>
-                                            </td>
-                                            <td>
-                                                <a href='viewstaff.aspx?ID=<%# Eval("StaffID")%>'><%# Eval("Name") %></a>
-                                            </td>
-                                            <td>
-                                                <a href='viewdepartment.aspx?ID=<%# Eval("DepartmentID") %>'><%# Eval("DepartmentName") %></a>
-                                            </td>
-                                            <td>
-                                                <a href="mailto:<%# Eval("Email") %>"><%# Eval("Email") %></a>
-                                            </td>
-                                            <td>
-                                                <%# Eval("Phone") %>
-                                            </td>
-                                            <td style="text-align:center">
-                                                <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewstaff.aspx?ID=" + Eval("StaffID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
-                                                <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#Eval("StaffID")%>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>
-                                            </td>
-                                        </tr>
-                                    </ItemTemplate>
-                                </asp:Repeater>
+                            <table id="tableTT" class="table table-striped table-bordered table-advance table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center">Staff Code</th>
+                                        <th style="text-align: center">Name</th>
+                                        <th style="text-align: center">Department Name</th>
+                                        <th style="text-align: center">Email</th>
+                                        <th style="text-align: center">Phone</th>
+                                        <th style="text-align: center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
+                                        <ItemTemplate>
+                                            <tr>
+                                                <td style="text-align: center">
+                                                    <%# Eval("StaffCode") %>
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <a href='viewstaff.aspx?ID=<%# Eval("StaffID")%>'><%# Eval("Name") %></a>
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <a href='viewdepartment.aspx?ID=<%# Eval("DepartmentID") %>'><%# Eval("DepartmentName") %></a>
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <a href="mailto:<%# Eval("Email") %>"><%# Eval("Email") %></a>
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <%# Eval("Phone") %>
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewstaff.aspx?ID=" + Eval("StaffID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
+                                                    <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#Eval("StaffID")%>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>
+                                                </td>
+                                            </tr>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th style="text-align: center">Staff Code</th>
+                                        <th style="text-align: center">Name</th>
+                                        <th style="text-align: center">Department Name</th>
+                                        <th style="text-align: center">Email</th>
+                                        <th style="text-align: center">Phone</th>
+                                        <th style="text-align: center">Action</th>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>

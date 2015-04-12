@@ -21,7 +21,7 @@ public partial class resetpassword : System.Web.UI.Page
         {
             String HashedPassword = Utility.GetSHA512Hash(txtPassword.Text);
 
-            if (new StaffLogic().resetPassword(Convert.ToInt32(Request.QueryString["ID"]), HashedPassword) == 1)
+            if (new StaffLogic().resetPassword(Convert.ToString(Request.QueryString["attr1"]), Convert.ToString(Request.QueryString["attr2"]), HashedPassword) == 1)
             {
                 Response.Redirect("login.aspx");
             }

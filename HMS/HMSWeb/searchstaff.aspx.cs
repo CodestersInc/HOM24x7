@@ -19,15 +19,11 @@ public partial class searchstaff : System.Web.UI.Page
         {
             Response.Redirect("home.aspx");
         }
-    }
-
-    protected void btnSubmit_Click(object sender, EventArgs e)
-    {
-        Staff loggedUser = (Staff)Session["loggedUser"];
-        
-        searchResultArea.Visible = true;
-        Repeater1.DataSource = new StaffLogic().search(txtName.Text, loggedUser.AccountID);
-        Repeater1.DataBind();
+        if (!IsPostBack)
+        {
+            Repeater1.DataSource = new StaffLogic().search("", loggedUser.AccountID);
+            Repeater1.DataBind();
+        }
     }
 
     protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -39,7 +35,7 @@ public partial class searchstaff : System.Web.UI.Page
             Staff loggeduser = (Staff)Session["loggeduser"];
 
             searchResultArea.Visible = true;
-            Repeater1.DataSource = staffLogic.search(txtName.Text, loggeduser.AccountID);
+            Repeater1.DataSource = staffLogic.search("", loggeduser.AccountID);
             Repeater1.DataBind();
         }
     }

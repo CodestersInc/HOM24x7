@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="searchroom.aspx.cs" Inherits="searchroom" MaintainScrollPositionOnPostback="true"%>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="searchroom.aspx.cs" Inherits="searchroom" MaintainScrollPositionOnPostback="true" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" runat="Server">
 </asp:Content>
@@ -22,65 +22,63 @@
                 <!-- END PAGE TITLE & BREADCRUMB-->
             </div>
         </div>
-        <div class="widget-body form">
-            <div class="form-horizontal">
-                <div class="control-group">
-                    <label class="control-label">Room Name</label>
-                    <div class="controls">
-                        <asp:TextBox ID="txtName" runat="server" CssClass="span3  tooltips" data-trigger="hover" data-original-title="Enter Room number to search for."></asp:TextBox>
-                        <asp:Button ID="btnSubmit" CssClass="btn btn-info" runat="server" Text="Search" OnClick="btnSubmit_Click" />
-                    </div>
-                </div>
-                <asp:PlaceHolder ID="searchResultArea" Visible="false" runat="server">
-                    <!-- BEGIN ADVANCED TABLE widget-->
-                    <div class="row-fluid">
-                        <div class="span12">
-                            <!-- BEGIN EXAMPLE TABLE widget-->
-                            <div class="widget">
-                                <div class="widget-title">
-                                    <h4><i class="icon-reorder"></i>Room Types</h4>
-                                    <span class="tools">
-                                        <a href="javascript:;" class="icon-chevron-down"></a>
-                                        <a href="javascript:;" class="icon-remove"></a>
-                                    </span>
-                                </div>
-                                <div class="widget-body">
-                                    <table class="table table-striped border">
-                                        <tr>
-                                            <th>Room Number</th>
-                                            <th>Room Type</th>
-                                            <th>Status</th>
-                                            <th>Floor</th>
-
-                                            <th></th>
-                                        </tr>
-
-                                        <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
-                                            <ItemTemplate>
-                                                <tr>
-                                                    <td><a href='viewroom.aspx?ID=<%# Eval("RoomID")%>' ><%#Eval("RoomNumber")%></a></td>
-                                                    <td><a href='viewroomtype.aspx?ID=<%#Eval("RoomTypeID")%>'><%#Eval("Name") %> </a> </td>
-                                                    <td><%#Eval("Status")%></td>
-                                                    <td><a href='viewfloor.aspx?ID=<%#Eval("RoomTypeID")%>'><%#Eval("FloorNumber")%></a></td>
-
-                                                    <td style="text-align:center">
-                                                        <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewroom.aspx?ID=" + Eval("RoomID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
-                                                        <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("RoomID") %>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>
-                                                    </td>
-                                                </tr>
-                                            </ItemTemplate>
-                                        </asp:Repeater>
-
-                                    </table>
-                                </div>
-                            </div>
-                            <!-- END EXAMPLE TABLE widget-->
+        <asp:PlaceHolder ID="searchResultArea" runat="server">
+            <!-- BEGIN ADVANCED TABLE widget-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN EXAMPLE TABLE widget-->
+                    <div class="widget">
+                        <div class="widget-title">
+                            <h4><i class="icon-reorder"></i>Room Types</h4>
+                            <span class="tools">
+                                <a href="javascript:;" class="icon-chevron-down"></a>
+                                <a href="javascript:;" class="icon-remove"></a>
+                            </span>
+                        </div>
+                        <div class="widget-body">
+                            <table id="tableTT" class="table table-striped border table-advance table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center">Room Number</th>
+                                        <th style="text-align: center">Room Type</th>
+                                        <th style="text-align: center">Status</th>
+                                        <th style="text-align: center">Floor</th>
+                                        <th style="text-align: center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
+                                        <ItemTemplate>
+                                            <tr>
+                                                <td style="text-align: center"><a href='viewroom.aspx?ID=<%# Eval("RoomID")%>'><%#Eval("RoomNumber")%></a></td>
+                                                <td style="text-align: center"><a href='viewroomtype.aspx?ID=<%#Eval("RoomTypeID")%>'><%#Eval("Name") %> </a></td>
+                                                <td style="text-align: center"><%#Eval("Status")%></td>
+                                                <td style="text-align: center"><a href='viewfloor.aspx?ID=<%#Eval("RoomTypeID")%>'><%#Eval("FloorNumber")%></a></td>
+                                                <td style="text-align: center">
+                                                    <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewroom.aspx?ID=" + Eval("RoomID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
+                                                    <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("RoomID") %>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>
+                                                </td>
+                                            </tr>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th style="text-align: center">Room Number</th>
+                                        <th style="text-align: center">Room Type</th>
+                                        <th style="text-align: center">Status</th>
+                                        <th style="text-align: center">Floor</th>
+                                        <th style="text-align: center">Action</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
                         </div>
                     </div>
-                    <!-- END ADVANCED TABLE widget-->
-                </asp:PlaceHolder>
+                    <!-- END EXAMPLE TABLE widget-->
+                </div>
             </div>
-        </div>
+            <!-- END ADVANCED TABLE widget-->
+        </asp:PlaceHolder>
     </div>
     <!-- END PAGE CONTAINER -->
 </asp:Content>

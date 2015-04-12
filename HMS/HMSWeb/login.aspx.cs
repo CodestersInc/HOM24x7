@@ -32,7 +32,7 @@ public partial class login : System.Web.UI.Page
             {
                 Session.Add("LoggedUser", systemAdminLogger);
                 Session.Add("UserType", "SystemAdmin");
-                redirectAsNeeded();
+                Response.Redirect("systemadminhome.aspx");
             }
             else
             {
@@ -74,13 +74,10 @@ public partial class login : System.Web.UI.Page
     private void redirectAsNeeded()
     {
         String redirectionUrl = Request["url"];
-        if (redirectionUrl.Equals("/login.aspx") && Session["UserType"] == "Staff")
+
+        if (redirectionUrl.Equals("/login.aspx"))
         {
             redirectionUrl = "home.aspx";
-        }
-        if (redirectionUrl.Equals("/login.aspx") && Session["UserType"] == "SystemAdmin")
-        {
-            redirectionUrl = "systemadminhome.aspx";
         }
         Response.Redirect(redirectionUrl);
     }

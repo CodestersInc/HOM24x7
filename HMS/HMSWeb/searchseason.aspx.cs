@@ -21,15 +21,11 @@ public partial class searchseason : System.Web.UI.Page
         {
             Response.Redirect("home.aspx");
         }
-    }
-
-    protected void btnSubmit_Click(object sender, EventArgs e)
-    {
-        Staff loggedUser = (Staff)Session["loggedUser"];
-
-        searchResultArea.Visible = true;
-        Repeater1.DataSource = new SeasonLogic().search(txtSeasonName.Text, loggedUser.AccountID);
-        Repeater1.DataBind();
+        if (!IsPostBack)
+        {
+            Repeater1.DataSource = new SeasonLogic().search("", loggedUser.AccountID);
+            Repeater1.DataBind();
+        }
     }
 
     protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -41,7 +37,7 @@ public partial class searchseason : System.Web.UI.Page
             Staff loggeduser = (Staff)Session["loggeduser"];
 
             searchResultArea.Visible = true;
-            Repeater1.DataSource = seasonLogic.search(txtSeasonName.Text, loggeduser.AccountID);
+            Repeater1.DataSource = seasonLogic.search("", loggeduser.AccountID);
             Repeater1.DataBind();
         }
     }

@@ -35,7 +35,9 @@
     <link href="assets/bootstrap-toggle-buttons/static/stylesheets/bootstrap-toggle-buttons.css" rel="stylesheet" />
     <link href="assets/data-tables/DT_bootstrap.css" rel="stylesheet" />
     <link href="assets/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
-
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="DataTables-1.10.6/media/css/jquery.dataTables.css" />
+    <link rel="stylesheet" type="text/css" href="DataTables-1.10.6/extensions/TableTools/css/dataTables.tableTools.css" />
 </head>
 <!-- END HEAD -->
 
@@ -84,7 +86,7 @@
                                         </li>
                                         <li class="divider"></li>
                                         <li>
-                                            <a id="btnLogout" href="login.aspx" runat="server"><i class="icon-key"></i> Log Out</a>
+                                            <a id="btnLogout" href="login.aspx" runat="server"><i class="icon-key"></i>Log Out</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -266,7 +268,7 @@
 					                <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a href="delegateservicerequest.aspx">Delegate Service Request</a></li>
+                                    <li><a href="delegateservicerequest.aspx">Delegate Service</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
@@ -329,6 +331,22 @@
             <script>
                 jQuery(document).ready(function () {
                     App.init();
+                });
+            </script>
+
+            <!-- DataTables -->
+            <script type="text/javascript" charset="utf8" src="DataTables-1.10.6/media/js/jquery.dataTables.js"></script>
+            <script type="text/javascript" charset="utf8" src="DataTables-1.10.6/extensions/TableTools/js/dataTables.tableTools.js"></script>
+
+            <script>
+                $(document).ready(function () {
+                    $('#tableTT').DataTable({
+                        dom: 'T<"clear">lfrtip',
+                        tableTools: {
+                            "sSwfPath": "DataTables-1.10.6/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
+                            "aButtons": ["copy", "xls", "pdf", "print"]
+                        }
+                    });
                 });
             </script>
 

@@ -1,6 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="searchhotelac.aspx.cs" Inherits="hacsearch" MaintainScrollPositionOnPostback="true"%>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="searchhotelac.aspx.cs" Inherits="hacsearch" MaintainScrollPositionOnPostback="true" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" runat="Server">    
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="Server">
@@ -23,71 +23,65 @@
                 <!-- END PAGE TITLE & BREADCRUMB-->
             </div>
         </div>
-        <div class="widget-body form">
-            <div class="form-horizontal">
-                <div class="control-group">
-                    <label class="control-label">Account Name</label>
-                    <div class="controls">
-                        <asp:TextBox ID="txtName" runat="server" CssClass="span4 tooltips" data-trigger="hover" data-original-title="Enter account to search for."></asp:TextBox>
-                        <asp:Button ID="btnSubmit" CssClass="btn btn-info" runat="server" Text="Search" OnClick="btnSubmit_Click" />
-                    </div>
-                </div>
-            </div>
-        </div>
-        <asp:PlaceHolder ID="searchResultArea" Visible="false" runat="server">
-        <!-- BEGIN ADVANCED TABLE widget-->
-        <div class="row-fluid">
-            <div class="span12">
-                <!-- BEGIN EXAMPLE TABLE widget-->
-                <div class="widget">
-                    <div class="widget-title">
-                        <h4><i class="icon-reorder"></i>Account Record</h4>
-                        <span class="tools">
-                            <a href="javascript:;" class="icon-chevron-down"></a>
-                            <a href="javascript:;" class="icon-remove"></a>
-                        </span>
-                    </div>
-                    <div class="widget-body">
-                        <table class="table table-striped table-bordered table-advance table-hover">
-                            <tr>
-                                <th>Company</th>
-                                <th>Contact Person</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Website</th>
-                                <th></th>
-                            </tr>
-                            <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
-                                <ItemTemplate>
+
+        <asp:PlaceHolder ID="searchResultArea" runat="server">
+            <!-- BEGIN ADVANCED TABLE widget-->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- BEGIN EXAMPLE TABLE widget-->
+                    <div class="widget">
+                        <div class="widget-title">
+                            <h4><i class="icon-reorder"></i>Account Record</h4>
+                            <span class="tools">
+                                <a href="javascript:;" class="icon-chevron-down"></a>
+                                <a href="javascript:;" class="icon-remove"></a>
+                            </span>
+                        </div>
+                        <div class="widget-body">
+                            <table id="tableTT" class="table table-striped table-bordered table-advance table-hover">
+                                <thead>
                                     <tr>
-                                        <td>
-                                            <a href='viewhotelac.aspx?ID=<%# Eval("AccountID") %>'> <%# Eval("Company") %></a>  
-                                        </td>
-                                        <td>
-                                            <%# Eval("ContactPerson") %>
-                                        </td>
-                                        <td>
-                                            <%# Eval("Email") %>
-                                        </td>
-                                        <td>
-                                            <%# Eval("Phone") %>
-                                        </td>
-                                        <td>
-                                            <a href='http://<%# Eval("Website") %>'><%# Eval("Website") %></a>
-                                        </td>
-                                        <td style="text-align:center">
-                                            <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewhotelac.aspx?ID=" + Eval("AccountID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
-                                            <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("AccountID") %>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>
-                                        </td>
+                                        <th>Company</th>
+                                        <th>Contact Person</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Website</th>
+                                        <th></th>
                                     </tr>
-                                </ItemTemplate>
-                            </asp:Repeater>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
+                                        <ItemTemplate>
+                                            <tr>
+                                                <td>
+                                                    <a href='viewhotelac.aspx?ID=<%# Eval("AccountID") %>'><%# Eval("Company") %></a>
+                                                </td>
+                                                <td>
+                                                    <%# Eval("ContactPerson") %>
+                                                </td>
+                                                <td>
+                                                    <%# Eval("Email") %>
+                                                </td>
+                                                <td>
+                                                    <%# Eval("Phone") %>
+                                                </td>
+                                                <td>
+                                                    <a href='http://<%# Eval("Website") %>'><%# Eval("Website") %></a>
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewhotelac.aspx?ID=" + Eval("AccountID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
+                                                    <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("AccountID") %>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>
+                                                </td>
+                                            </tr>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
+                    <!-- END EXAMPLE TABLE widget-->
                 </div>
-                <!-- END EXAMPLE TABLE widget-->
             </div>
-        </div>
         </asp:PlaceHolder>
         <!-- END ADVANCED TABLE widget-->
     </div>

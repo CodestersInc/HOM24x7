@@ -104,13 +104,14 @@ namespace BusinessLogic
             return DBUtility.Modify(query, lstParams);
         }
 
-        public int resetPassword(int StaffID, String Password)
+        public int resetPassword(String uname, String oldPassword, String newPassword)
         {
-            String query = "update Staff set Password=@Password where StaffID=@ID";
+            String query = "update Staff set Password=@newPassword where Username=@uname and Password=@oldPassword";
             List<SqlParameter> lstParams = new List<SqlParameter>();
             
-            lstParams.Add(new SqlParameter("@Password", Password));
-            lstParams.Add(new SqlParameter("@ID", StaffID));
+            lstParams.Add(new SqlParameter("@newPassword", newPassword));
+            lstParams.Add(new SqlParameter("@uname", uname));
+            lstParams.Add(new SqlParameter("@oldPassword", oldPassword));
 
             return DBUtility.Modify(query, lstParams);
         }
