@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{21AD7845-9B30-458A-9C74-B0768DDF78D1}"
 EndProject
@@ -42,6 +42,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "HotelClient", "http://local
 		SccProvider = "SAK"
 		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		ProjectReferences = "{379e13b3-2fce-463c-a86d-44d877d610d5}|BusinessLogic.dll;{21AD7845-9B30-458A-9C74-B0768DDF78D1}|DataAccess.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_50057"
 		Debug.AspNetCompiler.PhysicalPath = "HotelClient\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50057\"

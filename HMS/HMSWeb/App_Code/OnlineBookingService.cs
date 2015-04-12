@@ -26,7 +26,7 @@ public class OnlineBookingService : System.Web.Services.WebService {
     }
 
     [WebMethod]
-    public string createOnlineBooking(int RoomTypeID, int NoOfPersons, string CheckInDate, string PlannedCheckoutDate, int CustomerID,string CustomerRemarks, double WebsiteRate)
+    public string createOnlineBooking(int RoomTypeID, int NoOfPersons, string CheckInDate, string PlannedCheckoutDate, int CustomerID,string CustomerRemarks, double WebsiteRate, int AccountID)
     {
         DateTime mCheckInDate;
         DateTime mPlannedCheckoutDate;
@@ -42,6 +42,7 @@ public class OnlineBookingService : System.Web.Services.WebService {
         
         OnlineBooking onlineBookingObj = new OnlineBookingLogic().create(new OnlineBooking(0,
             RoomTypeID,
+            1,
             NoOfPersons,
             mCheckInDate,
             mPlannedCheckoutDate,
@@ -50,8 +51,9 @@ public class OnlineBookingService : System.Web.Services.WebService {
             0,
             "",
             CustomerRemarks,
-            WebsiteRate));
+            WebsiteRate,
+            AccountID));
 
-        return "Hello World";
+        return "Online booking created";
     }
 }

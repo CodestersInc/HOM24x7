@@ -26,6 +26,7 @@ public partial class registrestaff : System.Web.UI.Page
         }
         if(!IsPostBack)
         {
+            txtDOB.Text = DateTime.Now.Date.AddYears(-18).ToString("dd-MM-yyyy");            
             //Fill Department List
             DataTable dt = new DepartmentLogic().selectDistinctDepartment(loggedUser.AccountID);
             ddlDepartment.DataSource = dt;

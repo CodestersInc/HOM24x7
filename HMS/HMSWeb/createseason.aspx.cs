@@ -26,6 +26,8 @@ public partial class createseason : System.Web.UI.Page
 
         if (!IsPostBack)
         {
+            txtFromDate.Text = DateTime.Now.Date.ToString("dd-MM-yyyy");
+            txtToDate.Text = DateTime.Now.Date.AddDays(1).ToString("dd-MM-yyyy");
             Repeater1.DataSource = new RoomTypeLogic().selectAll(loggedUser.AccountID);
             Repeater1.DataBind();
         }

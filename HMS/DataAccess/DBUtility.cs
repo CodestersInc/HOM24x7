@@ -13,6 +13,7 @@ namespace DataAccess
     {
         //non relative con string: @"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\App_Data\HMSDB.mdf;Integrated Security=True"
         //relative con string:"Data Source=(LocalDB)\\v11.0;AttachDbFilename=\"|DataDirectory|HMSDB.mdf\";Integrated Security=True"
+        //azure con string: Server=tcp:dptugxwwmi.database.windows.net,1433;Database=hom24x7_db;User ID=vraj@dptugxwwmi;Password=400%fail;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;
         private static String connectionString = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=\"|DataDirectory|HMSDB.mdf\";Integrated Security=True";
 
         public static int Modify(String query, List<SqlParameter> lstParams)
