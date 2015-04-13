@@ -27,14 +27,44 @@
     <asp:PlaceHolder ID="statisticsPlaceHolder" runat="server" Visible="false">
         <div id="page" class="dashboard">
             <!--BEGIN NOTIFICATION-->
-            <div class="alert alert-info" style="text-align:center">
+            <div class="alert alert-info" style="text-align: center">
                 <button data-dismiss="alert" class="close">×</button>
-                Welcome to <strong><asp:Label ID="lblHotelName" runat="server"></asp:Label></strong>.!
+                Welcome to <strong>
+                    <asp:Label ID="lblHotelName" runat="server"></asp:Label></strong>.!
             </div>
             <br />
             <br />
             <!--END NOTIFICATION-->
-            <div class="row-fluid circle-state-overview" style="padding-left:200px">
+            <div class="row-fluid circle-state-overview">
+
+                <div class="span2 responsive clearfix" data-tablet="span3" data-desktop="span2">
+                    <div class="circle-wrap">
+                        <div class="stats-circle gray-color">
+                            <i class="icon-bookmark"></i>
+                        </div>
+                        <p>
+                            <strong>
+                                <asp:Label ID="lblBookings" runat="server">2</asp:Label>
+                            </strong>
+                            Bookings
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="span2 responsive clearfix" data-tablet="span3" data-desktop="span2">
+                    <div class="circle-wrap">
+                        <div class="stats-circle purple-color">
+                            <i class="icon-user"></i>
+                        </div>
+                        <p>
+                            <strong>
+                                <asp:Label ID="lblCustomer" runat="server">2</asp:Label>
+                            </strong>
+                            Customer
+                        </p>
+                    </div>
+                </div>
+
                 <div class="span2 responsive" data-tablet="span3" data-desktop="span2">
                     <div class="circle-wrap">
                         <div class="stats-circle red-color">
@@ -80,7 +110,7 @@
                 <div class="span2 responsive clearfix" data-tablet="span3" data-desktop="span2">
                     <div class="circle-wrap">
                         <div class="stats-circle turquoise-color">
-                            <i class="icon-user"></i>
+                            <i class="icon-bolt"></i>
                         </div>
                         <p>
                             <strong>
@@ -90,8 +120,10 @@
                         </p>
                     </div>
                 </div>
+
+                <div class="span2 responsive clearfix" data-tablet="span3" data-desktop="span2">
+                </div>
             </div>
-        </div>
     </asp:PlaceHolder>
     <!-- END OVERVIEW STATISTIC BARS-->
 </asp:Content>
