@@ -4,8 +4,8 @@
     <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
     <style>
         .paletteComponent {
-            float: left;
-            padding-left:30px;                                                
+            padding-left:30px;
+            float:left;                                                         
         }
 
         #palette {
@@ -163,7 +163,7 @@
             var x = document.getElementById("roomList");
 
             if (x.length != 0) {
-                $("<div class='room' style= 'width: 50px; height: 50px; background-color: gray; text-align: left; vertical-align: middle; color: white;'></div>").prependTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" }).attr("roomid", $("#roomList").val());
+                $("<div class='room' style= 'width: 50px; height: 50px; background-color: gray; position:absolute; top:0; left:0'></div>").prependTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" }).attr("roomid", $("#roomList").val());
                 x.remove(x.selectedIndex);
                 
                 <%--Disable AddRoomTOCanvas button if no rooms--%>
@@ -176,8 +176,15 @@
 
     <%--Add other components to canvas--%>
     <script type="text/javascript">
-        $('.paletteComponent').click(function () {
-            $(this).clone().prependTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" }).addClass('otherComponent').removeClass('paletteComponent');
+        $('.paletteComponent').click(function () {            
+            $(this).clone()
+                .prependTo('#canvas')
+                .draggable({ containment: "#canvas" })
+                .resizable({ containment: "#canvas" })
+                .rotatable({ containment: "#canvas" })
+                .removeClass('paletteComponent')
+                .addClass('otherComponent')
+                .css({ "position": "absolute", "top": "0", "left": "0" });;
         });
     </script>
 

@@ -5,7 +5,7 @@
     <style>
         .paletteComponent {
             float: left;
-            padding-left:10px;
+            padding-left:30px;
         }
 
         #palette {
@@ -166,9 +166,9 @@
             var x = document.getElementById("roomList");
 
             if (x.length != 0) {
-                $("<div class='room' style= 'width: 50px; height: 50px; background-color: gray; text-align: left; vertical-align: middle; color: white;'></div>").prependTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" }).attr("roomid", $("#roomList").val());
+                $("<div class='room' style= 'width: 50px; height: 50px; background-color: gray; position:absolute; top:0; left:0'></div>").prependTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" }).attr("roomid", $("#roomList").val());
                 x.remove(x.selectedIndex);
-                
+
                 <%--Disable AddRoomTOCanvas button if no rooms--%>
                 if (x.length == 0) {
                     $('#btnAddRoomToCanvas').attr("disabled", true);
@@ -180,7 +180,14 @@
     <%--Add other components to canvas--%>
     <script type="text/javascript">
         $('.paletteComponent').click(function () {
-            $(this).clone().prependTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" }).addClass('otherComponent').removeClass('paletteComponent');            
+            $(this).clone()
+                .prependTo('#canvas')
+                .draggable({ containment: "#canvas" })
+                .resizable({ containment: "#canvas" })
+                .rotatable({ containment: "#canvas" })
+                .removeClass('paletteComponent')
+                .addClass('otherComponent')
+                .css({ "position": "absolute", "top": "0", "left": "0" });;
         });
     </script>
 
