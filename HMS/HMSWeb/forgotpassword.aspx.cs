@@ -48,7 +48,7 @@ public partial class forgotpassword : System.Web.UI.Page
 
                 msg.Body = "Click on the below link to reset your password" +
                            "<br>" +
-                           string.Format("<a href='http://localhost:49306/resetpassword.aspx?attr1={0}&attr2={1}'>Password Reset Link</a>", uname, pass);
+                           string.Format("<a href='http://hom24x7.somee.com/resetpassword.aspx?attr1={0}&attr2={1}'>Password Reset Link</a>", uname, pass);
 
                 smtp.Send(msg);
 

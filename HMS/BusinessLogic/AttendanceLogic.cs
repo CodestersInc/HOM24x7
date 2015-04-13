@@ -115,18 +115,6 @@ namespace BusinessLogic
             return DBUtility.Select(query, new List<SqlParameter>());
         }
 
-
-        public DataTable getStaffByDepartment(int DepartmentID, int AccountID)
-        {
-            String query = "select * from Staff where AccountID=@AccountID and DepartmentID=@DepartmentID";
-            List<SqlParameter> lstParams = new List<SqlParameter>();
-
-            lstParams.Add(new SqlParameter("@DepartmentID", DepartmentID));
-            lstParams.Add(new SqlParameter("@AccountID", AccountID));
-
-            return DBUtility.Select(query, lstParams);
-        }
-
         public DataTable getAttendanceRange(DateTime FromDate, DateTime ToDate, int DepartmentID, int AccountID)
         {
             if (DepartmentID == 0)
@@ -158,17 +146,16 @@ namespace BusinessLogic
             return DBUtility.Select(query, lstParams);
         }
 
-        public bool isMarked(int DepartmentID, int AccountID)
+        public DataTable getStaffForAttendance(int DepartmentID, int AccountID)
         {
-            String query = "select * from Attendance, Staff where Staff.DepartmentID=@DepartmentID and AccountID=@AccountID and Staff.StaffID=Attendance.StaffID and AttendanceDate=@Today";
+            String query = "select * from Staff where Staff.StaffID NOT IN (select StaffID from Attendance where AttendanceDate=@Today) and Staff.DepartmentID=@DepartmentID and AccountID=@AccountID";            
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@DepartmentID", DepartmentID));
             lstParams.Add(new SqlParameter("@AccountID", AccountID));
             lstParams.Add(new SqlParameter("@Today", DateTime.Now.Date));
 
-            return (DBUtility.Select(query, lstParams).Rows.Count > 0);
-
+            return DBUtility.Select(query, lstParams);
         }
     }
 }

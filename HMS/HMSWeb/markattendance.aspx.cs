@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
+using System.Data;
 
 public partial class markattendance : System.Web.UI.Page
 {
@@ -22,17 +23,17 @@ public partial class markattendance : System.Web.UI.Page
             Response.Redirect("home.aspx");
         }
 
-        AttendanceLogic attendanceLogic = new AttendanceLogic();
+        DataTable staff = new AttendanceLogic().getStaffForAttendance(loggedUser.DepartmentID, loggedUser.AccountID);
 
-        if (attendanceLogic.isMarked(loggedUser.DepartmentID, loggedUser.AccountID))
+        if (staff.Rows.Count > 0)
+        {
+            Repeater1.DataSource = staff;
+            Repeater1.DataBind();
+            
+        }
+        else
         {
             Response.Redirect("viewattendance.aspx");
-        }
-
-        if (!IsPostBack)
-        {
-            Repeater1.DataSource = attendanceLogic.getStaffByDepartment(loggedUser.DepartmentID, loggedUser.AccountID);
-            Repeater1.DataBind();
         }
     }
 
