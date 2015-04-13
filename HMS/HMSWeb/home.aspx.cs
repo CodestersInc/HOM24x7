@@ -37,7 +37,13 @@ public partial class home : System.Web.UI.Page
             lblDepartments.Text = dt1.Rows.Count.ToString();
 
             DataTable dt2 = new RoomLogic().selectAll(loggedUser.AccountID);
-            lblRooms.Text = dt2.Rows.Count.ToString();      
+            lblRooms.Text = dt2.Rows.Count.ToString();
+
+            DataTable dt3 = new ServiceLogic().getAllServices(loggedUser.AccountID);
+            lblServices.Text = dt3.Rows.Count.ToString();
+
+            Account account = new AccountLogic().selectById(loggedUser.AccountID);
+            lblHotelName.Text = account.Company;
         }        
     }
 }

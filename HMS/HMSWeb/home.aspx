@@ -19,52 +19,76 @@
     </div>
     <!-- END THEME CUSTOMIZER-->
 
-    <div style="text-align: center; padding-top:20px">
+    <div style="text-align: center; padding-top: 20px">
         <h2><b>Home Page</b></h2>
     </div>
 
     <!-- BEGIN OVERVIEW STATISTIC BARS-->
     <asp:PlaceHolder ID="statisticsPlaceHolder" runat="server" Visible="false">
-        <div class="row-fluid circle-state-overview" style="padding:150px 0px 0px 280px">
-            <div class="span2 responsive clearfix" data-tablet="span3" data-desktop="span2">
-                <div class="circle-wrap">
-                    <div class="stats-circle turquoise-color">
-                        <i class="icon-user"></i>
-                    </div>
-                    <p>
-                        <strong>
-                            <asp:Label ID="lblStaffMembers" runat="server"></asp:Label>
-                        </strong>
-                        Staff Members
-                    </p>
-                </div>
+        <div id="page" class="dashboard">
+            <!--BEGIN NOTIFICATION-->
+            <div class="alert alert-info" style="text-align:center">
+                <button data-dismiss="alert" class="close">×</button>
+                Welcome to <strong><asp:Label ID="lblHotelName" runat="server"></asp:Label></strong>.!
             </div>
-
-            <div class="span2 responsive" data-tablet="span3" data-desktop="span2">
-                <div class="circle-wrap">
-                    <div class="stats-circle red-color">
-                        <i class="icon-columns"></i>
+            <br />
+            <br />
+            <!--END NOTIFICATION-->
+            <div class="row-fluid circle-state-overview" style="padding-left:200px">
+                <div class="span2 responsive" data-tablet="span3" data-desktop="span2">
+                    <div class="circle-wrap">
+                        <div class="stats-circle red-color">
+                            <i class="icon-columns"></i>
+                        </div>
+                        <p>
+                            <strong>
+                                <asp:Label ID="lblDepartments" runat="server"></asp:Label>
+                            </strong>
+                            Departments
+                        </p>
                     </div>
-                    <p>
-                        <strong>
-                            <asp:Label ID="lblDepartments" runat="server"></asp:Label>
-                        </strong>
-                        Departments
-                    </p>
                 </div>
-            </div>
 
-            <div class="span2 responsive" data-tablet="span3" data-desktop="span2">
-                <div class="circle-wrap">
-                    <div class="stats-circle green-color">
-                        <i class="icon-key"></i>
+                <div class="span2 responsive" data-tablet="span3" data-desktop="span2">
+                    <div class="circle-wrap">
+                        <div class="stats-circle green-color">
+                            <i class="icon-key"></i>
+                        </div>
+                        <p>
+                            <strong>
+                                <asp:Label ID="lblRooms" runat="server"></asp:Label>
+                            </strong>
+                            Rooms
+                        </p>
                     </div>
-                    <p>
-                        <strong>
-                            <asp:Label ID="lblRooms" runat="server"></asp:Label>
-                        </strong>
-                        Rooms
-                    </p>
+                </div>
+
+                <div class="span2 responsive" data-tablet="span3" data-desktop="span2">
+                    <div class="circle-wrap">
+                        <div class="stats-circle purple-color">
+                            <i class="icon-ambulance"></i>
+                        </div>
+                        <p>
+                            <strong>
+                                <asp:Label ID="lblServices" runat="server"></asp:Label>
+                            </strong>
+                            Services
+                        </p>
+                    </div>
+                </div>
+
+                <div class="span2 responsive clearfix" data-tablet="span3" data-desktop="span2">
+                    <div class="circle-wrap">
+                        <div class="stats-circle turquoise-color">
+                            <i class="icon-user"></i>
+                        </div>
+                        <p>
+                            <strong>
+                                <asp:Label ID="lblStaffMembers" runat="server"></asp:Label>
+                            </strong>
+                            Staff Members
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

@@ -45,7 +45,7 @@
                                     <th>Room number</th>
                                     <th>Requested Date/Time</th>
                                     <th>Customer remarks</th>
-                                    <th>AssignedID</th>
+                                    <th>Assigned to</th>
                                     <th>Unit</th>
                                     <th></th>
                                 </tr>
