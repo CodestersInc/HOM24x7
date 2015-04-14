@@ -64,7 +64,7 @@
                                         <div class="control-group">
                                             <label class="control-label">Department</label>
                                             <div class="controls">
-                                                <asp:DropDownList ID="ddlDepartment" runat="server" CssClass="span3" data-placeholder="Choose a Category" TabIndex="1" />
+                                                <asp:DropDownList ID="ddlDepartment" runat="server" CssClass="span3" data-placeholder="Choose a Department" TabIndex="1" />
                                             </div>
                                         </div>
                                     </asp:PlaceHolder>

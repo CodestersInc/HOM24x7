@@ -33,7 +33,7 @@ public partial class viewattendance : System.Web.UI.Page
             ddlDepartment.DataBind();
 
             ddlDepartment.SelectedValue = "0";
-            Repeater1.DataSource = new AttendanceLogic().getAttendanceRange(DateTime.Now.Date,
+            Repeater1.DataSource = new AttendanceLogic().getAttendanceForRange(DateTime.Now.Date,
                 DateTime.Now.Date,
                 loggedUser.AccountID);
             Repeater1.DataBind();
@@ -45,7 +45,7 @@ public partial class viewattendance : System.Web.UI.Page
 
         if (!IsPostBack && loggedUser.UserType == "Managerial Staff")
         {
-            Repeater1.DataSource = new AttendanceLogic().getAttendanceRange(DateTime.Now.Date,
+            Repeater1.DataSource = new AttendanceLogic().getAttendanceForRange(DateTime.Now.Date,
                 DateTime.Now.Date,
                 loggedUser.DepartmentID,
                 loggedUser.AccountID);
@@ -59,10 +59,10 @@ public partial class viewattendance : System.Web.UI.Page
     {
         Staff loggedUser = (Staff)Session["LoggedUser"];
 
-        Repeater1.DataSource = (loggedUser.UserType == "Managerial Staff") ? new AttendanceLogic().getAttendanceRange(Convert.ToDateTime(txtFromDate.Text),
+        Repeater1.DataSource = (loggedUser.UserType == "Managerial Staff") ? new AttendanceLogic().getAttendanceForRange(Convert.ToDateTime(txtFromDate.Text),
             Convert.ToDateTime(txtToDate.Text),
             loggedUser.DepartmentID,
-            loggedUser.AccountID) : new AttendanceLogic().getAttendanceRange(Convert.ToDateTime(txtFromDate.Text),
+            loggedUser.AccountID) : new AttendanceLogic().getAttendanceForRange(Convert.ToDateTime(txtFromDate.Text),
             Convert.ToDateTime(txtToDate.Text),
             Convert.ToInt32(ddlDepartment.SelectedValue),
             loggedUser.AccountID);
@@ -83,11 +83,14 @@ public partial class viewattendance : System.Web.UI.Page
             attendanceObj.OutTime = Convert.ToDateTime(((HiddenField)Repeater1.Items[i].FindControl("HiddenFieldOutTime")).Value);
             attendanceObj.AttendanceStatus = ((CheckBox)Repeater1.Items[i].FindControl("cbxPresence")).Checked;
 
-            attendanceLogic.update(attendanceObj);
+            if (attendanceLogic.update(attendanceObj) != 1)
+            {
+                Response.Redirect("ErrorPage500.html");
+            }
         }
     }
     protected void btnCancel_Click(object sender, EventArgs e)
     {
-
+        Response.Redirect("home.aspx");
     }
 }

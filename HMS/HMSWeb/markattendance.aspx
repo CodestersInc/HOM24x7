@@ -38,27 +38,40 @@
                     <div class="widget-body form">
                         <!-- BEGIN FORM-->
                         <div>
-                            <div class="form-horizontal">
-                                <table class="table table-striped table-bordered table-advance table-hover">
-                                    <tr>
-                                        <th>Staff Code</th>
-                                        <th>Name</th>
-                                        <th style="text-align: center">Attendance</th>
-                                    </tr>
-                                    <asp:Repeater ID="Repeater1" runat="server">
-                                        <ItemTemplate>
-                                            <tr>
-                                                <td><%# Eval("StaffCode") %></td>
-                                                <td><%# Eval("Name") %></td>
-                                                <td style="text-align: center">
-                                                    <asp:CheckBox ID="cbxPresence" CssClass="success-toggle-button toggle-button" runat="server" />
-                                                    <asp:HiddenField ID="HiddenFieldStaffID" runat="server" Value='<%# Eval("StaffID") %>' />
-                                                </td>
-                                            </tr>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-                                </table>
+                            <div class="form-horizontal">                                
+                                <asp:PlaceHolder ID="ddlDepartmentPlaceHolder" runat="server" Visible="false">
+                                    <div class="control-group">
+                                        <label class="control-label">Department</label>
+                                        <div class="controls">
+                                            <asp:DropDownList ID="ddlDepartment" runat="server" OnSelectedIndexChanged="ddlDepartment_SelectedIndexChanged" AutoPostBack="True" CssClass="span3" data-placeholder="Choose a Department" TabIndex="1" />
+                                        </div>
+                                    </div>
+                                </asp:PlaceHolder>
 
+                                <asp:Label ID="lblMarked" runat="server" CssClass="alert alert-info" Visible="false"><strong>Note:</strong> Attendance for selected department is already marked for today</asp:Label>
+
+                                <asp:PlaceHolder ID="staffRecordPlaceHolder" runat="server">
+                                    <table class="table table-striped table-bordered table-advance table-hover">
+                                        <tr>
+                                            <th>Staff Code</th>
+                                            <th>Name</th>
+                                            <th style="text-align: center">Attendance</th>
+                                        </tr>
+
+                                        <asp:Repeater ID="Repeater1" runat="server">
+                                            <ItemTemplate>
+                                                <tr>
+                                                    <td><%# Eval("StaffCode") %></td>
+                                                    <td><%# Eval("Name") %></td>
+                                                    <td style="text-align: center">
+                                                        <asp:CheckBox ID="cbxPresence" CssClass="success-toggle-button toggle-button" runat="server" />
+                                                        <asp:HiddenField ID="HiddenFieldStaffID" runat="server" Value='<%# Eval("StaffID") %>' />
+                                                    </td>
+                                                </tr>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </table>
+                                </asp:PlaceHolder>
                                 <div class="form-actions">
                                     <asp:Button ID="btnSubmit" runat="server" Text="Submit Attendance" CssClass="btn btn-success" OnClick="btnSubmit_Click" />
                                 </div>
