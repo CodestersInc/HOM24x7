@@ -148,5 +148,14 @@ namespace BusinessLogic
 
             return DBUtility.Select(query, new List<SqlParameter>());
         }
+
+        public DataTable selectAll(int AccountID)
+        {
+            String query = "select * from OnlineBooking where AccountID=@AccountID";
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+            lstParams.Add(new SqlParameter("@AccountID", AccountID));
+
+            return DBUtility.Select(query, lstParams);
+        }
     }
 }

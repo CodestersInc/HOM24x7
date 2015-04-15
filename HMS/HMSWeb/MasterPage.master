@@ -187,7 +187,7 @@
 					            <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a href="createpayslip.aspx">Generate Payslip</a></li>
+                                    <li><a href="generatepayslip.aspx">Generate Payslip</a></li>
                                     <li><a href="searchpayslip.aspx">Search Payslip</a></li>
                                 </ul>
                             </li>
@@ -295,6 +295,20 @@
                 <!-- BEGIN PAGE -->
                 <div id="main-content">
                     <!-- BEGIN PAGE CONTAINER-->
+                    <!-- BEGIN THEME CUSTOMIZER-->
+                    <div id="theme-change" class="hidden-phone">
+                        <i class="icon-cogs"></i>
+                        <span class="settings">
+                            <span class="text">Theme:</span>
+                            <span class="colors">
+                                <span class="color-default" data-style="default"></span>
+                                <span class="color-gray" data-style="gray"></span>
+                                <span class="color-purple" data-style="purple"></span>
+                                <span class="color-navy-blue" data-style="navy-blue"></span>
+                            </span>
+                        </span>
+                    </div>
+                    <!-- END THEME CUSTOMIZER-->
                     <!--Visual contents from other pages-->
                     <asp:ContentPlaceHolder ID="bodyContentPlaceHolder" runat="server">
                     </asp:ContentPlaceHolder>

@@ -134,6 +134,15 @@ namespace BusinessLogic
             return DBUtility.Select(query, new List<SqlParameter>());
         }
 
+        public DataTable selectAll(int AccountID)
+        {
+            String query = "select * from Customer where AccountID=@AccountID";
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+            lstParams.Add(new SqlParameter("@AccountID", AccountID));
+
+            return DBUtility.Select(query, lstParams);
+        }
+
         public Customer login(String username, String password)
         {
             String query = "select * from customer where Username=@Username and Password=@Password";

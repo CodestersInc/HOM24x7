@@ -30,20 +30,26 @@ public partial class home : System.Web.UI.Page
         {
             statisticsPlaceHolder.Visible = true;
 
-            DataTable dt = new StaffLogic().selectAll(loggedUser.AccountID);
-            lblStaffMembers.Text = dt.Rows.Count.ToString();
-
-            DataTable dt1 = new DepartmentLogic().selectAll(loggedUser.AccountID);
-            lblDepartments.Text = dt1.Rows.Count.ToString();
-
-            DataTable dt2 = new RoomLogic().selectAll(loggedUser.AccountID);
-            lblRooms.Text = dt2.Rows.Count.ToString();
-
-            DataTable dt3 = new ServiceLogic().getAllServices(loggedUser.AccountID);
-            lblServices.Text = dt3.Rows.Count.ToString();
-
             Account account = new AccountLogic().selectById(loggedUser.AccountID);
             lblHotelName.Text = account.Company;
+
+            DataTable dt1 = new OnlineBookingLogic().selectAll(loggedUser.AccountID);
+            lblBookings.Text = dt1.Rows.Count.ToString();
+
+            DataTable dt2 = new CustomerLogic().selectAll(loggedUser.AccountID);
+            lblCustomer.Text = dt2.Rows.Count.ToString();
+
+            DataTable dt3 = new StaffLogic().selectAll(loggedUser.AccountID);
+            lblStaffMembers.Text = dt3.Rows.Count.ToString();
+
+            DataTable dt4 = new DepartmentLogic().selectAll(loggedUser.AccountID);
+            lblDepartments.Text = dt4.Rows.Count.ToString();
+
+            DataTable dt5 = new RoomLogic().selectAll(loggedUser.AccountID);
+            lblRooms.Text = dt5.Rows.Count.ToString();
+
+            DataTable dt6 = new ServiceLogic().getAllServices(loggedUser.AccountID);
+            lblServices.Text = dt6.Rows.Count.ToString();            
         }        
     }
 }
