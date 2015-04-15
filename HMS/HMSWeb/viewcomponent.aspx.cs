@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
+using System.IO;
 
 public partial class viewcomponent : System.Web.UI.Page
 {
@@ -34,6 +35,10 @@ public partial class viewcomponent : System.Web.UI.Page
     protected void btnUpdate_Click(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["loggedUser"];
+
+        ComponentLogic componentLogic = new ComponentLogic();
+        
+        String staleImagePath = componentLogic.selectById(Convert.ToInt32(Request.QueryString["ID"])).Image;
         String ticks = DateTime.Now.Ticks.ToString();
 
         Component component = new Component();
@@ -47,17 +52,26 @@ public partial class viewcomponent : System.Web.UI.Page
         }
         else
         {
-            component.Image = new ComponentLogic().selectById(Convert.ToInt32(Request.QueryString["ID"])).Image;
+            component.Image = staleImagePath;
         }
         component.AccountID = loggedUser.AccountID;
 
-        int res = new ComponentLogic().update(component);
+        int res = componentLogic.update(component);
 
         if (res != 0)
         {
             if (FileUpload1.HasFile)
             {
                 FileUpload1.SaveAs(Server.MapPath("img/component/" + ticks + FileUpload1.FileName));
+                try
+                {
+                    File.Delete(staleImagePath);
+                }
+                catch (Exception)
+                {
+                    //for now just do nothing this case may come in place if therre is 
+                    //no file to be deleted or the path is ""
+                }
             }
             Response.Redirect("searchcomponent.aspx");
         }

@@ -8,6 +8,7 @@ using BusinessLogic;
 using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
+using System.IO;
 
 public partial class viewroomtype : System.Web.UI.Page
 {
@@ -36,7 +37,10 @@ public partial class viewroomtype : System.Web.UI.Page
     {
         Staff loggedUser = (Staff)Session["loggedUser"];
 
+        RoomTypeLogic roomTypeLogic = new RoomTypeLogic();
+
         String ticks = DateTime.Now.Ticks.ToString();
+        String staleImagePath = roomTypeLogic.selectById(Convert.ToInt32(Request.QueryString["ID"])).Photo;
         
         RoomType roomtypeobj = new RoomType();
         roomtypeobj.RoomTypeID=Convert.ToInt32(Request.QueryString["ID"]);
@@ -48,7 +52,7 @@ public partial class viewroomtype : System.Web.UI.Page
         }
         else
         {
-            roomtypeobj.Photo = new RoomTypeLogic().selectById(Convert.ToInt32(Request.QueryString["ID"])).Photo;
+            roomtypeobj.Photo = staleImagePath;
         }
         roomtypeobj.AccountID = loggedUser.AccountID;
 
@@ -57,11 +61,22 @@ public partial class viewroomtype : System.Web.UI.Page
             if (FileUpload1.HasFile)
             {
                 FileUpload1.SaveAs(Server.MapPath("img/roomtype/" + ticks + FileUpload1.FileName));
+                try
+                {
+                    File.Delete(staleImagePath);
+                }
+                catch (Exception)
+                {
+                    //for now just do nothing this case may come in place if therre is 
+                    //no file to be deleted or the path is ""
+                }
             }
+
+            SeasonRoomLogic seasonRoomLogic = new SeasonRoomLogic();
 
             for (int i = 0; i < Repeater1.Items.Count; i++)
             {
-                new SeasonRoomLogic().update(new SeasonRoom(Convert.ToInt32(((HiddenField)Repeater1.Items[i].FindControl("HiddenFieldSeasonRoomID")).Value),
+                seasonRoomLogic.update(new SeasonRoom(Convert.ToInt32(((HiddenField)Repeater1.Items[i].FindControl("HiddenFieldSeasonRoomID")).Value),
                         Convert.ToInt32(((HiddenField)Repeater1.Items[i].FindControl("HiddenFieldSeasonID")).Value),
                         roomtypeobj.RoomTypeID,
                         Convert.ToSingle(((TextBox)Repeater1.Items[i].FindControl("txtRate")).Text),

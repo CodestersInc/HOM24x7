@@ -42,7 +42,7 @@ public partial class viewplan : System.Web.UI.Page
         floorPlan.PlanID = Convert.ToInt32(Request.QueryString["ID"]);
         floorPlan.PlanStyle = txtPlanData.Text;
         floorPlan.Image = "";
-
+        
         if (new FloorPlanLogic().update(floorPlan) == 1)
         {
             if (new PlanComponentLogic().deleteAll(Convert.ToInt32(Request.QueryString["ID"])) >= 0)

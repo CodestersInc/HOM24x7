@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using BusinessLogic;
+using System.IO;
 
 public partial class viewservice : System.Web.UI.Page
 {
@@ -49,19 +50,31 @@ public partial class viewservice : System.Web.UI.Page
         Staff loggedUser = (Staff)Session["loggedUser"];
         String ticks = DateTime.Now.Ticks.ToString();
 
+        ServiceLogic serviceLogic = new ServiceLogic();
+        String staleImagePath = serviceLogic.selectById(Convert.ToInt32(Request.QueryString["ID"])).Image;
+
         Service serviceobj = new Service(Convert.ToInt32(Request.QueryString["ID"]),
             txtName.Text,
             Convert.ToInt32(ddlDepartment.SelectedValue),
             Convert.ToDouble(txtRate.Text),
-            (FileUpload1.HasFile)? "img/service/" + ticks + FileUpload1.FileName : new ServiceLogic().selectById(Convert.ToInt32(Request.QueryString["ID"])).Image,
+            (FileUpload1.HasFile)? "img/service/" + ticks + FileUpload1.FileName : staleImagePath,
             Convert.ToInt32(ddlServiceType.SelectedValue));
 
 
-        if (new ServiceLogic().update(serviceobj) == 1)
+        if (serviceLogic.update(serviceobj) == 1)
         {
             if (FileUpload1.HasFile)
             {
                 FileUpload1.SaveAs(Server.MapPath("img/service/" + ticks + FileUpload1.FileName));
+                try
+                {
+                    File.Delete(staleImagePath);
+                }
+                catch (Exception)
+                {
+                    //for now just do nothing this case may come in place if therre is 
+                    //no file to be deleted or the path is ""
+                }
             }
             Response.Redirect("searchservice.aspx");
         }

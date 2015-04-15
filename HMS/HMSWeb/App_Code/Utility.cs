@@ -21,6 +21,11 @@ namespace WebUtility
             //
         }
 
+        public static Boolean replaceImage(String oldImagePath, String newImagePath)
+        {
+            return true;
+        }
+
         public static Boolean isEmpty(String Text)
         {
             if (Text.CompareTo("") == 0) return true; else return false;

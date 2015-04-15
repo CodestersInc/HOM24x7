@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
+using System.IO;
 
 public partial class viewservicetype : System.Web.UI.Page
 {
@@ -31,6 +32,10 @@ public partial class viewservicetype : System.Web.UI.Page
         Staff loggedUser = (Staff)Session["loggedUser"];
         String ticks = DateTime.Now.Ticks.ToString();
 
+        ServiceTypeLogic serviceTypeLogic = new ServiceTypeLogic();
+
+        String staleImagePath = serviceTypeLogic.selectById(Convert.ToInt32(Request.QueryString["ID"])).Image;
+
         ServiceType serviceTypeObj = new ServiceType();
         serviceTypeObj.ServiceTypeID = Convert.ToInt32(Request.QueryString["ID"]);
         serviceTypeObj.Name = txtServiceTypeName.Text;
@@ -41,17 +46,26 @@ public partial class viewservicetype : System.Web.UI.Page
         }
         else
         {
-            serviceTypeObj.Image = new ServiceTypeLogic().selectById(Convert.ToInt32(Request.QueryString["ID"])).Image;
+            serviceTypeObj.Image = staleImagePath;
         }
         serviceTypeObj.AccountID = loggedUser.AccountID;
 
-        int res = new ServiceTypeLogic().update(serviceTypeObj);
+        int res = serviceTypeLogic.update(serviceTypeObj);
 
         if (res != 0)
         {
             if (FileUpload1.HasFile)
             {
                 FileUpload1.SaveAs(Server.MapPath("img/ServiceType/" + ticks + FileUpload1.FileName));
+            }
+            try
+            {
+                File.Delete(staleImagePath);
+            }
+            catch (Exception)
+            {
+                //for now just do nothing this case may come in place if therre is 
+                //no file to be deleted or the path is ""
             }
             Response.Redirect("searchServiceType.aspx");
         }
