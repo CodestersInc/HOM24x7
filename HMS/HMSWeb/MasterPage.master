@@ -364,6 +364,25 @@
                 });
             </script>
 
+            <!-- Date Picker -->
+            <script type="text/javascript" src="assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+            <script type="text/javascript" src="assets/bootstrap-daterangepicker/date.js"></script>
+            <script type="text/javascript" src="assets/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+            <script>
+                $(".date-picker").datepicker();
+
+                $(".date-picker").on('changeDate', function (ev) {
+                    if (ev.viewMode === 'days') {
+                        $(this).datepicker('hide');
+                    }
+                });
+
+                $(".non-editable").keypress(function (e) {
+                    e.preventDefault();
+                });
+            </script>
+
             <!--Scripts from other pages-->
             <asp:ContentPlaceHolder ID="scriptsContentPlaceHolder" runat="server">
             </asp:ContentPlaceHolder>

@@ -22,7 +22,6 @@ public partial class viewcomponent : System.Web.UI.Page
             int componentID = Convert.ToInt32(Request.QueryString["ID"]);
             Component component = new ComponentLogic().selectById(componentID);
             txtComponentName.Text = component.Name;
-            if (component.Type == "Room") cbxIsRoom.Checked = true; else cbxIsRoom.Checked = false;
             txtDescription.Text = component.Description;
             Image1.ImageUrl = component.Image;
         }
@@ -44,7 +43,6 @@ public partial class viewcomponent : System.Web.UI.Page
         Component component = new Component();
         component.ComponentID = Convert.ToInt32(Request.QueryString["ID"]);
         component.Name = txtComponentName.Text;
-        component.Type = (cbxIsRoom.Checked) ? "Room" : "Other";
         component.Description = txtDescription.Text;
         if (FileUpload1.HasFile)
         {
@@ -69,7 +67,7 @@ public partial class viewcomponent : System.Web.UI.Page
                 }
                 catch (Exception)
                 {
-                    //for now just do nothing this case may come in place if therre is 
+                    //for now just do nothing this case may come in place if there is 
                     //no file to be deleted or the path is ""
                 }
             }

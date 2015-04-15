@@ -10,7 +10,6 @@ namespace BusinessLogic
     {
         public int ComponentID;
         public String Name;
-        public String Type;
         public String Description;
         public String Image;
         public int AccountID;
@@ -20,11 +19,10 @@ namespace BusinessLogic
 
         }
 
-        public Component(int ComponentID, String Name, String Type, String Description, String Image, int AccountID)
+        public Component(int ComponentID, String Name, String Description, String Image, int AccountID)
         {
             this.ComponentID = ComponentID;
             this.Name = Name;
-            this.Type = Type;
             this.Description = Description;
             this.Image = Image;
             this.AccountID = AccountID;

@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<!-- START HEAD -->
 <head runat="server">
     <meta charset="utf-8" />
     <title>Reset Password</title>
@@ -15,6 +16,7 @@
     <link href="css/style_default.css" rel="stylesheet" id="style_color" />
 </head>
 <!-- END HEAD -->
+
 <!-- BEGIN BODY -->
 <body id="login-body">
     <form id="form2" runat="server">

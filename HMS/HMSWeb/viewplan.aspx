@@ -34,7 +34,7 @@
                     <li>
                         <a href="#">Plan</a> <span class="divider">&nbsp;</span>
                     </li>
-                    <li><a href="viewplan.aspx">View</a><span class="divider-last">&nbsp;</span></li>
+                    <li><a href="#">View</a><span class="divider-last">&nbsp;</span></li>
                 </ul>
             </div>
         </div>

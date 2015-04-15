@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" runat="Server">
     <link href="assets/bootstrap/css/bootstrap-fileupload.css" rel="stylesheet" />
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="Server">
     <!-- BEGIN PAGE CONTAINER-->
     <div class="container-fluid">
@@ -134,15 +135,10 @@
             </div>
             <!-- END PAGE CONTENT-->
         </div>
-        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END PAGE CONTAINER-->
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
-    <script type="text/javascript" src="assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-    <script type="text/javascript" src="assets/bootstrap-daterangepicker/date.js"></script>
-    <script type="text/javascript" src="assets/bootstrap-daterangepicker/daterangepicker.js"></script>
 
-    <script>
-        $(".date-picker").datepicker();
-    </script>
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
 </asp:Content>
 

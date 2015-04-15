@@ -16,7 +16,7 @@
                     <li>
                         <a href="#">Service</a> <span class="divider">&nbsp;</span>
                     </li>
-                    <li><a href="viewservice.aspx">View</a><span class="divider-last">&nbsp;</span></li>
+                    <li><a href="#">View</a><span class="divider-last">&nbsp;</span></li>
                 </ul>
             </div>
         </div>

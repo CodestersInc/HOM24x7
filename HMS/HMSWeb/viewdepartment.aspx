@@ -17,7 +17,7 @@
                     <li>
                         <a href="#">Department</a> <span class="divider">&nbsp;</span>
                     </li>
-                    <li><a href="viewdepartment.aspx">View</a><span class="divider-last">&nbsp;</span></li>
+                    <li><a href="#">View</a><span class="divider-last">&nbsp;</span></li>
                 </ul>
             </div>
         </div>
@@ -250,9 +250,4 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
-    <script>
-        $(".txtManagerName").keypress(function (e) {
-            e.preventDefault();
-        });
-    </script>
 </asp:Content>

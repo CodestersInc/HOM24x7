@@ -92,10 +92,11 @@
                     <!-- END EXAMPLE TABLE widget-->
                 </div>
             </div>
-
             <!-- END ADVANCED TABLE widget-->
         </asp:PlaceHolder>
     </div>
     <!-- END PAGE CONTAINER -->
 </asp:Content>
 
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
+</asp:Content>

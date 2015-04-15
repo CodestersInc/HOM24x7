@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 
-public partial class createpayslip : System.Web.UI.Page
+public partial class editpayslip : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -19,15 +19,20 @@ public partial class createpayslip : System.Web.UI.Page
         {
             Response.Redirect("home.aspx");
         }
-
         if (!IsPostBack)
-        {            
-            searchResultArea.Visible = true;
-            Repeater1.DataSource = new StaffLogic().getStaffForPayroll(loggedUser.AccountID);
-            Repeater1.DataBind();
+        {
+            staffInfoRepeater.DataSource = new StaffLogic().getStaffMember(Convert.ToInt32(Request.QueryString["ID"]));
+            staffInfoRepeater.DataBind();
+
+            payrollInfoRepeater.DataSource = new StaffLogic().getStaffMember(Convert.ToInt32(Request.QueryString["ID"]));
+            payrollInfoRepeater.DataBind();
         }
     }
-    protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("createpayslip.aspx");
+    }
+    protected void btnGenerate_Click(object sender, EventArgs e)
     {
 
     }

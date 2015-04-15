@@ -42,14 +42,8 @@
                                 <div class="control-group">
                                     <label class="control-label">Component Name</label>
                                     <div class="controls">
-                                        <asp:TextBox ID="txtComponentName" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter the name of season" data-original-title="Popover header"></asp:TextBox>
+                                        <asp:TextBox ID="txtComponentName" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter the name of component" data-original-title="Hint"></asp:TextBox>
                                         <asp:RequiredFieldValidator ControlToValidate="txtComponentName" ID="NameRequiredFieldValidator" ValidationGroup="First" runat="server" ErrorMessage="Please give a Name to the component" CssClass="alert alert-error"></asp:RequiredFieldValidator>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">Is Room</label>
-                                    <div class="controls">
-                                        <asp:CheckBox ID="cbxIsRoom" CssClass="success-toggle-button toggle-button" runat="server" />
                                     </div>
                                 </div>
 
@@ -85,6 +79,7 @@
     </div>
     <!-- END PAGE CONTAINER-->
 </asp:Content>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
     <script type="text/javascript" src="assets/bootstrap-toggle-buttons/static/js/jquery.toggle.yesno-buttons.js"></script>
 

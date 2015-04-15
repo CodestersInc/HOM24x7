@@ -2,6 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" Runat="Server">
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" Runat="Server">
     <div class="container-fluid">
         <!-- BEGIN PAGE HEADER-->
@@ -75,6 +76,7 @@
         <!-- END PAGE CONTENT-->
     </div>
 </asp:Content>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" Runat="Server">
 </asp:Content>
 

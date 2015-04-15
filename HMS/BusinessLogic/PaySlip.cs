@@ -9,36 +9,44 @@ namespace BusinessLogic
     public class PaySlip : IModel
     {
         public int PaySlipID;
-        public int SaffID;
+        public int StaffID;
         public double BasicSalary;
-        public double Allowance;
-        public double Deduction;
+        public double ConvAllowance;
+        public double Bonus;
+        public double PF;
+        public double ProfessionalTax;
+        public double IncomeTax;
         public double NetPay;
         public DateTime FromDate;
         public DateTime ToDate;
-        public DateTime GenerateDate;
+        public int DaysPayable;
         public DateTime PayDate;
+        public DateTime GenerateDate;
         public int ApproverID;
+        public int AccountID;
 
         public PaySlip()
         {
 
         }
-
-        public PaySlip(int PaySlipID, int SaffID, double BasicSalary, double Allowance, double Deduction, double NetPay, DateTime FromDate, DateTime ToDate, DateTime GenerateDate, DateTime PayDate, int ApproverID)
+        public PaySlip(int PaySlipID, int StaffID, double BasicSalary, double ConvAllowance, double Bonus, double PF, double ProfessionalTax, double IncomeTax, double NetPay, DateTime FromDate, DateTime ToDate, int DaysPayable, DateTime PayDate, DateTime GenerateDate, int ApproverID, int AccountID)
         {
             this.PaySlipID = PaySlipID;
-            this.SaffID = SaffID;
+            this.StaffID = StaffID;
             this.BasicSalary = BasicSalary;
-            this.Allowance = Allowance;
-            this.Deduction = Deduction;
+            this.ConvAllowance = ConvAllowance;
+            this.Bonus = Bonus;
+            this.PF = PF;
+            this.ProfessionalTax = ProfessionalTax;
+            this.IncomeTax = IncomeTax;
             this.NetPay = NetPay;
             this.FromDate = FromDate;
             this.ToDate = ToDate;
-            this.GenerateDate = GenerateDate;
+            this.DaysPayable = DaysPayable;
             this.PayDate = PayDate;
+            this.GenerateDate = GenerateDate;
             this.ApproverID = ApproverID;
-            
+            this.AccountID = AccountID;
         }
     }
 }

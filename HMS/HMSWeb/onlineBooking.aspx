@@ -7,7 +7,8 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
     <link href="clientcss/style.css" rel="stylesheet" type="text/css" media="all" />
     <script src="clientjs/jquery.min.js"></script>
-    <!---strat-date-piker---->
+
+    <!---Start Date Picker---->
     <link rel="stylesheet" href="clientcss/jquery-ui.css" />
     <script src="clientjs/jquery-ui.js"></script>
     <script>
@@ -15,7 +16,8 @@
             $(".datepicker").datepicker();
         });
     </script>
-    <!---/End-date-piker---->
+    <!---End Date Picker---->
+
     <link type="text/css" rel="stylesheet" href="clientcss/JFGrid.css" />
     <link type="text/css" rel="stylesheet" href="clientcss/JFFormStyle-1.css" />
     <script type="text/javascript" src="clientjs/JFCore.js"></script>

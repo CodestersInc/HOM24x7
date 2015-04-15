@@ -25,12 +25,11 @@ namespace BusinessLogic
 
         public Component create(Component obj)
         {
-            String query = "insert into Component values(@Name, @Type, @Description, @Image, @AccountID)";
+            String query = "insert into Component values(@Name, @Description, @Image, @AccountID)";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@Name", obj.Name));
             lstParams.Add(new SqlParameter("@Description", obj.Description));
-            lstParams.Add(new SqlParameter("@Type", obj.Type));
             lstParams.Add(new SqlParameter("@Image", obj.Image));
             lstParams.Add(new SqlParameter("@AccountID", obj.AccountID));
 
@@ -38,12 +37,11 @@ namespace BusinessLogic
 
             if (res == 1)
             {
-                String fetchquery = "select * from Component where Name=@Name and Type=@Type and Description=@Description and Image=@Image and AccountID=@AccountID;";
+                String fetchquery = "select * from Component where Name=@Name and Description=@Description and Image=@Image and AccountID=@AccountID;";
                 List<SqlParameter> lstParams1 = new List<SqlParameter>();
 
                 lstParams1.Add(new SqlParameter("@Name", obj.Name));
                 lstParams1.Add(new SqlParameter("@Description", obj.Description));
-                lstParams1.Add(new SqlParameter("@Type", obj.Type));
                 lstParams1.Add(new SqlParameter("@Image", obj.Image));
                 lstParams1.Add(new SqlParameter("@AccountID", obj.AccountID));
 
@@ -52,7 +50,6 @@ namespace BusinessLogic
                 {
                     return new Component(Convert.ToInt32(dt.Rows[0]["ComponentID"]),
                     dt.Rows[0]["Name"].ToString(),
-                    dt.Rows[0]["Type"].ToString(),
                     dt.Rows[0]["Description"].ToString(),
                     dt.Rows[0]["Image"].ToString(),
                     Convert.ToInt32(dt.Rows[0]["AccountID"]));
@@ -67,13 +64,12 @@ namespace BusinessLogic
 
         public int update(Component obj)
         {
-            String query = "update Component set Name=@Name, Type=@Type, Description=@Description, Image=@Image, AccountID=@AccountID where ComponentID=@ComponentID";
+            String query = "update Component set Name=@Name, Description=@Description, Image=@Image, AccountID=@AccountID where ComponentID=@ComponentID";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@ComponentID", obj.ComponentID));
             lstParams.Add(new SqlParameter("@Name", obj.Name));
             lstParams.Add(new SqlParameter("@Description", obj.Description));
-            lstParams.Add(new SqlParameter("@Type", obj.Type));
             lstParams.Add(new SqlParameter("@Image", obj.Image));
             lstParams.Add(new SqlParameter("@AccountID", obj.AccountID));
 
@@ -101,7 +97,6 @@ namespace BusinessLogic
             {
                 return new Component(Convert.ToInt32(dt.Rows[0]["ComponentID"]),
                     dt.Rows[0]["Name"].ToString(),
-                    dt.Rows[0]["Type"].ToString(),
                     dt.Rows[0]["Description"].ToString(),
                     dt.Rows[0]["Image"].ToString(),
                     Convert.ToInt32(dt.Rows[0]["AccountID"]));

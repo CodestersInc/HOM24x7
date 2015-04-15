@@ -27,14 +27,10 @@ public partial class createcomponent : System.Web.UI.Page
     {
         Staff loggedUser = (Staff)Session["loggedUser"];
 
-        String ticks = DateTime.Now.Ticks.ToString();
-        
-
-        String Type = (cbxIsRoom.Checked)?"Room":"Other";
+        String ticks = DateTime.Now.Ticks.ToString();       
 
         Component componentObj = new ComponentLogic().create(new Component(0,
             txtComponentName.Text,
-            Type,
             txtDescription.Text,
             "img/component/" + ticks + FileUpload1.FileName,
             loggedUser.AccountID));
@@ -47,8 +43,7 @@ public partial class createcomponent : System.Web.UI.Page
         else
         {
             Server.TransferRequest("ErrorPage500.html");
-        }
-            
+        }            
     }
 
     protected void btnCancel_Click(object sender, EventArgs e)

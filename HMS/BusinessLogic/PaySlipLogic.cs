@@ -20,35 +20,58 @@ namespace BusinessLogic
 
         public PaySlip create(PaySlip obj)
         {
-            String query = "insert into PaySlip values(@SaffID, @BasicSalary, @Allowance, @Deduction, @FromDate, @ToDate, @GenerateDate, @ApproverID); select * from PaySlip where BasicSalary=@BasicSalary and Allowance=@Allowance and Deduction=@Deduction and FromDate=@FromDate and ToDate=@ToDate and GenerateDate=@GenerateDate PayDate=@PayDate and ApproverID=@ApproverID);";
+            String query = "insert into PaySlip values(@StaffID, @BasicSalary, @ConvAllowance, @Bonus, @PF, @ProfessionalTax, @IncomeTax, @Netpay, @FromDate, @ToDate, @DaysPayable, @GenerateDate, @PayDate, @ApproverID, @AccountID)";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
-            lstParams.Add(new SqlParameter("@SaffID", obj.SaffID));
+            lstParams.Add(new SqlParameter("@StaffID", obj.StaffID));
             lstParams.Add(new SqlParameter("@BasicSalary", obj.BasicSalary));
-            lstParams.Add(new SqlParameter("@Allowance", obj.Allowance));
-            lstParams.Add(new SqlParameter("@Deduction", obj.Deduction));
+            lstParams.Add(new SqlParameter("@ConvAllowance", obj.ConvAllowance));
+            lstParams.Add(new SqlParameter("@Bonus", obj.Bonus));
+            lstParams.Add(new SqlParameter("@PF", obj.PF));
+            lstParams.Add(new SqlParameter("@ProfessionalTax", obj.ProfessionalTax));
+            lstParams.Add(new SqlParameter("@IncomeTax", obj.IncomeTax));
+            lstParams.Add(new SqlParameter("@NetPay", obj.NetPay));
             lstParams.Add(new SqlParameter("@FromDate", obj.FromDate));
             lstParams.Add(new SqlParameter("@ToDate", obj.ToDate));
+            lstParams.Add(new SqlParameter("@DaysPayable", obj.DaysPayable));
             lstParams.Add(new SqlParameter("@GenerateDate", obj.GenerateDate));
             lstParams.Add(new SqlParameter("@PayDate", obj.PayDate));
             lstParams.Add(new SqlParameter("@ApproverID", obj.ApproverID));
+            lstParams.Add(new SqlParameter("@AccountID", obj.AccountID));
 
-            DataTable dt = DBUtility.InsertAndFetch(query, lstParams);
+            int res = DBUtility.Modify(query, lstParams);
 
-            if (dt.Rows.Count == 1)
+            if (res==1)
             {
+                String selectquery = "select * from PaySlip where StaffID=@StaffID and FromDate=@FromDate and ToDate=@ToDate and GenerateDate=@GenerateDate and ApproverID=@ApproverID and AccountID=@AccountID";
+
+                List<SqlParameter> lstParams1 = new List<SqlParameter>();
+
+                lstParams1.Add(new SqlParameter("@StaffID", obj.StaffID));
+                lstParams1.Add(new SqlParameter("@FromDate", obj.FromDate));
+                lstParams1.Add(new SqlParameter("@ToDate", obj.ToDate));
+                lstParams1.Add(new SqlParameter("@GenerateDate", obj.GenerateDate));                
+                lstParams1.Add(new SqlParameter("@ApproverID", obj.ApproverID));
+                lstParams1.Add(new SqlParameter("@AccountID", obj.AccountID));
+
+                DataTable dt = DBUtility.Select(selectquery, lstParams1);
+
                 return new PaySlip(Convert.ToInt32(dt.Rows[0]["PaySlipID"]),
                 Convert.ToInt32(dt.Rows[0]["StaffID"]),
                 Convert.ToDouble(dt.Rows[0]["BasicSalary"]),
-                Convert.ToDouble(dt.Rows[0]["Allowance"]),
-                Convert.ToDouble(dt.Rows[0]["Deduction"]),
+                Convert.ToDouble(dt.Rows[0]["ConvAllowance"]),
+                Convert.ToDouble(dt.Rows[0]["Bonus"]),
+                Convert.ToDouble(dt.Rows[0]["PF"]),
+                Convert.ToDouble(dt.Rows[0]["ProfessionalTax"]),
+                Convert.ToDouble(dt.Rows[0]["IncomeTax"]),
                 Convert.ToDouble(dt.Rows[0]["NetPay"]),
                 Convert.ToDateTime(dt.Rows[0]["FromDate"]),
                 Convert.ToDateTime(dt.Rows[0]["ToDate"]),
-                Convert.ToDateTime(dt.Rows[0]["GeneratedDate"]),
+                Convert.ToInt32(dt.Rows[0]["DaysPayable"]),
+                Convert.ToDateTime(dt.Rows[0]["GenerateDate"]),
                 Convert.ToDateTime(dt.Rows[0]["PayDate"]),
-                Convert.ToInt32(dt.Rows[0]["ApproverID"]));
-
+                Convert.ToInt32(dt.Rows[0]["ApproverID"]),
+                Convert.ToInt32(dt.Rows[0]["AccountID"]));
             }
             else
             {
@@ -58,19 +81,17 @@ namespace BusinessLogic
 
         public int update(PaySlip obj)
         {
-            String query = "update PaySlip set SaffID=@SaffID, BasicSalary=@BasicSalary, Allowance=@Allowance, Deduction=@Deduction, NetPay=@NetPay FromDate=@FromDate, ToDate=@ToDate, GenerateDate=@GenerateDate, ApproverID=@ApproverID where PaySlipID=@PaySlipID";
+            String query = "update PaySlip set ConvAllowance=@ConvAllowance, Bonus=@Bonus, PF=@PF, ProfessionalTax=@ProfessionalTax, IncomeTax=@IncomeTax, NetPay=@Netpay, ApproverID=@ApproverID  where PaySlipID=@PaySlipID and AccountID=@AccountID";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
-            lstParams.Add(new SqlParameter("@PaySlipID", obj.PaySlipID));
-            lstParams.Add(new SqlParameter("@SaffID", obj.SaffID));
-            lstParams.Add(new SqlParameter("@BasicSalary", obj.BasicSalary));
-            lstParams.Add(new SqlParameter("@Allowance", obj.Allowance));
-            lstParams.Add(new SqlParameter("@Deduction", obj.Deduction));
+            lstParams.Add(new SqlParameter("@ConvAllowance", obj.ConvAllowance));
+            lstParams.Add(new SqlParameter("@Bonus", obj.Bonus));
+            lstParams.Add(new SqlParameter("@PF", obj.PF));
+            lstParams.Add(new SqlParameter("@ProfessionalTax", obj.ProfessionalTax));
+            lstParams.Add(new SqlParameter("@IncomeTax", obj.IncomeTax));
             lstParams.Add(new SqlParameter("@NetPay", obj.NetPay));
-            lstParams.Add(new SqlParameter("@FromDate", obj.FromDate));
-            lstParams.Add(new SqlParameter("@ToDate", obj.ToDate));
-            lstParams.Add(new SqlParameter("@GenerateDate", obj.GenerateDate));
             lstParams.Add(new SqlParameter("@ApproverID", obj.ApproverID));
+            lstParams.Add(new SqlParameter("@AccountID", obj.AccountID));
 
             return DBUtility.Modify(query, lstParams); 
         }
@@ -97,15 +118,19 @@ namespace BusinessLogic
                 return new PaySlip(Convert.ToInt32(dt.Rows[0]["PaySlipID"]),
                 Convert.ToInt32(dt.Rows[0]["StaffID"]),
                 Convert.ToDouble(dt.Rows[0]["BasicSalary"]),
-                Convert.ToDouble(dt.Rows[0]["Allowance"]),
-                Convert.ToDouble(dt.Rows[0]["Deduction"]),
+                Convert.ToDouble(dt.Rows[0]["ConvAllowance"]),
+                Convert.ToDouble(dt.Rows[0]["Bonus"]),
+                Convert.ToDouble(dt.Rows[0]["PF"]),
+                Convert.ToDouble(dt.Rows[0]["ProfessionalTax"]),
+                Convert.ToDouble(dt.Rows[0]["IncomeTax"]),
                 Convert.ToDouble(dt.Rows[0]["NetPay"]),
                 Convert.ToDateTime(dt.Rows[0]["FromDate"]),
                 Convert.ToDateTime(dt.Rows[0]["ToDate"]),
-                Convert.ToDateTime(dt.Rows[0]["GeneratedDate"]),
+                Convert.ToInt32(dt.Rows[0]["DaysPayable"]),
+                Convert.ToDateTime(dt.Rows[0]["GenerateDate"]),
                 Convert.ToDateTime(dt.Rows[0]["PayDate"]),
-                Convert.ToInt32(dt.Rows[0]["ApproverID"]));
-
+                Convert.ToInt32(dt.Rows[0]["ApproverID"]),
+                Convert.ToInt32(dt.Rows[0]["AccountID"]));
             }
             else
             {
@@ -119,6 +144,17 @@ namespace BusinessLogic
             String query = "select * from PaySlip";
 
             return DBUtility.Select(query, new List<SqlParameter>());
+        }
+
+        public DataTable getLastPaySlipGenerateDate(int AccountID)
+        {
+            String query = "select ToDate from PaySlip where PaySlipID = ( select MAX(PaySlipID) from PaySlip where AccountID=@AccountID)";
+            
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+
+            lstParams.Add(new SqlParameter("@AccountID", AccountID));
+
+            return DBUtility.Select(query, lstParams); 
         }
     }
 }

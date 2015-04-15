@@ -16,7 +16,7 @@
                     <li>
                         <a href="#">Floor</a> <span class="divider">&nbsp;</span>
                     </li>
-                    <li><a href="createfloor.aspx">View</a><span class="divider-last">&nbsp;</span></li>
+                    <li><a href="#">View</a><span class="divider-last">&nbsp;</span></li>
                 </ul>
             </div>
         </div>

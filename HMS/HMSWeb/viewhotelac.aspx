@@ -18,7 +18,7 @@
                     <li>
                         <a href="#">Accounts</a> <span class="divider">&nbsp;</span>
                     </li>
-                    <li><a href="viewhotelac.aspx">View</a><span class="divider-last">&nbsp;</span></li>
+                    <li><a href="#">View</a><span class="divider-last">&nbsp;</span></li>
                 </ul>
             </div>
         </div>
@@ -87,8 +87,7 @@
                                 <div class="controls">
                                     <div class="input-prepend">                                        
                                         <span class="add-on">URL</span>
-                                        <asp:TextBox ID="txtWebsite" placeholder="Enter website URL" runat="server"></asp:TextBox>
-                                        <%--<asp:RegularExpressionValidator ControlToValidate="txtWebsite" ID="WebsiteRegularExpressionValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid website URL" ValidationExpression="/((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)/i" ValidationGroup="First" CssClass="alert alert-error"></asp:RegularExpressionValidator>--%>
+                                        <asp:TextBox ID="txtWebsite" placeholder="Enter website URL" runat="server"></asp:TextBox>                                        
                                     </div>
                                 </div>
                             </div>
@@ -130,14 +129,9 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
-    <script type="text/javascript" src="assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-    <script type="text/javascript" src="assets/bootstrap-daterangepicker/date.js"></script>
-    <script type="text/javascript" src="assets/bootstrap-daterangepicker/daterangepicker.js"></script>
     <script type="text/javascript" src="assets/bootstrap-toggle-buttons/static/js/jquery.toggle.buttons.js"></script>
 
     <script>
-        $(".date-picker").datepicker();
-
         var handleToggleButtons = function () {
             if (!jQuery().toggleButtons) {
                 return;

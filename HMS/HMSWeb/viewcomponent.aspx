@@ -18,7 +18,7 @@
                     <li>
                         <a href="#">Component</a> <span class="divider">&nbsp;</span>
                     </li>
-                    <li><a href="viewcomponent.aspx">View</a><span class="divider-last">&nbsp;</span></li>
+                    <li><a href="#">View</a><span class="divider-last">&nbsp;</span></li>
                 </ul>
             </div>
         </div>
@@ -46,12 +46,6 @@
                                         <asp:RequiredFieldValidator ControlToValidate="txtComponentName" ID="NameRequiredFieldValidator" ValidationGroup="First" runat="server" ErrorMessage="Please give a Name to the component" CssClass="alert alert-error"></asp:RequiredFieldValidator>
                                     </div>
                                 </div>
-                                <div class="control-group">
-                                    <label class="control-label">Is Room</label>
-                                    <div class="controls">
-                                        <asp:CheckBox ID="cbxIsRoom" CssClass="success-toggle-button toggle-button" runat="server" />
-                                    </div>
-                                </div>
 
                                 <div class="control-group">
                                     <label class="control-label">Description</label>
@@ -69,9 +63,7 @@
                                         <asp:FileUpload ID="FileUpload1" runat="server" />
                                         <asp:RequiredFieldValidator ControlToValidate="FileUpload1" ID="FileUploadRequiredFieldValidator" runat="server" ErrorMessage="Please add an image file to be displayed on the plan" ValidationGroup="First" CssClass="alert alert-error"></asp:RequiredFieldValidator>
                                         <br />
-                                        <br />
-                                        <%--<span class="label label-important">NOTE!</span>
-                                        <span>Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only</span>--%>
+                                        <br />                                        
                                     </div>
                                 </div>
 

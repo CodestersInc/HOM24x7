@@ -291,14 +291,9 @@
 
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
-    <script type="text/javascript" src="assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-    <script type="text/javascript" src="assets/bootstrap-daterangepicker/date.js"></script>
-    <script type="text/javascript" src="assets/bootstrap-daterangepicker/daterangepicker.js"></script>
     <script type="text/javascript" src="assets/bootstrap-toggle-buttons/static/js/jquery.toggle.yesno-buttons.js"></script>
 
     <script>
-        $(".date-picker").datepicker();
-
         var handleToggleButtons = function () {
             if (!jQuery().toggleButtons) {
                 return;
@@ -310,11 +305,6 @@
                 }
             });
         }
-
-        $(".non-editable").keypress(function (e) {
-            e.preventDefault();
-        });
-
     </script>
 </asp:Content>
 

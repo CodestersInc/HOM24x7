@@ -2,6 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" runat="Server">
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="Server">
     <!-- BEGIN PAGE CONTAINER-->
     <div class="container-fluid">
@@ -40,7 +41,7 @@
                                 <thead>
                                     <tr>
                                         <th style="text-align: center">Floor Number</th>
-                                        <th style="text-align: center">Acxtion</th>
+                                        <th style="text-align: center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -75,5 +76,6 @@
     </div>
     <!-- END PAGE CONTAINER -->
 </asp:Content>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
 </asp:Content>

@@ -17,7 +17,7 @@
                     <li>
                         <a href="#">Season</a> <span class="divider">&nbsp;</span>
                     </li>
-                    <li><a href="viewseason.aspx">View</a><span class="divider-last">&nbsp;</span></li>
+                    <li><a href="#">View</a><span class="divider-last">&nbsp;</span></li>
                 </ul>
             </div>
         </div>
@@ -49,7 +49,7 @@
                                 <div class="control-group">
                                     <label class="control-label">From Date</label>
                                     <div class="controls">
-                                        <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+                                        <div class="input-append date date-picker non-editable" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
                                             <asp:TextBox ID="txtFromDate" runat="server" CssClass=" m-ctrl-medium date-picker" size="16" Text="DD-MM-YYYY"></asp:TextBox>
                                             <span class="add-on"><i class="icon-calendar"></i></span>
                                         </div>
@@ -59,7 +59,7 @@
                                 <div class="control-group">
                                     <label class="control-label">To Date</label>
                                     <div class="controls">
-                                        <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+                                        <div class="input-append date date-picker non-editable" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
                                             <asp:TextBox ID="txtToDate" runat="server" CssClass=" m-ctrl-medium date-picker" size="16" Text="DD-MM-YYYY"></asp:TextBox>
                                             <span class="add-on"><i class="icon-calendar"></i></span>
                                         </div>
@@ -67,8 +67,7 @@
                                 </div>
 
                                 <div class="form-actions">
-                                    <asp:LinkButton ID="btnUpdate" ValidationGroup="First" CssClass="btn btn-inverse" runat="server" OnClick="btnUpdate_Click"><i class="icon-refresh icon-white"></i>Update</asp:LinkButton>
-                                    <%--<asp:Button ID="btnReset" CssClass="btn" runat="server" Text="Reset" />--%>
+                                    <asp:LinkButton ID="btnUpdate" ValidationGroup="First" CssClass="btn btn-inverse" runat="server" OnClick="btnUpdate_Click"><i class="icon-refresh icon-white"></i>Update</asp:LinkButton>                                    
                                     <asp:Button ID="btnCancel" CssClass="btn" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
                                 </div>
 
@@ -85,11 +84,4 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
-    <script type="text/javascript" src="assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-    <script type="text/javascript" src="assets/bootstrap-daterangepicker/date.js"></script>
-    <script type="text/javascript" src="assets/bootstrap-daterangepicker/daterangepicker.js"></script>
-
-    <script>
-        $(".date-picker").datepicker();
-    </script>
 </asp:Content>

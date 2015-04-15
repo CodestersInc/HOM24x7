@@ -2,6 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" runat="Server">
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="Server">
     <!-- BEGIN PAGE CONTAINER-->
     <div class="container-fluid">
@@ -42,7 +43,6 @@
                                     <tr>
                                         <th style="text-align: center">Image</th>
                                         <th style="text-align: center">Name</th>
-                                        <th style="text-align: center">Type</th>
                                         <th style="text-align: center">Description</th>
                                         <th style="text-align: center">Action</th>
                                     </tr>
@@ -56,9 +56,6 @@
                                                 </td>
                                                 <td style="vertical-align: middle; text-align: center">
                                                     <a href='viewcomponent.aspx?ID=<%# Eval("ComponentID") %>'><%# Eval("Name") %></a>
-                                                </td>
-                                                <td style="vertical-align: middle; text-align: center">
-                                                    <%# Eval("Type") %>
                                                 </td>
                                                 <td style="vertical-align: middle; text-align: center">
                                                     <%# Eval("Description") %>
@@ -75,7 +72,6 @@
                                     <tr>
                                         <th style="text-align: center">Image</th>
                                         <th style="text-align: center">Name</th>
-                                        <th style="text-align: center">Type</th>
                                         <th style="text-align: center">Description</th>
                                         <th style="text-align: center">Action</th>
                                     </tr>
@@ -91,8 +87,8 @@
         </asp:PlaceHolder>
     </div>
     <!-- END PAGE CONTAINER -->
-
 </asp:Content>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
 </asp:Content>
 

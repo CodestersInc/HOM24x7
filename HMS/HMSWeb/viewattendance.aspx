@@ -17,7 +17,7 @@
                     <li>
                         <a href="#">Attendance</a> <span class="divider">&nbsp;</span>
                     </li>
-                    <li><a href="viewattendance.aspx">View</a><span class="divider-last">&nbsp;</span></li>
+                    <li><a href="#">View</a><span class="divider-last">&nbsp;</span></li>
                 </ul>
             </div>
         </div>
@@ -44,7 +44,7 @@
                                         <label class="control-label">From Date</label>
                                         <div class="controls">
                                             <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-                                                <asp:TextBox ID="txtFromDate" runat="server" CssClass="span6" Text="dd-mm-yyyy"></asp:TextBox>
+                                                <asp:TextBox ID="txtFromDate" runat="server" CssClass="span6  non-editable" Text="dd-mm-yyyy"></asp:TextBox>
                                                 <span class="add-on"><i class="icon-calendar"></i></span>
                                             </div>
                                         </div>
@@ -54,7 +54,7 @@
                                         <label class="control-label">To Date</label>
                                         <div class="controls">
                                             <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-                                                <asp:TextBox ID="txtToDate" runat="server" CssClass="span6" Text="dd-mm-yyyy"></asp:TextBox>
+                                                <asp:TextBox ID="txtToDate" runat="server" CssClass="span6 non-editable" Text="dd-mm-yyyy"></asp:TextBox>
                                                 <span class="add-on"><i class="icon-calendar"></i></span>
                                             </div>
                                         </div>
@@ -140,14 +140,9 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
-    <script type="text/javascript" src="assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-    <script type="text/javascript" src="assets/bootstrap-daterangepicker/date.js"></script>
-    <script type="text/javascript" src="assets/bootstrap-daterangepicker/daterangepicker.js"></script>
     <script type="text/javascript" src="assets/bootstrap-toggle-buttons/static/js/jquery.toggle.attendance-buttons.js"></script>
 
     <script>
-        $(".date-picker").datepicker();
-
         var handleToggleButtons = function () {
             if (!jQuery().toggleButtons) {
                 return;
