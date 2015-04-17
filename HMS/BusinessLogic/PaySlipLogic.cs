@@ -18,6 +18,36 @@ namespace BusinessLogic
             throw new NotImplementedException();
         }
 
+        public DataTable search(DateTime FromDate, DateTime ToDate, int DepartmentID, int AccountID)
+        {
+            if (DepartmentID == 0)
+            {
+                return search(FromDate, ToDate, AccountID);
+            }
+            String query = "select Department.Name as 'DepartmentName', PaySlip.*, Staff.StaffCode, Staff.Name from Department, PaySlip, Staff where Staff.StaffID=PaySlip.StaffID and Staff.DepartmentID = Department.DepartmentID and Department.DepartmentID=@DepartmentID and PaySlip.AccountID=@AccountID and GenerateDate BETWEEN @FromDate AND @ToDate";
+            
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+
+            lstParams.Add(new SqlParameter("@FromDate", FromDate));
+            lstParams.Add(new SqlParameter("@ToDate", ToDate));
+            lstParams.Add(new SqlParameter("@DepartmentID", DepartmentID));
+            lstParams.Add(new SqlParameter("@AccountID", AccountID));
+
+            return DBUtility.Select(query, lstParams);
+        }
+
+        public DataTable search(DateTime FromDate, DateTime ToDate, int AccountID)
+        {
+            String query = "select Department.Name as 'DepartmentName', PaySlip.*, Staff.StaffCode, Staff.Name from Department, PaySlip, Staff where Staff.StaffID=PaySlip.StaffID and Staff.DepartmentID = Department.DepartmentID and PaySlip.AccountID=@AccountID and GenerateDate BETWEEN @FromDate AND @ToDate";
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+
+            lstParams.Add(new SqlParameter("@FromDate", FromDate));
+            lstParams.Add(new SqlParameter("@ToDate", ToDate));
+            lstParams.Add(new SqlParameter("@AccountID", AccountID));
+
+            return DBUtility.Select(query, lstParams);
+        }
+
         public PaySlip create(PaySlip obj)
         {
             String query = "insert into PaySlip values(@StaffID, @BasicSalary, @ConvAllowance, @Bonus, @PF, @ProfessionalTax, @IncomeTax, @Netpay, @FromDate, @ToDate, @DaysPayable, @GenerateDate, @PayDate, @ApproverID, @AccountID)";
@@ -81,9 +111,10 @@ namespace BusinessLogic
 
         public int update(PaySlip obj)
         {
-            String query = "update PaySlip set ConvAllowance=@ConvAllowance, Bonus=@Bonus, PF=@PF, ProfessionalTax=@ProfessionalTax, IncomeTax=@IncomeTax, NetPay=@Netpay, ApproverID=@ApproverID  where PaySlipID=@PaySlipID and AccountID=@AccountID";
+            String query = "update PaySlip set BasicSalary=@BasicSalary, ConvAllowance=@ConvAllowance, Bonus=@Bonus, PF=@PF, ProfessionalTax=@ProfessionalTax, IncomeTax=@IncomeTax, NetPay=@Netpay, ApproverID=@ApproverID  where PaySlipID=@PaySlipID and AccountID=@AccountID";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
+            lstParams.Add(new SqlParameter("@BasicSalary", obj.BasicSalary));
             lstParams.Add(new SqlParameter("@ConvAllowance", obj.ConvAllowance));
             lstParams.Add(new SqlParameter("@Bonus", obj.Bonus));
             lstParams.Add(new SqlParameter("@PF", obj.PF));
@@ -91,6 +122,7 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@IncomeTax", obj.IncomeTax));
             lstParams.Add(new SqlParameter("@NetPay", obj.NetPay));
             lstParams.Add(new SqlParameter("@ApproverID", obj.ApproverID));
+            lstParams.Add(new SqlParameter("@PaySlipID", obj.PaySlipID));
             lstParams.Add(new SqlParameter("@AccountID", obj.AccountID));
 
             return DBUtility.Modify(query, lstParams); 

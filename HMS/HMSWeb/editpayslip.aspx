@@ -28,6 +28,7 @@
             </div>
         </div>
         <!-- END PAGE HEADER-->
+
         <!-- BEGIN PAGE CONTENT-->
         <div class="row-fluid">
             <div class="span12">
@@ -41,124 +42,118 @@
                         </span>
                     </div>
                     <div class="widget-body form">
-                        <center><h3>PAYSLIP FOR THE MONTH "________________________"</h3></center>
-                        <!-- BEGIN FORM -->
-                        <div>
-                            <div class="form-horizontal">
-                                <table border="1" align="center" style="width: 70%;" class="table table-striped table-bordered table-advance table-hover">
-                                    <asp:Repeater ID="staffInfoRepeater" runat="server">
-                                        <ItemTemplate>
-                                            <tr>
-                                                <td>
-                                                    <label class="boldText">Staff Code</label></td>
-                                                <td>
-                                                    <asp:Label ID="lblStaffCode" runat="server"><b><%# Eval("StaffCode") %></asp:Label></td>
-                                                <td>
-                                                    <label class="boldText">Name</label></td>
-                                                <td>
-                                                    <asp:Label ID="lblName" runat="server"><b><%# Eval("Name") %></asp:Label></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label class="boldText">Designation</label></td>
-                                                <td>
-                                                    <asp:Label ID="lblDesignation" runat="server"><b><%# Eval("Designation") %></asp:Label></td>
-                                                <td>
-                                                    <label class="boldText">Bank AC No</label></td>
-                                                <td>
-                                                    <asp:Label ID="lblBankACNo" runat="server"><b><%# Eval("BankACNumber") %></asp:Label></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label class="boldText">Department</label></td>
-                                                <td>
-                                                    <asp:Label ID="lblDepartment" runat="server"><b><%# Eval("DepartmentName") %></asp:Label></td>
-                                                <td>
-                                                    <label class="boldText">Date of Join</label></td>
-                                                <td>
-                                                    <asp:Label ID="lblDOJ" runat="server"><b><%# Eval("DOJ", "{0:dd-MM-yyyy}") %></asp:Label></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label class="boldText">Working Days</label></td>
-                                                <td>
-                                                    <asp:Label ID="lblWorkingDays" runat="server"><b>30</asp:Label></td>
-                                                <td>
-                                                    <label class="boldText">Days Payable</label></td>
-                                                <td>
-                                                    <asp:Label ID="lblDaysPayable" runat="server"><b>30</asp:Label></td>
-                                            </tr>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-                                </table>
-
-                                <br />
-
-                                <table border="1" align="center" style="width: 70%;" class="table table-striped table-bordered table-advance table-hover">
+                        <table border="1" align="center" style="width: 70%;" class="table table-striped table-bordered table-advance table-hover">
+                            <asp:Repeater ID="staffInfoRepeater" runat="server">
+                                <ItemTemplate>
                                     <tr>
-                                        <th class="boldText" style="text-align: center">Earnings</th>
-                                        <th class="boldText" style="text-align: center">&#8377</th>
-                                        <th class="boldText" style="text-align: center">Deduction</th>
-                                        <th class="boldText" style="text-align: center">&#8377</th>
+                                        <td>
+                                            <label class="boldText">Staff Code</label></td>
+                                        <td>
+                                            <asp:Label ID="lblStaffCode" CssClass="bold" runat="server"><%# Eval("StaffCode") %></asp:Label></td>
+                                        <td>
+                                            <label class="boldText">Name</label></td>
+                                        <td>
+                                            <asp:Label ID="lblName" CssClass="bold" runat="server"><%# Eval("Name") %></asp:Label></td>
                                     </tr>
-                                    <asp:Repeater ID="payrollInfoRepeater" runat="server">
-                                        <ItemTemplate>
-                                            <tr>
-                                                <td>BASIC SALARY</td>
-                                                <td style="text-align: right">
-                                                    <asp:TextBox ID="txtBasicSalary" Style="text-align: right" Text='<%# Eval("Salary") %>' CssClass="span6" runat="server"></asp:TextBox></td>
-                                                <asp:Label ID="lblStaffCode" runat="server"><b></asp:Label></td>
-                                                <td>PF</td>
-                                                <td style="text-align: right">
-                                                    <asp:TextBox ID="txtPF" CssClass="span6" runat="server"></asp:TextBox></td>
-                                            </tr>
+                                    <tr>
+                                        <td>
+                                            <label class="boldText">Designation</label></td>
+                                        <td>
+                                            <asp:Label ID="lblDesignation" CssClass="bold" runat="server"><%# Eval("Designation") %></asp:Label></td>
+                                        <td>
+                                            <label class="boldText">Bank AC No</label></td>
+                                        <td>
+                                            <asp:Label ID="lblBankACNo" CssClass="bold" runat="server"><%# Eval("BankACNumber") %></asp:Label></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label class="boldText">Department</label></td>
+                                        <td>
+                                            <asp:Label ID="lblDepartment" CssClass="bold" runat="server"><%# Eval("DepartmentName") %></asp:Label></td>
+                                        <td>
+                                            <label class="boldText">Date of Join</label></td>
+                                        <td>
+                                            <asp:Label ID="lblDOJ" CssClass="bold" runat="server"><%# Eval("DOJ", "{0:dd-MM-yyyy}") %></asp:Label></td>
+                                    </tr>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                            <tr>
+                                <td>
+                                    <label class="boldText">Total Days</label></td>
+                                <td>
+                                    <asp:Label ID="lblTotalDays" CssClass="bold" runat="server"></asp:Label></td>
+                                <td>
+                                    <label class="boldText">Days Payable</label></td>
+                                <td>
+                                    <asp:Label ID="lblDaysPayable" CssClass="bold" runat="server"></asp:Label></td>
+                            </tr>
+                        </table>
 
-                                            <tr>
-                                                <td>CONVEYANCE ALLOWANCE</td>
-                                                <td style="text-align: right">
-                                                    <asp:TextBox ID="txtConvAllowance" CssClass="span6" runat="server"></asp:TextBox></td>
-                                                <td>PROFESSIONAL TAX</td>
-                                                <td style="text-align: right">
-                                                    <asp:TextBox ID="txtProTax" CssClass="span6" runat="server"></asp:TextBox></td>
-                                            </tr>
+                        <br />
 
-                                            <tr>
-                                                <td>BONUS/EXGRATIA</td>
-                                                <td style="text-align: right">
-                                                    <asp:TextBox ID="txtBonus" CssClass="span6" runat="server"></asp:TextBox></td>
-                                                <td>INCOME TAX</td>
-                                                <td style="text-align: right">
-                                                    <asp:TextBox ID="txtIncomeTax" CssClass="span6" runat="server"></asp:TextBox></td>
-                                            </tr>
+                        <table border="1" align="center" style="width: 70%;" class="table table-striped table-bordered table-advance table-hover">
+                            <tr>
+                                <th class="boldText" style="text-align: center">Earnings</th>
+                                <th class="boldText" style="text-align: center">&#8377</th>
+                                <th class="boldText" style="text-align: center">Deduction</th>
+                                <th class="boldText" style="text-align: center">&#8377</th>
+                            </tr>
+                            <tr>
+                                <td>BASIC SALARY</td>
+                                <td style="text-align: center">
+                                    <asp:TextBox ID="txtBasicSalary" Style="text-align: right" CssClass="span6" runat="server"></asp:TextBox></td>
+                                <td>PF</td>
+                                <td style="text-align: center">
+                                    <asp:TextBox ID="txtPF" Style="text-align: right" CssClass="span6" runat="server"></asp:TextBox></td>
+                            </tr>
 
-                                            <tr>
-                                                <td class="boldText">Total Earnings</td>
-                                                <td class="boldText">
-                                                    <asp:Label ID="lblTotalEarnings" runat="server"></asp:Label></td>
-                                                <td class="boldText">Total Deduction</td>
-                                                <td class="boldText">
-                                                    <asp:Label ID="lblTotalDeduction" runat="server"></asp:Label></td>
-                                            </tr>
+                            <tr>
+                                <td>CONVEYANCE ALLOWANCE</td>
+                                <td style="text-align: center">
+                                    <asp:TextBox ID="txtConvAllowance" Style="text-align: right" CssClass="span6" runat="server"></asp:TextBox></td>
+                                <td>PROFESSIONAL TAX</td>
+                                <td style="text-align: center">
+                                    <asp:TextBox ID="txtProTax" Style="text-align: right" CssClass="span6" runat="server"></asp:TextBox></td>
+                            </tr>
 
-                                            <tr>
-                                                <td>
-                                                    <asp:Label ID="lblPayableSalary" Style="font-size: 15px; font-weight: bold" runat="server" Text="Label">Total Pay</asp:Label>
-                                                </td>
-                                            </tr>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-                                </table>
+                            <tr>
+                                <td>BONUS/EXGRATIA</td>
+                                <td style="text-align: center">
+                                    <asp:TextBox ID="txtBonus" Style="text-align: right" CssClass="span6" runat="server"></asp:TextBox></td>
+                                <td>INCOME TAX</td>
+                                <td style="text-align: center">
+                                    <asp:TextBox ID="txtIncomeTax" Style="text-align: right" CssClass="span6" runat="server"></asp:TextBox></td>
+                            </tr>
 
-                                <br />
+                            <tr>
+                                <td class="boldText" style="text-align: center">Total Earnings</td>
+                                <td class="boldText" style="text-align: center">
+                                    <asp:Label ID="lblTotalEarnings" runat="server"></asp:Label></td>
+                                <td class="boldText" style="text-align: center">Total Deduction</td>
+                                <td class="boldText" style="text-align: center">
+                                    <asp:Label ID="lblTotalDeduction" runat="server"></asp:Label></td>
+                            </tr>
 
-                                <div class="form-actions">
-                                    <asp:Button ID="btnGenerate" ValidationGroup="First" CssClass="btn btn-success" runat="server" Text="Generate" OnClick="btnGenerate_Click" />
-                                    <span></span>
-                                    <asp:Button ID="btnCancel" CssClass="btn btn-warning" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
-                                </div>
-                            </div>
+                            <tfoot>
+                                <tr>
+                                    <td style="text-align: center;">
+                                        <asp:Label ID="lbl" Style="font-size: 16px; font-weight: bold" runat="server">Net Pay</asp:Label>
+                                    </td>
+                                    <td colspan="3">
+                                        <asp:Label ID="lblNetPay" Style="font-size: 16px; font-weight: bold" runat="server"></asp:Label>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                        <br />
+
+                        <div class="form-actions">
+                            <asp:LinkButton ID="btnSave" CssClass="btn btn-success" runat="server" OnClick="btnSave_Click">Save</asp:LinkButton>
+                            <asp:LinkButton ID="btnUpdate" CssClass="btn btn-inverse" runat="server" Visible="false" OnClick="btnUpdate_Click"><i class="icon-refresh icon-white"></i> Update</asp:LinkButton>
+                            <span></span>
+                            <asp:Button ID="btnCancel" CssClass="btn btn-warning" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
                         </div>
-                        <!-- END FORM -->
                     </div>
                 </div>
                 <!-- END SAMPLE FORM widget-->

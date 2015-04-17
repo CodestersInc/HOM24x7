@@ -34,22 +34,31 @@ public partial class generatepayslip : System.Web.UI.Page
         Staff loggedUser = (Staff)Session["loggedUser"];
         DateTime fromDate = Convert.ToDateTime(txtFromDate.Text);
         DateTime toDate = Convert.ToDateTime(txtToDate.Text);
-        int daysPayable = Convert.ToInt32((toDate - fromDate).TotalDays);
+
+        Staff staff;
 
         DataTable staffData = new StaffLogic().getStaffForPayroll(loggedUser.AccountID);
         PaySlipLogic logic = new PaySlipLogic();
+        int daysPayable;
+        double monthlysalary;
+        double basic;
 
         for (int i = 0; i < staffData.Rows.Count; i++)
         {
+            daysPayable = new AttendanceLogic().getPayableDaysForStaff(fromDate, toDate, Convert.ToInt32(staffData.Rows[i]["StaffID"]));
+            monthlysalary = (Convert.ToDouble(staffData.Rows[i]["Salary"]));
+
+            basic = Math.Abs((monthlysalary/30)*daysPayable);
+
             logic.create(new PaySlip(0,
             Convert.ToInt32(staffData.Rows[i]["StaffID"]),
-            (Convert.ToDouble(staffData.Rows[i]["Salary"])) / daysPayable,
+            basic,
             0,
             0,
             0,
             0,
             0,
-            (Convert.ToDouble(staffData.Rows[i]["Salary"])) / daysPayable,
+            basic,
             fromDate,
             toDate,
             daysPayable,

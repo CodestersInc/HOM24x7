@@ -146,6 +146,18 @@ namespace BusinessLogic
             return DBUtility.Select(query, lstParams);
         }
 
+        public int getPayableDaysForStaff(DateTime FromDate, DateTime ToDate, int StaffID)
+        {
+            String query = "select COUNT(AttendanceID) from Attendance where AttendanceDate BETWEEN @FromDate AND @ToDate and StaffID=@StaffID";
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+            
+            lstParams.Add(new SqlParameter("@FromDate", FromDate));
+            lstParams.Add(new SqlParameter("@ToDate", ToDate));
+            lstParams.Add(new SqlParameter("@StaffID", StaffID));
+
+            return Convert.ToInt32(DBUtility.Select(query, lstParams).Rows[0][0]);
+        }
+
         public DataTable getStaffForAttendance(int DepartmentID, int AccountID)
         {
             if (DepartmentID == 0)
