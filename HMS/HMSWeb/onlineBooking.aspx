@@ -89,7 +89,7 @@
                                     </div>
                                 </li>
                                 <li class="span1_of_2 left">
-                                    <h5>Number of person:</h5>
+                                    <h5>Person staying:</h5>
                                     <!----------start section_room----------->
                                     <div class="section_room">
                                         <asp:TextBox ID="txtNumberOfPerson" class="frm-field required" runat="server"></asp:TextBox>

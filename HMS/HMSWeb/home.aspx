@@ -1,6 +1,23 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="home.aspx.cs" Inherits="home" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" runat="Server">
+    <!--Converse.js CSS and js start-->
+
+    <link rel="shortcut icon" type="image/ico" href="conversejs/css/images/favicon.ico"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="conversejs/components/bootstrap/dist/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" media="screen" href="conversejs/components/fontawesome/css/font-awesome.min.css" />
+    <link type="text/css" rel="stylesheet" media="screen" href="conversejs/css/theme.css" />
+    <link type="text/css" rel="stylesheet" media="screen" href="conversejs/css/converse.min.css" />
+    <script type="text/javascript" src="analytics.js"></script>
+    <noscript><p><img src="//stats.opkode.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+    <!-- Only for development: <script data-main="main" src="components/requirejs/require.js"></script> -->
+    <![if gte IE 9]>
+        <script src="conversejs/builds/converse.website.min.js"></script>
+    <![endif]>
+    <!--[if lt IE 9]>
+        <script src="builds/converse.website-no-otr.min.js"></script>
+    <![endif]-->
+    <!--Converse.js CSS and js END-->
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="Server">
@@ -111,6 +128,45 @@
             </div>
     </asp:PlaceHolder>
     <!-- END OVERVIEW STATISTIC BARS-->
+    <!-- converse.js script start-->
+    <script>
+        require(['converse'], function (converse) {
+            (function () {
+                /* XXX: This function initializes jquery.easing for the https://conversejs.org
+                * website. This code is only useful in the context of the converse.js
+                * website and converse.js itself is NOT dependent on it.
+                */
+                var $ = converse.env.jQuery;
+                $(window).scroll(function () {
+                    if ($(".navbar").offset().top > 50) {
+                        $(".navbar-fixed-top").addClass("top-nav-collapse");
+                    } else {
+                        $(".navbar-fixed-top").removeClass("top-nav-collapse");
+                    }
+                });
+                //jQuery for page scrolling feature - requires jQuery Easing plugin
+                $('.page-scroll a').bind('click', function (event) {
+                    var $anchor = $(this);
+                    $('html, body').stop().animate({
+                        scrollTop: $($anchor.attr('href')).offset().top
+                    }, 700, 'easeInOutExpo');
+                    event.preventDefault();
+                });
+            })();
+            converse.initialize({
+                // the default BOSH manager for converse js
+                bosh_service_url: 'http://codester.cloudapp.net:5280/http-bind',
+                i18n: locales['en'], // Refer to ./locale/locales.js to see which locales are supported
+                keepalive: true,
+                message_carbons: true,
+                play_sounds: true,
+                roster_groups: true,
+                show_controlbox_by_default: true,
+                xhr_user_search: false
+            });
+        });
+</script>
+    <!-- converse.js script end-->
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
