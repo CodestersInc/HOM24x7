@@ -91,33 +91,47 @@
                             <!-- BEGIN FORM-->
                             <div>
                                 <div class="form-horizontal">
-                                    <table class="table table-striped table-bordered table-advance table-hover">
-                                        <tr>
-                                            <th>Date</th>
-                                            <th>Staff Code</th>
-                                            <th>Name</th>
-                                            <th>Department</th>
-                                            <th style="text-align:center">Attendance</th>
-                                        </tr>
-                                        <asp:Repeater ID="Repeater1" runat="server">
-                                            <ItemTemplate>
-                                                <tr>
-                                                    <asp:HiddenField ID="HiddenFieldAttendanceID" Value='<%# Eval("AttendanceID") %>' runat="server" />
-                                                    <asp:HiddenField ID="HiddenFieldAttendanceDate" Value='<%# Eval("AttendanceDate") %>' runat="server" />
-                                                    <asp:HiddenField ID="HiddenFieldInTime" Value='<%# Eval("InTime") %>' runat="server" />
-                                                    <asp:HiddenField ID="HiddenFieldOutTime" Value='<%# Eval("OutTime") %>' runat="server" />
-                                                    
-                                                    <td><%# Eval("AttendanceDate", "{0:dd-MM-yyyy}") %></td>
-                                                    <td><%# Eval("StaffCode") %></td>
-                                                    <td><%# Eval("Name") %></td>
-                                                    <td><%# Eval("DepartmentName") %></td>
-                                                    <td style="text-align:center">
-                                                        <asp:CheckBox ID="cbxPresence" Checked='<%# Eval("AttendanceStatus") %>' CssClass="success-toggle-button toggle-button" runat="server" />
-                                                        <asp:HiddenField ID="HiddenFieldStaffID" runat="server" Value='<%# Eval("StaffID") %>' />
-                                                    </td>
-                                                </tr>
-                                            </ItemTemplate>
-                                        </asp:Repeater>
+                                    <%--ID as tableTT to use table-tools--%>
+                                    <table id="tableTT" class="table table-striped table-bordered table-advance table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th style="text-align: center">Date</th>
+                                                <th style="text-align: center">Staff Code</th>
+                                                <th style="text-align: center">Name</th>
+                                                <th style="text-align: center">Department</th>
+                                                <th style="text-align: center">Attendance</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <asp:Repeater ID="Repeater1" runat="server">
+                                                <ItemTemplate>
+                                                    <tr>
+                                                        <asp:HiddenField ID="HiddenFieldAttendanceID" Value='<%# Eval("AttendanceID") %>' runat="server" />
+                                                        <asp:HiddenField ID="HiddenFieldAttendanceDate" Value='<%# Eval("AttendanceDate") %>' runat="server" />
+                                                        <asp:HiddenField ID="HiddenFieldInTime" Value='<%# Eval("InTime") %>' runat="server" />
+                                                        <asp:HiddenField ID="HiddenFieldOutTime" Value='<%# Eval("OutTime") %>' runat="server" />
+
+                                                        <td style="text-align: center"><%# Eval("AttendanceDate", "{0:dd-MM-yyyy}") %></td>
+                                                        <td style="text-align: center"><%# Eval("StaffCode") %></td>
+                                                        <td style="text-align: center"><%# Eval("Name") %></td>
+                                                        <td style="text-align: center"><%# Eval("DepartmentName") %></td>
+                                                        <td style="text-align: center">
+                                                            <asp:CheckBox ID="cbxPresence" Checked='<%# Eval("AttendanceStatus") %>' CssClass="success-toggle-button toggle-button" runat="server" />
+                                                            <asp:HiddenField ID="HiddenFieldStaffID" runat="server" Value='<%# Eval("StaffID") %>' />
+                                                        </td>
+                                                    </tr>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th style="text-align: center">Date</th>
+                                                <th style="text-align: center">Staff Code</th>
+                                                <th style="text-align: center">Name</th>
+                                                <th style="text-align: center">Department</th>
+                                                <th style="text-align: center">Attendance</th>
+                                            </tr>
+                                        </tfoot>
                                     </table>
 
                                     <div class="form-actions">

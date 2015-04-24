@@ -89,8 +89,8 @@
                                     <input id="btnAddRoomToCanvas" class="btn-primary" type="button" value="Add room to plan" />                                    
                                 </div>
                             </div>
-
                             <!--START PLAN BUILDER-->
+
                             <!--START PALLETTE-->
                             <asp:PlaceHolder ID="palettePlaceHolder" runat="server" Visible="true">
                                 <div class="widget palette" >
@@ -163,7 +163,7 @@
             var x = document.getElementById("roomList");
 
             if (x.length != 0) {
-                $("<div class='room' style= 'width: 50px; height: 50px; background-color: gray; position:absolute; top:0; left:0'></div>").prependTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" }).attr("roomid", $("#roomList").val());
+                $("<div class='room' style= 'width: 70px; height: 70px; background-color: gray; position:absolute; top:0; left:0'></div>").prependTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" }).attr("roomid", $("#roomList").val());
                 x.remove(x.selectedIndex);
                 
                 <%--Disable AddRoomTOCanvas button if no rooms--%>
@@ -212,4 +212,5 @@
             $('.txtOtherComponentData').val(otherComponentData);
         }
     </script>
+
 </asp:Content>

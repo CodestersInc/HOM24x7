@@ -5,7 +5,7 @@
     <style>
         .paletteComponent {
             float: left;
-            padding-left:30px;
+            padding-left: 30px;
         }
 
         #palette {
@@ -20,6 +20,7 @@
         }
     </style>
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="Server">
     <!-- BEGIN PAGE CONTAINER-->
     <div class="container-fluid">
@@ -116,7 +117,7 @@
                                 </ItemTemplate>
                             </asp:Repeater>
                             <!--END CANVAS-->
-                                    </div>
+                        </div>
                         <!-- END PLAN BUILDER-->
 
                         <div class="form-actions">
@@ -132,10 +133,10 @@
             <asp:TextBox ID="txtRoomComponentData" CssClass="txtRoomComponentData" style="display:none" runat="server"></asp:TextBox>
             <asp:TextBox ID="txtOtherComponentData" CssClass="txtOtherComponentData" style="display:none" runat="server"></asp:TextBox>
             <!-- END PAGE CONTAINER-->
-    </div>
     </asp:PlaceHolder>
     </div>
 </asp:Content>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
     <script src="js/jquery-ui.js"></script>
     <script src="js/jquery.ui.rotatable.min.js"></script>
@@ -166,7 +167,7 @@
             var x = document.getElementById("roomList");
 
             if (x.length != 0) {
-                $("<div class='room' style= 'width: 50px; height: 50px; background-color: gray; position:absolute; top:0; left:0'></div>").prependTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" }).attr("roomid", $("#roomList").val());
+                $("<div class='room' style= 'width: 70px; height: 70px; background-color: gray; position:absolute; top:0; left:0'></div>").prependTo('#canvas').draggable({ containment: "#canvas" }).resizable({ containment: "#canvas" }).rotatable({ containment: "#canvas" }).attr("roomid", $("#roomList").val());
                 x.remove(x.selectedIndex);
 
                 <%--Disable AddRoomTOCanvas button if no rooms--%>
@@ -192,7 +193,7 @@
     </script>
 
     <%--Grabbing css of plan and plan components--%>
-    <script type="text/javascript">      
+    <script type="text/javascript">
         var canvasData = ""
         var roomComponentData = "";
         var otherComponentData = "";

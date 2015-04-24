@@ -247,8 +247,7 @@
             });
         })();
         converse.initialize({
-			// the default BOSH manager for converse js
-			bosh_service_url: 'http://codester.cloudapp.net:5280/http-bind',
+            bosh_service_url: 'https://conversejs.org/http-bind/', // Please use this connection manager only for testing purposes
             i18n: locales['en'], // Refer to ./locale/locales.js to see which locales are supported
             keepalive: true,
             message_carbons: true,

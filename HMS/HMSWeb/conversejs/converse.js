@@ -168,6 +168,7 @@
         Strophe.addNamespace('MUC_ROOMCONF', Strophe.NS.MUC + "#roomconfig");
         Strophe.addNamespace('MUC_USER', Strophe.NS.MUC + "#user");
         Strophe.addNamespace('REGISTER', 'jabber:iq:register');
+        Strophe.addNamespace('ROSTERX', 'http://jabber.org/protocol/rosterx');
         Strophe.addNamespace('XFORM', 'jabber:x:data');
 
         // Add Strophe Statuses
@@ -1507,6 +1508,7 @@
             },
 
             updateVCard: function () {
+                if (!this.use_vcards) { return; }
                 var jid = this.model.get('jid'),
                     contact = converse.roster.get(jid);
                 if ((contact) && (!contact.get('vcard_updated'))) {
@@ -2016,7 +2018,7 @@
                     converse.features.on('add', this.featureAdded, this);
                     // Features could have been added before the controlbox was
                     // initialized. Currently we're only interested in MUC
-                    var feature = converse.features.findWhere({'var': 'http://jabber.org/protocol/muc'});
+                    var feature = converse.features.findWhere({'var': Strophe.NS.MUC});
                     if (feature) {
                         this.featureAdded(feature);
                     }
@@ -2145,7 +2147,7 @@
             },
 
             featureAdded: function (feature) {
-                if ((feature.get('var') == 'http://jabber.org/protocol/muc') && (converse.allow_muc)) {
+                if ((feature.get('var') == Strophe.NS.MUC) && (converse.allow_muc)) {
                     this.roomspanel.model.save({muc_domain: feature.get('from')});
                     var $server= this.$el.find('input.new-chatroom-server');
                     if (! $server.is(':focus')) {
@@ -3094,7 +3096,13 @@
                 var contact_jid, $forwarded, $received, $sent,
                     msgid = $message.attr('id'),
                     chatbox, resource, roster_item,
-                    message_from = $message.attr('from');
+                    message_from = $message.attr('from'),
+                    message_to = $message.attr('to');
+
+                if(!_.contains([converse.connection.jid, converse.bare_jid], message_to)) {
+                    // Ignore messages sent to a different resource
+                    return true;
+                }
                 if (message_from === converse.connection.jid) {
                     // FIXME: Forwarded messages should be sent to specific resources,
                     // not broadcasted
@@ -3970,7 +3978,7 @@
                 if (contact.showInRoster()) {
                     if (this.model.get('state') === CLOSED) {
                         if (view.$el[0].style.display !== "none") { view.$el.hide(); }
-                        if (this.$el[0].style.display === "none") { this.$el.show(); }
+                        if (!this.$el.is(':visible')) { this.$el.show(); }
                     } else {
                         if (this.$el[0].style.display !== "block") { this.show(); }
                     }
@@ -3995,10 +4003,12 @@
             },
 
             show: function () {
-                // FIXME: There's a bug here, if show_only_online_users is true
-                // Possible solution, get the group, call _.each and check
-                // showInRoster
-                this.$el.nextUntil('dt').addBack().show();
+                this.$el.show();
+                _.each(this.getAll(), function (contactView) {
+                    if (contactView.model.showInRoster()) {
+                        contactView.$el.show();
+                    }
+                });
             },
 
             hide: function () {
@@ -4316,7 +4326,8 @@
                         t += $(msg).find('item').length*250;
                         return true;
                     },
-                    'http://jabber.org/protocol/rosterx', 'message', null);
+                    Strophe.NS.ROSTERX, 'message', null
+                );
             },
 
             registerPresenceHandler: function () {
@@ -4711,7 +4722,7 @@
                  * feature-providing Models, not here
                  */
                  converse.connection.disco.addFeature(Strophe.NS.CHATSTATES);
-                 converse.connection.disco.addFeature('http://jabber.org/protocol/rosterx'); // Limited support
+                 converse.connection.disco.addFeature(Strophe.NS.ROSTERX); // Limited support
                  converse.connection.disco.addFeature('jabber:x:conference');
                  converse.connection.disco.addFeature('urn:xmpp:carbons:2');
                  converse.connection.disco.addFeature(Strophe.NS.VCARD);
@@ -4954,7 +4965,7 @@
                  */
                 var $form= this.$('form'),
                     $stanza = $(stanza),
-                    $fields;
+                    $fields, $input;
                 $form.empty().append(converse.templates.registration_form({
                     'domain': this.domain,
                     'title': this.title,
@@ -4962,16 +4973,27 @@
                 }));
                 if (this.form_type == 'xform') {
                     $fields = $stanza.find('field');
-                    _.each($fields, $.proxy(function (field) {
+                    _.each($fields, function (field) {
                         $form.append(utils.xForm2webForm.bind(this, $(field), $stanza));
-                    }, this));
+                    }.bind(this));
                 } else {
                     // Show fields
                     _.each(Object.keys(this.fields), $.proxy(function (key) {
-                        $form.append('<label>'+key+'</label>');
-                        var $input = $('<input placeholder="'+key+'" name="'+key+'"></input>');
-                        if (key === 'password' || key === 'email') {
-                            $input.attr('type', key);
+                        if (key == "username") {
+                            $input = templates.form_username({
+                                domain: ' @'+this.domain,
+                                name: key,
+                                type: "text",
+                                label: key,
+                                value: '',
+                                required: 1
+                            });
+                        } else {
+                            $form.append('<label>'+key+'</label>');
+                            $input = $('<input placeholder="'+key+'" name="'+key+'"></input>');
+                            if (key === 'password' || key === 'email') {
+                                $input.attr('type', key);
+                            }
                         }
                         $form.append($input);
                     }, this));
@@ -5047,13 +5069,19 @@
                     return;
                 }
                 var $inputs = $(ev.target).find(':input:not([type=button]):not([type=submit])'),
-                    iq = $iq({type: "set"})
-                        .c("query", {xmlns:Strophe.NS.REGISTER})
-                        .c("x", {xmlns: Strophe.NS.XFORM, type: 'submit'});
+                    iq = $iq({type: "set"}).c("query", {xmlns:Strophe.NS.REGISTER});
 
-                $inputs.each(function () {
-                    iq.cnode(utils.webForm2xForm(this)).up();
-                });
+                if (this.form_type == 'xform') {
+                    iq.c("x", {xmlns: Strophe.NS.XFORM, type: 'submit'});
+                    $inputs.each(function () {
+                        iq.cnode(utils.webForm2xForm(this)).up();
+                    });
+                } else {
+                    $inputs.each(function () {
+                        var $input = $(this);
+                        iq.c($input.attr('name'), {}, $input.val());
+                    });
+                }
                 converse.connection._addSysHandler(this._onRegisterIQ.bind(this), null, "iq", null, null);
                 converse.connection.send(iq);
                 this.setFields(iq.tree());

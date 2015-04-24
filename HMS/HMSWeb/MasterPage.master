@@ -6,7 +6,6 @@
 <!-- BEGIN HEAD -->
 <head runat="server">
     <title></title>
-
     <!--Header contents from other pages-->
     <asp:ContentPlaceHolder ID="headContentPlaceHolder" runat="server">
     </asp:ContentPlaceHolder>
