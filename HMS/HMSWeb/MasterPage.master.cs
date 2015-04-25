@@ -32,7 +32,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
                     lblUsername.Text = staffObj.Name;
                     String userType = staffObj.UserType;
 
-                    if (userType == "Hotel Admin" || userType == "Managerial Staff")
+                    if (userType == "Hotel Admin")
                     {
                         Session["StaffUserType"] = "Hotel Admin";                        
                         departmentPlaceHolder.Visible = true;
@@ -58,17 +58,44 @@ public partial class MasterPage : System.Web.UI.MasterPage
                             servicePlaceHolder.Visible = true;
                             serviceRequestPlaceHolder.Visible = true;
                         }
+                        lblUsername.Text = staffObj.Name;
+                    }
+
+                    if (userType == "Managerial Staff")
+                    {
+                        Session["StaffUserType"] = "Managerial Staff";
+                        staffPlaceHolder.Visible = true;
+
+                        if (Convert.ToBoolean(Session["OnlineBooking"]) == true)
+                        {
+
+                        }
+
+                        if (Convert.ToBoolean(Session["Payroll"]) == true)
+                        {
+                            attendancePlaceHolder.Visible = true;
+                            payrollPlaceHolder.Visible = true;
+                        }
+
+                        if (Convert.ToBoolean(Session["Service"]) == true)
+                        {
+                            servicePlaceHolder.Visible = true;
+                            serviceRequestPlaceHolder.Visible = true;
+                        }
 
                         lblUsername.Text = staffObj.Name;
                     }
+
                     if (userType == "Reception")
                     {
 
                     }
+
                     if (userType == "Service")
                     {
 
                     }
+
                     if (userType == "DepartmentManager")
                     {
 
@@ -89,5 +116,15 @@ public partial class MasterPage : System.Web.UI.MasterPage
     protected void btnMyProfile_Click(object sender, EventArgs e)
     {
         Response.Redirect("userprofile.aspx");
+    }
+
+    protected void btnLogout_Click(object sender, EventArgs e)
+    {
+        Session["LoggedUser"] = null;
+        Session["UserType"] = null;
+        Session["jid"] = null;
+        Session["rid"] = null;
+        Session["sid"] = null;
+        Response.Redirect("login.aspx");
     }
 }
