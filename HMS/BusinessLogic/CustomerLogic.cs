@@ -145,7 +145,7 @@ namespace BusinessLogic
 
         public Customer login(String username, String password)
         {
-            String query = "select * from customer where Username=@Username and Password=@Password";
+            String query = "select * from Customer where Username=@Username and Password=@Password";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
             lstParams.Add(new SqlParameter("@Username", username));
