@@ -123,8 +123,8 @@
     <script>
         require(['converse'], function (converse) {
             converse.initialize({
-                bosh_service_url: 'http://codester.cloudapp.net:5280/http-bind', // Please use this connection manager only for testing purposes
-                i18n: locales['en'], // Refer to ./locale/locales.js to see which locales are supported
+                bosh_service_url: 'http://codester.cloudapp.net:5280/http-bind',
+                i18n: locales['en'],
                 keepalive: true,
                 message_carbons: true,
                 play_sounds: true,
