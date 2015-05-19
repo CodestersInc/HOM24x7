@@ -56,7 +56,8 @@ public partial class login : System.Web.UI.Page
                     {
                         Session.Add("LoggedUser", customerLogger);
                         Session.Add("UserType", "Customer");
-                        Response.Redirect("request-a-service.aspx");
+                        //redirectAsNeeded();
+                        Response.Redirect("ServiceHome.aspx");
                     }
                     else
                     {

@@ -197,5 +197,10 @@ namespace BusinessLogic
                 return null;
             }
         }
+
+        public Booking getCurruntBooking(int CustomerID)
+        {
+
+        }
     }
 }
