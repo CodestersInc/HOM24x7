@@ -10,7 +10,7 @@ using System.Data.SqlClient;
 using BusinessLogic;
 using WebUtility;
 
-public partial class registrestaff : System.Web.UI.Page
+partial class registerstaff : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {

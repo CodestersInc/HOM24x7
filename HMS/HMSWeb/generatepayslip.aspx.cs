@@ -35,8 +35,6 @@ public partial class generatepayslip : System.Web.UI.Page
         DateTime fromDate = Convert.ToDateTime(txtFromDate.Text);
         DateTime toDate = Convert.ToDateTime(txtToDate.Text);
 
-        Staff staff;
-
         DataTable staffData = new StaffLogic().getStaffForPayroll(loggedUser.AccountID);
         PaySlipLogic logic = new PaySlipLogic();
         int daysPayable;

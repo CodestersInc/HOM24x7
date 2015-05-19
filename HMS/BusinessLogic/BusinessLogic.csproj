@@ -47,6 +47,8 @@
     <Compile Include="Account.cs" />
     <Compile Include="AttendanceLogic.cs" />
     <Compile Include="Attendance.cs" />
+    <Compile Include="Bill.cs" />
+    <Compile Include="BillLogic.cs" />
     <Compile Include="BookingLogic.cs" />
     <Compile Include="Booking.cs" />
     <Compile Include="Component.cs" />

@@ -25,52 +25,79 @@ namespace BusinessLogic
 
         public Customer create(Customer obj)
         {
-            String query = "insert into Customer values(@CreateDate, @Name, @Email, @Phone, @Username, @Password, @IsActive, @AccountID);";
-            List<SqlParameter> lstParams = new List<SqlParameter>();
+            String checkquery = "select * from Customer where Name=@Name and Email=@Email and Phone=@Phone and AccountID=@AccountID";
+            List<SqlParameter> lstParamsc = new List<SqlParameter>();
 
-            lstParams.Add(new SqlParameter("@CreateDate", obj.CreateDate));
-            lstParams.Add(new SqlParameter("@Name", obj.Name));
-            lstParams.Add(new SqlParameter("@Email", obj.Email));
-            lstParams.Add(new SqlParameter("@Phone", obj.Phone));
-            lstParams.Add(new SqlParameter("@Username", obj.Username));
-            lstParams.Add(new SqlParameter("@Password", obj.Password));
-            lstParams.Add(new SqlParameter("@IsActive", obj.IsActive));
-            lstParams.Add(new SqlParameter("@AccountID", obj.AccountID));
+            lstParamsc.Add(new SqlParameter("@CreateDate", obj.CreateDate));
+            lstParamsc.Add(new SqlParameter("@Name", obj.Name));
+            lstParamsc.Add(new SqlParameter("@Email", obj.Email));
+            lstParamsc.Add(new SqlParameter("@Phone", obj.Phone));
+            lstParamsc.Add(new SqlParameter("@AccountID", obj.AccountID));
 
-            int res = DBUtility.Modify(query, lstParams);
+            DataTable records = DBUtility.Select(checkquery, lstParamsc);
 
-            if (res == 1)
+            if (records.Rows.Count == 1)
             {
-                String fetchquery = "select * from Customer where CreateDate=@CreateDate and Name=@Name and Email=@Email and Phone=@Phone and Username=@Username and Password=@Password and IsActive=@IsActive and AccountID=@AccountID";
-                List<SqlParameter> lstParams1 = new List<SqlParameter>();
-
-                lstParams1.Add(new SqlParameter("@CreateDate", obj.CreateDate));
-                lstParams1.Add(new SqlParameter("@Name", obj.Name));
-                lstParams1.Add(new SqlParameter("@Email", obj.Email));
-                lstParams1.Add(new SqlParameter("@Phone", obj.Phone));
-                lstParams1.Add(new SqlParameter("@Username", obj.Username));
-                lstParams1.Add(new SqlParameter("@Password", obj.Password));
-                lstParams1.Add(new SqlParameter("@IsActive", obj.IsActive));
-                lstParams1.Add(new SqlParameter("@AccountID", obj.AccountID));
-                DataTable dt = DBUtility.Select(fetchquery, lstParams1);
-                if (dt.Rows.Count == 1)
-                {
-                    return new Customer(Convert.ToInt32(dt.Rows[0]["CustomerID"]),
-                        Convert.ToDateTime(dt.Rows[0]["CreateDate"]),
-                        dt.Rows[0]["Name"].ToString(),
-                        dt.Rows[0]["Email"].ToString(),
-                        dt.Rows[0]["Phone"].ToString(),
-                        dt.Rows[0]["Username"].ToString(),
-                        dt.Rows[0]["Password"].ToString(),
-                        Convert.ToBoolean(dt.Rows[0]["IsActive"]),
-                        Convert.ToInt32(dt.Rows[0]["AccountID"]));
-                }
-                else
-                {
-                    return null;
-                }
+                return new Customer(Convert.ToInt32(records.Rows[0]["CustomerID"]),
+                        Convert.ToDateTime(records.Rows[0]["CreateDate"]),
+                        records.Rows[0]["Name"].ToString(),
+                        records.Rows[0]["Email"].ToString(),
+                        records.Rows[0]["Phone"].ToString(),
+                        records.Rows[0]["Username"].ToString(),
+                        records.Rows[0]["Password"].ToString(),
+                        Convert.ToBoolean(records.Rows[0]["IsActive"]),
+                        Convert.ToInt32(records.Rows[0]["AccountID"]));
             }
-            return null;
+            else
+            {
+                String query = "insert into Customer values(@CreateDate, @Name, @Email, @Phone, @Username, @Password, @IsActive, @AccountID);";
+                List<SqlParameter> lstParams = new List<SqlParameter>();
+
+                lstParams.Add(new SqlParameter("@CreateDate", obj.CreateDate));
+                lstParams.Add(new SqlParameter("@Name", obj.Name));
+                lstParams.Add(new SqlParameter("@Email", obj.Email));
+                lstParams.Add(new SqlParameter("@Phone", obj.Phone));
+                lstParams.Add(new SqlParameter("@Username", obj.Username));
+                lstParams.Add(new SqlParameter("@Password", obj.Password));
+                lstParams.Add(new SqlParameter("@IsActive", obj.IsActive));
+                lstParams.Add(new SqlParameter("@AccountID", obj.AccountID));
+
+                int res = DBUtility.Modify(query, lstParams);
+
+                if (res == 1)
+                {
+                    String fetchquery = "select * from Customer where CreateDate=@CreateDate and Name=@Name and Email=@Email and Phone=@Phone and Username=@Username and Password=@Password and IsActive=@IsActive and AccountID=@AccountID";
+                    List<SqlParameter> lstParams1 = new List<SqlParameter>();
+
+                    lstParams1.Add(new SqlParameter("@CreateDate", obj.CreateDate));
+                    lstParams1.Add(new SqlParameter("@Name", obj.Name));
+                    lstParams1.Add(new SqlParameter("@Email", obj.Email));
+                    lstParams1.Add(new SqlParameter("@Phone", obj.Phone));
+                    lstParams1.Add(new SqlParameter("@Username", obj.Username));
+                    lstParams1.Add(new SqlParameter("@Password", obj.Password));
+                    lstParams1.Add(new SqlParameter("@IsActive", obj.IsActive));
+                    lstParams1.Add(new SqlParameter("@AccountID", obj.AccountID));
+                    DataTable dt = DBUtility.Select(fetchquery, lstParams1);
+
+                    if (dt.Rows.Count == 1)
+                    {
+                        return new Customer(Convert.ToInt32(dt.Rows[0]["CustomerID"]),
+                            Convert.ToDateTime(dt.Rows[0]["CreateDate"]),
+                            dt.Rows[0]["Name"].ToString(),
+                            dt.Rows[0]["Email"].ToString(),
+                            dt.Rows[0]["Phone"].ToString(),
+                            dt.Rows[0]["Username"].ToString(),
+                            dt.Rows[0]["Password"].ToString(),
+                            Convert.ToBoolean(dt.Rows[0]["IsActive"]),
+                            Convert.ToInt32(dt.Rows[0]["AccountID"]));
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                return null;
+            }                                  
         }
 
         public int update(Customer obj)

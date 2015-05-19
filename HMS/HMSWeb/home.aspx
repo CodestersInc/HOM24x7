@@ -120,10 +120,11 @@
 
 <asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
     <!-- conversejs script start-->    
+    <%--bosh_service_url: 'http://codester.cloudapp.net:5280/http-bind',--%>
     <script>
         require(['converse'], function (converse) {
             converse.initialize({
-                bosh_service_url: 'http://codester.cloudapp.net:5280/http-bind',
+                bosh_service_url:'https://conversejs.org/http-bind/',                
                 i18n: locales['en'],
                 keepalive: true,
                 message_carbons: true,

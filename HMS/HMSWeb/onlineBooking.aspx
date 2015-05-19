@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="onlineBooking.aspx.cs" Inherits="Default1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="onlineBooking.aspx.cs" Inherits="onlinebooking" %>
 
 <!DOCTYPE HTML>
 <html>
@@ -7,7 +7,7 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
     <link href="clientcss/style.css" rel="stylesheet" type="text/css" media="all" />
     <script src="clientjs/jquery.min.js"></script>
-    
+
     <!---Start Date Picker---->
     <link rel="stylesheet" href="clientcss/jquery-ui.css" />
     <script src="clientjs/jquery-ui.js"></script>
@@ -66,9 +66,36 @@
             </div>
             <div class="reservation">
                 <ul>
-                    <li class="span1_of_1">
+                    <li class="span1_of_1 left">
+                        <h5 style="padding-top: 5px;">Name:</h5>
+                        <div>
+                            <asp:TextBox ID="txtName" Style="height: 27px; width: 26px; font-size:16px" runat="server"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ControlToValidate="txtName" ValidationGroup="First" runat="server" ErrorMessage="RequiredFieldValidator"></asp:RequiredFieldValidator>
+                        </div>
+                    </li>
+                    <li class="span1_of_1 left">
+                        <h5 style="padding-top: 5px;">Email:</h5>
+                        <div class="">
+                            <asp:TextBox ID="txtEmail" Style="height: 27px; width: 26px; font-size:16px" runat="server"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ControlToValidate="txtEmail" ValidationGroup="First" runat="server" ErrorMessage="RequiredFieldValidator"></asp:RequiredFieldValidator>
+                        </div>
+                    </li>
+                    <li class="span1_of_1 left">
+                        <h5 style="padding-top: 5px;">Phone:</h5>
+                        <div class="">
+                            <asp:TextBox ID="txtPhone" Style="height: 27px; width: 26px; font-size:16px" runat="server"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ControlToValidate="txtPhone" ValidationGroup="First" runat="server" ErrorMessage="RequiredFieldValidator"></asp:RequiredFieldValidator>
+                        </div>
+                    </li>
+                    <li class="span1_of_1 left">
+                        <h5 style="padding-top: 5px;">No. Of Persons:</h5>
+                        <div class="">
+                            <asp:TextBox ID="txtNumberOfPerson" Style="height: 27px; width: 26px; font-size:16px" runat="server"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ControlToValidate="txtNumberOfPerson" ValidationGroup="First" runat="server" ErrorMessage="RequiredFieldValidator"></asp:RequiredFieldValidator>
+                        </div>
+                    </li>
+                    <li class="span1_of_1 left">
                         <h5>type of room:</h5>
-                        <!----------start section_room----------->
                         <div class="section_room">
                             <asp:DropDownList ID="ddlRoomType" runat="server"></asp:DropDownList>
                         </div>
@@ -85,17 +112,9 @@
                             <asp:TextBox CssClass="date datepicker" ID="txtCheckOutDate" value="DD-MM-YY" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'DD-MM-YY';}" runat="server"></asp:TextBox>
                         </div>
                     </li>
-                    <li class="span1_of_2 left">
-                        <h5>Persons:</h5>
-                        <!----------start section_room----------->
-                        <div class="section_room">
-                            <asp:TextBox ID="txtNumberOfPerson" runat="server"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ControlToValidate="txtNumberOfPerson" ValidationGroup="First" runat="server" ErrorMessage="RequiredFieldValidator"></asp:RequiredFieldValidator>
-                        </div>
-                    </li>
-                    <li class="span1_of_3">
-                        <div class="date_btn">
-                            <asp:Button ID="btnSubmit" ValidationGroup="First" runat="server" Text="Book now" OnClick="btnSubmit_Click" />
+                    <li class="span1_of_1 left">
+                        <div class="date_btn" style="padding-left:10px;">                            
+                            <asp:Button ID="btnSubmit" Style="height: 36px; font-size: 18px; color:white; background-color:deepskyblue" ValidationGroup="First" runat="server" Text="Book now" OnClick="btnSubmit_Click" />
                         </div>
                     </li>
                 </ul>

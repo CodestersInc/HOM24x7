@@ -128,5 +128,19 @@ namespace BusinessLogic
 
             return DBUtility.Select(query, lstParams);
         }
+
+        public int getWebsiteRate(int RoomTypeID, DateTime Date, int AccountID)
+        {
+            String query = "select WebsiteRate from SeasonRoom where SeasonRoom.RoomTypeID=@RoomTypeID and SeasonRoom.SeasonID=(select Season.SeasonID from Season where Season.FromDate < @Date AND Season.ToDate > @Date and Season.AccountID=@AccountID)";
+
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+
+            lstParams.Add(new SqlParameter("@RoomTypeID", RoomTypeID));
+            lstParams.Add(new SqlParameter("@Date", Date));
+            lstParams.Add(new SqlParameter("@AccountID", AccountID));
+
+            return Convert.ToInt32(DBUtility.Select(query, lstParams).Rows[0][0]);
+
+        }
     }
 }

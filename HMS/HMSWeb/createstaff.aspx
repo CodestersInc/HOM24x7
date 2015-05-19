@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="createstaff.aspx.cs" Inherits="registrestaff" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="createstaff.aspx.cs" Inherits="registerstaff" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" runat="Server">
     <link rel="stylesheet" href="assets/bootstrap-toggle-buttons/static/stylesheets/bootstrap-toggle-buttons.css" />
