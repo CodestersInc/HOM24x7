@@ -61,6 +61,7 @@ public partial class viewstaff : System.Web.UI.Page
         staffobj.BankACNumber = txtBankACNumber.Text;
         staffobj.DepartmentID = Convert.ToInt32(ddlDepartment.SelectedValue);
         staffobj.AccountID = loggedUser.AccountID;
+        staffobj.Password = loggedUser.Password;
 
         if(new StaffLogic().update(staffobj)==1)
         {

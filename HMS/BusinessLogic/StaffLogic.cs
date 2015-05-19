@@ -86,7 +86,7 @@ namespace BusinessLogic
 
         public int update(Staff obj)
         {
-            String query = "update Staff set StaffCode=@StaffCode, Name=@Name, Email=@Email, Phone=@Phone, UserType=@UserType, Designation=@Designation, DOB=@DOB, DOJ=@DOJ, Salary=@Salary, IsActive=@IsActive, BankACNumber=@BankACNumber, DepartmentID=@DepartmentID, AccountID=@AccountID where StaffID=@StaffID";
+            String query = "update Staff set StaffCode=@StaffCode, Name=@Name, Email=@Email, Phone=@Phone, UserType=@UserType, Designation=@Designation, DOB=@DOB, DOJ=@DOJ, Salary=@Salary, IsActive=@IsActive, BankACNumber=@BankACNumber, DepartmentID=@DepartmentID, AccountID=@AccountID, Password=@Password where StaffID=@StaffID";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@StaffID", obj.StaffID));
@@ -103,6 +103,7 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@BankACNumber", obj.BankACNumber));
             lstParams.Add(new SqlParameter("@DepartmentID", obj.DepartmentID));
             lstParams.Add(new SqlParameter("@AccountID", obj.AccountID));
+            lstParams.Add(new SqlParameter("@Password", obj.Password));
 
             return DBUtility.Modify(query, lstParams);
         }        

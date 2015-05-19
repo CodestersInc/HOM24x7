@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using System.Security.Cryptography;
 using System.Text;
 using BusinessLogic;
@@ -69,16 +71,9 @@ namespace WebUtility
             }
         }
 
-
-        public static Boolean CompareSHA512Hash(String source, String Hash)
+        public static Boolean CompareSHA512Hash(String Hash1, String Hash2)
         {
-            // Hash the input. 
-            string hashOfInput = GetSHA512Hash(source);
-
-            // Create a StringComparer an compare the hashes.
-            StringComparer comparer = StringComparer.OrdinalIgnoreCase;
-
-            if (0 == comparer.Compare(hashOfInput, Hash))
+            if (Hash1 == Hash2)
             {
                 return true;
             }
@@ -88,5 +83,20 @@ namespace WebUtility
             }
         }
 
+        public static void MsgBox(String msg, Page page, Object obj)
+        {
+            string s = "<SCRIPT language='javascript'>alert('" + msg.Replace("\r\n", "\\n").Replace("'", "") + "'); </SCRIPT>";
+            Type cstype = obj.GetType();
+            ClientScriptManager cs = page.ClientScript;
+            cs.RegisterClientScriptBlock(cstype, s, s.ToString());
+        }
+
+        public static void MsgBox(String msg, Page page, Object obj, String redirectURL)
+        {
+            string s = "<SCRIPT language='javascript'>alert('" + msg.Replace("\r\n", "\\n").Replace("'", "") + "'); window.location='" + redirectURL + "'</SCRIPT>";
+            Type cstype = obj.GetType();
+            ClientScriptManager cs = page.ClientScript;
+            cs.RegisterClientScriptBlock(cstype, s, s.ToString());
+        }
     }
 }

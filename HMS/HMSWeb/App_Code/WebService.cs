@@ -51,14 +51,4 @@ public class WebService : System.Web.Services.WebService {
 
         return js.Serialize(data);
     }
-
-    [WebMethod]
-    public SayHello SayHelloObject(string firstName, string lastName)
-    {
-        SayHello o = new SayHello();
-        o.Greeting = "Hello";
-        o.Name = firstName + " " + lastName;
-
-        return o;
-    }
 }

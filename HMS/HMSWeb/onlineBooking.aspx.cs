@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using System.Globalization;
+using WebUtility;
 
 public partial class onlinebooking : System.Web.UI.Page
 {
@@ -43,7 +44,7 @@ public partial class onlinebooking : System.Web.UI.Page
             DateTime checkInDate = Convert.ToDateTime((DateTime.ParseExact(txtCheckInDate.Text, "MM/dd/yyyy", CultureInfo.InvariantCulture)).ToString("dd-MM-yyyy"));
             DateTime checkOutDate = Convert.ToDateTime((DateTime.ParseExact(txtCheckOutDate.Text, "MM/dd/yyyy", CultureInfo.InvariantCulture)).ToString("dd-MM-yyyy"));
 
-            new OnlineBookingLogic().create(new OnlineBooking(0,
+            if (new OnlineBookingLogic().create(new OnlineBooking(0,
                 RoomTypeID,
                 1,
                 Convert.ToInt32(txtNumberOfPerson.Text),
@@ -55,7 +56,18 @@ public partial class onlinebooking : System.Web.UI.Page
                 "",
                 "",
                 new RoomTypeLogic().getWebsiteRate(RoomTypeID, DateTime.Now.Date, AccountID),
-                AccountID));
-        }        
+                AccountID)) != null)
+            {
+                txtName.Text = "";
+                txtEmail.Text = "";
+                txtPhone.Text = "";
+                txtNumberOfPerson.Text = "";
+                ddlRoomType.SelectedIndex = 0;
+                txtCheckInDate.Text = "";
+                txtCheckOutDate.Text = "";
+
+                Utility.MsgBox("Reservation Successful...!!", this.Page, this);
+            }
+        }
     }
 }

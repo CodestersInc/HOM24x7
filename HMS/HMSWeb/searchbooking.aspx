@@ -78,6 +78,7 @@
                                                 <td style="text-align: center">
                                                     <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "viewbooking.aspx?ID=" + Eval("BookingID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
                                                     <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("BookingID") %>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>
+                                                    <asp:LinkButton ID="btnCheckout" CssClass="btn btn-success" PostBackUrl='<%# "checkout.aspx?ID=" + Eval("BookingID") %>' runat="server"><i class="icon-angle-right"></i> Checkout</asp:LinkButton>
                                                 </td>
                                             </tr>
                                         </ItemTemplate>

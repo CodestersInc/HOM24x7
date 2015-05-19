@@ -47,7 +47,7 @@ namespace BusinessLogic
 
         public int update(SystemAdmin obj)
         {
-            String query = "update SystemAdmin set Name=@Name, Email=@Email, Phone=@Phone where Username = @Username and Password = @Password";
+            String query = "update SystemAdmin set Email=@Email, Phone=@Phone, Password=@Password where Username=@Username and Name=@Name";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@Name", obj.Name));
