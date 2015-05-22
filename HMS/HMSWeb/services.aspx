@@ -148,7 +148,7 @@
                                             <ins><%# Eval("Rate") %></ins>
                                         </div>
                                         <div class="product-option-shop">
-                                            <a class="add_to_cart_button" href='placeorder.aspx?ID=<%# Eval("ServiceID")%>'>Request</a>
+                                            <a class="add_to_cart_button" href='placeorder.aspx?ID=<%# Eval("ServiceID")%>&Type=<%# Request["ID"]%>'>Request</a>
                                         </div>
                                     </div>
                                 </div>

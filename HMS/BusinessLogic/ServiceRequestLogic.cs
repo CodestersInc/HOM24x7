@@ -19,7 +19,7 @@ namespace BusinessLogic
 
         public ServiceRequest create(ServiceRequest obj)
         {
-            String query = "insert into ServiceRequest values(@ServiceID, @BookingID, @CreatedDate, @RequestedDate, @Status, @CustomerRemarks, @StaffRemarks, @AssignedID, @Unit) select * from ServiceRequest where ServiceID=@ServiceID BookingID=@BookingID CreatedDate=@CreatedDate and RequestedDate=@RequestedDate and Status=@Status and CustomerRemarks=@CustomerRemarks and StaffRemarks=@StaffRemarks and AssignedID=@AssignedID and Unit=@Unit";
+            String query = "insert into ServiceRequest values(@ServiceID, @BookingID, @CreatedDate, @RequestedDate, @Status, @CustomerRemarks, @StaffRemarks, @AssignedID, @Unit) ";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@ServiceID", obj.ServiceID));
@@ -32,20 +32,44 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@AssignedID", obj.AssignedID));
             lstParams.Add(new SqlParameter("@Unit", obj.Unit));
 
-            DataTable dt = DBUtility.InsertAndFetch(query, lstParams);
+            int res = DBUtility.Modify(query, lstParams);
 
-            if (dt.Rows.Count == 1)
+            if (res == 1)
             {
-                return new ServiceRequest(Convert.ToInt32(dt.Rows[0]["ServiceRequestID"]),
-                Convert.ToInt32(dt.Rows[0]["ServiceID"]),
-                Convert.ToInt32(dt.Rows[0]["BookingID"]),
-                Convert.ToDateTime(dt.Rows[0]["CreatedDate"]),
-                Convert.ToDateTime(dt.Rows[0]["RequestedDate"]),
-                dt.Rows[0]["Status"].ToString(),
-                dt.Rows[0]["CustomerRemarks"].ToString(),
-                dt.Rows[0]["StaffRemarks"].ToString(),
-                Convert.ToInt32(dt.Rows[0]["AssignedID"]),
-                Convert.ToInt32(dt.Rows[0]["Unit"]));
+                String selectQuery = "select * from ServiceRequest where ServiceID=@ServiceID and BookingID=@BookingID and CreatedDate=@CreatedDate and RequestedDate=@RequestedDate and Status=@Status and CustomerRemarks=@CustomerRemarks and StaffRemarks=@StaffRemarks and AssignedID=@AssignedID and Unit=@Unit";
+
+                List<SqlParameter> lstParams1 = new List<SqlParameter>();
+
+                lstParams1.Add(new SqlParameter("@ServiceID", obj.ServiceID));
+                lstParams1.Add(new SqlParameter("@BookingID", obj.BookingID));
+                lstParams1.Add(new SqlParameter("@CreatedDate", obj.CreatedDate));
+                lstParams1.Add(new SqlParameter("@RequestedDate", obj.RequestedDate));
+                lstParams1.Add(new SqlParameter("@Status", obj.Status));
+                lstParams1.Add(new SqlParameter("@CustomerRemarks", obj.CustomerRemarks));
+                lstParams1.Add(new SqlParameter("@StaffRemarks", obj.StaffRemarks));
+                lstParams1.Add(new SqlParameter("@AssignedID", obj.AssignedID));
+                lstParams1.Add(new SqlParameter("@Unit", obj.Unit));
+
+                DataTable dt = DBUtility.Select(selectQuery, lstParams1);
+
+                if (dt.Rows.Count == 1)
+                {
+                    return new ServiceRequest(Convert.ToInt32(dt.Rows[0]["ServiceRequestID"]),
+                        Convert.ToInt32(dt.Rows[0]["ServiceID"]),
+                        Convert.ToInt32(dt.Rows[0]["BookingID"]),
+                        Convert.ToDateTime(dt.Rows[0]["CreatedDate"]),
+                        Convert.ToDateTime(dt.Rows[0]["RequestedDate"]),
+                        dt.Rows[0]["Status"].ToString(),
+                        dt.Rows[0]["CustomerRemarks"].ToString(),
+                        dt.Rows[0]["StaffRemarks"].ToString(),
+                        Convert.ToInt32(dt.Rows[0]["AssignedID"]),
+                        Convert.ToInt32(dt.Rows[0]["Unit"]));
+                }
+                else
+                {
+                    return null;
+                }
+
             }
             else
             {
@@ -69,7 +93,7 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@AssignedID", obj.AssignedID));
             lstParams.Add(new SqlParameter("@Unit", obj.Unit));
 
-            return DBUtility.Modify(query, lstParams); 
+            return DBUtility.Modify(query, lstParams);
         }
 
         public int delete(int id)
@@ -78,7 +102,7 @@ namespace BusinessLogic
             List<SqlParameter> lstParams = new List<SqlParameter>();
             lstParams.Add(new SqlParameter("@ID", id));
 
-            return DBUtility.Modify(query, lstParams);  
+            return DBUtility.Modify(query, lstParams);
         }
 
         public ServiceRequest selectById(int id)
@@ -89,7 +113,7 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@id", id));
             DataTable dt = DBUtility.Select(query, lstParams);
 
-            if(dt.Rows.Count==1)
+            if (dt.Rows.Count == 1)
             {
                 return new ServiceRequest(Convert.ToInt32(dt.Rows[0]["ServiceRequestID"]),
                 Convert.ToInt32(dt.Rows[0]["ServiceID"]),

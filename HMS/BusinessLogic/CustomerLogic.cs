@@ -200,7 +200,38 @@ namespace BusinessLogic
 
         public Booking getCurruntBooking(int CustomerID)
         {
+            String query = "select * from Booking where CustomerID = @CustomerID order by CheckInDate";
+            
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+            lstParams.Add(new SqlParameter("@CustomerID", CustomerID));
 
+            DataTable dt = DBUtility.Select(query, lstParams);
+
+            if (dt.Rows.Count != 0)
+            {
+                return new Booking(Convert.ToInt32(dt.Rows[0]["BookingID"]),
+                    Convert.ToInt32(dt.Rows[0]["RoomID"]),
+                    Convert.ToInt32(dt.Rows[0]["NoOfPersons"]),
+                    Convert.ToDateTime(dt.Rows[0]["CheckInDate"]),
+                    Convert.ToDateTime(dt.Rows[0]["PlannedCheckoutDate"]),
+                    Convert.ToDateTime(dt.Rows[0]["CheckOutDate"]),
+                    dt.Rows[0]["Status"].ToString(),
+                    Convert.ToDouble(dt.Rows[0]["PaidAmount"]),
+                    Convert.ToInt32(dt.Rows[0]["CustomerID"]),
+                    Convert.ToInt32(dt.Rows[0]["ApproverID"]),
+                    Convert.ToInt32(dt.Rows[0]["ReceiverID"]),
+                    dt.Rows[0]["StaffRemarks"].ToString(),
+                    dt.Rows[0]["CustomerRemarks"].ToString(),
+                    Convert.ToDouble(dt.Rows[0]["RoomRate"]),
+                    dt.Rows[0]["PaymentMode"].ToString(),
+                    Convert.ToInt32(dt.Rows[0]["ChequeNo"]),
+                    dt.Rows[0]["BankName"].ToString(),
+                    Convert.ToInt32(dt.Rows[0]["OnlineBookingID"]));
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

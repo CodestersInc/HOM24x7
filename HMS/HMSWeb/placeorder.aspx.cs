@@ -44,6 +44,14 @@ public partial class placeorder : System.Web.UI.Page
     {
         new ServiceRequestLogic().create(new ServiceRequest(0,
             Convert.ToInt32(Request["ID"]),
-            ))
+            new CustomerLogic().getCurruntBooking((((Customer)Session["loggedUser"]).CustomerID)).BookingID,
+            DateTime.Now,
+            DateTime.Now,
+            "Pending",
+            txtCustomerRemarks.Text,
+            "",
+            0,
+            Convert.ToInt32(txtQuantity.Text)));
+        Response.Redirect("services.aspx?ID=" + Request["Type"]);
     }
 }
