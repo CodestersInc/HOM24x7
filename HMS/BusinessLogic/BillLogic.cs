@@ -10,7 +10,7 @@ using DataAccess;
 
 namespace BusinessLogic
 {
-    class BillLogic : ILogic<Bill>
+    public class BillLogic : ILogic<Bill>
     {
         public DataTable search(String searchsttring, int id)
         {
@@ -30,16 +30,15 @@ namespace BusinessLogic
 
         public Bill create(Bill obj)
         {
-            String insertQuery = "insert into Bill values(@CustomerID, @RoomID, @RoomCharges, @ServiceCharges, @TotalAmount, @DiscountPercentage, @PayableAmount, @PaymentMode, @PaymentDetails)";
+            String insertQuery = "insert into Bill values(@BookingID, @RoomCharges, @ServiceCharges, @TotalAmount, @DiscountedAmount, @PayableAmount, @PaymentMode, @PaymentDetails)";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
-            lstParams.Add(new SqlParameter("@CustomerID", obj.CustomerID));
-            lstParams.Add(new SqlParameter("@RoomID", obj.RoomID));
+            lstParams.Add(new SqlParameter("@BookingID", obj.BookingID));
             lstParams.Add(new SqlParameter("@RoomCharges", obj.RoomCharges));
             lstParams.Add(new SqlParameter("@ServiceCharges", obj.ServiceCharges));
             lstParams.Add(new SqlParameter("@TotalAmount", obj.TotalAmount));
-            lstParams.Add(new SqlParameter("@Discount", obj.DiscountPercentage));
+            lstParams.Add(new SqlParameter("@DiscountedAmount", obj.DiscountedAmount));
             lstParams.Add(new SqlParameter("@PayableAmount", obj.PayableAmount));
             lstParams.Add(new SqlParameter("@PaymentMode", obj.PaymentMode));
             lstParams.Add(new SqlParameter("@PaymentDetails", obj.PaymentDetails));
@@ -48,16 +47,15 @@ namespace BusinessLogic
 
             if (res == 1)
             {
-                String selectQuery = "select * from Bill where CustomerID=@CustomerID, RoomID=@RoomID, RoomCharges=@RoomCharges, ServiceCharges=@ServiceCharge, TotalAmount=@TotalAmount, DiscountPercentage=@DiscountPercentage, PayableAmount=@PayableAmount, PaymentMode=@PaymentMode, PaymentDetails=@PaymentDetails";
+                String selectQuery = "select * from Bill where BookingID=@BookingID and RoomCharges=@RoomCharges and ServiceCharges=@ServiceCharge and TotalAmount=@TotalAmount and DiscountedAmount=@DiscountedAmount and PayableAmount=@PayableAmount and PaymentMode=@PaymentMode and PaymentDetails=@PaymentDetails";
 
                 List<SqlParameter> lstParams1 = new List<SqlParameter>();
 
-                lstParams1.Add(new SqlParameter("@CustomerID", obj.CustomerID));
-                lstParams1.Add(new SqlParameter("@RoomID", obj.RoomID));
+                lstParams1.Add(new SqlParameter("@BookingID", obj.BookingID));
                 lstParams1.Add(new SqlParameter("@RoomCharges", obj.RoomCharges));
-                lstParams1.Add(new SqlParameter("@ServiceCharges", obj.ServiceCharges));
+                lstParams1.Add(new SqlParameter("@ServiceCharge", obj.ServiceCharges));
                 lstParams1.Add(new SqlParameter("@TotalAmount", obj.TotalAmount));
-                lstParams1.Add(new SqlParameter("@Discount", obj.DiscountPercentage));
+                lstParams1.Add(new SqlParameter("@DiscountedAmount", obj.DiscountedAmount));
                 lstParams1.Add(new SqlParameter("@PayableAmount", obj.PayableAmount));
                 lstParams1.Add(new SqlParameter("@PaymentMode", obj.PaymentMode));
                 lstParams1.Add(new SqlParameter("@PaymentDetails", obj.PaymentDetails));
@@ -67,12 +65,11 @@ namespace BusinessLogic
                 if (dt.Rows.Count == 1)
                 {
                     return new Bill(Convert.ToInt32(dt.Rows[0]["BillID"]),
-                        Convert.ToInt32(dt.Rows[0]["CusomerID"]),
-                        Convert.ToInt32(dt.Rows[0]["RoomID"]),
+                        Convert.ToInt32(dt.Rows[0]["BookingID"]),
                         Convert.ToDouble(dt.Rows[0]["RoomCharges"]),
                         Convert.ToDouble(dt.Rows[0]["ServiceCharges"]),
                         Convert.ToDouble(dt.Rows[0]["TotalAmount"]),
-                        Convert.ToDouble(dt.Rows[0]["DiscountPercentage"]),
+                        Convert.ToDouble(dt.Rows[0]["DiscountedAmount"]),
                         Convert.ToDouble(dt.Rows[0]["PayableAmount"]),
                         dt.Rows[0]["PaymentMode"].ToString(),
                         dt.Rows[0]["PaymentDetails"].ToString());
@@ -87,18 +84,18 @@ namespace BusinessLogic
 
         public int update(Bill obj)
         {
-            String query = "update Bill set @CustomerID, RoomID=@RoomID, RoomCharges=@RoomCharges, ServiceCharges=@ServiceCharge, TotalAmount=@TotalAmount, DiscountPercentage=@DiscountPercentage, PayableAmount=@PayableAmount, PaymentMode=@PaymentMode, PaymentDetails=@PaymentDetails";
+            String query = "update Bill set BookingID=@BookingID, RoomID=@RoomID, RoomCharges=@RoomCharges, ServiceCharges=@ServiceCharge, TotalAmount=@TotalAmount, DiscountedAmount=@DiscountedAmount, PayableAmount=@PayableAmount, PaymentMode=@PaymentMode, PaymentDetails=@PaymentDetails where BillID=@BillID";
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
-            lstParams.Add(new SqlParameter("@CustomerID", obj.CustomerID));
-            lstParams.Add(new SqlParameter("@RoomID", obj.RoomID));
+            lstParams.Add(new SqlParameter("@BookingID", obj.BookingID));
             lstParams.Add(new SqlParameter("@RoomCharges", obj.RoomCharges));
             lstParams.Add(new SqlParameter("@ServiceCharges", obj.ServiceCharges));
             lstParams.Add(new SqlParameter("@TotalAmount", obj.TotalAmount));
-            lstParams.Add(new SqlParameter("@Discount", obj.DiscountPercentage));
+            lstParams.Add(new SqlParameter("@DiscountedAmount", obj.DiscountedAmount));
             lstParams.Add(new SqlParameter("@PayableAmount", obj.PayableAmount));
             lstParams.Add(new SqlParameter("@PaymentMode", obj.PaymentMode));
             lstParams.Add(new SqlParameter("@PaymentDetails", obj.PaymentDetails));
+            lstParams.Add(new SqlParameter("@BillID", obj.BillID));
 
             return DBUtility.Modify(query, lstParams);
         }
@@ -123,12 +120,11 @@ namespace BusinessLogic
             if (dt.Rows.Count == 1)
             {
                 return new Bill(Convert.ToInt32(dt.Rows[0]["BillID"]),
-                    Convert.ToInt32(dt.Rows[0]["CusomerID"]),
-                    Convert.ToInt32(dt.Rows[0]["RoomID"]),
+                    Convert.ToInt32(dt.Rows[0]["BookingID"]),
                     Convert.ToDouble(dt.Rows[0]["RoomCharges"]),
                     Convert.ToDouble(dt.Rows[0]["ServiceCharges"]),
                     Convert.ToDouble(dt.Rows[0]["TotalAmount"]),
-                    Convert.ToDouble(dt.Rows[0]["DiscountPercentage"]),
+                    Convert.ToDouble(dt.Rows[0]["DiscountedAmount"]),
                     Convert.ToDouble(dt.Rows[0]["PayableAmount"]),
                     dt.Rows[0]["PaymentMode"].ToString(),
                     dt.Rows[0]["PaymentDetails"].ToString());

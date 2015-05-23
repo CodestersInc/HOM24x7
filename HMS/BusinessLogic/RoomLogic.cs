@@ -116,14 +116,16 @@ namespace BusinessLogic
             return DBUtility.Select(query, new List<SqlParameter>());
         }
 
-        public DataTable getFilteredRooms(int RoomTypeID, int FloorID)
+        public DataTable getFilteredRooms(int RoomTypeID, int FloorID, DateTime FromDate, DateTime ToDate)
         {
-            String query = "select * from Room where RoomTypeID=@RoomTypeID and FloorID=@FloorID";
+            String query = "select Room.RoomID, Room.RoomNumber from Room where Room.Status NOT IN ('Under Maintenance','Occupied','Booked') and Room.RoomTypeID=@RoomTypeID and Room.FloorID=@FloorID and  Room.RoomID NOT IN (select Booking.RoomID from Booking where CheckInDate >= @FromDate AND CheckOutDate <= @ToDate and Status IN ('Checked In', 'Approved'))";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@RoomTypeID", RoomTypeID));
             lstParams.Add(new SqlParameter("@FloorID", FloorID));
+            lstParams.Add(new SqlParameter("@FromDate", FromDate));
+            lstParams.Add(new SqlParameter("@ToDate", ToDate));
             return DBUtility.Select(query, lstParams);
 
         }

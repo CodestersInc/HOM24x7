@@ -137,5 +137,16 @@ namespace BusinessLogic
             
             return DBUtility.Select(query, lstParams);
         }
+
+        public DataTable getServiceTotalForBooking(int BookingID)
+        {
+            String query = "select Service.Name AS 'ServiceName', SUM(Service.Rate*ServiceRequest.Unit) AS 'ServiceCharge' from Service, ServiceRequest where Service.ServiceID=ServiceRequest.ServiceID and ServiceRequest.BookingID=@BookingID GROUP BY Service.Name";
+
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+
+            lstParams.Add(new SqlParameter("@BookingID", BookingID));
+
+            return DBUtility.Select(query, lstParams);
+        }
     }
 }

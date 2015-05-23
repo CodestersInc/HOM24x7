@@ -22,7 +22,9 @@
                     <li>
                         <a href="#">Payslip</a> <span class="divider">&nbsp;</span>
                     </li>
-                    <li><a href="#">View</a><span class="divider-last">&nbsp;</span></li>
+                    <li>
+                        <a href="#">View</a><span class="divider-last">&nbsp;</span>
+                    </li>
                 </ul>
             </div>
         </div>

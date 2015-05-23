@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-    class Bill : IModel
+    public class Bill : IModel
     {
         public int BillID;
-        public int CustomerID;
-        public int RoomID;
+        public int BookingID;
         public double RoomCharges;
         public double ServiceCharges;
         public double TotalAmount;
-        public double DiscountPercentage;
+        public double DiscountedAmount;
         public double PayableAmount;
         public string PaymentMode;
         public string PaymentDetails;
@@ -24,15 +23,14 @@ namespace BusinessLogic
 
         }
 
-        public Bill(int BillID, int CustomerID, int RoomID, double RoomCharges, double ServiceCharges, double TotalAmount, double DiscountPercentage, double PayableAmount, string PaymentMode, string PaymentDetails)
+        public Bill(int BillID, int BookingID, double RoomCharges, double ServiceCharges, double TotalAmount, double DiscountedAmount, double PayableAmount, string PaymentMode, string PaymentDetails)
         {
             this.BillID = BillID;
-            this.CustomerID = CustomerID;
-            this.RoomID = RoomID;
+            this.BookingID = BookingID;
             this.RoomCharges = RoomCharges;
             this.ServiceCharges = ServiceCharges;
             this.TotalAmount = TotalAmount;
-            this.DiscountPercentage = DiscountPercentage;
+            this.DiscountedAmount = DiscountedAmount;
             this.PayableAmount = PayableAmount;
             this.PaymentMode = PaymentMode;
             this.PaymentDetails = PaymentDetails;

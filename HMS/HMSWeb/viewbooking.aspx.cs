@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
+using System.Data;
 
 public partial class viewbooking : System.Web.UI.Page
 {
@@ -25,13 +26,13 @@ public partial class viewbooking : System.Web.UI.Page
         {
             StaffLogic staffLogic = new StaffLogic();
             RoomTypeLogic roomTypeLogic = new RoomTypeLogic();
-            
+
             //Fill ddlRoomType
             ddlRoomType.DataSource = roomTypeLogic.selectAll(loggedUser.AccountID);
             ddlRoomType.DataValueField = "RoomTypeID";
             ddlRoomType.DataTextField = "Name";
             ddlRoomType.DataBind();
-            ddlRoomType_SelectedIndexChange(sender, null);
+            //ddlRoomType_SelectedIndexChange(sender, null);
 
             //Fill ddlApprover
             ddlApprover.DataSource = staffLogic.getReceptionManager(loggedUser.AccountID);
@@ -47,9 +48,8 @@ public partial class viewbooking : System.Web.UI.Page
 
             Booking booking = new BookingLogic().selectById(Convert.ToInt32(Request.QueryString["ID"]));
             Room room = new RoomLogic().selectById(booking.RoomID);
-            ddlRoomType.SelectedValue = room.RoomTypeID.ToString();
-            ddlFloor.SelectedValue = room.FloorID.ToString();
-            ddlRoom.SelectedValue = room.RoomID.ToString();
+
+            ddlRoomType.SelectedValue = room.RoomTypeID.ToString();            
             txtNoOfPersons.Text = booking.NumberOfPersons.ToString();
             txtCheckInDate.Text = booking.CheckInDate.ToString("dd-MM-yyyy");
             txtPlannedCheckoutDate.Text = booking.PlannedCheckOutDate.ToString("dd-MM-yyyy");
@@ -66,6 +66,10 @@ public partial class viewbooking : System.Web.UI.Page
             txtChequeNumber.Text = booking.ChequeNo.ToString();
             txtBankName.Text = booking.BankName;
             ViewState["CustomerID"] = booking.CustomerID;
+
+            //Fill ddlFloor and ddlRoom
+            ddlRoomType_SelectedIndexChange(sender, null);
+            ddlRoom.SelectedValue = booking.RoomID.ToString();
         }
     }
     protected void btnUpdate_Click(object sender, EventArgs e)
@@ -116,6 +120,7 @@ public partial class viewbooking : System.Web.UI.Page
             Response.Redirect("ErrorPage500.html");
         }
     }
+
     protected void btnCancel_Click(object sender, EventArgs e)
     {
         Response.Redirect("searchbooking.aspx");
@@ -124,30 +129,27 @@ public partial class viewbooking : System.Web.UI.Page
     protected void ddlRoomType_SelectedIndexChange(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["loggedUser"];
-        try
-        {
-            ddlFloor.DataSource = new FloorLogic().getFloorsForRoomType(Convert.ToInt32(ddlRoomType.SelectedValue), ((Staff)Session["loggedUser"]).AccountID);
-            ddlFloor.DataValueField = "FloorID";
-            ddlFloor.DataTextField = "FloorNumber";
-            ddlFloor.DataBind();
-            ddlFloor_SelectedIndexChanged(sender, null);
 
-            txtRoomRates.Text = (new SeasonRoomLogic().fetchCurrentRoomRate(Convert.ToInt32(ddlRoomType.SelectedValue), loggedUser.AccountID)).ToString();
-        }
-        catch (FormatException)
-        {
-            noRoomPlaceHolder.Visible = true;
-            createBookingPlaceHolder.Visible = false;
-        }
+        ddlFloor.DataSource = new FloorLogic().getFloorsForRoomType(Convert.ToInt32(ddlRoomType.SelectedValue), ((Staff)Session["loggedUser"]).AccountID);
+        ddlFloor.DataValueField = "FloorID";
+        ddlFloor.DataTextField = "FloorNumber";
+        ddlFloor.DataBind();
+        ddlFloor_SelectedIndexChanged(sender, null);
 
+        txtRoomRates.Text = (new SeasonRoomLogic().fetchCurrentRoomRate(Convert.ToInt32(ddlRoomType.SelectedValue), loggedUser.AccountID)).ToString();
     }
 
     protected void ddlFloor_SelectedIndexChanged(object sender, EventArgs e)
     {
-        ddlRoom.DataSource = new RoomLogic().getFilteredRooms(Convert.ToInt32(ddlRoomType.SelectedValue), Convert.ToInt32(ddlFloor.SelectedValue));
+        Booking booking = new BookingLogic().selectById(Convert.ToInt32(Request.QueryString["ID"]));
+        Room room = new RoomLogic().selectById(booking.RoomID);
+
+        DataTable dt = new RoomLogic().getFilteredRooms(Convert.ToInt32(ddlRoomType.SelectedValue), Convert.ToInt32(ddlFloor.SelectedValue), Convert.ToDateTime(txtCheckInDate.Text), Convert.ToDateTime(txtPlannedCheckoutDate.Text));
+        dt.Rows.Add(room.RoomID, room.RoomNumber);
+        ddlRoom.DataSource = dt;
         ddlRoom.DataValueField = "RoomID";
         ddlRoom.DataTextField = "RoomNumber";
-        ddlRoom.DataBind();
+        ddlRoom.DataBind();        
     }
 
     protected void btnCustomerCreate_Click(object sender, EventArgs e)

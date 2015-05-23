@@ -8,7 +8,6 @@ using System.Data.Sql;
 using System.Data.SqlClient;
 using DataAccess;
 
-
 namespace BusinessLogic
 {
     public class PaySlipLogic : ILogic<PaySlip>

@@ -71,7 +71,7 @@ public partial class createbooking : System.Web.UI.Page
 
     protected void ddlFloor_SelectedIndexChanged(object sender, EventArgs e)
     {
-        ddlRoom.DataSource = new RoomLogic().getFilteredRooms(Convert.ToInt32(ddlRoomType.SelectedValue), Convert.ToInt32(ddlFloor.SelectedValue));
+        ddlRoom.DataSource = new RoomLogic().getFilteredRooms(Convert.ToInt32(ddlRoomType.SelectedValue), Convert.ToInt32(ddlFloor.SelectedValue), Convert.ToDateTime(txtCheckInDate.Text), Convert.ToDateTime(txtPlannedCheckoutDate.Text));
         ddlRoom.DataValueField = "RoomID";
         ddlRoom.DataTextField = "RoomNumber";
         ddlRoom.DataBind();
@@ -121,6 +121,21 @@ public partial class createbooking : System.Web.UI.Page
                 Response.Redirect("ErrorPage500");
             }
             ViewState["CustomerID"] = newCustomer.CustomerID;
+        }
+
+        if (ddlStatus.SelectedValue == "Approved" || ddlStatus.SelectedValue == "Checked In")
+        {
+            RoomLogic roomlogic = new RoomLogic();
+            Room room = roomlogic.selectById(Convert.ToInt32(ddlRoom.SelectedValue));
+            if (ddlStatus.SelectedValue == "Approved")
+            {
+                room.Status = "Booked";
+            }
+            if (ddlStatus.SelectedValue == "Checked In")
+            {
+                room.Status = "Occupied";
+            }            
+            roomlogic.update(room);
         }
 
         Booking bookingObj = new BookingLogic().create(new Booking(0,

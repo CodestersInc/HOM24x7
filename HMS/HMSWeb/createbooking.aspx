@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="createbooking.aspx.cs" Inherits="createbooking"  MaintainScrollPositionOnPostback="true" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="createbooking.aspx.cs" Inherits="createbooking" MaintainScrollPositionOnPostback="true" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" runat="Server">
 </asp:Content>
@@ -51,6 +51,26 @@
 
                                 <asp:PlaceHolder ID="createBookingPlaceHolder" runat="server">
                                     <div class="control-group">
+                                        <label class="control-label">Check-in Date</label>
+                                        <div class="controls">
+                                            <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+                                                <asp:TextBox ID="txtCheckInDate" runat="server" CssClass="span6 non-editable" Text="dd-mm-yyyy"></asp:TextBox>
+                                                <span class="add-on"><i class="icon-calendar"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label">Planned check-out Date</label>
+                                        <div class="controls">
+                                            <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+                                                <asp:TextBox ID="txtPlannedCheckoutDate" runat="server" CssClass="span6 non-editable" Text="dd-mm-yyyy"></asp:TextBox>
+                                                <span class="add-on"><i class="icon-calendar"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
                                         <label class="control-label">Room Type</label>
                                         <div class="controls">
                                             <asp:DropDownList ID="ddlRoomType" runat="server" CssClass="span4" data-placeholder="Choose a Category" TabIndex="1" OnSelectedIndexChanged="ddlRoomType_SelectedIndexChange" AutoPostBack="True"></asp:DropDownList>
@@ -84,34 +104,14 @@
                                     </div>
 
                                     <div class="control-group">
-                                        <label class="control-label">Check-in Date</label>
-                                        <div class="controls">
-                                            <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-                                                <asp:TextBox ID="txtCheckInDate" runat="server" CssClass="span6 non-editable" Text="dd-mm-yyyy"></asp:TextBox>
-                                                <span class="add-on"><i class="icon-calendar"></i></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="control-group">
-                                        <label class="control-label">Planned check-out Date</label>
-                                        <div class="controls">
-                                            <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-                                                <asp:TextBox ID="txtPlannedCheckoutDate" runat="server" CssClass="span6 non-editable" Text="dd-mm-yyyy"></asp:TextBox>
-                                                <span class="add-on"><i class="icon-calendar"></i></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="control-group">
                                         <label class="control-label">Status</label>
                                         <div class="controls">
                                             <asp:DropDownList ID="ddlStatus" runat="server" CssClass="span4" data-placeholder="Select/update the status of the booking" TabIndex="1">
                                                 <asp:ListItem Value="Pending">Pending</asp:ListItem>
                                                 <asp:ListItem Value="Approved">Approved</asp:ListItem>
                                                 <asp:ListItem Value="Advance Paid">Advance Paid</asp:ListItem>
-                                                <asp:ListItem Value="Checked In">Checked in</asp:ListItem>
-                                                <asp:ListItem Value="Checked Out">Checked out</asp:ListItem>
+                                                <asp:ListItem Value="Checked In">Checked In</asp:ListItem>
+                                                <asp:ListItem Value="Checked Out">Checked Out</asp:ListItem>
                                                 <asp:ListItem Value="Cancelled">Cancelled</asp:ListItem>
                                             </asp:DropDownList>
                                         </div>
@@ -266,7 +266,7 @@
                                     <div class="control-group">
                                         <label class="control-label">Bank Name</label>
                                         <div class="controls">
-                                            <asp:TextBox ID="txtBankName" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter the full name of staff member." data-original-title="Popover header"></asp:TextBox>                                            
+                                            <asp:TextBox ID="txtBankName" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter the full name of staff member." data-original-title="Popover header"></asp:TextBox>
                                             <asp:RegularExpressionValidator ID="NameRegularExpressionValidator" runat="server" ValidationGroup="First" ErrorMessage="The name cannot contain any special characters" CssClass="alert alert-error" Display="Dynamic" ControlToValidate="txtBankName" ValidationExpression="^[a-zA-Z''-'\s]{1,90}$" />
                                         </div>
                                     </div>
