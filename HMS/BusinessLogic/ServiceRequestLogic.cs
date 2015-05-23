@@ -138,5 +138,27 @@ namespace BusinessLogic
 
             return DBUtility.Select(query, new List<SqlParameter>());
         }
+
+        public DataTable getPendingRequests(int AccountID)
+        {
+            String query = "select ServiceRequest.*, Service.Name as ServiceName, Room.RoomNumber as RoomNumber, Room.RoomID from ServiceRequest, Service, ServiceType, Booking, Room where ServiceType.AccountID=1 and ServiceRequest.Status='Pending' and ServiceRequest.ServiceID = Service.ServiceID and Service.ServiceTypeID = ServiceType.ServiceTypeID and ServiceRequest.BookingID = Booking.BookingID and Booking.RoomID = Room.RoomID";
+
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+
+            lstParams.Add(new SqlParameter("@AccountID", AccountID));
+            return DBUtility.Select(query, lstParams);
+        }
+
+        public DataTable getPendingRequestsOfStaff(Staff serviceProvider)
+        {
+            String query = "select * from ServiceRequest where AssignedID=@StaffID and Status='Pending' AccountID=@AccountID ";
+
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+
+            lstParams.Add(new SqlParameter("@StaffID", serviceProvider.StaffID));
+            lstParams.Add(new SqlParameter("@AccountID", serviceProvider.AccountID));
+
+            return DBUtility.Select(query, lstParams);
+        }
     }
 }

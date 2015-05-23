@@ -10,7 +10,13 @@ public partial class createroomtype : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        Staff loggedUser = (Staff)Session["loggedUser"];
+        var User = Session["loggedUser"];
+        Staff loggedUser = null;
+        if(!(User is Staff))
+            Response.Redirect("login.aspx");
+
+        loggedUser = (Staff)Session["loggedUser"];
+
         if (loggedUser == null)
         {
             Response.Redirect("login.aspx?url=" + Request.Url);

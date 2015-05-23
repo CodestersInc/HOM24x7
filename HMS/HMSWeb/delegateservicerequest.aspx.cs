@@ -20,13 +20,50 @@ public partial class delegaterequest : System.Web.UI.Page
         {
             Response.Redirect("home.aspx");
         }
-    }
-    protected void btnSubmit_Click(object sender, EventArgs e)
-    {
 
+        if (!IsPostBack)
+        {
+            RequestListRepeater.DataSource = new ServiceRequestLogic().getPendingRequests(loggedUser.AccountID);
+            RequestListRepeater.DataBind();
+        }
     }
-    protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
-    {
 
+    protected void RequestListRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+    {
+        if (e.CommandName == "Delegate")
+        {
+            Staff loggedUser = (Staff)Session["loggedUser"];
+
+            StaffListPlaceHolder.Visible = true;
+            RequestListPlaceHolder.Visible = false;
+            ViewState["ServiceRequestID"] = e.CommandArgument;
+
+            StaffListRepeater.DataSource = new StaffLogic().searchManager(loggedUser.AccountID);
+            StaffListRepeater.DataBind();
+        }
     }
+
+    protected void StaffListRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+    {
+        if (e.CommandName == "Assign")
+        {
+            Staff loggedUser = (Staff)Session["loggedUser"];
+            
+            RequestListPlaceHolder.Visible = true;
+
+            ServiceRequestLogic serviceRequestLogic = new ServiceRequestLogic();
+            ServiceRequest serviceRequestObj = serviceRequestLogic.selectById(Convert.ToInt32(ViewState["ServiceRequestID"]));
+
+            serviceRequestObj.AssignedID = Convert.ToInt32(e.CommandArgument);
+            serviceRequestObj.Status = "Assigned";
+
+            int res = serviceRequestLogic.update(serviceRequestObj);
+
+            RequestListRepeater.DataSource = new ServiceRequestLogic().getPendingRequests(loggedUser.AccountID);
+            RequestListRepeater.DataBind();
+
+            StaffListPlaceHolder.Visible = false;
+        }
+    }
+    
 }

@@ -8,7 +8,7 @@
         <!-- BEGIN PAGE HEADER-->
         <div class="row-fluid">
             <div class="span12">
-                <h3 class="page-title">Create a Room</h3>
+                <h3 class="page-title">View Room</h3>
                 <ul class="breadcrumb">
                     <li>
                         <a href="home.aspx"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>

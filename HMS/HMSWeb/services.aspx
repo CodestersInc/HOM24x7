@@ -141,9 +141,9 @@
                                 <div class="col-md-3 col-sm-6">
                                     <div class="single-shop-product">
                                         <div class="product-upper">
-                                            <img src='<%# Eval("Image") %>' alt="" />
+                                            <a href='placeorder.aspx?ID=<%# Eval("ServiceID")%>&Type=<%# Request["ID"]%>'><img src='<%# Eval("Image") %>' style="height: 150px; width: 300px" alt="" /></a>
                                         </div>
-                                        <h2><a href=""><%# Eval("Name") %></a></h2>
+                                        <h2><a href="'placeorder.aspx?ID=<%# Eval("ServiceID")%>&Type=<%# Request["ID"]%>"><%# Eval("Name") %></a></h2>
                                         <div class="product-carousel-price">
                                             <ins><%# Eval("Rate") %></ins>
                                         </div>

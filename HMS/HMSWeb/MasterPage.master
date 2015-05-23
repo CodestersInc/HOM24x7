@@ -149,7 +149,7 @@
                         </asp:PlaceHolder>
                         <!-- END Sidebar Element-Attendance -->
 
-                        <!-- START Sidebar Element-Attendance -->
+                        <%--<!-- START Sidebar Element-Attendance -->
                         <asp:PlaceHolder ID="ServiceRequestPlceHolder" runat="server" Visible="false">
                             <li class="has-sub">
                                 <a href="javascript:;">
@@ -162,7 +162,7 @@
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
-                        <!-- END Sidebar Element-Attendance -->
+                        <!-- END Sidebar Element-Attendance -->--%>
 
                         <!-- START Sidebar Element-Booking -->
                         <asp:PlaceHolder ID="bookingPlaceHolder" runat="server" Visible="false">
@@ -284,6 +284,7 @@
                                 </a>
                                 <ul class="sub">
                                     <li><a href="delegateservicerequest.aspx">Delegate Service</a></li>
+                                    <li><a href="myservicerequest.aspx">My Requests</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
