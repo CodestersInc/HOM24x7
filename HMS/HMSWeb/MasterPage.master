@@ -148,22 +148,7 @@
                             </li>
                         </asp:PlaceHolder>
                         <!-- END Sidebar Element-Attendance -->
-
-                        <%--<!-- START Sidebar Element-Attendance -->
-                        <asp:PlaceHolder ID="ServiceRequestPlceHolder" runat="server" Visible="false">
-                            <li class="has-sub">
-                                <a href="javascript:;">
-                                    <span class="icon-box"><i class="icon-barcode"></i></span>Attendance
-                                <span class="arrow"></span>
-                                </a>
-                                <ul class="sub">
-                                    <li><a href="markattendance.aspx">Customer's Requests</a></li>
-                                    <li><a href="viewattendance.aspx"></a></li>
-                                </ul>
-                            </li>
-                        </asp:PlaceHolder>
-                        <!-- END Sidebar Element-Attendance -->--%>
-
+                        
                         <!-- START Sidebar Element-Booking -->
                         <asp:PlaceHolder ID="bookingPlaceHolder" runat="server" Visible="false">
                             <li class="has-sub">
@@ -174,6 +159,7 @@
                                 <ul class="sub">
                                     <li><a href="createbooking.aspx">Create Booking</a></li>
                                     <li><a href="searchbooking.aspx">Search Booking</a></li>
+                                    <li><a href="viewonlinebooking.aspx">View Online Booking</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>

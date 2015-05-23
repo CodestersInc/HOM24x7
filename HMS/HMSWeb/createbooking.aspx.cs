@@ -28,8 +28,27 @@ public partial class createbooking : System.Web.UI.Page
             StaffLogic staffLogic = new StaffLogic();
             RoomTypeLogic roomTypeLogic = new RoomTypeLogic();
 
-            txtCheckInDate.Text = DateTime.Now.Date.ToString("dd-MM-yyyy");
-            txtPlannedCheckoutDate.Text = DateTime.Now.Date.AddDays(1).ToString("dd-MM-yyyy");
+            if(Convert.ToInt32(Request.QueryString["ID"])>0)
+            {
+                OnlineBookingLogic onlinebookingLogic = new OnlineBookingLogic();
+                OnlineBooking onlinebooking = onlinebookingLogic.selectById(Convert.ToInt32(Request.QueryString["ID"]));
+
+                txtCheckInDate.Text = onlinebooking.CheckInDate.ToString("dd-MM-yyyy");
+                txtPlannedCheckoutDate.Text = onlinebooking.PlannedCheckOutDate.ToString("dd-MM-yyyy");
+                txtNoOfPersons.Text = onlinebooking.NumberOfPersons.ToString();
+                txtNoOfPersons.Enabled = false;
+                txtCustomerName.Text = new CustomerLogic().selectById(onlinebooking.CustomerID).Name;
+                ViewState["CustomerID"] = onlinebooking.CustomerID;
+                txtCustomerName.Enabled = false;
+                txtRoomRates.Text = onlinebooking.WebsiteRate.ToString();
+                txtRoomRates.Enabled = false;
+            }
+            else
+            {
+                txtCheckInDate.Text = DateTime.Now.Date.ToString("dd-MM-yyyy");
+                txtPlannedCheckoutDate.Text = DateTime.Now.Date.AddDays(1).ToString("dd-MM-yyyy");
+            }              
+          
             ddlRoomType.DataSource = roomTypeLogic.selectAll(loggedUser.AccountID);
             ddlRoomType.DataValueField = "RoomTypeID";
             ddlRoomType.DataTextField = "Name";

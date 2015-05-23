@@ -46,15 +46,12 @@ public partial class onlinebooking : System.Web.UI.Page
 
             if (new OnlineBookingLogic().create(new OnlineBooking(0,
                 RoomTypeID,
-                1,
                 Convert.ToInt32(txtNumberOfPerson.Text),
                 checkInDate,
                 checkOutDate,
-                "",
+                "Pending",
                 newCustomer.CustomerID,
                 0,
-                "",
-                "",
                 new RoomTypeLogic().getWebsiteRate(RoomTypeID, DateTime.Now.Date, AccountID),
                 AccountID)) != null)
             {
