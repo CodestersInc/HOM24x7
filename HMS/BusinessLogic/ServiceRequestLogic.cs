@@ -141,7 +141,7 @@ namespace BusinessLogic
 
         public DataTable getPendingRequests(int AccountID)
         {
-            String query = "select ServiceRequest.*, Service.Name as ServiceName, Room.RoomNumber as RoomNumber, Room.RoomID from ServiceRequest, Service, ServiceType, Booking, Room where ServiceType.AccountID=1 and ServiceRequest.Status='Pending' and ServiceRequest.ServiceID = Service.ServiceID and Service.ServiceTypeID = ServiceType.ServiceTypeID and ServiceRequest.BookingID = Booking.BookingID and Booking.RoomID = Room.RoomID";
+            String query = "select ServiceRequest.*, Service.Name as ServiceName, Room.RoomNumber as RoomNumber, Room.RoomID from ServiceRequest, Service, ServiceType, Booking, Room where ServiceType.AccountID=@AccountID and ServiceRequest.Status='Pending' and ServiceRequest.ServiceID = Service.ServiceID and Service.ServiceTypeID = ServiceType.ServiceTypeID and ServiceRequest.BookingID = Booking.BookingID and Booking.RoomID = Room.RoomID";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
@@ -162,12 +162,11 @@ namespace BusinessLogic
 
         public DataTable getAssignedRequestsOfStaff(Staff serviceProvider)
         {
-            String query = "select * from ServiceRequest where AssignedID=@StaffID and Status='Assigned' and AccountID=@AccountID ";
+            String query = "select ServiceRequest.*, Service.Name as ServiceName, Room.RoomNumber as RoomNumber, Room.RoomID from ServiceRequest, Service, ServiceType, Booking, Room where ServiceRequest.AssignedID=@StaffID and ServiceRequest.Status='Assigned' and ServiceRequest.ServiceID = Service.ServiceID and Service.ServiceTypeID = ServiceType.ServiceTypeID and ServiceRequest.BookingID = Booking.BookingID and Booking.RoomID = Room.RoomID";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
 
             lstParams.Add(new SqlParameter("@StaffID", serviceProvider.StaffID));
-            lstParams.Add(new SqlParameter("@AccountID", serviceProvider.AccountID));
 
             return DBUtility.Select(query, lstParams);
         }

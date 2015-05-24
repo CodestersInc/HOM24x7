@@ -69,9 +69,7 @@
                                                     <%# Eval("Unit") %>
                                                 </td>
                                                 <td style="text-align: center">
-                                                    <span class="label label-success">Approved</span>
-                                                    <%--<asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# ".aspx?ID=" + Eval("ServiceRequestID") %>' runat="server"><i class="icon-edit"></i> Delegate</asp:LinkButton>--%>
-                                                    <asp:LinkButton ID="btnDone" runat="server" CommandName="Done" CommandArgument='<%#Eval("ServiceRequestID")%>' CssClass="label label-success">Done</asp:LinkButton>
+                                                    <asp:LinkButton ID="btnDone" runat="server" CommandName="Done" CommandArgument='<%#Eval("ServiceRequestID")%>' CssClass="label label-success">Delivered</asp:LinkButton>
                                                 </td>
                                             </tr>
                                         </ItemTemplate>

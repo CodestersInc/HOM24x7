@@ -40,13 +40,15 @@ public partial class placeorder : System.Web.UI.Page
         lblServiceType.Text = new ServiceTypeLogic().selectById(RequestedService.ServiceTypeID).Name;
         imgService.ImageUrl = RequestedService.Image;
 
-        String ServiceCookie = Response.Cookies["Service"].Value;
-        String UnitCookie = Response.Cookies["Unit"].Value;
+
         double total = 0;
         lblProductCount.Text = "0";
 
-        if (ServiceCookie != null)
+        if (Request.Cookies["Service"] != null)
         {
+            String ServiceCookie = Server.HtmlEncode(Request.Cookies["Service"].Value);
+            String UnitCookie = Server.HtmlEncode(Request.Cookies["Unit"].Value);
+        
             String[] Services = ServiceCookie.Split(',');
             String[] Units = UnitCookie.Split(',');
             lblProductCount.Text = ServiceCookie.Length.ToString();
@@ -61,19 +63,18 @@ public partial class placeorder : System.Web.UI.Page
 
     protected void btnAddToCart_Click(object sender, EventArgs e)
     {
-        if (Response.Cookies["Service"].Value == null)
+        if (Server.HtmlEncode(Request.Cookies["Service"].Value) == null)
         {
             Response.Cookies["Service"].Value = Request["ID"];
             Response.Cookies["Unit"].Value = txtQuantity.Text;
         }
         else
         {
-            Response.Cookies["Service"].Value = Response.Cookies["Service"].Value + "," + Request["ID"];
-            Response.Cookies["Unit"].Value = Response.Cookies["Unit"].Value + "," + txtQuantity.Text;
+            Response.Cookies["Service"].Value = Server.HtmlEncode(Request.Cookies["Service"].Value) + "," + Request["ID"];
+            Response.Cookies["Unit"].Value = Server.HtmlEncode(Request.Cookies["Unit"].Value) + "," + txtQuantity.Text;
         }
         Response.Cookies["Service"].Expires = DateTime.Now.AddDays(5);
         Response.Cookies["Unit"].Expires = DateTime.Now.AddDays(5);
-        
     }
     
     protected void btnOrderNow_Click(object sender, EventArgs e)

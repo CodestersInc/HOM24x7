@@ -13,7 +13,7 @@ public partial class myservicerequest : System.Web.UI.Page
         var User = Session["loggedUser"];
         if (!(User is Staff))
             Response.Redirect("login.aspx");
-        Staff loggedUser = (Staff)Session["loggedUser"];
+        Staff loggedUser = (Staff)User;
 
         if (loggedUser == null)
         {
@@ -35,10 +35,15 @@ public partial class myservicerequest : System.Web.UI.Page
     {
         if (e.CommandName == "Done")
         {
+            Staff loggedUser = (Staff)Session["loggedUser"];
+
             ServiceRequestLogic serviceRequestLogic = new ServiceRequestLogic();
             ServiceRequest obj = serviceRequestLogic.selectById(Convert.ToInt32(e.CommandArgument));
-            obj.Status = "Deleverd";
+            obj.Status = "Delivered";
             serviceRequestLogic.update(obj);
+
+            RequestListRepeater.DataSource = new ServiceRequestLogic().getAssignedRequestsOfStaff(loggedUser);
+            RequestListRepeater.DataBind();
         }
     }
 }
