@@ -16,6 +16,11 @@ public partial class checkout : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        var User = Session["loggedUser"];
+        Staff loggedUser = null;
+        if (!(User is Staff))
+            Response.Redirect("login.aspx");
+
         if (!IsPostBack)
         {
             Booking booking = null;

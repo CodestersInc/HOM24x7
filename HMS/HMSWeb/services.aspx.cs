@@ -11,6 +11,9 @@ public partial class services : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        var User = Session["loggedUser"];
+        if (!(User is Customer))
+            Response.Redirect("login.aspx");
         Customer loggedUser = null;
         int ServiceTypeID = 0;
         try

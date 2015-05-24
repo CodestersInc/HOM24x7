@@ -41,7 +41,7 @@
                             <ul>
                                 <li><a href="#"><i class="fa fa-user"></i>My Account</a></li>
                                 <li><a href="#"><i class="fa fa-heart"></i>Wishlist</a></li>
-                                <li><a href="cart.html"><i class="fa fa-user"></i>My Cart</a></li>
+                                <li><a href="cart.aspx"><i class="fa fa-user"></i>My Cart</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-user"></i>Checkout</a></li>
                                 <li><a href="#"><i class="fa fa-user"></i>Login</a></li>
                             </ul>
@@ -87,7 +87,9 @@
 
                     <div class="col-sm-6">
                         <div class="shopping-item">
-                            <a href="cart.html">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i><span class="product-count">5</span></a>
+                            <a href="cart.aspx">Cart - <asp:Label ID="lblCartTotal" CssClass="cart-amunt" runat="server" Text="Label"></asp:Label> <i class="fa fa-shopping-cart"></i>
+                                <asp:Label ID="lblProductCount" CssClass="product-count" runat="server" Text="Label"></asp:Label>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -110,7 +112,7 @@
                         <ul class="nav navbar-nav">
                             <li><a href="servicehome.aspx">Home</a></li>
                             <li><a href="services.aspx">Services</a></li>
-                            <li><a href="cart.html">Cart</a></li>
+                            <li><a href="cart.aspx">Cart</a></li>
                         </ul>
                     </div>
                 </div>

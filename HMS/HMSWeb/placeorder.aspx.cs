@@ -10,6 +10,10 @@ public partial class placeorder : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        var User = Session["loggedUser"];
+
+        if (!(User is Customer))
+            Response.Redirect("login.aspx");
         Customer loggedUser = null;
         int ServiceID = 0;
         try
@@ -27,16 +31,48 @@ public partial class placeorder : System.Web.UI.Page
         }
         if (ServiceID == 0) Response.Redirect("servicehome.aspx");
 
-        Service RequestedService = new ServiceLogic().selectById(ServiceID);
+        ServiceLogic serviceLogic = new ServiceLogic();
+
+        Service RequestedService = serviceLogic.selectById(ServiceID);
         lblPrice.Text = RequestedService.Rate.ToString();
         lblProductName.Text = RequestedService.Name;
         lblServiceName.Text = RequestedService.Name;
         lblServiceType.Text = new ServiceTypeLogic().selectById(RequestedService.ServiceTypeID).Name;
         imgService.ImageUrl = RequestedService.Image;
+
+        String ServiceCookie = Response.Cookies["Service"].Value;
+        String UnitCookie = Response.Cookies["Unit"].Value;
+        double total = 0;
+        lblProductCount.Text = "0";
+
+        if (ServiceCookie != null)
+        {
+            String[] Services = ServiceCookie.Split(',');
+            String[] Units = UnitCookie.Split(',');
+            lblProductCount.Text = ServiceCookie.Length.ToString();
+            for (int i = 0; i < Services.Length; i++)
+            {
+                total += serviceLogic.selectById(Convert.ToInt32(Services[i])).Rate * Convert.ToInt32(Units);
+            }
+        }
+        lblCartTotal.Text = total.ToString();
+        
     }
 
     protected void btnAddToCart_Click(object sender, EventArgs e)
     {
+        if (Response.Cookies["Service"].Value == null)
+        {
+            Response.Cookies["Service"].Value = Request["ID"];
+            Response.Cookies["Unit"].Value = txtQuantity.Text;
+        }
+        else
+        {
+            Response.Cookies["Service"].Value = Response.Cookies["Service"].Value + "," + Request["ID"];
+            Response.Cookies["Unit"].Value = Response.Cookies["Unit"].Value + "," + txtQuantity.Text;
+        }
+        Response.Cookies["Service"].Expires = DateTime.Now.AddDays(5);
+        Response.Cookies["Unit"].Expires = DateTime.Now.AddDays(5);
         
     }
     

@@ -10,7 +10,10 @@ public partial class viewhotelac : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        SystemAdmin loggedUser = (SystemAdmin)Session["LoggedUser"];
+        var User = Session["loggedUser"];
+        if (!(User is SystemAdmin))
+            Response.Redirect("login.aspx");
+        SystemAdmin loggedUser = (SystemAdmin)User;
         if (loggedUser == null || Session["UserType"].ToString() != "SystemAdmin")
         {
             Response.Redirect("login.aspx");           

@@ -100,7 +100,7 @@ public partial class UserProfile : System.Web.UI.Page
             Response.Redirect("systemadminhome.aspx");
         }
 
-        if (Session["UserType"] == "SystemAdmin")
+        if (Session["UserType"] == "Staff")
         {
             Response.Redirect("home.aspx");
         }
