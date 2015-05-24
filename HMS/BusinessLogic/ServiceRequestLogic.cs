@@ -151,7 +151,18 @@ namespace BusinessLogic
 
         public DataTable getPendingRequestsOfStaff(Staff serviceProvider)
         {
-            String query = "select * from ServiceRequest where AssignedID=@StaffID and Status='Pending' AccountID=@AccountID ";
+            String query = "select * from ServiceRequest where AssignedID=@StaffID and Status='Pending'";
+
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+
+            lstParams.Add(new SqlParameter("@StaffID", serviceProvider.StaffID));
+
+            return DBUtility.Select(query, lstParams);
+        }
+
+        public DataTable getAssignedRequestsOfStaff(Staff serviceProvider)
+        {
+            String query = "select * from ServiceRequest where AssignedID=@StaffID and Status='Assigned' and AccountID=@AccountID ";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
 

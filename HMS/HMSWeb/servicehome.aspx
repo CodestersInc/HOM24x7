@@ -132,7 +132,7 @@
                                     <asp:Repeater ID="ServiceTypeRepeater" runat="server">
                                         <ItemTemplate>
                                             <div>
-                                                <a href='services.aspx?ID=<%# Eval("ServiceTypeID") %>'><img src='<%#Eval("Image") %>' alt="" /></a>
+                                                <a href='services.aspx?ID=<%# Eval("ServiceTypeID") %>'><img style="height: 150px; width: 300px;" src='<%#Eval("Image") %>' alt="" /></a>
                                             </div>
                                         </ItemTemplate>
                                     </asp:Repeater>
