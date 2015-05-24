@@ -32,7 +32,8 @@ public partial class createbooking : System.Web.UI.Page
             StaffLogic staffLogic = new StaffLogic();
             RoomTypeLogic roomTypeLogic = new RoomTypeLogic();
 
-            if(Convert.ToInt32(Request.QueryString["ID"])>0)
+            //Handle online booking conversion request
+            if (Convert.ToInt32(Request.QueryString["ID"]) > 0)
             {
                 OnlineBookingLogic onlinebookingLogic = new OnlineBookingLogic();
                 OnlineBooking onlinebooking = onlinebookingLogic.selectById(Convert.ToInt32(Request.QueryString["ID"]));
@@ -47,23 +48,47 @@ public partial class createbooking : System.Web.UI.Page
                 txtRoomRates.Text = onlinebooking.WebsiteRate.ToString();
                 txtRoomRates.Enabled = false;
             }
-            else
+            else //Handle regular booking requests
             {
                 txtCheckInDate.Text = DateTime.Now.Date.ToString("dd-MM-yyyy");
                 txtPlannedCheckoutDate.Text = DateTime.Now.Date.AddDays(1).ToString("dd-MM-yyyy");
-            }              
-          
-            ddlRoomType.DataSource = roomTypeLogic.selectAll(loggedUser.AccountID);
-            ddlRoomType.DataValueField = "RoomTypeID";
-            ddlRoomType.DataTextField = "Name";
-            ddlRoomType.DataBind();
-            ddlRoomType_SelectedIndexChange(sender, null);
+            }
 
+            //Handle plan based booking requests
+            if (Convert.ToInt32(Request.QueryString["RID"]) > 0)
+            {
+                Room room = new RoomLogic().selectById(Convert.ToInt32(Request.QueryString["RID"]));
+
+                txtRoomType.Text = new RoomTypeLogic().selectById(room.RoomTypeID).Name;
+                txtRoomType.Enabled = false;
+                txtFloor.Text = new FloorLogic().selectById(room.FloorID).FloorNumber.ToString();
+                txtFloor.Enabled = false;
+                txtRoomNumber.Text = room.RoomNumber.ToString();
+                txtRoomNumber.Enabled = false;
+
+                txtRoomRates.Text = (new SeasonRoomLogic().fetchCurrentRoomRate(room.RoomTypeID, loggedUser.AccountID)).ToString();
+                txtRoomRates.Enabled = false;
+
+                ddlDataPH.Visible = false;
+                txtDataPH.Visible = true;
+            }
+            else
+            {
+                //Fill ddlRoomType
+                ddlRoomType.DataSource = roomTypeLogic.selectAll(loggedUser.AccountID);
+                ddlRoomType.DataValueField = "RoomTypeID";
+                ddlRoomType.DataTextField = "Name";
+                ddlRoomType.DataBind();
+                ddlRoomType_SelectedIndexChange(sender, null);
+            }
+            
+            //Fill ddlApprover
             ddlApprover.DataSource = staffLogic.getReceptionManager(loggedUser.AccountID);
             ddlApprover.DataValueField = "StaffID";
             ddlApprover.DataTextField = "Name";
             ddlApprover.DataBind();
 
+            //Fill ddlReeiver
             ddlReceiver.DataSource = staffLogic.getReceptionStaff(loggedUser.AccountID);
             ddlReceiver.DataValueField = "StaffID";
             ddlReceiver.DataTextField = "Name";
@@ -80,6 +105,7 @@ public partial class createbooking : System.Web.UI.Page
             ddlFloor.DataValueField = "FloorID";
             ddlFloor.DataTextField = "FloorNumber";
             ddlFloor.DataBind();
+
             ddlFloor_SelectedIndexChanged(sender, null);
 
             txtRoomRates.Text = (new SeasonRoomLogic().fetchCurrentRoomRate(Convert.ToInt32(ddlRoomType.SelectedValue), loggedUser.AccountID)).ToString();
@@ -89,12 +115,12 @@ public partial class createbooking : System.Web.UI.Page
             noRoomPlaceHolder.Visible = true;
             createBookingPlaceHolder.Visible = false;
         }
-
     }
 
     protected void ddlFloor_SelectedIndexChanged(object sender, EventArgs e)
     {
-        ddlRoom.DataSource = new RoomLogic().getFilteredRooms(Convert.ToInt32(ddlRoomType.SelectedValue), Convert.ToInt32(ddlFloor.SelectedValue), Convert.ToDateTime(txtCheckInDate.Text), Convert.ToDateTime(txtPlannedCheckoutDate.Text));
+        DataTable dt = new RoomLogic().getFilteredRooms(Convert.ToInt32(ddlRoomType.SelectedValue), Convert.ToInt32(ddlFloor.SelectedValue), Convert.ToDateTime(txtCheckInDate.Text), Convert.ToDateTime(txtPlannedCheckoutDate.Text));
+        ddlRoom.DataSource = dt;
         ddlRoom.DataValueField = "RoomID";
         ddlRoom.DataTextField = "RoomNumber";
         ddlRoom.DataBind();
@@ -157,7 +183,7 @@ public partial class createbooking : System.Web.UI.Page
             if (ddlStatus.SelectedValue == "Checked In")
             {
                 room.Status = "Occupied";
-            }            
+            }
             roomlogic.update(room);
         }
 

@@ -18,19 +18,12 @@
         <div><br />Example E</div>
         <div id="searchresultsE"></div><br />
         <div id="R"></div>
-
-
-
         <hr /><br />
         Username<input type="text" id="CustomerUsername" value="" /><br />
         Password<input type="text" id="CustomerPassword" /><br />
-        <input type="button" value="Submit" onclick="customerLogin()"/> 
-
-
+        <input type="button" value="Submit" onclick="customerLogin()" />
     </form>
     <script type="text/javascript">
-
-
         $(document).ready(function () {
             $.ajax({
                 type: "POST",
@@ -56,14 +49,13 @@
             $.ajax({
                 type: "POST",
                 url: "WebService.asmx/SayHello1",
-                data: { firstName: 1, lastName: 12-2-2014 },
+                data: { firstName: 1, lastName: 12 - 2 - 2014 },
                 contentType: "application/x-www-form-urlencoded; charset=UTF-8",
                 dataType: "text",
                 success: function (data) {
                     $("#searchresultsC").html(data);
                 }
             });
-
 
             $.ajax({
                 type: "POST",
@@ -120,7 +112,7 @@
                                            "/" +
                                value.getDate() +
                                            "/" +
-                           value.getFullYear();                    
+                           value.getFullYear();
                     alert(data.Name);
                     alert(value);
                     alert(data.Email);
@@ -133,7 +125,7 @@
                 }
             });
 
-            
+
             var dataTemp1 = "{ firstName: '" + Username + "', lastName:'" + Password + "'}";
             $.ajax({
                 type: "POST",
@@ -148,7 +140,5 @@
             });
         }
     </script>
-
 </body>
-
 </html>

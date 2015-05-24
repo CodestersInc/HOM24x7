@@ -70,27 +70,52 @@
                                         </div>
                                     </div>
 
-                                    <div class="control-group">
-                                        <label class="control-label">Room Type</label>
-                                        <div class="controls">
-                                            <asp:DropDownList ID="ddlRoomType" runat="server" CssClass="span4" data-placeholder="Choose a Category" TabIndex="1" OnSelectedIndexChanged="ddlRoomType_SelectedIndexChange" AutoPostBack="True"></asp:DropDownList>
+                                    <asp:PlaceHolder ID="ddlDataPH" runat="server">
+                                        <div class="control-group">
+                                            <label class="control-label">Room Type</label>
+                                            <div class="controls">
+                                                <asp:DropDownList ID="ddlRoomType" runat="server" CssClass="span4" data-placeholder="Choose a Category" TabIndex="1" OnSelectedIndexChanged="ddlRoomType_SelectedIndexChange" AutoPostBack="True"></asp:DropDownList>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <asp:PlaceHolder ID="FloorPlaceHolder" runat="server" Visible="true">
+                                        <asp:PlaceHolder ID="FloorPlaceHolder" runat="server" Visible="true">
+                                            <div class="control-group">
+                                                <label class="control-label">Floor</label>
+                                                <div class="controls">
+                                                    <asp:DropDownList ID="ddlFloor" runat="server" CssClass="span4" data-placeholder="Choose a Category" OnSelectedIndexChanged="ddlFloor_SelectedIndexChanged" TabIndex="1" AutoPostBack="True"></asp:DropDownList>
+                                                </div>
+                                            </div>
+                                        </asp:PlaceHolder>
+
+                                        <asp:PlaceHolder ID="RoomPlaceHolder" runat="server" Visible="true">
+                                            <div class="control-group">
+                                                <label class="control-label">Room</label>
+                                                <div class="controls">
+                                                    <asp:DropDownList ID="ddlRoom" runat="server" CssClass="span4" data-placeholder="Choose a Category" TabIndex="1"></asp:DropDownList>
+                                                </div>
+                                            </div>
+                                        </asp:PlaceHolder>
+                                    </asp:PlaceHolder>
+
+                                    <asp:PlaceHolder ID="txtDataPH" runat="server" Visible="false">
+                                        <div class="control-group">
+                                            <label class="control-label">Room Type</label>
+                                            <div class="controls">
+                                                <asp:TextBox ID="txtRoomType" runat="server" CssClass="span4"></asp:TextBox>
+                                            </div>
+                                        </div>
+
                                         <div class="control-group">
                                             <label class="control-label">Floor</label>
                                             <div class="controls">
-                                                <asp:DropDownList ID="ddlFloor" runat="server" CssClass="span4" data-placeholder="Choose a Category" OnSelectedIndexChanged="ddlFloor_SelectedIndexChanged" TabIndex="1" AutoPostBack="True"></asp:DropDownList>
+                                                <asp:TextBox ID="txtFloor" runat="server" CssClass="span4"></asp:TextBox>
                                             </div>
                                         </div>
-                                    </asp:PlaceHolder>
 
-                                    <asp:PlaceHolder ID="RoomPlaceHolder" runat="server" Visible="true">
                                         <div class="control-group">
                                             <label class="control-label">Room</label>
                                             <div class="controls">
-                                                <asp:DropDownList ID="ddlRoom" runat="server" CssClass="span4" data-placeholder="Choose a Category" TabIndex="1"></asp:DropDownList>
+                                                <asp:TextBox ID="txtRoomNumber" runat="server" CssClass="span4"></asp:TextBox>
                                             </div>
                                         </div>
                                     </asp:PlaceHolder>

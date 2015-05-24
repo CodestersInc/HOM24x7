@@ -120,7 +120,7 @@ namespace BusinessLogic
 
         public DataTable selectAllRoomComponents(int PlanID)
         {
-            String query = "select * from PlanComponent where PlanID=@PlanID and ComponentID=0";
+            String query = "select PlanComponent.*, Room.RoomNumber AS 'RoomNumber', RoomType.Name AS 'RoomType', Room.Status AS 'RoomStatus' from PlanComponent, Room, RoomType where PlanID=@PlanID and PlanComponent.RoomID=Room.RoomID and Room.RoomTypeID=RoomType.RoomTypeID and ComponentID=0";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
 

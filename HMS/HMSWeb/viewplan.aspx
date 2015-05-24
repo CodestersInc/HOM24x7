@@ -55,8 +55,9 @@
                     <!-- BEGIN FORM-->
                     <div>
                         <div class="form-horizontal">
+                            <!--Start Room List-->
                             <div class="control-group">
-                                <label class="control-label">Room Number</label>
+                                <label class="control-label">Room Number</label>                                
                                 <div class="controls">
                                     <select id="roomList" class="span3">
                                         <asp:Repeater ID="selectionRepeater" runat="server">
@@ -67,12 +68,13 @@
                                     </select>
                                     <b>OR</b>
                                     <a href="createroom.aspx"><b>Create a new room</b></a>
-                                </div>
+                                </div>                                
                                 <br />
                                 <div class="controls">
                                     <input id="btnAddRoomToCanvas" class="btn-primary" type="button" value="Add to Plan" />                                    
                                 </div>
                             </div>
+                            <!--End Room List-->
 
                             <!--START PLAN BUILDER-->
                             <!--START PALLETTE-->
@@ -116,9 +118,9 @@
                                     <div class="otherComponent" componentid='<%# Eval("ComponentID") %>' style='<%# Eval("PlanComponentStyle") %>'></div>
                                 </ItemTemplate>
                             </asp:Repeater>
-                            <!--END CANVAS-->
+                            <!--END CANVAS-->                            
+                            <!-- END PLAN BUILDER-->
                         </div>
-                        <!-- END PLAN BUILDER-->
 
                         <div class="form-actions">
                             <asp:LinkButton ID="btnUpdate" CssClass="btn btn-inverse" runat="server" OnClientClick="savePlanData()" OnClick="btnUpdate_Click"><i class="icon-refresh icon-white"></i>Update</asp:LinkButton>
@@ -132,9 +134,9 @@
             <asp:TextBox ID="txtPlanData" CssClass="txtPlanData" style="display:none" runat="server"></asp:TextBox>
             <asp:TextBox ID="txtRoomComponentData" CssClass="txtRoomComponentData" style="display:none" runat="server"></asp:TextBox>
             <asp:TextBox ID="txtOtherComponentData" CssClass="txtOtherComponentData" style="display:none" runat="server"></asp:TextBox>
-            <!-- END PAGE CONTAINER-->
     </asp:PlaceHolder>
     </div>
+    <!-- END PAGE CONTAINER-->
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
