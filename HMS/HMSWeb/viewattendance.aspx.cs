@@ -19,7 +19,7 @@ public partial class viewattendance : System.Web.UI.Page
         {
             Response.Redirect("login.aspx");
         }
-        if (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff")
+        if (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff" && loggedUser.UserType != "Regular Staff" && loggedUser.UserType != "Reception Staff")
         {
             Response.Redirect("home.aspx");
         }
@@ -36,55 +36,80 @@ public partial class viewattendance : System.Web.UI.Page
             ddlDepartment.DataBind();
 
             ddlDepartment.SelectedValue = "0";
-            Repeater1.DataSource = new AttendanceLogic().getAttendanceForRange(DateTime.Now.Date,
+            editableAttendanceRepeater.DataSource = new AttendanceLogic().getAttendanceForRange(DateTime.Now.Date,
                 DateTime.Now.Date,
                 loggedUser.AccountID);
-            Repeater1.DataBind();
+            editableAttendanceRepeater.DataBind();
 
             txtFromDate.Text = DateTime.Now.Date.ToString("dd-MM-yyyy");
             txtToDate.Text = DateTime.Now.Date.ToString("dd-MM-yyyy");
-
         }
 
         if (!IsPostBack && loggedUser.UserType == "Managerial Staff")
         {
-            Repeater1.DataSource = new AttendanceLogic().getAttendanceForRange(DateTime.Now.Date,
+            editableAttendanceRepeater.DataSource = new AttendanceLogic().getAttendanceForRange(DateTime.Now.Date,
                 DateTime.Now.Date,
                 loggedUser.DepartmentID,
                 loggedUser.AccountID);
-            Repeater1.DataBind();
+            editableAttendanceRepeater.DataBind();
 
             txtFromDate.Text = DateTime.Now.Date.ToString("dd-MM-yyyy");
             txtToDate.Text = DateTime.Now.Date.ToString("dd-MM-yyyy");
+        }
+
+        if (!IsPostBack && (loggedUser.UserType == "Regular Staff" || loggedUser.UserType == "Reception Staff"))
+        {
+            nonEditableAttendanceRepeater.DataSource = new AttendanceLogic().getAttendanceForRange(DateTime.Now.Date,
+                DateTime.Now.Date,
+                loggedUser.StaffID,
+                "Staff");
+            editableAttendanceRepeater.DataBind();
+
+            txtFromDate.Text = DateTime.Now.Date.ToString("dd-MM-yyyy");
+            txtToDate.Text = DateTime.Now.Date.ToString("dd-MM-yyyy");
+            editableAttendancePH.Visible = false;
+            nonEditableAttendancePH.Visible = true;
         }
     }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["LoggedUser"];
 
-        Repeater1.DataSource = (loggedUser.UserType == "Managerial Staff") ? new AttendanceLogic().getAttendanceForRange(Convert.ToDateTime(txtFromDate.Text),
-            Convert.ToDateTime(txtToDate.Text),
-            loggedUser.DepartmentID,
-            loggedUser.AccountID) : new AttendanceLogic().getAttendanceForRange(Convert.ToDateTime(txtFromDate.Text),
-            Convert.ToDateTime(txtToDate.Text),
-            Convert.ToInt32(ddlDepartment.SelectedValue),
-            loggedUser.AccountID);
+        if (loggedUser.UserType == "Hotel Admin" || loggedUser.UserType == "Managerial Staff")
+        {
+            editableAttendanceRepeater.DataSource = (loggedUser.UserType == "Managerial Staff") ? new AttendanceLogic().getAttendanceForRange(Convert.ToDateTime(txtFromDate.Text),
+                Convert.ToDateTime(txtToDate.Text),
+                loggedUser.DepartmentID,
+                loggedUser.AccountID) : new AttendanceLogic().getAttendanceForRange(Convert.ToDateTime(txtFromDate.Text),
+                Convert.ToDateTime(txtToDate.Text),
+                Convert.ToInt32(ddlDepartment.SelectedValue),
+                loggedUser.AccountID);
 
-        Repeater1.DataBind();
+            editableAttendanceRepeater.DataBind();
+        }
+        if (loggedUser.UserType == "Regular Staff" || loggedUser.UserType == "Reception Staff")
+        {
+            nonEditableAttendanceRepeater.DataSource = new AttendanceLogic().getAttendanceForRange(Convert.ToDateTime(txtFromDate.Text),
+                Convert.ToDateTime(txtToDate.Text),
+                loggedUser.StaffID,
+                "Staff");
+
+            nonEditableAttendanceRepeater.DataBind();
+        }
     }
     protected void btnUpdate_Click(object sender, EventArgs e)
     {
         AttendanceLogic attendanceLogic = new AttendanceLogic();
         Attendance attendanceObj = new Attendance();
 
-        for(int i=0; i<Repeater1.Items.Count; i++)
+        for (int i = 0; i < editableAttendanceRepeater.Items.Count; i++)
         {
-            attendanceObj.AttendanceID = Convert.ToInt32(((HiddenField)Repeater1.Items[i].FindControl("HiddenFieldAttendanceID")).Value);
-            attendanceObj.StaffID = Convert.ToInt32(((HiddenField)Repeater1.Items[i].FindControl("HiddenFieldStaffID")).Value);
-            attendanceObj.AttendanceDate = Convert.ToDateTime(((HiddenField)Repeater1.Items[i].FindControl("HiddenFieldAttendanceDate")).Value);
-            attendanceObj.InTime = Convert.ToDateTime(((HiddenField)Repeater1.Items[i].FindControl("HiddenFieldInTime")).Value);
-            attendanceObj.OutTime = Convert.ToDateTime(((HiddenField)Repeater1.Items[i].FindControl("HiddenFieldOutTime")).Value);
-            attendanceObj.AttendanceStatus = ((CheckBox)Repeater1.Items[i].FindControl("cbxPresence")).Checked;
+            attendanceObj.AttendanceID = Convert.ToInt32(((HiddenField)editableAttendanceRepeater.Items[i].FindControl("HiddenFieldAttendanceID")).Value);
+            attendanceObj.StaffID = Convert.ToInt32(((HiddenField)editableAttendanceRepeater.Items[i].FindControl("HiddenFieldStaffID")).Value);
+            attendanceObj.AttendanceDate = Convert.ToDateTime(((HiddenField)editableAttendanceRepeater.Items[i].FindControl("HiddenFieldAttendanceDate")).Value);
+            attendanceObj.InTime = Convert.ToDateTime(((HiddenField)editableAttendanceRepeater.Items[i].FindControl("HiddenFieldInTime")).Value);
+            attendanceObj.OutTime = Convert.ToDateTime(((HiddenField)editableAttendanceRepeater.Items[i].FindControl("HiddenFieldOutTime")).Value);
+            attendanceObj.AttendanceStatus = ((CheckBox)editableAttendanceRepeater.Items[i].FindControl("cbxPresence")).Checked;
 
             if (attendanceLogic.update(attendanceObj) != 1)
             {

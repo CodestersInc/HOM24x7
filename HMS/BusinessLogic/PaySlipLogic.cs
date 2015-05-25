@@ -17,6 +17,27 @@ namespace BusinessLogic
             throw new NotImplementedException();
         }
 
+        public DataTable search(DateTime FromDate, DateTime ToDate, int StaffID, String flag)
+        {
+            if (flag == "Staff")
+            {
+                String query = "select Department.Name as 'DepartmentName', PaySlip.*, Staff.StaffCode, Staff.Name from Department, PaySlip, Staff where PaySlip.StaffID=Staff.StaffID and Staff.DepartmentID = Department.DepartmentID and GenerateDate BETWEEN @FromDate AND @ToDate and PaySlip.StaffID=@StaffID";
+
+                List<SqlParameter> lstParams = new List<SqlParameter>();
+
+                lstParams.Add(new SqlParameter("@FromDate", FromDate));
+                lstParams.Add(new SqlParameter("@ToDate", ToDate));
+                lstParams.Add(new SqlParameter("@StaffID", StaffID));
+
+                return DBUtility.Select(query, lstParams);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        //Search Department Wise
         public DataTable search(DateTime FromDate, DateTime ToDate, int DepartmentID, int AccountID)
         {
             if (DepartmentID == 0)
@@ -35,6 +56,7 @@ namespace BusinessLogic
             return DBUtility.Select(query, lstParams);
         }
 
+        //Global Search
         public DataTable search(DateTime FromDate, DateTime ToDate, int AccountID)
         {
             String query = "select Department.Name as 'DepartmentName', PaySlip.*, Staff.StaffCode, Staff.Name from Department, PaySlip, Staff where Staff.StaffID=PaySlip.StaffID and Staff.DepartmentID = Department.DepartmentID and PaySlip.AccountID=@AccountID and GenerateDate BETWEEN @FromDate AND @ToDate";

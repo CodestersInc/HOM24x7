@@ -87,7 +87,7 @@
                                     <div class="input-prepend">
                                         <span class="add-on">URL</span>
                                         <asp:TextBox ID="txtWebsite" placeholder="Enter website URL" runat="server"></asp:TextBox>
-                                        <asp:RegularExpressionValidator ControlToValidate="txtWebsite" ID="WebsiteRegularExpressionValidator" Display="Dynamic" runat="server" ErrorMessage="Please enter a valid website URL" ValidationExpression="/((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)/i" ValidationGroup="First" CssClass="alert alert-error"></asp:RegularExpressionValidator>
+                                        <asp:RegularExpressionValidator ControlToValidate="txtWebsite" ID="WebsiteRegularExpressionValidator" runat="server" ErrorMessage="Please enter a valid website URL" ValidationExpression="(?i:(http\:\/\/|https\:\/\/)?([a-z0-9][a-z0-9\-]*\.)+[a-z0-9][a-z0-9\-]*$)" ValidationGroup="First" CssClass="alert alert-error"></asp:RegularExpressionValidator>
                                     </div>
                                 </div>
                             </div>
@@ -204,7 +204,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Date of Birth</label>
                                     <div class="controls">
-                                        <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+                                        <div class="input-append date date-picker" data-date="01-01-2015" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
                                             <asp:TextBox ID="txtDOB" runat="server" CssClass="span6 non-editable" Text="dd-mm-yyyy"></asp:TextBox>
                                             <span class="add-on"><i class="icon-calendar"></i></span>
                                         </div>

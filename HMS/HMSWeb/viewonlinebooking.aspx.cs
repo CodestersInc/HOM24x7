@@ -17,10 +17,12 @@ public partial class viewonlinebooking : System.Web.UI.Page
         {
             Response.Redirect("login.aspx?url=" + Request.Url);
         }
-        if (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff")
+
+        if (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff" && loggedUser.UserType != "Reception Staff")
         {
             Response.Redirect("home.aspx");
         }
+
         if (!IsPostBack)
         {
             DataTable dt = new OnlineBookingLogic().search("", loggedUser.AccountID);

@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using System.Data;
+using WebUtility;
 
 public partial class editpayslip : System.Web.UI.Page
 {
@@ -13,17 +14,28 @@ public partial class editpayslip : System.Web.UI.Page
     {
         var User = Session["loggedUser"];
         if (!(User is Staff))
+
             Response.Redirect("login.aspx");
+
         Staff loggedUser = (Staff)User;
-        
-        if (loggedUser == null || (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff"))
+
+        if (loggedUser == null)
         {
             Response.Redirect("login.aspx?url=" + Request.Url);
         }
-        if (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff")
+
+        if (loggedUser.UserType == "Regular Staff" || loggedUser.UserType == "Reception Staff")
         {
-            Response.Redirect("home.aspx");
+            Utility.MsgBox("You do not have the required rights...!!", this.Page, this, "searchpayslip.aspx");
         }
+        else
+        {
+            if (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff")
+            {
+                Response.Redirect("home.aspx");
+            }
+        }
+
         if (!IsPostBack)
         {
             PaySlip payslip = new PaySlipLogic().selectById(Convert.ToInt32(Request.QueryString["ID"]));
@@ -34,6 +46,10 @@ public partial class editpayslip : System.Web.UI.Page
 
             DateTime fromDate = payslip.FromDate;
             DateTime toDate = payslip.ToDate;
+
+            lblFromDate.Text = payslip.FromDate.ToString("dd-MM-yyyy");
+            lblToDate.Text = payslip.ToDate.ToString("dd-MM-yyyy");
+
             int totalDays = Convert.ToInt32((toDate - fromDate).TotalDays);
 
             lblTotalDays.Text = totalDays.ToString();
@@ -81,7 +97,7 @@ public partial class editpayslip : System.Web.UI.Page
         }
     }
     protected void btnSave_Click(object sender, EventArgs e)
-    {        
+    {
         lblTotalEarnings.Text = (Convert.ToInt32(txtBasicSalary.Text) + Convert.ToInt32(txtConvAllowance.Text) + Convert.ToInt32(txtBonus.Text)).ToString();
         lblTotalDeduction.Text = (Convert.ToInt32(txtPF.Text) + Convert.ToInt32(txtProTax.Text) + Convert.ToInt32(txtIncomeTax.Text)).ToString();
         lblNetPay.Text = "&#8377 " + (Convert.ToInt32(lblTotalEarnings.Text) - Convert.ToInt32(lblTotalDeduction.Text)).ToString();

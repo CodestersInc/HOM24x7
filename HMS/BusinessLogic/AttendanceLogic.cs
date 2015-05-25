@@ -115,6 +115,26 @@ namespace BusinessLogic
             return DBUtility.Select(query, new List<SqlParameter>());
         }
 
+        public DataTable getAttendanceForRange(DateTime FromDate, DateTime ToDate, int StaffID, string Flag)
+        {
+            if (Flag == "Staff")
+            {
+                String query = "select * from Attendance where Attendance.StaffID=@StaffID and AttendanceDate between @FromDate and @ToDate";
+
+                List<SqlParameter> lstParams = new List<SqlParameter>();
+
+                lstParams.Add(new SqlParameter("@StaffID", StaffID));
+                lstParams.Add(new SqlParameter("@FromDate", FromDate));
+                lstParams.Add(new SqlParameter("@ToDate", ToDate));
+
+                return DBUtility.Select(query, lstParams);
+            }
+            else
+            {
+                return null;
+            }            
+        }
+
         public DataTable getAttendanceForRange(DateTime FromDate, DateTime ToDate, int DepartmentID, int AccountID)
         {
             if (DepartmentID == 0)

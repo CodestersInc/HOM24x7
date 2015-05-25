@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
+using WebUtility;
 
 public partial class viewhotelac : System.Web.UI.Page
 {
@@ -13,6 +14,7 @@ public partial class viewhotelac : System.Web.UI.Page
         var User = Session["loggedUser"];
         if (!(User is SystemAdmin))
             Response.Redirect("login.aspx");
+
         SystemAdmin loggedUser = (SystemAdmin)User;
         if (loggedUser == null || Session["UserType"].ToString() != "SystemAdmin")
         {
@@ -52,7 +54,7 @@ public partial class viewhotelac : System.Web.UI.Page
 
         if (new AccountLogic().update(accountobj) == 1)
         {
-            Response.Redirect("searchhotelac.aspx");
+            Utility.MsgBox("Updates saved successfully...!!", this.Page, this, "searchhotelac.aspx");
         }
         else
         {

@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using BusinessLogic;
 using System.Data;
 using System.Runtime.Serialization.Json;
+using WebUtility;
 
 public partial class createbooking : System.Web.UI.Page
 {
@@ -16,13 +17,14 @@ public partial class createbooking : System.Web.UI.Page
         
         if (!(User is Staff))
             Response.Redirect("login.aspx");
+
         Staff loggedUser = (Staff)User;
 
         if (loggedUser == null)
         {
             Response.Redirect("login.aspx?url=" + Request.Url);
         }
-        if (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff")
+        if (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff" && loggedUser.UserType != "Reception Staff")
         {
             Response.Redirect("home.aspx");
         }
@@ -58,6 +60,11 @@ public partial class createbooking : System.Web.UI.Page
             if (Convert.ToInt32(Request.QueryString["RID"]) > 0)
             {
                 Room room = new RoomLogic().selectById(Convert.ToInt32(Request.QueryString["RID"]));
+
+                if (room.Status != "Empty")
+                {
+                    Utility.MsgBox("Room is currently unavailable...!!", this.Page, this, "receptionisthome.aspx");
+                }
 
                 txtRoomType.Text = new RoomTypeLogic().selectById(room.RoomTypeID).Name;
                 txtRoomType.Enabled = false;

@@ -33,8 +33,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
                     String userType = staffObj.UserType;
 
                     if (userType == "Hotel Admin")
-                    {
-                        Session["StaffUserType"] = "Hotel Admin";                        
+                    {                      
                         departmentPlaceHolder.Visible = true;
                         planbuilderPlaceHolder.Visible = true;                        
                         roomPlaceHolder.Visible = true;
@@ -44,7 +43,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
 
                         if (Convert.ToBoolean(Session["OnlineBooking"]) == true)
                         {
-
+                            onlineBookingPlaceHolder.Visible = true;
                         }
 
                         if(Convert.ToBoolean(Session["Payroll"])==true)
@@ -58,17 +57,18 @@ public partial class MasterPage : System.Web.UI.MasterPage
                             servicePlaceHolder.Visible = true;
                             serviceRequestPlaceHolder.Visible = true;
                         }
-                        lblUsername.Text = staffObj.Name;
+                        
                     }
 
                     if (userType == "Managerial Staff")
                     {
                         Session["StaffUserType"] = "Managerial Staff";
+                        departmentPlaceHolder.Visible = true;
                         staffPlaceHolder.Visible = true;
 
                         if (Convert.ToBoolean(Session["OnlineBooking"]) == true)
                         {
-
+                            onlineBookingPlaceHolder.Visible = true;
                         }
 
                         if (Convert.ToBoolean(Session["Payroll"]) == true)
@@ -82,23 +82,34 @@ public partial class MasterPage : System.Web.UI.MasterPage
                             servicePlaceHolder.Visible = true;
                             serviceRequestPlaceHolder.Visible = true;
                         }
-
                         lblUsername.Text = staffObj.Name;
                     }
 
-                    if (userType == "Reception")
+                    if (userType == "Reception Staff")
                     {
-
+                        attendancePlaceHolder.Visible = true;
+                        markAttendancePlaceHolder.Visible = false;
+                        payrollPlaceHolder.Visible = true;
+                        generatePayslipPlaceHolder.Visible = false;
+                        bookingPlaceHolder.Visible = true;
+                        if (Convert.ToBoolean(Session["OnlineBooking"]) == true)
+                        {
+                            onlineBookingPlaceHolder.Visible = true;
+                        }
                     }
 
-                    if (userType == "Service")
+                    if (userType == "Regular Staff")
                     {
+                        attendancePlaceHolder.Visible = true;
+                        markAttendancePlaceHolder.Visible = false;                        
+                        payrollPlaceHolder.Visible = true;
+                        generatePayslipPlaceHolder.Visible = false;
 
-                    }
-
-                    if (userType == "DepartmentManager")
-                    {
-
+                        if (Convert.ToBoolean(Session["Service"]) == true)
+                        {                            
+                            serviceRequestPlaceHolder.Visible = true;
+                            delegateRequestPlaceHolder.Visible = false;
+                        }
                     }
                 }
                 else

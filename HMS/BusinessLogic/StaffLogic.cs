@@ -252,12 +252,27 @@ namespace BusinessLogic
             }
         }
 
-        public DataTable getStaffForPayroll(int AccountID)
+        public DataTable getStaffForPayroll(int AccountID, DateTime FromDate, DateTime ToDate)
         {
-            String query = "select Department.Name as 'DepartmentName', Staff.* from Department, Staff where StaffID NOT IN (select StaffID from PaySlip) and  Staff.DepartmentID=Department.DepartmentID and Staff.AccountID=@AccountID order by Staff.StaffCode";
+            String query = "select Department.Name as 'DepartmentName', Staff.* from Department, Staff where StaffID NOT IN (select StaffID from PaySlip where GenerateDate BETWEEN @FromDate AND @ToDate) and  Staff.DepartmentID=Department.DepartmentID and Staff.AccountID=@AccountID order by Staff.StaffCode";
 
             List<SqlParameter> lstParams = new List<SqlParameter>();
             lstParams.Add(new SqlParameter("@AccountID", AccountID));
+            lstParams.Add(new SqlParameter("@FromDate", FromDate));
+            lstParams.Add(new SqlParameter("@ToDate", ToDate));
+
+            return DBUtility.Select(query, lstParams);
+        }
+
+        public DataTable getStaffForPayroll(int DepartmentID, int AccountID, DateTime FromDate, DateTime ToDate)
+        {
+            String query = "select Staff.* from Staff where StaffID NOT IN (select StaffID from PaySlip where GenerateDate BETWEEN @FromDate AND @ToDate) and Staff.AccountID=@AccountID and Staff.DepartmentID=@DepartmentID order by Staff.StaffCode";
+
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+            lstParams.Add(new SqlParameter("@AccountID", AccountID));
+            lstParams.Add(new SqlParameter("@DepartmentID", DepartmentID));
+            lstParams.Add(new SqlParameter("@FromDate", FromDate));
+            lstParams.Add(new SqlParameter("@ToDate", ToDate));
 
             return DBUtility.Select(query, lstParams);
         }

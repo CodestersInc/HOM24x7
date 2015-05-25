@@ -47,7 +47,15 @@ public partial class login : System.Web.UI.Page
                     Session.Add("Service", (features.Contains("#Service#")) ? true : false);
                     Session.Add("LoggedUser", staffLogger);
                     Session.Add("UserType", "Staff");
-                    redirectAsNeeded();
+
+                    if (staffLogger.UserType == "Reception Staff")
+                    {
+                        Response.Redirect("receptionisthome.aspx");
+                    }
+                    else
+                    {
+                        redirectAsNeeded();
+                    }                    
                 }
                 else
                 {
@@ -56,7 +64,6 @@ public partial class login : System.Web.UI.Page
                     {
                         Session.Add("LoggedUser", customerLogger);
                         Session.Add("UserType", "Customer");
-                        //redirectAsNeeded();
                         Response.Redirect("ServiceHome.aspx");
                     }
                     else

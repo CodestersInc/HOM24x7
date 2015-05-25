@@ -43,7 +43,7 @@
                                     <div class="control-group">
                                         <label class="control-label">From Date</label>
                                         <div class="controls">
-                                            <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+                                            <div class="input-append date date-picker" data-date="01-01-2015" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
                                                 <asp:TextBox ID="txtFromDate" runat="server" CssClass="span6  non-editable" Text="dd-mm-yyyy"></asp:TextBox>
                                                 <span class="add-on"><i class="icon-calendar"></i></span>
                                             </div>
@@ -53,7 +53,7 @@
                                     <div class="control-group">
                                         <label class="control-label">To Date</label>
                                         <div class="controls">
-                                            <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+                                            <div class="input-append date date-picker" data-date="01-01-2015" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
                                                 <asp:TextBox ID="txtToDate" runat="server" CssClass="span6 non-editable" Text="dd-mm-yyyy"></asp:TextBox>
                                                 <span class="add-on"><i class="icon-calendar"></i></span>
                                             </div>
@@ -90,56 +90,95 @@
                         <div class="widget-body form">
                             <!-- BEGIN FORM-->
                             <div>
-                                <div class="form-horizontal">
-                                    <%--ID as tableTT to use table-tools--%>
-                                    <table id="tableTT" class="table table-striped table-bordered table-advance table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th style="text-align: center">Date</th>
-                                                <th style="text-align: center">Staff Code</th>
-                                                <th style="text-align: center">Name</th>
-                                                <th style="text-align: center">Department</th>
-                                                <th style="text-align: center">Attendance</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <asp:Repeater ID="Repeater1" runat="server">
-                                                <ItemTemplate>
-                                                    <tr>
-                                                        <asp:HiddenField ID="HiddenFieldAttendanceID" Value='<%# Eval("AttendanceID") %>' runat="server" />
-                                                        <asp:HiddenField ID="HiddenFieldAttendanceDate" Value='<%# Eval("AttendanceDate") %>' runat="server" />
-                                                        <asp:HiddenField ID="HiddenFieldInTime" Value='<%# Eval("InTime") %>' runat="server" />
-                                                        <asp:HiddenField ID="HiddenFieldOutTime" Value='<%# Eval("OutTime") %>' runat="server" />
+                                <asp:PlaceHolder ID="editableAttendancePH" runat="server">
+                                    <div class="form-horizontal">
+                                        <%--ID as tableTT to use table-tools--%>
+                                        <table id="tableTT" class="table table-striped table-bordered table-advance table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th style="text-align: center">Date</th>
+                                                    <th style="text-align: center">Staff Code</th>
+                                                    <th style="text-align: center">Name</th>
+                                                    <th style="text-align: center">Department</th>
+                                                    <th style="text-align: center">Attendance</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <asp:Repeater ID="editableAttendanceRepeater" runat="server">
+                                                    <ItemTemplate>
+                                                        <tr>
+                                                            <asp:HiddenField ID="HiddenFieldAttendanceID" Value='<%# Eval("AttendanceID") %>' runat="server" />
+                                                            <asp:HiddenField ID="HiddenFieldAttendanceDate" Value='<%# Eval("AttendanceDate") %>' runat="server" />
+                                                            <asp:HiddenField ID="HiddenFieldInTime" Value='<%# Eval("InTime") %>' runat="server" />
+                                                            <asp:HiddenField ID="HiddenFieldOutTime" Value='<%# Eval("OutTime") %>' runat="server" />
 
-                                                        <td style="text-align: center"><%# Eval("AttendanceDate", "{0:dd-MM-yyyy}") %></td>
-                                                        <td style="text-align: center"><%# Eval("StaffCode") %></td>
-                                                        <td style="text-align: center"><%# Eval("Name") %></td>
-                                                        <td style="text-align: center"><%# Eval("DepartmentName") %></td>
-                                                        <td style="text-align: center">
-                                                            <asp:CheckBox ID="cbxPresence" Checked='<%# Eval("AttendanceStatus") %>' CssClass="success-toggle-button toggle-button" runat="server" />
-                                                            <asp:HiddenField ID="HiddenFieldStaffID" runat="server" Value='<%# Eval("StaffID") %>' />
-                                                        </td>
-                                                    </tr>
-                                                </ItemTemplate>
-                                            </asp:Repeater>
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th style="text-align: center">Date</th>
-                                                <th style="text-align: center">Staff Code</th>
-                                                <th style="text-align: center">Name</th>
-                                                <th style="text-align: center">Department</th>
-                                                <th style="text-align: center">Attendance</th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
+                                                            <td style="text-align: center"><%# Eval("AttendanceDate", "{0:dd-MM-yyyy}") %></td>
+                                                            <td style="text-align: center"><%# Eval("StaffCode") %></td>
+                                                            <td style="text-align: center"><%# Eval("Name") %></td>
+                                                            <td style="text-align: center"><%# Eval("DepartmentName") %></td>
+                                                            <td style="text-align: center">
+                                                                <asp:CheckBox ID="cbxPresence" Checked='<%# Eval("AttendanceStatus") %>' CssClass="success-toggle-button toggle-button" runat="server" />
+                                                                <asp:HiddenField ID="HiddenFieldStaffID" runat="server" Value='<%# Eval("StaffID") %>' />
+                                                            </td>
+                                                        </tr>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th style="text-align: center">Date</th>
+                                                    <th style="text-align: center">Staff Code</th>
+                                                    <th style="text-align: center">Name</th>
+                                                    <th style="text-align: center">Department</th>
+                                                    <th style="text-align: center">Attendance</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
 
-                                    <div class="form-actions">
-                                        <asp:LinkButton ID="btnUpdate" CssClass="btn btn-inverse" runat="server" OnClick="btnUpdate_Click"><i class="icon-refresh icon-white"></i> Update</asp:LinkButton>
-                                        <asp:Button ID="btnCancel" CssClass="btn btn-warning" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
+                                        <div class="form-actions">
+                                            <asp:LinkButton ID="btnUpdate" CssClass="btn btn-inverse" runat="server" OnClick="btnUpdate_Click"><i class="icon-refresh icon-white"></i> Update</asp:LinkButton>
+                                            <asp:Button ID="btnCancel" CssClass="btn btn-warning" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
+                                        </div>
+
                                     </div>
+                                </asp:PlaceHolder>
 
-                                </div>
+                                <asp:PlaceHolder ID="nonEditableAttendancePH" runat="server" Visible="false">
+                                    <div class="form-horizontal">
+                                        <%--ID as tableTT to use table-tools--%>
+                                        <table id="tableTT" class="table table-striped table-bordered table-advance table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th style="text-align: center">Date</th>
+                                                    <th style="text-align: center">Attendance Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <asp:Repeater ID="nonEditableAttendanceRepeater" runat="server">
+                                                    <ItemTemplate>
+                                                        <tr>
+                                                            <td style="text-align: center"><%# Eval("AttendanceDate", "{0:dd-MM-yyyy}") %></td>
+                                                            <td style="text-align: center">
+                                                                <asp:CheckBox ID="cbxPresence" Enabled="false" Checked='<%# Eval("AttendanceStatus") %>' CssClass="success-toggle-button toggle-button" runat="server" />                                                                
+                                                            </td>
+                                                        </tr>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th style="text-align: center">Date</th>
+                                                    <th style="text-align: center">Attendance Status</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+
+                                        <div class="form-actions">                                            
+                                            <asp:LinkButton ID="btnClose" CssClass="btn btn-warning" runat="server" Text="Close" OnClientClick="home.aspx"/>
+                                        </div>
+
+                                    </div>
+                                </asp:PlaceHolder>
                             </div>
                             <!-- END FORM-->
                         </div>

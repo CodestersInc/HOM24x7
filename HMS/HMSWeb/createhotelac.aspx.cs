@@ -89,7 +89,7 @@ public partial class hacregister : System.Web.UI.Page
                 {
                     if (RegularSeason != null)
                     {
-                        Response.Redirect("home.aspx");
+                        Utility.MsgBox("Hotel Account successfuly created...!!", this.Page, this, "sytemadminhome.aspx");
                     }
                     else
                     {
@@ -97,7 +97,6 @@ public partial class hacregister : System.Web.UI.Page
                         staffLogic.delete(newstaff.StaffID);
                         accountLogic.delete(newAccount.AccountID);
                     }
-
                 }
             }
             else
@@ -105,9 +104,13 @@ public partial class hacregister : System.Web.UI.Page
                 accountLogic.delete(newAccount.AccountID);
             }
         }
+        else
+        {
+            Utility.MsgBox("Account creation failed...!!", this.Page, this, "sytemadminhome.aspx");
+        }
     }
     protected void btnCancel_Click(object sender, EventArgs e)
     {
-        Response.Redirect("home.aspx");
+        Response.Redirect("systemadminhome.aspx");
     }
 }

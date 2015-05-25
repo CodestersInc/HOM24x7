@@ -15,17 +15,20 @@ public partial class home : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         var User = Session["loggedUser"];
+
         if (!(User is Staff))
             Response.Redirect("login.aspx");
+
         Staff loggedUser = (Staff)User;
 
         if (loggedUser == null)
         {
             Response.Redirect("login.aspx?url=" + Request.Url);
         }
-        if (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff")
+
+        if (loggedUser.UserType == "Reception Staff")
         {
-            Response.Redirect("home.aspx");
+            Response.Redirect("receptionisthome.aspx");
         }
 
         if (!IsPostBack)

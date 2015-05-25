@@ -14,12 +14,15 @@ public partial class viewpayslip : System.Web.UI.Page
         var User = Session["loggedUser"];
         if (!(User is Staff))
             Response.Redirect("login.aspx");
+
         Staff loggedUser = (Staff)User;
-        if (loggedUser == null || (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff"))
+
+        if (loggedUser == null)
         {
             Response.Redirect("login.aspx?url=" + Request.Url);
         }
-        if (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff")
+
+        if (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff" && loggedUser.UserType != "Regular Staff" && loggedUser.UserType != "Reception Staff")
         {
             Response.Redirect("home.aspx");
         }
@@ -33,6 +36,9 @@ public partial class viewpayslip : System.Web.UI.Page
 
             DateTime fromDate = payslip.FromDate;
             DateTime toDate = payslip.ToDate;
+            lblFromDate.Text = payslip.FromDate.ToString("dd-MM-yyyy");
+            lblToDate.Text = payslip.ToDate.ToString("dd-MM-yyyy");
+
             int totalDays = Convert.ToInt32((toDate - fromDate).TotalDays);
 
             lblTotalDays.Text = totalDays.ToString();

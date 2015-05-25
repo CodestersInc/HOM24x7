@@ -19,7 +19,7 @@ public partial class myservicerequest : System.Web.UI.Page
         {
             Response.Redirect("login.aspx?url=" + Request.Url);
         }
-        if (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff")
+        if (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff" &&  loggedUser.UserType != "Regular Staff")
         {
             Response.Redirect("home.aspx");
         }

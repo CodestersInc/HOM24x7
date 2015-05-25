@@ -79,6 +79,16 @@
                             </asp:Repeater>
                             <tr>
                                 <td>
+                                    <label class="boldText">From Date</label></td>
+                                <td>
+                                    <asp:Label ID="lblFromDate" CssClass="bold" runat="server"></asp:Label></td>
+                                <td>
+                                    <label class="boldText">To Date</label></td>
+                                <td>
+                                    <asp:Label ID="lblToDate" CssClass="bold" runat="server"></asp:Label></td>
+                            </tr>
+                            <tr>
+                                <td>
                                     <label class="boldText">Total Days</label></td>
                                 <td>
                                     <asp:Label ID="lblTotalDays" CssClass="bold" runat="server"></asp:Label></td>

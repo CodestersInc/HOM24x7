@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using System.Data;
+using WebUtility;
 
 public partial class generatepayslip : System.Web.UI.Page
 {
@@ -15,11 +16,11 @@ public partial class generatepayslip : System.Web.UI.Page
         if (!(User is Staff))
             Response.Redirect("login.aspx");
         Staff loggedUser = (Staff)User;
-        if (loggedUser == null || loggedUser.UserType != "Hotel Admin")
+        if (loggedUser == null)
         {
             Response.Redirect("login.aspx?url=" + Request.Url);
         }
-        if (loggedUser.UserType != "Hotel Admin")
+        if (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff")
         {
             Response.Redirect("home.aspx");
         }
@@ -37,37 +38,91 @@ public partial class generatepayslip : System.Web.UI.Page
         Staff loggedUser = (Staff)Session["loggedUser"];
         DateTime fromDate = Convert.ToDateTime(txtFromDate.Text);
         DateTime toDate = Convert.ToDateTime(txtToDate.Text);
+        DataTable staffData = null;
+        PaySlipLogic paysliplogic = new PaySlipLogic();
 
-        DataTable staffData = new StaffLogic().getStaffForPayroll(loggedUser.AccountID);
-        PaySlipLogic logic = new PaySlipLogic();
         int daysPayable;
         double monthlysalary;
         double basic;
 
-        for (int i = 0; i < staffData.Rows.Count; i++)
+        if (loggedUser.UserType == "Hotel Admin")
         {
-            daysPayable = new AttendanceLogic().getPayableDaysForStaff(fromDate, toDate, Convert.ToInt32(staffData.Rows[i]["StaffID"]));
-            monthlysalary = (Convert.ToDouble(staffData.Rows[i]["Salary"]));
+            staffData = new StaffLogic().getStaffForPayroll(loggedUser.AccountID, fromDate, toDate);                       
 
-            basic = Math.Abs((monthlysalary/30)*daysPayable);
+            for (int i = 0; i < staffData.Rows.Count; i++)
+            {
+                daysPayable = new AttendanceLogic().getPayableDaysForStaff(fromDate, toDate, Convert.ToInt32(staffData.Rows[i]["StaffID"]));
+                monthlysalary = (Convert.ToDouble(staffData.Rows[i]["Salary"]));
+                basic = Math.Abs((monthlysalary / 30) * daysPayable);
 
-            logic.create(new PaySlip(0,
-            Convert.ToInt32(staffData.Rows[i]["StaffID"]),
-            basic,
-            0,
-            0,
-            0,
-            0,
-            0,
-            basic,
-            fromDate,
-            toDate,
-            daysPayable,
-            DateTime.Now,
-            DateTime.Now,
-            loggedUser.StaffID,
-            loggedUser.AccountID));
+                if(paysliplogic.create(new PaySlip(0,
+                Convert.ToInt32(staffData.Rows[i]["StaffID"]),
+                basic,
+                0,
+                0,
+                0,
+                0,
+                0,
+                basic,
+                fromDate,
+                toDate,
+                daysPayable,
+                DateTime.Now,
+                DateTime.Now,
+                loggedUser.StaffID,
+                loggedUser.AccountID)) != null)
+                {
+                    Utility.MsgBox("Payslip generated successfully...!!", this.Page, this);
+                }
+                else
+                {
+                    Response.Redirect("ErrorPage500.html");
+                }
+            }
         }
-        Response.Redirect("home.aspx");
+
+        if (loggedUser.UserType == "Managerial Staff")
+        {
+            staffData = new StaffLogic().getStaffForPayroll(loggedUser.DepartmentID,loggedUser.AccountID, fromDate, toDate);
+
+            for (int i = 0; i < staffData.Rows.Count; i++)
+            {
+                daysPayable = new AttendanceLogic().getPayableDaysForStaff(fromDate, toDate, Convert.ToInt32(staffData.Rows[i]["StaffID"]));
+
+                if (daysPayable == 0)
+                {
+                    continue;
+                }
+                else
+                {
+                    monthlysalary = (Convert.ToDouble(staffData.Rows[i]["Salary"]));
+                    basic = Math.Abs((monthlysalary / 30) * daysPayable);
+
+                    if(paysliplogic.create(new PaySlip(0,
+                    Convert.ToInt32(staffData.Rows[i]["StaffID"]),
+                    basic,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    basic,
+                    fromDate,
+                    toDate,
+                    daysPayable,
+                    DateTime.Now,
+                    DateTime.Now,
+                    loggedUser.StaffID,
+                    loggedUser.AccountID)) != null)
+                    {
+                        Utility.MsgBox("Payslip generated successfully...!!", this.Page, this);
+                    }
+                    else
+                    {
+                        Response.Redirect("ErrorPage500.html");
+                    }
+                }                
+            }
+        }
     }
 }

@@ -139,5 +139,16 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@AccountID", AccountID));
             return DBUtility.Select(query, lstParams);
         }
+
+        public DataTable getFloorsWithPlan(int AccountID)
+        {
+            String query = "select Floor.FloorNumber, FloorPlan.PlanID from Floor, FloorPlan where Floor.FloorID=FloorPlan.FloorID and Floor.AccountID=@AccountID";
+
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+
+            lstParams.Add(new SqlParameter("AccountID", AccountID));
+
+            return DBUtility.Select(query, lstParams);
+        }
     }
 }

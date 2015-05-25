@@ -30,7 +30,7 @@
                     <!-- BEGIN SAMPLE FORM widget-->
                     <div class="widget">
                         <div class="widget-title">
-                            <h4><i class="icon-reorder"></i>Select a range of dates (during which payslips were genearated)</h4>
+                            <h4><i class="icon-reorder"></i>Select a range of dates (during which payslips were generated)</h4>
                             <span class="tools">
                                 <a href="javascript:;" class="icon-chevron-down"></a>
                                 <a href="javascript:;" class="icon-remove"></a>
@@ -43,7 +43,7 @@
                                     <div class="control-group">
                                         <label class="control-label">From Date</label>
                                         <div class="controls">
-                                            <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+                                            <div class="input-append date date-picker" data-date="01-01-2015" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
                                                 <asp:TextBox ID="txtFromDate" runat="server" CssClass="span6  non-editable" Text="dd-mm-yyyy"></asp:TextBox>
                                                 <span class="add-on"><i class="icon-calendar"></i></span>
                                             </div>
@@ -53,21 +53,23 @@
                                     <div class="control-group">
                                         <label class="control-label">To Date</label>
                                         <div class="controls">
-                                            <div class="input-append date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+                                            <div class="input-append date date-picker" data-date="01-01-2015" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
                                                 <asp:TextBox ID="txtToDate" runat="server" CssClass="span6 non-editable" Text="dd-mm-yyyy"></asp:TextBox>
                                                 <span class="add-on"><i class="icon-calendar"></i></span>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="control-group">
-                                        <label class="control-label">Department</label>
-                                        <div class="controls">
-                                            <asp:DropDownList ID="ddlDepartment" runat="server" CssClass="span3" data-placeholder="Choose a Department" TabIndex="1" />
+                                    <asp:PlaceHolder ID="ddlDepartmentPlaceHolder" runat="server">
+                                        <div class="control-group">
+                                            <label class="control-label">Department</label>
+                                            <div class="controls">
+                                                <asp:DropDownList ID="ddlDepartment" runat="server" CssClass="span3" data-placeholder="Choose a Department" TabIndex="1" />
+                                            </div>
                                         </div>
-                                    </div>
+                                    </asp:PlaceHolder>
 
-                                    <asp:Label ID="lblNoPayslips" runat="server" CssClass="alert alert-info" Visible="false"><strong>Note:</strong> No payslips found for the selected department.</asp:Label>
+                                    <asp:Label ID="lblNoPayslips" runat="server" CssClass="alert alert-info" Visible="false"><strong>Note:</strong> No payslips found...!!</asp:Label>
 
                                     <div class="form-actions">
                                         <asp:Button ID="btnSearch" CssClass="btn btn-info" runat="server" Text="Search" OnClick="btnSearch_Click" />
@@ -113,7 +115,7 @@
                                                             <td style="text-align: center"><%# Eval("DepartmentName") %></td>
                                                             <td style="text-align: center"><%# Eval("GenerateDate", "{0:dd-MM-yyyy}") %></td>
                                                             <td style="text-align: center">&#8377 <%# Eval("NetPay") %></td>
-                                                            <td style="text-align: center">                                                                
+                                                            <td style="text-align: center">
                                                                 <asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# "editpayslip.aspx?ID=" + Eval("PaySlipID") %>' runat="server"><i class="icon-edit"></i> Edit</asp:LinkButton>
                                                                 <asp:LinkButton ID="btnView" CssClass="btn mini purple" PostBackUrl='<%# "viewpayslip.aspx?ID=" + Eval("PaySlipID") %>' runat="server"><i class="icon-eye-open"></i> View</asp:LinkButton>
                                                                 <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("PaySlipID") %>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>

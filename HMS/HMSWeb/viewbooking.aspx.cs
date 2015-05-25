@@ -20,7 +20,7 @@ public partial class viewbooking : System.Web.UI.Page
         {
             Response.Redirect("login.aspx?url=" + Request.Url);
         }
-        if (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff")
+        if (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff" && loggedUser.UserType != "Reception Staff")
         {
             Response.Redirect("home.aspx");
         }

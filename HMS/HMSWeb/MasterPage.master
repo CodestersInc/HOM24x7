@@ -80,12 +80,9 @@
                                         <li>
                                             <asp:LinkButton ID="LinkButton2" runat="server"><i class="icon-tasks"></i> My Tasks</asp:LinkButton>
                                         </li>
-                                        <li>
-                                            <asp:LinkButton ID="LinkButton3" runat="server"><i class="icon-calendar"></i> Calendar</asp:LinkButton>
-                                        </li>
                                         <li class="divider"></li>
                                         <li>
-                                            <asp:LinkButton ID="btnLogout" runat="server" OnClick="btnLogout_Click"><i class="icon-key"></i>Log Out</asp:LinkButton>
+                                            <asp:LinkButton ID="btnLogout" runat="server" OnClick="btnLogout_Click"><i class="icon-key"></i> Log Out</asp:LinkButton>
                                         </li>
                                     </ul>
                                 </li>
@@ -142,13 +139,15 @@
                                 <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a href="markattendance.aspx">Mark Attendance</a></li>
+                                    <asp:PlaceHolder ID="markAttendancePlaceHolder" runat="server">
+                                        <li><a href="markattendance.aspx">Mark Attendance</a></li>
+                                    </asp:PlaceHolder>
                                     <li><a href="viewattendance.aspx">View Attendance</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
                         <!-- END Sidebar Element-Attendance -->
-                        
+
                         <!-- START Sidebar Element-Booking -->
                         <asp:PlaceHolder ID="bookingPlaceHolder" runat="server" Visible="false">
                             <li class="has-sub">
@@ -159,7 +158,6 @@
                                 <ul class="sub">
                                     <li><a href="createbooking.aspx">Create Booking</a></li>
                                     <li><a href="searchbooking.aspx">Search Booking</a></li>
-                                    <li><a href="viewonlinebooking.aspx">View Online Booking</a></li>
                                 </ul>
                             </li>
                         </asp:PlaceHolder>
@@ -180,6 +178,20 @@
                         </asp:PlaceHolder>
                         <!-- END-Sidebar Element-Department -->
 
+                        <!-- START Sidebar Element-Online Booking -->
+                        <asp:PlaceHolder ID="onlineBookingPlaceHolder" runat="server" Visible="false">
+                            <li class="has-sub">
+                                <a href="javascript:;">
+                                    <span class="icon-box"><i class="icon-bullhorn"></i></span>Online Booking
+                                <span class="arrow"></span>
+                                </a>
+                                <ul class="sub">
+                                    <li><a href="viewonlinebooking.aspx">Online Booking Requests</a></li>
+                                </ul>
+                            </li>
+                        </asp:PlaceHolder>
+                        <!-- END Sidebar Element-Online Booking -->
+
                         <!-- START Sidebar Element-Payroll -->
                         <asp:PlaceHolder ID="payrollPlaceHolder" runat="server" Visible="false">
                             <li class="has-sub">
@@ -188,7 +200,9 @@
 					            <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a href="generatepayslip.aspx">Generate Payslip</a></li>
+                                    <asp:PlaceHolder ID="generatePayslipPlaceHolder" runat="server">
+                                        <li><a href="generatepayslip.aspx">Generate Payslip</a></li>
+                                    </asp:PlaceHolder>
                                     <li><a href="searchpayslip.aspx">Search Payslip</a></li>
                                 </ul>
                             </li>
@@ -269,7 +283,9 @@
 					                <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a href="delegateservicerequest.aspx">Delegate Service</a></li>
+                                    <asp:PlaceHolder ID="delegateRequestPlaceHolder" runat="server">
+                                        <li><a href="delegateservicerequest.aspx">Delegate Service</a></li>
+                                    </asp:PlaceHolder>
                                     <li><a href="myservicerequest.aspx">My Requests</a></li>
                                 </ul>
                             </li>
