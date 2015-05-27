@@ -39,8 +39,6 @@
 
                         <asp:PlaceHolder ID="RequestListPlaceHolder" runat="server">
                             <div class="widget-body">
-
-
                                 <table class="table table-striped table-bordered table-advance table-hover">
                                     <tr>
                                         <th>Service</th>
@@ -75,6 +73,16 @@
                                         </ItemTemplate>
                                     </asp:Repeater>
                                 </table>
+                            </div>
+                        </asp:PlaceHolder>
+
+                        <asp:PlaceHolder ID="noServiceRequestsPH" runat="server" Visible="false">
+                            <div class="control-group">
+                                <div class="controls">
+                                    <div class="alert">
+                                        <label>No pending service requests.</label>
+                                    </div>
+                                </div>
                             </div>
                         </asp:PlaceHolder>
                     </div>

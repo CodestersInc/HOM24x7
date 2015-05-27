@@ -35,6 +35,8 @@ public partial class searchroomtype : System.Web.UI.Page
         {
             RoomTypeLogic roomTypeLogic = new RoomTypeLogic();
             roomTypeLogic.delete(Convert.ToInt32(e.CommandArgument));
+            roomTypeLogic.deleteAllSeasonRooms(Convert.ToInt32(e.CommandArgument));
+
             Staff loggedUser = (Staff)Session["loggeduser"];
             
             searchResultArea.Visible = true;

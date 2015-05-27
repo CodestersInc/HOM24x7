@@ -50,11 +50,11 @@ public partial class viewroom : System.Web.UI.Page
             Convert.ToInt32(ddlFloor.SelectedValue),
             ddlStatus.SelectedValue)) == 1)
         {
-            Utility.MsgBox("Room details updated successfully...!!", this.Page, this, "serachroom.aspx");
+            Utility.MsgBox("Room details updated successfully...!!", this.Page, this, "searchroom.aspx");
         }
         else
         {
-            Utility.MsgBox("Error: Room updation failed...!!", this.Page, this, "serachroom.aspx");
+            Utility.MsgBox("Error: Room updation failed...!!", this.Page, this, "searchroom.aspx");
         }
     }
     protected void btnCancel_Click(object sender, EventArgs e)

@@ -78,6 +78,7 @@
                                 <label class="control-label">Address</label>
                                 <div class="controls">
                                     <asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine" CssClass="span4" Rows="3"></asp:TextBox>
+                              
                                 </div>
                             </div>
 
@@ -225,8 +226,8 @@
                                 <div class="control-group">
                                     <label class="control-label">Bank AC Number</label>
                                     <div class="controls">
-                                        <asp:TextBox ID="txtBankACNumber" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter bank AC number (if any)" data-original-title="Hint"></asp:TextBox>                                        
-                                        <asp:RegularExpressionValidator ControlToValidate="txtBankACNumber" Display="Dynamic" ID="BankACNoRegularExpressionValidator" runat="server" ErrorMessage="Please enter a valid AC number" ValidationExpression="[a-zA-Z0-9]{16}([a-zA-Z0-9]?){0,16}" ValidationGroup="First" CssClass="alert alert-error"></asp:RegularExpressionValidator>
+                                        <asp:TextBox ID="txtBankACNumber" runat="server" CssClass="span4 popovers" data-trigger="hover" data-content="Enter bank AC number (if any)" data-original-title="Hint"></asp:TextBox>
+                                        <asp:RegularExpressionValidator ControlToValidate="txtBankACNumber" Display="Dynamic" ID="BankACNoRegularExpressionValidator" runat="server" ErrorMessage="Please enter a valid AC number" ValidationExpression="^\d+(\d\w)?$" ValidationGroup="First" CssClass="alert alert-error"></asp:RegularExpressionValidator>
                                     </div>
                                 </div>
 

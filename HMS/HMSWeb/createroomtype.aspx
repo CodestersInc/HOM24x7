@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="createroomtype.aspx.cs" Inherits="createroomtype" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headContentPlaceHolder" runat="Server">
-    <link href="assets/bootstrap/css/bootstrap-fileupload.css" rel="stylesheet" />
+
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="Server">
@@ -59,9 +59,7 @@
                                     <label class="control-label">Photo</label>
                                     <div class="controls">
                                         <asp:FileUpload ID="FileUpload1" runat="server" />
-                                        <asp:RequiredFieldValidator ControlToValidate="FileUpload1" ID="FileUploadRequiredFieldValidator" runat="server" ErrorMessage="Please add a photo of that perticula room type" CssClass="alert alert-error"></asp:RequiredFieldValidator>
-                                        <br />
-                                        <br />
+                                        <asp:RequiredFieldValidator ControlToValidate="FileUpload1" ValidationGroup="First" ID="FileUploadRequiredFieldValidator" runat="server" ErrorMessage="Please add a photo for the room type" CssClass="alert alert-error"></asp:RequiredFieldValidator>
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +84,6 @@
                         <div>
                             <div>
                                 <!-- START SEASON MAPPING -->
-                                <!--START Repeater-->
                                 <table class="table table-striped table-bordered table-advance table-hover">
                                     <tr>
                                         <th>Season</th>
@@ -118,7 +115,6 @@
                                         </ItemTemplate>
                                     </asp:Repeater>
                                 </table>
-                                <!--END Repeater-->
                                 <!-- END SEASON MAPPING -->
                             </div>
 
@@ -141,4 +137,3 @@
 
 <asp:Content ID="Content3" ContentPlaceHolderID="scriptsContentPlaceHolder" runat="Server">
 </asp:Content>
-

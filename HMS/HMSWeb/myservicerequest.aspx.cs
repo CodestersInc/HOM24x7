@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
+using System.Data;
 
 public partial class myservicerequest : System.Web.UI.Page
 {
@@ -26,8 +27,17 @@ public partial class myservicerequest : System.Web.UI.Page
 
         if (!IsPostBack)
         {
-            RequestListRepeater.DataSource = new ServiceRequestLogic().getAssignedRequestsOfStaff(loggedUser);
-            RequestListRepeater.DataBind();
+            DataTable dt = new ServiceRequestLogic().getAssignedRequestsOfStaff(loggedUser);
+            if (dt.Rows.Count == 0)
+            {
+                RequestListPlaceHolder.Visible = false;
+                noServiceRequestsPH.Visible = true;
+            }
+            else
+            {
+                RequestListRepeater.DataSource = dt;
+                RequestListRepeater.DataBind();
+            }            
         }
     }
 

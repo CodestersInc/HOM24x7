@@ -88,6 +88,15 @@ namespace BusinessLogic
             return DBUtility.Modify(query, lstParams);  
         }
 
+        public int deleteAllSeasonRooms(int id)
+        {
+            String query = "delete from SeasonRoom where RoomTypeID=@ID";
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+            lstParams.Add(new SqlParameter("@ID", id));
+
+            return DBUtility.Modify(query, lstParams);
+        }
+
         public RoomType selectById(int id)
         {
             String query = "select * from RoomType where RoomTypeID=@id";

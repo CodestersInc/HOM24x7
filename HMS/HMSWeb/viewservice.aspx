@@ -85,7 +85,7 @@
 
                                     <div class="form-actions">
                                         <asp:LinkButton ID="btnUpdate" ValidationGroup="First" CssClass="btn btn-inverse" runat="server" OnClick="btnUpdate_Click"><i class="icon-refresh icon-white"></i>Update</asp:LinkButton>
-                                        <asp:Button ID="btnCancel" OnClick="btnCancel_Click" CssClass="btn" runat="server" Text="Cancel" />
+                                        <asp:Button ID="btnCancel" OnClick="btnCancel_Click" CssClass="btn btn-warning" runat="server" Text="Cancel" />
                                     </div>
                                 </div>
                             </div>

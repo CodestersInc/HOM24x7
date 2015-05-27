@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using System.Data;
+using WebUtility;
 
 public partial class cart : System.Web.UI.Page
 {
@@ -110,12 +111,12 @@ public partial class cart : System.Web.UI.Page
     protected void btnConfirmOrder_Click(object sender, EventArgs e)
     {
         Booking booking = (Booking)Session["Booking"];
-        ServiceRequestLogic servicerequestlogic = new ServiceRequestLogic();        
+        ServiceRequestLogic servicerequestlogic = new ServiceRequestLogic();
 
         for (int i = 0; i < CartItemRepeater.Items.Count; i++)
         {
-            servicerequestlogic.create(new ServiceRequest(0,
-                Convert.ToInt32(((HiddenField)CartItemRepeater.FindControl("hdnServiceID")).Value),
+            if (servicerequestlogic.create(new ServiceRequest(0,
+                Convert.ToInt32(((HiddenField)CartItemRepeater.Items[i].FindControl("HiddenFieldServiceID")).Value),
                 booking.BookingID,
                 DateTime.Now,
                 DateTime.Now,
@@ -123,7 +124,16 @@ public partial class cart : System.Web.UI.Page
                 "No Comments",
                 "",
                 0,
-                Convert.ToInt32(((TextBox)CartItemRepeater.Items[i].FindControl("txtQuantity")).Text)));
+                Convert.ToInt32(((TextBox)CartItemRepeater.Items[i].FindControl("txtQuantity")).Text))) != null)
+            {
+                Response.Cookies["Service"].Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies["Unit"].Expires = DateTime.Now.AddDays(-1);
+                Utility.MsgBox("Service order successfully placed...!!",this.Page,this,"servicehome.aspx");
+            }
+            else
+            {
+                Utility.MsgBox("Error: Service order failed...!!", this.Page, this, "cart.aspx.aspx");
+            }
         }
     }
 

@@ -156,8 +156,8 @@
                                                 <asp:Repeater ID="CartItemRepeater" runat="server" OnItemCommand="CartItemRepeater_ItemCommand">
                                                     <ItemTemplate>
                                                         <tr class="cart_item">
-                                                            <td class="product-remove">
-                                                                <asp:HiddenField ID="hdnServiceID" runat="server" Value='<%# Eval("ServiceID") %>' />
+                                                            <td class="product-remove">  
+                                                                <asp:HiddenField ID="HIddenFieldServiceID" runat="server" Value='<%# Eval("ServiceID") %>' />                                                              
                                                                 <asp:LinkButton ID="btnRemove" CssClass="remove" CommandName="Remove" CommandArgument='<%# Eval("ServiceID") %>' runat="server">X</asp:LinkButton>
                                                             </td>
                                                             <td class="product-thumbnail">
