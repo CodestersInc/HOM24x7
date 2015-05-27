@@ -124,7 +124,7 @@
     <script>
         require(['converse'], function (converse) {
             converse.initialize({
-                bosh_service_url:'https://conversejs.org/http-bind/',                
+                bosh_service_url: 'http://codester.cloudapp.net:5280/http-bind',
                 i18n: locales['en'],
                 keepalive: true,
                 message_carbons: true,

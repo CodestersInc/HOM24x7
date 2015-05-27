@@ -14,6 +14,7 @@ public partial class systemadminhome : System.Web.UI.Page
         var User = Session["loggedUser"];
         if (!(User is SystemAdmin))
             Response.Redirect("login.aspx");
+
         SystemAdmin loggedUser = (SystemAdmin)User;
 
         if (loggedUser == null)
