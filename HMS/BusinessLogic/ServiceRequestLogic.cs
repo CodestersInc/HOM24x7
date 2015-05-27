@@ -170,5 +170,10 @@ namespace BusinessLogic
 
             return DBUtility.Select(query, lstParams);
         }
+
+        public DataTable getCartItems(int[] Items, int[] Unit)
+        {
+            return null;
+        }
     }
 }

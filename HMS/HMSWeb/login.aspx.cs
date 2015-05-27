@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using BusinessLogic;
 using WebUtility;
 using System.Net.Mail;
+using System.Data;
 
 public partial class login : System.Web.UI.Page
 {
@@ -67,9 +68,11 @@ public partial class login : System.Web.UI.Page
                         Session.Add("LoggedUser", customerLogger);
                         Session.Add("UserType", "Customer");
 
-                        if (customerlogic.hasBookingNow(customerLogger.CustomerID, customerLogger.AccountID).Rows.Count==1)
+                        Booking booking = customerlogic.hasBookingNow(customerLogger.CustomerID, customerLogger.AccountID);
+                        if (booking!=null)
                         {
-                            Utility.MsgBox("Welcome...!!", this.Page, this, "servicehome.aspx");
+                            Session.Add("Booking",booking);
+                            Response.Redirect("servicehome.aspx");
                         }
                         else
                         {

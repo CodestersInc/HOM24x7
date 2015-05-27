@@ -234,7 +234,7 @@ namespace BusinessLogic
             }
         }
 
-        public DataTable hasBookingNow(int CustomerID, int AccountID)
+        public Booking hasBookingNow(int CustomerID, int AccountID)
         {
             string query = "select * from Booking, Customer where Booking.CustomerID = Customer.CustomerID and Booking.CustomerID=@CustomerID and Customer.AccountID=@AccountID and @CurrentDate BETWEEN Booking.CheckInDate AND Booking.CheckOutDate";
             
@@ -244,7 +244,33 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@AccountID", AccountID));
             lstParams.Add(new SqlParameter("@CurrentDate", DateTime.Now));
 
-            return DBUtility.Select(query, lstParams);
+            DataTable dt = DBUtility.Select(query, lstParams);
+
+            if (dt.Rows.Count == 1)
+            {
+                return new Booking(Convert.ToInt32(dt.Rows[0]["BookingID"]),
+                    Convert.ToInt32(dt.Rows[0]["RoomID"]),
+                    Convert.ToInt32(dt.Rows[0]["NoOfPersons"]),
+                    Convert.ToDateTime(dt.Rows[0]["CheckInDate"]),
+                    Convert.ToDateTime(dt.Rows[0]["PlannedCheckoutDate"]),
+                    Convert.ToDateTime(dt.Rows[0]["CheckOutDate"]),
+                    dt.Rows[0]["Status"].ToString(),
+                    Convert.ToDouble(dt.Rows[0]["PaidAmount"]),
+                    Convert.ToInt32(dt.Rows[0]["CustomerID"]),
+                    Convert.ToInt32(dt.Rows[0]["ApproverID"]),
+                    Convert.ToInt32(dt.Rows[0]["ReceiverID"]),
+                    dt.Rows[0]["StaffRemarks"].ToString(),
+                    dt.Rows[0]["CustomerRemarks"].ToString(),
+                    Convert.ToDouble(dt.Rows[0]["RoomRate"]),
+                    dt.Rows[0]["PaymentMode"].ToString(),
+                    Convert.ToInt32(dt.Rows[0]["ChequeNo"]),
+                    dt.Rows[0]["BankName"].ToString(),
+                    Convert.ToInt32(dt.Rows[0]["OnlineBookingID"]));
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public Customer getUserByEmail(string Email)

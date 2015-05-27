@@ -2,37 +2,32 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>eElectronics - HTML eCommerce Template</title>
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HOM24x7 Service Portal</title>
 
     <!-- Google Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css' />
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="Servicecss/owl.carousel.css">
-    <link rel="stylesheet" href="Servicecss/style.css">
-    <link rel="stylesheet" href="Servicecss/responsive.css">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" href="Servicecss/owl.carousel.css" />
+    <link rel="stylesheet" href="Servicecss/style.css" />
+    <link rel="stylesheet" href="Servicecss/responsive.css" />
 </head>
+
 <body>
     <form runat="server">
+        <!-- Begin header area -->
         <div class="header-area">
             <div class="container">
                 <div class="row">
@@ -40,10 +35,7 @@
                         <div class="user-menu">
                             <ul>
                                 <li><a href="#"><i class="fa fa-user"></i>My Account</a></li>
-                                <li><a href="#"><i class="fa fa-heart"></i>Wishlist</a></li>
-                                <li><a href="cart.aspx"><i class="fa fa-user"></i>My Cart</a></li>
-                                <li><a href="checkout.html"><i class="fa fa-user"></i>Checkout</a></li>
-                                <li><a href="#"><i class="fa fa-user"></i>Login</a></li>
+                                <li><a href="login.aspx"><i class="fa fa-user"></i>Logout</a></li>
                             </ul>
                         </div>
                     </div>
@@ -52,10 +44,10 @@
                         <div class="header-right">
                             <ul class="list-unstyled list-inline">
                                 <li class="dropdown dropdown-small">
-                                    <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">currency :</span><span class="value">USD </span><b class="caret"></b></a>
+                                    <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">currency :</span><span class="value">INR </span><b class="caret"></b></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#">USD</a></li>
                                         <li><a href="#">INR</a></li>
+                                        <li><a href="#">USD</a></li>
                                         <li><a href="#">GBP</a></li>
                                     </ul>
                                 </li>
@@ -76,18 +68,20 @@
         </div>
         <!-- End header area -->
 
+        <!-- Start site branding area -->
         <div class="site-branding-area">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="logo">
-                            <h1><a href="index.html">e<span>Electronics</span></a></h1>
+                            <h1><a href="servicehome.aspx">HOM24x7<span> Services  </span></a></h1>
                         </div>
                     </div>
 
                     <div class="col-sm-6">
                         <div class="shopping-item">
-                            <a href="cart.aspx">Cart - <asp:Label ID="lblCartTotal" CssClass="cart-amunt" runat="server" Text="Label"></asp:Label> <i class="fa fa-shopping-cart"></i>
+                            <a href="cart.aspx">View Cart
+                                    <i class="fa fa-shopping-cart"></i>
                                 <asp:Label ID="lblProductCount" CssClass="product-count" runat="server" Text="Label"></asp:Label>
                             </a>
                         </div>
@@ -97,6 +91,7 @@
         </div>
         <!-- End site branding area -->
 
+        <!-- Start mainmenu area -->
         <div class="mainmenu-area">
             <div class="container">
                 <div class="row">
@@ -111,7 +106,7 @@
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li><a href="servicehome.aspx">Home</a></li>
-                            <li><a href="services.aspx">Services</a></li>
+                            <li class="active"><a href="services.aspx">Services</a></li>
                             <li><a href="cart.aspx">Cart</a></li>
                         </ul>
                     </div>
@@ -119,6 +114,7 @@
             </div>
         </div>
         <!-- End mainmenu area -->
+
 
         <div class="product-big-title-area">
             <div class="container">
@@ -156,7 +152,7 @@
                                             <asp:Label ID="lblProductName" runat="server" Text="Product Name"></asp:Label></h2>
                                         <div class="product-inner-price">
                                             <ins>
-                                                <asp:Label ID="lblPrice" runat="server" Text="lblPrice"></asp:Label>
+                                                <asp:Label ID="lblPrice" runat="server" Text="lblPrice"></asp:Label>  &#8377
                                             </ins>
                                         </div>
                                         <div class="quantity">
@@ -166,7 +162,7 @@
                                         <br />
                                         Customer Remarks:
                                         <br />
-                                        <asp:TextBox ID="txtCustomerRemarks" TextMode="MultiLine" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txtCustomerRemarks" TextMode="MultiLine" Text="No comment" runat="server"></asp:TextBox>
                                         <br />
                                         <br />
                                         <asp:Button ID="btnAddToCart" CssClass="add_to_cart_button" OnClick="btnAddToCart_Click" runat="server" Text="Add to cart" />
@@ -175,7 +171,8 @@
                                             <br />
                                             <br />
                                             <p>
-                                                ServiceType: <a href="">
+                                                ServiceType: 
+                                                <a href="#">
                                                     <asp:Label ID="lblServiceType" runat="server" Text="Label"></asp:Label>
                                                 </a>
                                             </p>
@@ -188,12 +185,14 @@
                 </div>
             </div>
         </div>
+
+        <!-- Start footer area -->
         <div class="footer-bottom-area">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8">
                         <div class="copyright">
-                            <p>&copy; 2015 eElectronics. All Rights Reserved. Coded with <i class="fa fa-heart"></i>by <a href="http://wpexpand.com" target="_blank">WP Expand</a></p>
+                            <p>&copy; 2015 Host of the most. All Rights Reserved.</p>
                         </div>
                     </div>
 
@@ -208,6 +207,7 @@
                 </div>
             </div>
         </div>
+        <!-- End footer area -->
 
         <!-- Latest jQuery form server -->
         <script src="https://code.jquery.com/jquery.min.js"></script>

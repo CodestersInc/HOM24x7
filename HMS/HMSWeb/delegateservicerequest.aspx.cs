@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
+using System.Data;
 
 public partial class delegaterequest : System.Web.UI.Page
 {
@@ -26,8 +27,17 @@ public partial class delegaterequest : System.Web.UI.Page
 
         if (!IsPostBack)
         {
-            RequestListRepeater.DataSource = new ServiceRequestLogic().getPendingRequests(loggedUser.AccountID);
-            RequestListRepeater.DataBind();
+            DataTable dt = new ServiceRequestLogic().getPendingRequests(loggedUser.AccountID);
+            if (dt.Rows.Count == 0)
+            {
+                RequestListPlaceHolder.Visible = false;
+                noRequestsPlaceHolder.Visible = true;
+            }
+            else
+            {
+                RequestListRepeater.DataSource = dt;
+                RequestListRepeater.DataBind();
+            }
         }
     }
 
@@ -43,6 +53,17 @@ public partial class delegaterequest : System.Web.UI.Page
 
             StaffListRepeater.DataSource = new StaffLogic().searchManager(loggedUser.AccountID);
             StaffListRepeater.DataBind();
+        }
+
+        if (e.CommandName == "Remove")
+        {
+            ServiceRequestLogic servicerequestlogic = new ServiceRequestLogic();
+            servicerequestlogic.delete(Convert.ToInt32(e.CommandArgument));
+
+            Staff loggedUser = (Staff)Session["LoggedUser"];
+
+            RequestListRepeater.DataSource = servicerequestlogic.getPendingRequests(loggedUser.AccountID);
+            RequestListRepeater.DataBind();
         }
     }
 

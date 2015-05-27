@@ -40,43 +40,65 @@
 
                         <asp:PlaceHolder ID="RequestListPlaceHolder" runat="server">
                             <div class="widget-body">
-
-
-                                <table class="table table-striped table-bordered table-advance table-hover">
-                                    <tr>
-                                        <th>Service</th>
-                                        <th>Room number</th>
-                                        <th>Requested Date/Time</th>
-                                        <th>Customer remarks</th>
-                                        <th>Unit</th>
-                                        <th></th>
-                                    </tr>
-                                    <asp:Repeater ID="RequestListRepeater" runat="server" OnItemCommand="RequestListRepeater_ItemCommand">
-                                        <ItemTemplate>
-                                            <tr>
-                                                <td>
-                                                    <a href='viewservice.aspx?ID=<%# Eval("ServiceID") %>'><%# Eval("ServiceName") %></a>
-                                                </td>
-                                                <td>
-                                                    <a href='viewroom.aspx?ID=<%# Eval("RoomID") %>'><%# Eval("RoomNumber") %></a>
-                                                </td>
-                                                <td>
-                                                    <%# Eval("RequestedDate") %></a>
-                                                </td>
-                                                <td>
-                                                    <%# Eval("CustomerRemarks") %></a>
-                                                </td>
-                                                <td>
-                                                    <%# Eval("Unit") %>
-                                                </td>
-                                                <td style="text-align: center">
-                                                    <%--<asp:LinkButton ID="btnEdit" CssClass="btn mini purple" PostBackUrl='<%# ".aspx?ID=" + Eval("ServiceRequestID") %>' runat="server"><i class="icon-edit"></i> Delegate</asp:LinkButton>--%>
-                                                    <asp:LinkButton ID="btnDelegate" runat="server" CommandName="Delegate" CommandArgument='<%#Eval("ServiceRequestID")%>' CssClass="btn mini purple">Delegate <i class="icon-arrow-right"></i></asp:LinkButton>
-                                                </td>
-                                            </tr>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
+                                <table id="tableTT" class="table table-striped table-bordered table-advance table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align: center">Service</th>
+                                            <th style="text-align: center">Room number</th>
+                                            <th style="text-align: center">Requested Date/Time</th>
+                                            <th style="text-align: center">Customer remarks</th>
+                                            <th style="text-align: center">Unit</th>
+                                            <th style="text-align: center">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <asp:Repeater ID="RequestListRepeater" runat="server" OnItemCommand="RequestListRepeater_ItemCommand">
+                                            <ItemTemplate>
+                                                <tr>
+                                                    <td style="text-align: center">
+                                                        <a href='viewservice.aspx?ID=<%# Eval("ServiceID") %>'><%# Eval("ServiceName") %></a>
+                                                    </td>
+                                                    <td style="text-align: center">
+                                                        <a href='viewroom.aspx?ID=<%# Eval("RoomID") %>'><%# Eval("RoomNumber") %></a>
+                                                    </td>
+                                                    <td style="text-align: center">
+                                                        <%# Eval("RequestedDate") %></a>
+                                                    </td>
+                                                    <td style="text-align: center">
+                                                        <%# Eval("CustomerRemarks") %></a>
+                                                    </td>
+                                                    <td style="text-align: center">
+                                                        <%# Eval("Unit") %>
+                                                    </td>
+                                                    <td style="text-align: center">
+                                                        <asp:LinkButton ID="btnDelegate" runat="server" CommandName="Delegate" CommandArgument='<%#Eval("ServiceRequestID")%>' CssClass="btn mini purple">Delegate <i class="icon-arrow-right"></i></asp:LinkButton>
+                                                        <asp:LinkButton ID="btnRemove" runat="server" CommandName="Remove" CommandArgument='<%#  Eval("ServiceRequestID") %>' CssClass="btn mini purple"><i class="icon-trash"></i> Remove</asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th style="text-align: center">Service</th>
+                                            <th style="text-align: center">Room number</th>
+                                            <th style="text-align: center">Requested Date/Time</th>
+                                            <th style="text-align: center">Customer remarks</th>
+                                            <th style="text-align: center">Unit</th>
+                                            <th style="text-align: center">Action</th>
+                                        </tr>
+                                    </tfoot>
                                 </table>
+                            </div>
+                        </asp:PlaceHolder>
+                        
+                        <asp:PlaceHolder ID="noRequestsPlaceHolder" runat="server" Visible="false">
+                            <div class="control-group">
+                                <div class="controls">
+                                    <div class="alert">
+                                        <label>No pending service requests.</label>
+                                    </div>
+                                </div>
                             </div>
                         </asp:PlaceHolder>
                     </div>
@@ -101,7 +123,7 @@
                             <td>
                                 <%# Eval("StaffCode") %>
                             </td>
-                            
+
                             <td>
                                 <a href='viewstaff.aspx?ID=<%# Eval("StaffID") %>'><%# Eval("Name") %></a>
                             </td>

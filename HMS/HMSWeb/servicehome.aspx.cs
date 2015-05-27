@@ -13,9 +13,11 @@ public partial class ServiceHome : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        var User = Session["loggedUser"];
-        if (!(User is Customer))
-            Response.Redirect("login.aspx");
+        String User = (String)Session["UserType"];
+        if (User != null)
+            if(User!="Customer")
+                Response.Redirect("login.aspx");
+
         Customer loggedUser = null;
         try
         {
@@ -28,9 +30,19 @@ public partial class ServiceHome : System.Web.UI.Page
         catch (InvalidCastException)
         {
             Response.Redirect("login.aspx");
-        }     
-       
+        }
+
         ServiceTypeRepeater.DataSource = new ServiceTypeLogic().selectAll(loggedUser.AccountID);
         ServiceTypeRepeater.DataBind();
+
+        if (Request.Cookies["Service"] != null && Request.Cookies["Service"] != null)
+        {
+            String ServiceCookie = Server.HtmlEncode(Request.Cookies["Service"].Value);
+            String UnitCookie = Server.HtmlEncode(Request.Cookies["Unit"].Value);
+
+            String[] Services = ServiceCookie.Split(',');
+            String[] Units = UnitCookie.Split(',');
+            lblProductCount.Text = Services.Length.ToString();
+        }   
     }
 }
