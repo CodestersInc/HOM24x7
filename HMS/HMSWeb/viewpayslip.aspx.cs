@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using System.Data;
+using WebUtility;
 
 public partial class viewpayslip : System.Web.UI.Page
 {
@@ -56,12 +57,9 @@ public partial class viewpayslip : System.Web.UI.Page
             lblNetPay.Text = "&#8377 " + (Convert.ToInt32(lblTotalEarnings.Text) - Convert.ToInt32(lblTotalDeduction.Text)).ToString();
         }
     }
+
     protected void btnCancel_Click(object sender, EventArgs e)
     {
-        Response.Redirect("createpayslip.aspx");
-    }
-    protected void btnPrint_Click(object sender, EventArgs e)
-    {
-
+        Response.Redirect("home.aspx");
     }
 }

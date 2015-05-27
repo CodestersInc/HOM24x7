@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using System.IO;
+using WebUtility;
 
 public partial class viewcomponent : System.Web.UI.Page
 {
@@ -14,12 +15,14 @@ public partial class viewcomponent : System.Web.UI.Page
         var User = Session["loggedUser"];
         if (!(User is Staff))
             Response.Redirect("login.aspx");
+
         Staff loggedUser = (Staff)User;
 
         if (loggedUser == null || loggedUser.UserType != "Hotel Admin")
         {
             Response.Redirect("login.aspx");
         }
+
         if (!IsPostBack)
         {
             int componentID = Convert.ToInt32(Request.QueryString["ID"]);
@@ -57,9 +60,7 @@ public partial class viewcomponent : System.Web.UI.Page
         }
         component.AccountID = loggedUser.AccountID;
 
-        int res = componentLogic.update(component);
-
-        if (res != 0)
+        if (componentLogic.update(component)==1)
         {
             if (FileUpload1.HasFile)
             {
@@ -74,11 +75,11 @@ public partial class viewcomponent : System.Web.UI.Page
                     //no file to be deleted or the path is ""
                 }
             }
-            Response.Redirect("searchcomponent.aspx");
+            Utility.MsgBox("Component details updated successfully...!!",this.Page,this,"searchcomponent.aspx");
         }
         else
         {
-            Server.TransferRequest("ErrorPage500.html");
+            Utility.MsgBox("Error: Component updation failed...!!", this.Page, this, "searchcomponent.aspx");
         }
     }
 }

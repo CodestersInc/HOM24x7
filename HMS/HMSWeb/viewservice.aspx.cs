@@ -9,6 +9,7 @@ using System.Data.Sql;
 using System.Data.SqlClient;
 using BusinessLogic;
 using System.IO;
+using WebUtility;
 
 public partial class viewservice : System.Web.UI.Page
 {
@@ -75,15 +76,15 @@ public partial class viewservice : System.Web.UI.Page
                 }
                 catch (Exception)
                 {
-                    //for now just do nothing this case may come in place if therre is 
+                    //for now just do nothing this case may come in place if there is 
                     //no file to be deleted or the path is ""
                 }
             }
-            Response.Redirect("searchservice.aspx");
+            Utility.MsgBox("Service details updated successfully...!!", this.Page, this, "searchservice.aspx");
         }
         else
         {
-            Response.Redirect("ErrorPage500.html");
+            Utility.MsgBox("Error: Service updation failed...!!", this.Page, this, "searchservice.aspx");
         }
     }
     protected void btnCancel_Click(object sender, EventArgs e)

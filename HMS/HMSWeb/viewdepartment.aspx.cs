@@ -14,6 +14,7 @@ public partial class viewdepartment : System.Web.UI.Page
         var User = Session["loggedUser"];
         if (!(User is Staff))
             Response.Redirect("login.aspx");
+
         Staff loggedUser = (Staff)User;
 
         if (loggedUser == null || (loggedUser.UserType != "Hotel Admin" && loggedUser.UserType != "Managerial Staff"))
@@ -35,6 +36,7 @@ public partial class viewdepartment : System.Web.UI.Page
             newManagerPlaceHolder.Visible = false;
         }
     }
+
     protected void btnUpdate_Click(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["LoggedUser"];
@@ -42,13 +44,10 @@ public partial class viewdepartment : System.Web.UI.Page
         Department createdDepartment = new Department();
         StaffLogic staffLogicObj = new StaffLogic();
         DepartmentLogic departmentLogicObj = new DepartmentLogic();
-        int res=0;
 
         if (newManagerPlaceHolder.Visible == true)
         {
-            int departmentID = departmentLogicObj.fetchLastRecordId();
-
-            Staff createdstaff = new StaffLogic().create(new Staff(0,
+            Staff newmanager = new StaffLogic().create(new Staff(0,
                 txtStaffCode.Text,
                 txtName.Text,
                 txtEmail.Text,
@@ -62,39 +61,68 @@ public partial class viewdepartment : System.Web.UI.Page
                 Convert.ToInt32(txtSalary.Text),
                 cbxIsActive.Checked,
                 txtBankACNumber.Text,
-                departmentID + 1,
+                Convert.ToInt32(Request.QueryString["ID"]),
                 loggedUser.AccountID));
 
-            if (createdstaff != null)
+            if (newmanager != null)
             {
+                int oldmanagerID = departmentLogicObj.selectById(Convert.ToInt32(Request.QueryString["ID"])).ManagerID;
+
                 departmentobj = new Department(Convert.ToInt32(Request.QueryString["ID"]),
                                 txtDepartmentName.Text,
                                 loggedUser.AccountID,
-                                createdstaff.StaffID);
-                res = departmentLogicObj.update(departmentobj);
+                                newmanager.StaffID);
+
+                if (departmentLogicObj.update(departmentobj) == 1)
+                {
+                    Staff oldmanager = staffLogicObj.selectById(oldmanagerID);
+                    oldmanager.UserType = "Regular Staff";
+                    staffLogicObj.update(oldmanager);
+
+                    Utility.MsgBox("Department details updated successfully...!!", this.Page, this, "searchdepartment.aspx");
+                }
+                else
+                {
+                    staffLogicObj.delete(newmanager.StaffID);
+                    Utility.MsgBox("Error: Department updation failed...!!", this.Page, this, "searchdepartment.aspx");
+                }
+            }
+            else
+            {
+                Utility.MsgBox("Error: Department updation failed...!!", this.Page, this, "searchdepartment.aspx");
             }
         }
         else
         {
-            Staff staff = staffLogicObj.selectById(Convert.ToInt32(ViewState["staffid"]));
-            staff.UserType = "Managerial Staff";
-            staffLogicObj.update(staff);
+            int oldmanagerID = departmentLogicObj.selectById(Convert.ToInt32(Request.QueryString["ID"])).ManagerID;
 
-            departmentobj = new Department(Convert.ToInt32(Request.QueryString["ID"]),
+            Staff newmanager = staffLogicObj.selectById(Convert.ToInt32(ViewState["staffid"]));
+            newmanager.UserType = "Managerial Staff";
+
+            if (staffLogicObj.update(newmanager) == 1)
+            {
+                departmentobj = new Department(Convert.ToInt32(Request.QueryString["ID"]),
                                             txtDepartmentName.Text,
                                             loggedUser.AccountID,
                                             Convert.ToInt32(ViewState["staffid"]));
 
-            res = departmentLogicObj.update(departmentobj);            
-        }
+                if (departmentLogicObj.update(departmentobj) == 1)
+                {
+                    Staff oldmanager = staffLogicObj.selectById(oldmanagerID);
+                    oldmanager.UserType = "Regular Staff";
+                    staffLogicObj.update(oldmanager);
 
-        if (res == 1)
-        {
-            Response.Redirect("searchdepartment.aspx");
-        }
-        else
-        {
-            Response.Redirect("ErrorPage500.html");
+                    Utility.MsgBox("Department details updated successfully...!!", this.Page, this, "searchdepartment.aspx");
+                }
+                else
+                {
+                    Utility.MsgBox("Error: Department updation failed...!!", this.Page, this, "searchdepartment.aspx");
+                }
+            }
+            else
+            {
+                Utility.MsgBox("Error: Department updation failed...!!", this.Page, this, "searchdepartment.aspx");
+            }
         }
     }
 
@@ -103,9 +131,10 @@ public partial class viewdepartment : System.Web.UI.Page
         Staff loggedUser = (Staff)Session["LoggedUser"];
         StaffLogic staffLogic = new StaffLogic();
         String OriginalManagerName = staffLogic.selectById(new DepartmentLogic().selectById(Convert.ToInt32(Request.QueryString["ID"])).ManagerID).Name;
+        
         if (txtManagerName.Text.Equals(OriginalManagerName))
         {
-            Response.Redirect("Home.aspx");
+            Response.Redirect("searchdepartment.aspx");
         }
         else
         {
@@ -137,5 +166,4 @@ public partial class viewdepartment : System.Web.UI.Page
         ddlUserType.Enabled = false;
         managerNamePlaceHolder.Visible = false;
     }
-
 }

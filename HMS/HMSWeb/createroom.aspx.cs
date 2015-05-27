@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using BusinessLogic;
+using WebUtility;
 
 public partial class createroom : System.Web.UI.Page
 {
@@ -16,6 +17,7 @@ public partial class createroom : System.Web.UI.Page
         var User = Session["loggedUser"];
         if (!(User is Staff))
             Response.Redirect("login.aspx");
+
         Staff loggedUser = (Staff)User;
 
         if (loggedUser == null)
@@ -53,7 +55,11 @@ public partial class createroom : System.Web.UI.Page
             Convert.ToInt32(ddlFloor.SelectedValue),
             ddlStatus.SelectedValue))!=null)
         {
-            Response.Redirect("home.aspx");
+            Utility.MsgBox("Room created successfully...!!", this.Page, this, "home.aspx");
+        }
+        else
+        {
+            Utility.MsgBox("Error: Room creation failed...!!", this.Page, this, "createroom.aspx");
         }
 
     }

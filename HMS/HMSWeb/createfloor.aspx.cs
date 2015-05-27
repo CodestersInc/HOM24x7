@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using BusinessLogic;
+using WebUtility;
 
 public partial class createfloor : System.Web.UI.Page
 {
@@ -17,6 +18,7 @@ public partial class createfloor : System.Web.UI.Page
         
         if (!(User is Staff))
             Response.Redirect("login.aspx");
+
         Staff loggedUser = (Staff)Session["loggedUser"];
 
         if (loggedUser == null)
@@ -35,13 +37,13 @@ public partial class createfloor : System.Web.UI.Page
         if (new FloorLogic().create(new Floor(0,
             txtFloorNumber.Text,
             txtDescription.Text,
-            loggedUser.AccountID))!=null)
+            loggedUser.AccountID)) != null)
         {
-            Response.Redirect("createroom.aspx");
+            Utility.MsgBox("Floor created successfully...!!", this.Page, this, "home.aspx");
         }
         else
         {
-            Response.Redirect("ErrorPage500.html");
+            Utility.MsgBox("Error: Floor creation failed...!!", this.Page, this, "createfloor.aspx");
         }
     }
     protected void btnCancel_Click(object sender, EventArgs e)

@@ -14,7 +14,7 @@ public partial class createbooking : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         var User = Session["loggedUser"];
-        
+
         if (!(User is Staff))
             Response.Redirect("login.aspx");
 
@@ -88,7 +88,7 @@ public partial class createbooking : System.Web.UI.Page
                 ddlRoomType.DataBind();
                 ddlRoomType_SelectedIndexChange(sender, null);
             }
-            
+
             //Fill ddlApprover
             ddlApprover.DataSource = staffLogic.getReceptionManager(loggedUser.AccountID);
             ddlApprover.DataValueField = "StaffID";
@@ -161,6 +161,8 @@ public partial class createbooking : System.Web.UI.Page
 
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
+        Staff loggedUser = (Staff)Session["loggedUser"];
+
         if (createNewCustomerPlaceHolder.Visible == true)
         {
             Customer newCustomer = new CustomerLogic().create(new Customer(0,
@@ -177,21 +179,6 @@ public partial class createbooking : System.Web.UI.Page
                 Response.Redirect("ErrorPage500");
             }
             ViewState["CustomerID"] = newCustomer.CustomerID;
-        }
-
-        if (ddlStatus.SelectedValue == "Approved" || ddlStatus.SelectedValue == "Checked In")
-        {
-            RoomLogic roomlogic = new RoomLogic();
-            Room room = roomlogic.selectById(Convert.ToInt32(ddlRoom.SelectedValue));
-            if (ddlStatus.SelectedValue == "Approved")
-            {
-                room.Status = "Booked";
-            }
-            if (ddlStatus.SelectedValue == "Checked In")
-            {
-                room.Status = "Occupied";
-            }
-            roomlogic.update(room);
         }
 
         Booking bookingObj = new BookingLogic().create(new Booking(0,
@@ -213,16 +200,53 @@ public partial class createbooking : System.Web.UI.Page
             txtBankName.Text,
             0));
 
-        if (bookingObj == null)
+        if (bookingObj != null)
         {
-            Response.Redirect("ErrorPage.htm;");
+            if (ddlStatus.SelectedValue == "Approved" || ddlStatus.SelectedValue == "Checked In")
+            {
+                RoomLogic roomlogic = new RoomLogic();
+                Room room = roomlogic.selectById(Convert.ToInt32(ddlRoom.SelectedValue));
+                if (ddlStatus.SelectedValue == "Approved")
+                {
+                    room.Status = "Booked";
+                }
+                if (ddlStatus.SelectedValue == "Checked In")
+                {
+                    room.Status = "Occupied";
+                }
+                roomlogic.update(room);
+            }
+
+            if (loggedUser.UserType == "Hotel Admin" || loggedUser.UserType == "Managerial Staff")
+            {
+                Utility.MsgBox("Booking created successfully...!!", this.Page, this, "home.aspx");
+            }
+            if (loggedUser.UserType == "Reception Staff")
+            {
+                Utility.MsgBox("Booking created successfully...!!", this.Page, this, "receptionisthome.aspx");
+            }
         }
         else
-            Response.Redirect("Home.aspx");
+        {
+            if (createNewCustomerPlaceHolder.Visible == true)
+            {
+                new CustomerLogic().delete(Convert.ToInt32(ViewState["CustomerID"]));
+            }
+            Utility.MsgBox("Error: Booking creation failed...!!", this.Page, this, "createbooking.aspx");
+        }
     }
 
     protected void btnCancel_Click(object sender, EventArgs e)
     {
-        Response.Redirect("home.aspx");
+        Staff loggedUser = (Staff)Session["loggedUser"];
+
+        if (loggedUser.UserType == "Hotel Admin" || loggedUser.UserType == "Managerial Staff")
+        {
+            Response.Redirect("home.aspx");
+        }
+        if (loggedUser.UserType == "Reception Staff")
+        {
+            Response.Redirect("receptionisthome.aspx");
+        }
     }
 }

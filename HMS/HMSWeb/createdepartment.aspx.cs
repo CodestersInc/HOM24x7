@@ -52,12 +52,14 @@ public partial class adddepartment : System.Web.UI.Page
         Department departmentobj = new Department();
         Department createdDepartment = new Department();
         DepartmentLogic departmentLogicObj = new DepartmentLogic();
+        Staff createdstaff = null;
+        StaffLogic staffLogicObj = new StaffLogic();
 
         if (newManagerPlaceHolder.Visible == true)
         {
             int departmentID = departmentLogicObj.fetchLastRecordId();
 
-            Staff createdstaff = new StaffLogic().create(new Staff(0,
+            createdstaff = staffLogicObj.create(new Staff(0,
                 txtStaffCode.Text,
                 txtName.Text,
                 txtEmail.Text,
@@ -92,11 +94,15 @@ public partial class adddepartment : System.Web.UI.Page
 
         if (createdDepartment != null)
         {
-            Response.Redirect("home.aspx");
+            Utility.MsgBox("Department created successfully...!!", this.Page, this, "home.aspx");
         }
         else
         {
-            Response.Redirect("ErrorPage500.html");
+            if (newManagerPlaceHolder.Visible == true)
+            {
+                staffLogicObj.delete(createdstaff.StaffID);
+            }
+            Utility.MsgBox("Error: Department creation failed...!!", this.Page, this, "createdepartment.aspx");
         }
     }
 
@@ -117,7 +123,7 @@ public partial class adddepartment : System.Web.UI.Page
 
     protected void btnCancel_Click(object sender, EventArgs e)
     {
-        Response.Redirect("createdepartment.aspx");
+        Response.Redirect("home.aspx");
     }
 
     protected void btnNewManager_Click(object sender, EventArgs e)
@@ -126,7 +132,6 @@ public partial class adddepartment : System.Web.UI.Page
         managerChoicePlaceHolder.Visible = false;
         newManagerPlaceHolder.Visible = true;
         btnSubmit.Enabled = true;
-        btnNewManager.Visible = false;
-        
+        btnNewManager.Visible = false;        
     }
 }

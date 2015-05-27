@@ -59,23 +59,33 @@ public partial class login : System.Web.UI.Page
                 }
                 else
                 {
-                    Customer customerLogger = new CustomerLogic().login(HashedUsername, HashedPassword);
+                    CustomerLogic customerlogic = new CustomerLogic();
+                    Customer customerLogger = customerlogic.login(HashedUsername, HashedPassword);
+
                     if (customerLogger != null)
                     {
                         Session.Add("LoggedUser", customerLogger);
                         Session.Add("UserType", "Customer");
-                        Response.Redirect("ServiceHome.aspx");
+
+                        if (customerlogic.hasBookingNow(customerLogger.CustomerID, customerLogger.AccountID).Rows.Count==1)
+                        {
+                            Utility.MsgBox("Welcome...!!", this.Page, this, "servicehome.aspx");
+                        }
+                        else
+                        {
+                            Utility.MsgBox("Error: You do not have any bookings as of now...!!", this.Page, this, "login.aspx");
+                        }
                     }
                     else
                     {
-                        errorMessagePlaceHolder.Visible = true;
+                        Utility.MsgBox("Error: Invalid username or password", this.Page, this, "login.aspx");
                     }
                 }
             }
         }
         else
         {
-            errorMessagePlaceHolder.Visible = true;
+            Utility.MsgBox("Error: Invalid username or password", this.Page, this, "login.aspx");
         }
     }
 

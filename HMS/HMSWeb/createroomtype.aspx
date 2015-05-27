@@ -95,7 +95,7 @@
                                         <th>Max Discount</th>
                                         <th>Website Rate</th>
                                     </tr>
-                                    <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
+                                    <asp:Repeater ID="Repeater1" runat="server">
                                         <ItemTemplate>
                                             <tr>
                                                 <td>

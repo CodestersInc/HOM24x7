@@ -14,7 +14,6 @@ public partial class editpayslip : System.Web.UI.Page
     {
         var User = Session["loggedUser"];
         if (!(User is Staff))
-
             Response.Redirect("login.aspx");
 
         Staff loggedUser = (Staff)User;
@@ -70,7 +69,7 @@ public partial class editpayslip : System.Web.UI.Page
 
     protected void btnCancel_Click(object sender, EventArgs e)
     {
-        Response.Redirect("searchpayslip.aspx");
+        Response.Redirect("home.aspx");
     }
 
     protected void btnUpdate_Click(object sender, EventArgs e)
@@ -93,7 +92,11 @@ public partial class editpayslip : System.Web.UI.Page
 
         if (new PaySlipLogic().update(payslip) == 1)
         {
-            Response.Redirect("searchpayslip.aspx");
+            Utility.MsgBox("Payslip details updated successfully...!!", this.Page, this, "home.aspx");
+        }
+        else
+        {
+            Utility.MsgBox("Error: Payslip details updation failed...!!", this.Page, this, "searchpayslip.aspx");
         }
     }
     protected void btnSave_Click(object sender, EventArgs e)

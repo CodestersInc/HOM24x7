@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using BusinessLogic;
+using WebUtility;
 
 public partial class createseason : System.Web.UI.Page
 {
@@ -64,21 +65,16 @@ public partial class createseason : System.Web.UI.Page
                     Convert.ToSingle(((TextBox)Repeater1.Items[i].FindControl("txtMaxDiscount")).Text),
                     Convert.ToSingle(((TextBox)Repeater1.Items[i].FindControl("txtWebsiteRate")).Text)));
             }
-            
-            Response.Redirect("home.aspx");
+            Utility.MsgBox("Season created successfully...!!", this.Page, this, "home.aspx");            
         }
         else
         {
-            Response.Redirect("ErrorPage500.html");
+            Utility.MsgBox("Error: Season creation failed...!!", this.Page, this, "createseason.aspx");
         }
     }
 
     protected void btnCancel_Click(object sender, EventArgs e)
     {
         Response.Redirect("home.aspx");
-    }
-    protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
-    {
-
     }
 }

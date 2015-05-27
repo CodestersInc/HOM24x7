@@ -9,6 +9,7 @@ using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using System.IO;
+using WebUtility;
 
 public partial class viewroomtype : System.Web.UI.Page
 {
@@ -17,6 +18,7 @@ public partial class viewroomtype : System.Web.UI.Page
         var User = Session["loggedUser"];
         if (!(User is Staff))
             Response.Redirect("login.aspx");
+
         Staff loggedUser = (Staff)Session["loggedUser"];
         if (loggedUser == null || loggedUser.UserType != "Hotel Admin")
         {
@@ -88,11 +90,11 @@ public partial class viewroomtype : System.Web.UI.Page
                         Convert.ToSingle(((TextBox)Repeater1.Items[i].FindControl("txtWebsiteRate")).Text)));
             }
 
-            Response.Redirect("searchroomtype.aspx");
+            Utility.MsgBox("Room type details updated successfully...!!", this.Page, this, "searchroomtype.aspx");
         }
         else
         {
-            Response.Redirect("ErrorPage500.html");
+            Utility.MsgBox("Error: Room type updation failed...!!", this.Page, this, "searchroomtype.aspx");
         }
     }
 

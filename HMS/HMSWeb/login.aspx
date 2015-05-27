@@ -69,12 +69,6 @@
         </div>
         <!-- END LOGIN -->
 
-        <asp:PlaceHolder ID="errorMessagePlaceHolder" Visible="false" runat="server">
-            <script type="text/javascript">
-                alert("Invalid username or password...!!");
-            </script>
-        </asp:PlaceHolder>
-
         <!-- BEGIN COPYRIGHT -->
         <div id="login-copyright">
             2015 &copy; Host of the most.

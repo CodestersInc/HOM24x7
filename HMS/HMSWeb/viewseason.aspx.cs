@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
+using WebUtility;
 
 public partial class viewseason : System.Web.UI.Page
 {
@@ -13,6 +14,7 @@ public partial class viewseason : System.Web.UI.Page
         var User = Session["loggedUser"];
         if (!(User is Staff))
             Response.Redirect("login.aspx");
+
         Staff loggedUser = (Staff)Session["loggedUser"];
         if (loggedUser == null || loggedUser.UserType != "Hotel Admin")
         {
@@ -26,6 +28,7 @@ public partial class viewseason : System.Web.UI.Page
             txtToDate.Text = (seasonobject.ToDate).Date.ToString("dd-MM-yyyy");
         }
     }
+
     protected void btnUpdate_Click(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["loggedUser"];
@@ -38,11 +41,11 @@ public partial class viewseason : System.Web.UI.Page
 
         if (new SeasonLogic().update(seasonobject) == 1)
         {
-            Response.Redirect("searchseason.aspx");
+            Utility.MsgBox("Season details updated successfully...!!", this.Page, this, "searchseason.aspx");
         }
         else
         {
-            Response.Redirect("ErrorPage500.html");
+            Utility.MsgBox("Error: Season updation failed...!!", this.Page, this, "searchseason.aspx");
         }
     }
     protected void btnCancel_Click(object sender, EventArgs e)

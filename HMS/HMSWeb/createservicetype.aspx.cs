@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
+using WebUtility;
 
 public partial class createServiceType : System.Web.UI.Page
 {
@@ -40,16 +41,16 @@ public partial class createServiceType : System.Web.UI.Page
         if (serviceTypeObj != null)
         {
             FileUpload1.SaveAs(Server.MapPath("img/ServiceType/" + ticks + FileUpload1.FileName));
-            Response.Redirect("home.aspx");
+            Utility.MsgBox("Service type created successfully...!!", this.Page, this, "home.aspx");
         }
         else
         {
-            Server.TransferRequest("ErrorPage500.html");
+            Utility.MsgBox("Error: Service type creation failed...!!", this.Page, this, "createservicetype.aspx");
         }
     }
 
     protected void btnCancel_Click(object sender, EventArgs e)
     {
-
+        Response.Redirect("home.aspx");
     }
 }

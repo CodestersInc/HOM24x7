@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using BusinessLogic;
+using WebUtility;
 
 public partial class viewstaff : System.Web.UI.Page
 {
@@ -68,16 +69,16 @@ public partial class viewstaff : System.Web.UI.Page
 
         if(new StaffLogic().update(staffobj)==1)
         {
-            Response.Redirect("searchstaff.aspx");
+            Utility.MsgBox("Staff details updated successfully...!!", this.Page, this, "searchstaff.aspx");
         }
         else
         {
-            Response.Redirect("ErrorPage500.aspx");
+            Utility.MsgBox("Error: Staff updation failed...!!", this.Page, this, "searchstaff.aspx");
         }
     }
 
     protected void btnCancel_Click(object sender, EventArgs e)
     {
-        Response.Redirect("searchstaff.aspx");
+        Response.Redirect("home.aspx");
     }
 }

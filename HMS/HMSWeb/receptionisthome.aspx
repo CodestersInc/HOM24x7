@@ -135,8 +135,18 @@
                     <div class="controls">
                         <asp:DropDownList ID="ddlFloor" runat="server" CssClass="span3" data-placeholder="Choose a floor" TabIndex="1" />
                         <span></span>
-                        <asp:Button ID="viewPlan" CssClass="btn btn-info" runat="server" Text="View Plan" OnClick="viewPlan_Click"/>
+                        <asp:Button ID="viewPlan" CssClass="btn btn-info" runat="server" Text="View Plan" OnClick="viewPlan_Click" />
                     </div>
+                </div>
+            </div>
+        </div>
+    </asp:PlaceHolder>
+
+    <asp:PlaceHolder ID="noFloorPlansPH" runat="server" Visible="false">
+        <div class="control-group">
+            <div class="controls">
+                <div class="alert">
+                    <label>No floor plans available...!</label>
                 </div>
             </div>
         </div>

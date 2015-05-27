@@ -54,11 +54,11 @@ public partial class viewhotelac : System.Web.UI.Page
 
         if (new AccountLogic().update(accountobj) == 1)
         {
-            Utility.MsgBox("Updates saved successfully...!!", this.Page, this, "searchhotelac.aspx");
+            Utility.MsgBox("Account details updated successfully...!!", this.Page, this, "searchhotelac.aspx");
         }
         else
         {
-            Response.Redirect("ErrorPage500.html");
+            Utility.MsgBox("Error: Account updation failed...!!", this.Page, this, "searchhotelac.aspx");
         }
     }
     protected void btnCancel_Click(object sender, EventArgs e)

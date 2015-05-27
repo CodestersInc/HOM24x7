@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
+using WebUtility;
 
 public partial class createcomponent : System.Web.UI.Page
 {
@@ -41,11 +42,12 @@ public partial class createcomponent : System.Web.UI.Page
         if (componentObj != null)
         {
             FileUpload1.SaveAs(Server.MapPath("img/component/" + ticks + FileUpload1.FileName));
-            Response.Redirect("home.aspx");
+
+            Utility.MsgBox("Component created successfully...!!", this.Page, this, "home.aspx");
         }
         else
         {
-            Server.TransferRequest("ErrorPage500.html");
+            Utility.MsgBox("Error: Component creation failed...!!", this.Page, this, "createcomponent.aspx");
         }            
     }
 

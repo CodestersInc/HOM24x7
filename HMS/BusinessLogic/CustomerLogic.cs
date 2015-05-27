@@ -198,7 +198,7 @@ namespace BusinessLogic
             }
         }
 
-        public Booking getCurruntBooking(int CustomerID)
+        public Booking getCurrentBooking(int CustomerID)
         {
             String query = "select * from Booking where CustomerID = @CustomerID order by CheckInDate";
             
@@ -227,6 +227,46 @@ namespace BusinessLogic
                     Convert.ToInt32(dt.Rows[0]["ChequeNo"]),
                     dt.Rows[0]["BankName"].ToString(),
                     Convert.ToInt32(dt.Rows[0]["OnlineBookingID"]));
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public DataTable hasBookingNow(int CustomerID, int AccountID)
+        {
+            string query = "select * from Booking, Customer where Booking.CustomerID = Customer.CustomerID and Booking.CustomerID=@CustomerID and Customer.AccountID=@AccountID and @CurrentDate BETWEEN Booking.CheckInDate AND Booking.CheckOutDate";
+            
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+
+            lstParams.Add(new SqlParameter("@CustomerID", CustomerID));
+            lstParams.Add(new SqlParameter("@AccountID", AccountID));
+            lstParams.Add(new SqlParameter("@CurrentDate", DateTime.Now));
+
+            return DBUtility.Select(query, lstParams);
+        }
+
+        public Customer getUserByEmail(string Email)
+        {
+            String query = "select * from Customer where Email=@Email";
+
+            List<SqlParameter> lstParams = new List<SqlParameter>();
+            lstParams.Add(new SqlParameter("@Email", Email));
+
+            DataTable dt = DBUtility.Select(query, lstParams);
+
+            if (dt.Rows.Count == 1)
+            {
+                return new Customer(Convert.ToInt32(dt.Rows[0]["CustomerID"]),
+                Convert.ToDateTime(dt.Rows[0]["CreateDate"]),
+                dt.Rows[0]["Name"].ToString(),
+                dt.Rows[0]["Email"].ToString(),
+                dt.Rows[0]["Phone"].ToString(),
+                dt.Rows[0]["Username"].ToString(),
+                dt.Rows[0]["Password"].ToString(),
+                Convert.ToBoolean(dt.Rows[0]["IsActive"]),
+                Convert.ToInt32(dt.Rows[0]["AccountID"]));
             }
             else
             {

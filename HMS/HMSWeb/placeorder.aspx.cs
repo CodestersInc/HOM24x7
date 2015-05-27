@@ -14,6 +14,7 @@ public partial class placeorder : System.Web.UI.Page
 
         if (!(User is Customer))
             Response.Redirect("login.aspx");
+
         Customer loggedUser = null;
         int ServiceID = 0;
         try
@@ -81,7 +82,7 @@ public partial class placeorder : System.Web.UI.Page
     {
         new ServiceRequestLogic().create(new ServiceRequest(0,
             Convert.ToInt32(Request["ID"]),
-            new CustomerLogic().getCurruntBooking((((Customer)Session["loggedUser"]).CustomerID)).BookingID,
+            new CustomerLogic().getCurrentBooking((((Customer)Session["loggedUser"]).CustomerID)).BookingID,
             DateTime.Now,
             DateTime.Now,
             "Pending",

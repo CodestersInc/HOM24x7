@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using System.Data;
+using WebUtility;
 
 public partial class markattendance : System.Web.UI.Page
 {
@@ -14,6 +15,7 @@ public partial class markattendance : System.Web.UI.Page
         var User = Session["loggedUser"];
         if (!(User is Staff))
             Response.Redirect("login.aspx");
+
         Staff loggedUser = (Staff)User;
 
         if (loggedUser == null)
@@ -82,21 +84,14 @@ public partial class markattendance : System.Web.UI.Page
                 DateTime.Now,
                 ((CheckBox)Repeater1.Items[i].FindControl("cbxPresence")).Checked));
         }
-        if (loggedUser.UserType == "Managerial Staff")
-        {
-            Response.Redirect("viewattendance.aspx");
-        }
-        if (loggedUser.UserType == "Hotel Admin")
-        {
-            Response.Redirect("markattendance.aspx");
-        }
+        Utility.MsgBox("Attendance for " + DateTime.Now.ToString("dd-MM-yyyy") + " saved successully...!!", this.Page, this, "home.aspx");
     }
     protected void ddlDepartment_SelectedIndexChanged(object sender, EventArgs e)
     {
         Staff loggedUser = (Staff)Session["LoggedUser"];
 
         DataTable staff = new AttendanceLogic().getStaffForAttendance(Convert.ToInt32(ddlDepartment.SelectedValue), loggedUser.AccountID);
-        if (staff.Rows.Count>0)
+        if (staff.Rows.Count > 0)
         {
             lblMarked.Visible = false;
             staffRecordPlaceHolder.Visible = true;
@@ -105,8 +100,8 @@ public partial class markattendance : System.Web.UI.Page
         }
         else
         {
-            lblMarked.Visible = true;            
+            lblMarked.Visible = true;
             staffRecordPlaceHolder.Visible = false;
-        }        
+        }
     }
 }

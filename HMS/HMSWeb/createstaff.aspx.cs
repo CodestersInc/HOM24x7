@@ -41,7 +41,7 @@ partial class registerstaff : System.Web.UI.Page
 
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
-        Staff loggedInStaff = (Staff)Session["LoggedUser"];
+        Staff loggedInStaff = (Staff)Session["loggedUser"];
 
         Staff staffobject = new Staff(0,
             txtStaffCode.Text,
@@ -64,11 +64,11 @@ partial class registerstaff : System.Web.UI.Page
 
         if (createdstaff != null)
         {
-            Response.Redirect("home.aspx");
+            Utility.MsgBox("Staff created successfully...!!", this.Page, this, "home.aspx");
         }
         else
         {
-            Response.Redirect("ErrorPage500.html");
+            Utility.MsgBox("Error: Staff creation failed...!!", this.Page, this, "createstaff.aspx");
         }
     }
 

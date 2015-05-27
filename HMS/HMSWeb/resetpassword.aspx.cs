@@ -25,6 +25,10 @@ public partial class resetpassword : System.Web.UI.Page
             {
                 Response.Redirect("login.aspx");
             }
+            else
+            {
+                Utility.MsgBox("Error: Password reset failed...!!",this.Page,this,"login.aspx");
+            }
         }
         else
         {

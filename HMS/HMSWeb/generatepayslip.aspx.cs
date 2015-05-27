@@ -15,6 +15,7 @@ public partial class generatepayslip : System.Web.UI.Page
         var User = Session["loggedUser"];
         if (!(User is Staff))
             Response.Redirect("login.aspx");
+
         Staff loggedUser = (Staff)User;
         if (loggedUser == null)
         {
@@ -72,11 +73,11 @@ public partial class generatepayslip : System.Web.UI.Page
                 loggedUser.StaffID,
                 loggedUser.AccountID)) != null)
                 {
-                    Utility.MsgBox("Payslip generated successfully...!!", this.Page, this);
+                    Utility.MsgBox("Payslip generated successfully...!!", this.Page, this, "home.aspx");
                 }
                 else
                 {
-                    Response.Redirect("ErrorPage500.html");
+                    Utility.MsgBox("Error: Payslip generation failed...!!", this.Page, this, "generatepayslip.aspx");
                 }
             }
         }
@@ -115,11 +116,11 @@ public partial class generatepayslip : System.Web.UI.Page
                     loggedUser.StaffID,
                     loggedUser.AccountID)) != null)
                     {
-                        Utility.MsgBox("Payslip generated successfully...!!", this.Page, this);
+                        Utility.MsgBox("Payslip generated successfully...!!", this.Page, this, "home.aspx");
                     }
                     else
                     {
-                        Response.Redirect("ErrorPage500.html");
+                        Utility.MsgBox("Error: Payslip generation failed...!!", this.Page, this, "generatepayslip.aspx");
                     }
                 }                
             }

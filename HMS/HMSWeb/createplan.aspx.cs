@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using BusinessLogic;
+using WebUtility;
 
 
 public partial class createplan : System.Web.UI.Page
@@ -49,6 +50,7 @@ public partial class createplan : System.Web.UI.Page
             txtPlanData.Text,
             Convert.ToInt32(floorHiddenField.Value),
             ""));
+
         if (plan!=null)
         {
             PlanComponentLogic planComponentLogic = new PlanComponentLogic();
@@ -78,14 +80,18 @@ public partial class createplan : System.Web.UI.Page
                 planComponent.ComponentID = Convert.ToInt32(componentDetail[0]);
                 planComponentLogic.create(planComponent);
             }
+            Utility.MsgBox("Floor plan created successfully...!!", this.Page, this, "home.aspx");
         }
-        Response.Redirect("home.aspx");
+        else
+        {
+            Utility.MsgBox("Error: Floor plan creation failed...!!", this.Page, this, "createplan.aspx");
+        }
     }
 
 
     protected void btnCancel_Click(object sender, EventArgs e)
     {
-        Response.Redirect("searchplan.aspx");
+        Response.Redirect("home.aspx");
     }
 
     protected void createPlan_Click(object sender, EventArgs e)

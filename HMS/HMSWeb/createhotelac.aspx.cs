@@ -18,7 +18,9 @@ public partial class hacregister : System.Web.UI.Page
 
         if (!(User is SystemAdmin))
             Response.Redirect("login.aspx");
+
         SystemAdmin loggedUser = (SystemAdmin)Session["LoggedUser"];
+
         if (loggedUser == null)
         {
             Response.Redirect("login.aspx?url=" + Request.Url);
@@ -34,12 +36,14 @@ public partial class hacregister : System.Web.UI.Page
         StaffLogic staffLogic = new StaffLogic();
         SeasonLogic seasonLogic = new SeasonLogic();
         DepartmentLogic departmentLogic = new DepartmentLogic();
+        Account newAccount=null;
+        Department newDepartment=null;
 
         String features = ((cbxOnlineBooking.Checked) ? "#Online Booking#" : "") +
             ((cbxPayroll.Checked) ? "#Payroll#" : "") +
             ((cbxService.Checked) ? "#Service#" : "");
 
-        Account newAccount = accountLogic.create(new Account(0,
+         newAccount= accountLogic.create(new Account(0,
             txtCompany.Text,
             txtContact.Text,
             txtAccountEmail.Text,
@@ -50,7 +54,7 @@ public partial class hacregister : System.Web.UI.Page
 
         if (newAccount != null)
         {
-            Department newDepartment = departmentLogic.create(new Department(0,
+            newDepartment = departmentLogic.create(new Department(0,
             "Admin",
             newAccount.AccountID,
             0));
@@ -89,24 +93,31 @@ public partial class hacregister : System.Web.UI.Page
                 {
                     if (RegularSeason != null)
                     {
-                        Utility.MsgBox("Hotel Account successfuly created...!!", this.Page, this, "sytemadminhome.aspx");
+                        Utility.MsgBox("Hotel Account successfuly created...!!", this.Page, this, "systemadminhome.aspx");
                     }
                     else
                     {
                         departmentLogic.delete(newDepartment.DepartmentID);
                         staffLogic.delete(newstaff.StaffID);
                         accountLogic.delete(newAccount.AccountID);
+                        Utility.MsgBox("Error: Account creation failed...!!", this.Page, this, "createhotelac.aspx");
                     }
+                }
+                else
+                {
+                    departmentLogic.delete(newDepartment.DepartmentID);
+                    Utility.MsgBox("Error: Account creation failed...!!", this.Page, this, "createhotelac.aspx");
                 }
             }
             else
             {
                 accountLogic.delete(newAccount.AccountID);
+                Utility.MsgBox("Error: Account creation failed...!!", this.Page, this, "createhotelac.aspx");
             }
         }
         else
         {
-            Utility.MsgBox("Account creation failed...!!", this.Page, this, "sytemadminhome.aspx");
+            Utility.MsgBox("Error: Account creation failed...!!", this.Page, this, "createhotelac.aspx");
         }
     }
     protected void btnCancel_Click(object sender, EventArgs e)

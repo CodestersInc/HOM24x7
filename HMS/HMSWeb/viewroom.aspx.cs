@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using System.Data;
+using WebUtility;
 
 public partial class viewroom : System.Web.UI.Page
 {
@@ -14,6 +15,7 @@ public partial class viewroom : System.Web.UI.Page
         var User = Session["loggedUser"];
         if (!(User is Staff))
             Response.Redirect("login.aspx");
+
         Staff loggedUser = (Staff)Session["LoggedUser"];
         if (loggedUser == null || loggedUser.UserType != "Hotel Admin")
         {
@@ -48,11 +50,11 @@ public partial class viewroom : System.Web.UI.Page
             Convert.ToInt32(ddlFloor.SelectedValue),
             ddlStatus.SelectedValue)) == 1)
         {
-            Response.Redirect("searchroom.aspx");
+            Utility.MsgBox("Room details updated successfully...!!", this.Page, this, "serachroom.aspx");
         }
         else
         {
-            Response.Redirect("ErrorPage500.html");
+            Utility.MsgBox("Error: Room updation failed...!!", this.Page, this, "serachroom.aspx");
         }
     }
     protected void btnCancel_Click(object sender, EventArgs e)

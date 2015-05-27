@@ -48,13 +48,23 @@ public partial class receptionisthome : System.Web.UI.Page
             DataTable dt6 = new ServiceLogic().getAllServices(loggedUser.AccountID);
             lblServices.Text = dt6.Rows.Count.ToString();
 
-            //Fill ddlFloors
-            ddlFloor.DataSource = new FloorLogic().getFloorsWithPlan(loggedUser.AccountID);
-            ddlFloor.DataValueField = "PlanID";
-            ddlFloor.DataTextField = "FloorNumber";
-            ddlFloor.DataBind();
+            DataTable dt = new FloorLogic().getFloorsWithPlan(loggedUser.AccountID);
+            if (dt.Rows.Count == 0)
+            {
+                floorNumberPlaceHolder.Visible = false;
+                noFloorPlansPH.Visible = true;
+            }
+            else
+            {
+                //Fill ddlFloors
+                ddlFloor.DataSource = dt;
+                ddlFloor.DataValueField = "PlanID";
+                ddlFloor.DataTextField = "FloorNumber";
+                ddlFloor.DataBind();
+            }
         }
     }
+
     protected void viewPlan_Click(object sender, EventArgs e)
     {
         int planid = Convert.ToInt32(ddlFloor.SelectedValue);

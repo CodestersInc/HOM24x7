@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using System.Data;
+using WebUtility;
 
 public partial class viewbooking : System.Web.UI.Page
 {
@@ -14,6 +15,7 @@ public partial class viewbooking : System.Web.UI.Page
         var User = Session["loggedUser"];
         if (!(User is Staff))
             Response.Redirect("login.aspx");
+
         Staff loggedUser = (Staff)User;
 
         if (loggedUser == null)
@@ -116,11 +118,11 @@ public partial class viewbooking : System.Web.UI.Page
 
         if (new BookingLogic().update(booking) == 1)
         {
-            Response.Redirect("searchbooking.aspx");
+            Utility.MsgBox("Booking details updated successfully...!!", this.Page, this, "searchbooking.aspx");
         }
         else
         {
-            Response.Redirect("ErrorPage500.html");
+            Utility.MsgBox("Error: Booking updation failed...!!", this.Page, this, "searchcomponent.aspx");
         }
     }
 

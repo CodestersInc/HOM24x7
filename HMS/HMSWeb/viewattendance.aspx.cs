@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using System.Data;
+using WebUtility;
 
 public partial class viewattendance : System.Web.UI.Page
 {
@@ -113,7 +114,7 @@ public partial class viewattendance : System.Web.UI.Page
 
             if (attendanceLogic.update(attendanceObj) != 1)
             {
-                Response.Redirect("ErrorPage500.html");
+                Utility.MsgBox("Attendance details updated successfully...!!", this.Page, this, "viewattendance.aspx");
             }
         }
     }

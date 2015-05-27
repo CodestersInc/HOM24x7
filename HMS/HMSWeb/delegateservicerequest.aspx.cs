@@ -67,6 +67,5 @@ public partial class delegaterequest : System.Web.UI.Page
 
             StaffListPlaceHolder.Visible = false;
         }
-    }
-    
+    } 
 }
