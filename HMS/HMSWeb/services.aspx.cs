@@ -14,6 +14,7 @@ public partial class services : System.Web.UI.Page
         var User = Session["loggedUser"];
         if (!(User is Customer))
             Response.Redirect("login.aspx");
+
         Customer loggedUser = null;
         int ServiceTypeID = 0;
         try
@@ -34,7 +35,7 @@ public partial class services : System.Web.UI.Page
         ServiceTypeLogic serviceTypeLogic = new ServiceTypeLogic();
 
         lblServiceType.Text = (ServiceTypeID != 0)?serviceTypeLogic.selectById(ServiceTypeID).Name:"Services";
-        ServiceRepeater.DataSource = (ServiceTypeID != 0)?serviceLogic.selectAll(ServiceTypeID):serviceLogic.selectAll();
+        ServiceRepeater.DataSource = (ServiceTypeID != 0)?serviceLogic.selectAll(ServiceTypeID, loggedUser.AccountID):serviceLogic.selectAll(loggedUser.AccountID);
         ServiceRepeater.DataBind();
 
         if (Request.Cookies["Service"] != null && Request.Cookies["Service"] != null)

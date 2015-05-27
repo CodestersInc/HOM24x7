@@ -142,7 +142,23 @@ namespace BusinessLogic
             lstParams.Add(new SqlParameter("@RoomTypeID", RoomTypeID));
 
             DataTable dt = DBUtility.Select(query, lstParams);
-            return Convert.ToDouble(dt.Rows[0][0]);
+
+            if (dt.Rows.Count == 0)
+            {
+                String query1 = "select SeasonRoom.Rate from SeasonRoom, Season where SeasonRoom.SeasonID=Season.SeasonID and SeasonRoom.RoomTypeID=@RoomTypeID and Season.AccountID=@AccountID";
+
+                List<SqlParameter> lstParams1 = new List<SqlParameter>();
+                lstParams1.Add(new SqlParameter("@AccountID", AccountID));
+                lstParams1.Add(new SqlParameter("@RoomTypeID", RoomTypeID));
+
+                dt = DBUtility.Select(query1, lstParams1);
+
+                return Convert.ToDouble(dt.Rows[0][0]);
+            }
+            else
+            {
+                return Convert.ToDouble(dt.Rows[0][0]);
+            }            
         }
     }
 }
