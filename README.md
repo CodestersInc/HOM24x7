@@ -1,5 +1,5 @@
 # HOM24x7
-HOM24*7 Platform Implmementation
+HOM24*7 SaaS Platform Implementation
 
 ##Modules  
 1. Web based Chat API
